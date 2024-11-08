@@ -1,5 +1,4 @@
-package application;
-
+package travelAgency;
 
 public class TravelAgencyController {
 	TravelAgencyOwnerMenuView menu=new TravelAgencyOwnerMenuView();

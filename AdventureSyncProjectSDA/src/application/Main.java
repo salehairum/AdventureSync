@@ -16,11 +16,11 @@ public class Main extends Application {
 		
 		try {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("travelAgencyOwnerMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgency/travelAgencyOwnerMgrCars.fxml"));
 			Parent root = loader.load();  // This loads the FXML and sets the controller automatically
 
 			// Create the scene and set it
-			Scene scene = new Scene(root, 800, 600);
+			Scene scene = new Scene(root, 750, 500);
 	        // Set the scene to the primary stage
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("Travel Agency Owner Menu");
