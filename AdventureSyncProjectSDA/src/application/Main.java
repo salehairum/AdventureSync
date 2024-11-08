@@ -1,8 +1,10 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 
@@ -13,11 +15,16 @@ public class Main extends Application {
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("travelAgencyOwnerMenu.fxml"));
+			Parent root = loader.load();  // This loads the FXML and sets the controller automatically
+
+			// Create the scene and set it
+			Scene scene = new Scene(root, 800, 600);
+	        // Set the scene to the primary stage
+	        primaryStage.setScene(scene);
+	        primaryStage.setTitle("Travel Agency Owner Menu");
+	        primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
