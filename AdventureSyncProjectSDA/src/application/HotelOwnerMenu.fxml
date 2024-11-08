@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="500.0" prefWidth="197.0" style="-fx-background-color: EDDEA4;">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="24.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/logo.png" />
+               </image>
+            </ImageView>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel Owner Menu" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Attributes" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Text fill="#eddea4" layoutX="361.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text fill="#eddea4" layoutX="227.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Room" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#eddea4" layoutX="227.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Feedback" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#eddea4" layoutX="507.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Account" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="81.0" fitWidth="89.0" layoutX="286.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/room.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="89.0" layoutX="286.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/feedback.png" />
+         </image></ImageView>
+      <Text fill="#eddea4" layoutX="507.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Kitchen" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#eddea4" layoutX="361.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Hotel" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="79.0" fitWidth="89.0" layoutX="562.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/kitchen.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="89.0" layoutX="571.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="89.0" layoutX="431.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/hotel.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
