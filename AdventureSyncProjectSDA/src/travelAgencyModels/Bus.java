@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class Bus extends Vehicle {
 	//attributes
-	int busDriverID;
-	HashMap<Integer, Seat> seats;
-	int noOfSeats;
-	float priceOfSeats;
-	boolean hasTour;
-	//Tour tour;
+	private int busDriverID;
+	private HashMap<Integer, Seat> seats;
+	private int noOfSeats;
+	private float priceOfSeats;
+	private boolean hasTour;
+	//private Tour tour;
 	
 	//getters and setters
 	public int getBusDriverID() {

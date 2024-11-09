@@ -1,11 +1,11 @@
 package travelAgencyModels;
 
 public class Vehicle {
-	private int id;
-	private String brand;
-	private String model;
-	private int year; 
-	private String plateNumber;
+	protected int id;
+	protected String brand;
+	protected String model;
+	protected int year; 
+	protected String plateNumber;
 	
 	//getters and setters
 	public int getCarID() {

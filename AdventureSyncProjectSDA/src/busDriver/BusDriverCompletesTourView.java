@@ -7,15 +7,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
-public class BusDriverManageBusView {
+public class BusDriverCompletesTourView {
 	@FXML
 	private Pane sidePanel;
 	@FXML
 	private Pane mainPanel;
+	
 	Parent root;
 	
-	public BusDriverManageBusView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverMgrBus.fxml"));
+	public BusDriverCompletesTourView() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverCompletesTour.fxml"));
 		try {
 			root = loader.load();
 		} catch (IOException e) {

@@ -15,7 +15,7 @@ import travelAgencyOwner.TravelAgencyOwnerMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
-
+import travelAgencyOwner.TravelAgencyViewBusesView;
 //import bus driver
 import busDriver.BusDriverMenuView;
 import busDriver.BusDriverManageBusView;
@@ -32,7 +32,7 @@ public class Main extends Application {
 //			TravelAgencyOwnerMenuView travelAgencyMenu=new TravelAgencyOwnerMenuView();
 //			Parent root=travelAgencyMenu.getRoot();
 			
-			BusDriverUpdateBusView busDriverMenu=new BusDriverUpdateBusView();
+			TravelAgencyViewBusesView busDriverMenu=new TravelAgencyViewBusesView();
 			Parent root=busDriverMenu.getRoot();
 			
 			// Create the scene and set it

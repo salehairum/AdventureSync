@@ -1,8 +1,8 @@
 package travelAgencyModels;
 
 public class Seat {
-	int seatID;
-	int busID;
+	private int seatID;
+	private int busID;
 	boolean isBooked;
 
 	//getters and setters
