@@ -18,7 +18,7 @@
                   <Image url="@../resources/wandermate.png" />
                </image>
             </ImageView>
-            <Label layoutX="14.0" layoutY="148.0" prefHeight="40.0" prefWidth="188.0" text="Travel Agency Account" textFill="#0fa3b1">
+            <Label layoutX="32.0" layoutY="149.0" prefHeight="40.0" prefWidth="160.0" text="Bus Driver Account" textFill="#0fa3b1">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -50,57 +50,48 @@
          </children></Pane>
       <Pane fx:id="mainPanel" layoutX="196.0" layoutY="-2.0" prefHeight="510.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1;">
          <children>
-            <Label layoutX="204.0" layoutY="39.0" prefHeight="50.0" prefWidth="218.0" text="Welcome!" textFill="#eddea4">
+            <Label layoutX="200.0" layoutY="24.0" prefHeight="50.0" prefWidth="218.0" text="Welcome!" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0">
+            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
+            <VBox fx:id="completeTour" alignment="CENTER" layoutX="319.0" layoutY="89.0" prefHeight="160.0" prefWidth="179.0">
                <children>
-                  <VBox fx:id="manageCars" alignment="CENTER" layoutX="44.0" layoutY="-38.0" prefHeight="182.0" prefWidth="160.0">
-                     <children>
-                        <ImageView fx:id="carLogo" fitHeight="59.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/car.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="carLabel" prefHeight="50.0" prefWidth="152.0" text="Manage Cars" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                           <padding>
-                              <Insets top="15.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
+                  <ImageView fx:id="completeLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/complete.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="completeLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="Complete Tour" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
                </children>
-            </AnchorPane>
-            <VBox fx:id="manageBus" alignment="CENTER" layoutX="332.0" layoutY="100.0" prefHeight="182.0" prefWidth="170.0">
+            </VBox>
+            <VBox fx:id="manageBus" alignment="CENTER" layoutX="53.0" layoutY="220.0" prefHeight="160.0" prefWidth="160.0">
                <children>
-                  <ImageView fx:id="busLogo" fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="busLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/bus.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="busLabel" prefHeight="50.0" prefWidth="181.0" text="Manage Buses" textFill="#eddea4">
+                  <Label fx:id="busLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="Manage Bus" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="viewFeedback" alignment="CENTER" layoutX="48.0" layoutY="255.0" prefHeight="182.0" prefWidth="188.0">
+            <VBox fx:id="viewFeedback" alignment="CENTER" layoutX="309.0" layoutY="220.0" prefHeight="160.0" prefWidth="198.0">
                <children>
                   <ImageView fx:id="ratingLogo" fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/rating.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="feedbackLabel" prefHeight="50.0" prefWidth="178.0" text="View Feedback" textFill="#eddea4">
+                  <Label fx:id="feedbackLabel" prefHeight="50.0" prefWidth="176.0" text="View Feedback" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -110,20 +101,31 @@
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="manageAccount" alignment="CENTER" layoutX="320.0" layoutY="255.0" prefHeight="182.0" prefWidth="204.0">
+            <VBox fx:id="viewTour" alignment="CENTER" layoutX="53.0" layoutY="89.0" prefHeight="160.0" prefWidth="160.0">
                <children>
-                  <ImageView fx:id="accLogo" fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="tourLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/route.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="tourLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="View Tour" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="manageAccount" alignment="CENTER" layoutX="170.0" layoutY="336.0" prefHeight="160.0" prefWidth="198.0">
+               <children>
+                  <ImageView fx:id="accountLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/account.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="accountLabel" prefHeight="50.0" prefWidth="218.0" text="Manage Account" textFill="#eddea4">
+                  <Label fx:id="accountLabel" alignment="CENTER" prefHeight="42.0" prefWidth="202.0" text="Manage Account" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
                   </Label>
                </children>
             </VBox>
