@@ -3,10 +3,13 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import travelAgencyOwner.TravelAgencyManageAccountView;
+import travelAgencyOwner.TravelAgencyManageBusView;
+import travelAgencyOwner.TravelAgencyManageCarsView;
+import travelAgencyOwner.TravelAgencyOwnerMenuView;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
-
 
 public class Main extends Application {
 	@Override
@@ -15,10 +18,12 @@ public class Main extends Application {
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		try {
+//			TravelAgencyOwnerMenuView travelAgencyMenu=new TravelAgencyOwnerMenuView();
+//			Parent root=travelAgencyMenu.getRoot();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgency/travelAgencyOwnerMgrCars.fxml"));
-			Parent root = loader.load();  // This loads the FXML and sets the controller automatically
-
+			TravelAgencyManageAccountView travelAgencyAccount=new TravelAgencyManageAccountView();
+			Parent root=travelAgencyAccount.getRoot();
+			
 			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
 	        // Set the scene to the primary stage
