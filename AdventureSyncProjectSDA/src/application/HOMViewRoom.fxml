@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="25.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Text fill="#0fa3b1" layoutX="13.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel Owner Menu" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="13.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" fill="#0fa3b1" layoutX="13.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="id" fill="#0fa3b1" layoutX="13.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="13.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Other Attributes" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Button fx:id="menuButton" layoutX="444.0" layoutY="407.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Text fill="#eddea4" layoutX="382.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Rooms" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="306.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/room.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="viewRoomTable" layoutX="272.0" layoutY="150.0" prefHeight="200.0" prefWidth="425.0" style="-fx-background-color: F9F7F3;">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Room ID" />
+          <TableColumn prefWidth="104.0" text="Booking Status" />
+            <TableColumn prefWidth="245.0" text="Description" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
