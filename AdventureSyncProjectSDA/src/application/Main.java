@@ -32,28 +32,20 @@ public class Main extends Application {
 		//DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		try {
-//			TravelAgencyOwnerMenuView travelAgencyMenu=new TravelAgencyOwnerMenuView();
-//			Parent root=travelAgencyMenu.getRoot();
 			
-//			BusDriverUpdateBusView busDriverMenu=new BusDriverUpdateBusView();
-//			Parent root=busDriverMenu.getRoot();
-//			
-			Parent root;
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("HOMUpdateFood.fxml"));
-			try {
-				root = loader.load();
-				Scene scene = new Scene(root, 750, 500);
+			TravelAgencyViewBusesView busDriverMenu=new TravelAgencyViewBusesView();
+			Parent root=busDriverMenu.getRoot();
+			
+			// Create the scene and set it
+			Scene scene = new Scene(root, 750, 500);
+	       
+		        // Set the scene to the primary stage
 		        primaryStage.setScene(scene);
 		        primaryStage.setTitle("Hotel Owner Menu");
 		        primaryStage.show();
-			} catch (IOException e) {
+			} catch(Exception e) {
 				e.printStackTrace();
-			} 
-			// Create the scene and set it
-	        // Set the scene to the primary stage
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+			}
 	}
 	
 	public static void main(String[] args) {
