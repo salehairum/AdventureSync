@@ -18,6 +18,9 @@ import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 //import bus driver
 import busDriver.BusDriverMenuView;
+
+import java.io.IOException;
+
 import busDriver.BusDriverManageBusView;
 import busDriver.BusDriverMgrAccountView;
 import busDriver.BusDriverUpdateBusView;
@@ -32,19 +35,22 @@ public class Main extends Application {
 //			TravelAgencyOwnerMenuView travelAgencyMenu=new TravelAgencyOwnerMenuView();
 //			Parent root=travelAgencyMenu.getRoot();
 			
-			TravelAgencyViewBusesView busDriverMenu=new TravelAgencyViewBusesView();
-			Parent root=busDriverMenu.getRoot();
-			
+//			BusDriverUpdateBusView busDriverMenu=new BusDriverUpdateBusView();
+//			Parent root=busDriverMenu.getRoot();
+//			
+			Parent root;
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("HOMUpdateFood.fxml"));
+			try {
+				root = loader.load();
+				Scene scene = new Scene(root, 750, 500);
+		        primaryStage.setScene(scene);
+		        primaryStage.setTitle("Hotel Owner Menu");
+		        primaryStage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 			// Create the scene and set it
-			Scene scene = new Scene(root, 750, 500);
 	        // Set the scene to the primary stage
-	        primaryStage.setScene(scene);
-			// Create the scene and set it
-			Scene scene = new Scene(root);
-	        // Set the scene to the primary stage
-	        primaryStage.setScene(scene);
-	        primaryStage.setTitle("Hotel Owner Menu");
-	        primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
