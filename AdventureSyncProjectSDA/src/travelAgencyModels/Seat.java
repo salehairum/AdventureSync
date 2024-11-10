@@ -4,6 +4,8 @@ public class Seat {
 	private int seatID;
 	private int busID;
 	boolean isBooked;
+	int rowNo;
+	String type;
 
 	//getters and setters
 	public int getSeatID() {
@@ -23,5 +25,17 @@ public class Seat {
 	}
 	public void setBooked(boolean isBooked) {
 		this.isBooked = isBooked;
+	}
+	public int getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }

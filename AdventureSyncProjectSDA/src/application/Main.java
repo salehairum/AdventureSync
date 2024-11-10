@@ -1,29 +1,10 @@
 package application;
-	
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
-
-//import travel agency owner
-import travelAgencyOwner.TravelAgencyManageAccountView;
-import travelAgencyOwner.TravelAgencyManageBusView;
-import travelAgencyOwner.TravelAgencyManageCarsView;
-import travelAgencyOwner.TravelAgencyOwnerMenuView;
-import travelAgencyOwner.TravelAgencyAddCarView;
-import travelAgencyOwner.TravelAgencyDeleteCarsView;
-import travelAgencyOwner.TravelAgencyUpdatesCarView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import travelAgencyOwner.TravelAgencyViewBusesView;
-//import bus driver
-import busDriver.BusDriverMenuView;
-
-import java.io.IOException;
-
-import busDriver.BusDriverManageBusView;
-import busDriver.BusDriverMgrAccountView;
-import busDriver.BusDriverUpdateBusView;
 
 public class Main extends Application {
 	@Override
@@ -51,4 +32,5 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }
