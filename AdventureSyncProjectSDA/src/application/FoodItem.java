@@ -1,16 +1,19 @@
 package application;
 
 public class FoodItem {
+	//variables
 	private int foodID;
 	private String name;
 	private int quantity;
 	private float price;
+	//constructor
 	public FoodItem() {
 		foodID = 0;
 		name = "";
 		quantity = 0;
 		price = 0;
 	}
+	//getter and setter
 	public int getFoodID() {
 		return foodID;
 	}

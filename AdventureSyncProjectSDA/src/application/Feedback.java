@@ -1,16 +1,19 @@
 package application;
 
 public class Feedback {
+	//variables
 	private int feedbackID;
 	private int rating;
 	private String comment;
 	int touristID;
+	//constructor
 	public Feedback() {
 		feedbackID = 0;
 		rating = 0;
 		comment = "";
 		touristID = 0;
 	}
+	//getter and setter
 	public int getFeedbackID() {
 		return feedbackID;
 	}

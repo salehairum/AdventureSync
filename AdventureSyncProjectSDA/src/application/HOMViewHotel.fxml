@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -49,71 +48,49 @@
       </Pane>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
-            <Text fill="#eddea4" layoutX="172.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Food" textAlignment="CENTER" wrappingWidth="218.13671875">
+            <Text fill="#eddea4" layoutX="172.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Hotel" textAlignment="CENTER" wrappingWidth="218.13671875">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Text>
             <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="103.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/kitchen.png" />
+                  <Image url="@../resources/hotel.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="81.0" layoutY="152.0" prefHeight="87.0" prefWidth="377.0">
+            <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="377.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Enter Food Name" textFill="#eddea4">
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Location" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="foodNameInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="209.0" promptText="e.g biryani" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="81.0" layoutY="219.0" prefHeight="79.0" prefWidth="377.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="187.0" text="Enter Quantity" textFill="#eddea4">
+                  <Label fx:id="locationLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Location" textFill="#f7a072">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="foodQuanInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="220.0" promptText="e.g 123" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="81.0" layoutY="280.0" prefHeight="72.0" prefWidth="377.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="187.0" text="Enter Price" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="foodPriceInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="219.0" promptText="e.g 123" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="71.0" layoutY="98.0" prefHeight="79.0" prefWidth="386.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="187.0" text="Enter Food ID" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="foodIDInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="220.0" promptText="e.g 123" />
-               </children>
-            </HBox>
-            <Button fx:id="menuButton" layoutX="263.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="menuButton" layoutX="234.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updFoodButton" layoutX="133.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Update Food" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="viewFoodButton" layoutX="156.0" layoutY="368.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="179.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER" layoutX="87.0" layoutY="181.0" prefHeight="87.0" prefWidth="377.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Name" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Name" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>
