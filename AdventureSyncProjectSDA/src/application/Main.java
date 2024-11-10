@@ -29,25 +29,20 @@ public class Main extends Application {
 		//DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		try {
-//			TravelAgencyOwnerMenuView travelAgencyMenu=new TravelAgencyOwnerMenuView();
-//			Parent root=travelAgencyMenu.getRoot();
 			
 			TravelAgencyViewBusesView busDriverMenu=new TravelAgencyViewBusesView();
 			Parent root=busDriverMenu.getRoot();
 			
 			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
-	        // Set the scene to the primary stage
-	        primaryStage.setScene(scene);
-			// Create the scene and set it
-			Scene scene = new Scene(root);
-	        // Set the scene to the primary stage
-	        primaryStage.setScene(scene);
-	        primaryStage.setTitle("Hotel Owner Menu");
-	        primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	       
+		        // Set the scene to the primary stage
+		        primaryStage.setScene(scene);
+		        primaryStage.setTitle("Hotel Owner Menu");
+		        primaryStage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 	}
 	
 	public static void main(String[] args) {
