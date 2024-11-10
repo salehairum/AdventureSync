@@ -1,10 +1,13 @@
 package application;
 
 import javafx.application.Application;
+import tourist.TouristRatesBusTourView;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
+import signupForms.TouristSignUpView;
 
 public class Main extends Application {
 	@Override
@@ -14,7 +17,7 @@ public class Main extends Application {
 		
 		try {
 			
-			TravelAgencyViewBusesView busDriverMenu=new TravelAgencyViewBusesView();
+			TouristSignUpView busDriverMenu=new TouristSignUpView();
 			Parent root=busDriverMenu.getRoot();
 			
 			// Create the scene and set it
