@@ -16,7 +16,7 @@ public class Main extends Application {
 		
 		try {
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("HotelOwnerMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("HOMViewFood.fxml"));
 			Parent root = loader.load();  // This loads the FXML and sets the controller automatically
 
 			// Create the scene and set it
