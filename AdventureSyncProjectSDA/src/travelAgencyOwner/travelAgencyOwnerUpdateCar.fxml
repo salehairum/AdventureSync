@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="5.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <Pane fx:id="sidePanel" layoutY="-9.0" prefHeight="530.0" prefWidth="198.0" style="-fx-background-color: #EDDEA4;">
+               <children>
+                  <ImageView fx:id="logo" fitHeight="92.0" fitWidth="101.0" layoutX="48.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/wandermate.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="6.0" layoutY="110.0" prefHeight="40.0" prefWidth="188.0" text="Travel Agency Account" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="profile" layoutX="33.0" layoutY="184.0" prefHeight="200.0" prefWidth="134.0">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="name" prefHeight="40.0" prefWidth="166.0" text="Name" textFill="#0fa3b1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ownerID" prefHeight="40.0" prefWidth="166.0" text="ID" textFill="#0fa3b1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="40.0" prefWidth="166.0" text="Other attributes" textFill="#0fa3b1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane fx:id="mainPanel" layoutX="198.0" layoutY="-9.0" prefHeight="530.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
+               <children>
+                  <Label layoutX="100.0" layoutY="18.0" prefHeight="91.0" prefWidth="209.0" text="Update Car" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/car.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="menuButton" layoutX="379.0" layoutY="445.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <VBox layoutX="30.0" layoutY="172.0" prefHeight="273.0" prefWidth="495.0">
+                     <children>
+                        <HBox prefHeight="87.0" prefWidth="495.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter New Brand" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="brandInput" prefHeight="26.0" prefWidth="228.0" promptText="e.g Toyota">
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter New Model" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="modelInput" prefHeight="26.0" prefWidth="228.0" promptText="e.g Corolla">
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="87.0" prefWidth="495.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Year of Manufacture" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="yearInput" prefHeight="26.0" prefWidth="263.0" promptText="e.g 2024">
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Rental Fee" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="rentalFeeInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g 12000" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="87.0" prefWidth="495.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Plate Number" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="plateNoInput" prefHeight="26.0" prefWidth="263.0" promptText="e.g ABC-908">
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Cost per Kilometre" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="costPerKmInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g 100" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Button fx:id="updateButton" layoutX="233.0" layoutY="445.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update Car" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <VBox alignment="CENTER" layoutX="141.0" layoutY="109.0" prefHeight="78.0" prefWidth="238.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="258.0" text="Enter Car ID" textFill="#eddea4">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="carIdInput" prefHeight="26.0" prefWidth="365.0" promptText="e.g 1234" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="viewButton" layoutX="30.0" layoutY="445.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="188.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="View Cars First?" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
