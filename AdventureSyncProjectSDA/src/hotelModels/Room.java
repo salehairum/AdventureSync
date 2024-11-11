@@ -1,6 +1,8 @@
-package application;
+package hotelModels;
 
 import java.util.ArrayList;
+
+import application.Feedback;
 
 public class Room {
 	//variables
