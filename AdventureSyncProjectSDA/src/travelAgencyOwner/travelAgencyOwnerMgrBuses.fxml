@@ -63,7 +63,7 @@
                         <Image url="@../resources/bus.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="addCars" alignment="CENTER" layoutX="77.0" layoutY="170.0" prefHeight="160.0" prefWidth="160.0">
+                  <VBox fx:id="addCars" alignment="CENTER" layoutX="66.0" layoutY="119.0" prefHeight="160.0" prefWidth="160.0">
                      <children>
                         <ImageView fx:id="viewBusLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -82,7 +82,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <VBox fx:id="viewDrivers" alignment="CENTER" layoutX="299.0" layoutY="176.0" prefHeight="160.0" prefWidth="198.0">
+                  <VBox fx:id="viewDrivers" alignment="CENTER" layoutX="292.0" layoutY="119.0" prefHeight="160.0" prefWidth="198.0">
                      <children>
                         <ImageView fx:id="viewDriversLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,6 +90,20 @@
                            </image>
                         </ImageView>
                         <Label fx:id="viewDriversLabel" alignment="CENTER" prefHeight="42.0" prefWidth="213.0" text="View Bus Drivers" textFill="#eddea4">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="assignTour" alignment="CENTER" layoutX="179.0" layoutY="256.0" prefHeight="160.0" prefWidth="198.0">
+                     <children>
+                        <ImageView fx:id="assignTourLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/route.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="assignTourLabel" alignment="CENTER" prefHeight="71.0" prefWidth="198.0" text="Assign Tour To Bus" textAlignment="CENTER" textFill="#eddea4" wrapText="true">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
