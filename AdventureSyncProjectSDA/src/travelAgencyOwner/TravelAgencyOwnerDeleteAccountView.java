@@ -2,15 +2,12 @@ package travelAgencyOwner;
 
 import java.io.IOException;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 
-public class TravelAgencyViewBusesView {
+public class TravelAgencyOwnerDeleteAccountView {
 	@FXML
 	private Pane sidePanel;
 	@FXML
@@ -18,14 +15,14 @@ public class TravelAgencyViewBusesView {
 	
 	Parent root;
 	
-	public TravelAgencyViewBusesView() {
-///travelAgencyOwner/travelAgencyOwnerViewsBuses.fxml
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/HOMAddFood.fxml"));
+	public TravelAgencyOwnerDeleteAccountView() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerDeleteAccount.fxml"));
 		try {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		
 	}
 	
 	public Parent getRoot() {

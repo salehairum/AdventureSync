@@ -7,8 +7,15 @@ public class Tour {
 	protected String origin;
 	protected String destination;
 	protected Date date;
-	
+	private int busID;	//id of the bus to which this tour is assigned
+
 	//getters and setters
+	public int getBusID() {
+		return busID;
+	}
+	public void setBusID(int busID) {
+		this.busID = busID;
+	}
 	public int getTourID() {
 		return tourID;
 	}

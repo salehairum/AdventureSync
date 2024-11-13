@@ -20,11 +20,6 @@
                         <Image url="@../resources/wandermate.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="6.0" layoutY="110.0" prefHeight="40.0" prefWidth="188.0" text="Travel Agency Account" textFill="#0fa3b1">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
                   <VBox fx:id="profile" layoutX="33.0" layoutY="184.0" prefHeight="200.0" prefWidth="134.0">
                      <children>
                         <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
@@ -49,67 +44,45 @@
                         </Label>
                      </children>
                   </VBox>
+                  <Label layoutX="33.0" layoutY="128.0" prefHeight="40.0" prefWidth="160.0" text="Tourist Account" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="mainPanel" layoutX="198.0" layoutY="-9.0" prefHeight="530.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
                <children>
-                  <Label layoutX="192.0" layoutY="38.0" prefHeight="53.0" prefWidth="254.0" text="Manage Buses" textFill="#eddea4">
+                  <Label layoutX="192.0" layoutY="38.0" prefHeight="53.0" prefWidth="292.0" text="Delete Account" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
                   <ImageView fx:id="busLogo" fitHeight="59.0" fitWidth="55.0" layoutX="129.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/bus.png" />
+                        <Image url="@../resources/delete.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="addCars" alignment="CENTER" layoutX="66.0" layoutY="119.0" prefHeight="160.0" prefWidth="160.0">
-                     <children>
-                        <ImageView fx:id="viewBusLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/view.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="viewBusLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="View Buses" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
                   <Button fx:id="menuButton" layoutX="219.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <VBox fx:id="viewDrivers" alignment="CENTER" layoutX="292.0" layoutY="119.0" prefHeight="160.0" prefWidth="198.0">
-                     <children>
-                        <ImageView fx:id="viewDriversLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/viewDriver.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="viewDriversLabel" alignment="CENTER" prefHeight="42.0" prefWidth="213.0" text="View Bus Drivers" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="assignTour" alignment="CENTER" layoutX="179.0" layoutY="256.0" prefHeight="160.0" prefWidth="198.0">
-                     <children>
-                        <ImageView fx:id="assignTourLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/route.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="assignTourLabel" alignment="CENTER" prefHeight="71.0" prefWidth="198.0" text="Assign Tour To Bus" textAlignment="CENTER" textFill="#eddea4" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  <Label fx:id="deleteLabel1" alignment="CENTER" layoutX="5.0" layoutY="163.0" prefHeight="46.0" prefWidth="546.0" text="Are you sure you want to delete your account?" textFill="#eddea4" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="yesButton" layoutX="179.0" layoutY="209.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Yes" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="noButton" layoutX="278.0" layoutY="209.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="No" textFill="#f7a072">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
          </children>

@@ -65,7 +65,7 @@
                         <Image url="@../resources/route.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="menuButton" layoutX="205.0" layoutY="379.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+                  <Button fx:id="menuButton" layoutX="227.0" layoutY="379.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -89,13 +89,26 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="500.0">
+                        <HBox alignment="CENTER" prefHeight="69.0" prefWidth="500.0">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="260.0" text="Do you want to complete it?" textFill="#eddea4">
+                              <Button fx:id="viewDetailsButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="218.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="View Details First?" textFill="#f7a072">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="5.0" prefWidth="500.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="246.0" text="Do you want to complete it?" textFill="#eddea4">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="63.0" prefWidth="500.0">
+                           <children>
                               <Button fx:id="yesButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="99.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Yes" textFill="#f7a072">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
