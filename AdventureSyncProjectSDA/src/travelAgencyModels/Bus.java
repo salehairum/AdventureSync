@@ -10,6 +10,15 @@ public class Bus extends Vehicle {
 	private boolean hasTour;
 	private Tour tour;
 	
+	public Bus(int id, String brand, String model, int year, String plateNumber,HashMap<Integer, Seat> seats, int noOfSeats, float priceOfSeats, boolean hasTour, Tour tour) {
+		super(id, brand, model, year, plateNumber);
+		this.seats = seats;
+		this.noOfSeats = noOfSeats;
+		this.priceOfSeats = priceOfSeats;
+		this.hasTour = hasTour;
+		this.tour = tour;
+	}
+	
 	//getters and setters
 	public int getNoOfSeats() {
 		return noOfSeats;
