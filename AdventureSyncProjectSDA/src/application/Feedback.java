@@ -5,6 +5,7 @@ public class Feedback {
 	private int feedbackID;
 	private int rating;
 	private String comment;
+	private String typeOfFeedback;
 	int touristID;
 	//constructor
 	public Feedback() {
@@ -16,6 +17,12 @@ public class Feedback {
 	//getter and setter
 	public int getFeedbackID() {
 		return feedbackID;
+	}
+	public String getTypeOfFeedback() {
+		return typeOfFeedback;
+	}
+	public void setTypeOfFeedback(String typeOfFeedback) {
+		this.typeOfFeedback = typeOfFeedback;
 	}
 	public void setFeedbackID(int feedbackID) {
 		this.feedbackID = feedbackID;

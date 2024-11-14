@@ -11,6 +11,7 @@ public class Room {
 	private float pricePerNight;
 	private boolean isBooked;
 	private ArrayList<Feedback> ratings;
+	private int hotelID;
 	//constructor
 	public Room() {
 		roomID = 0;
@@ -23,6 +24,12 @@ public class Room {
 	}
 	public void setRoomID(int roomID) {
 		this.roomID = roomID;
+	}
+	public int getHotelID() {
+		return hotelID;
+	}
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
 	}
 	public String getDescription() {
 		return description;

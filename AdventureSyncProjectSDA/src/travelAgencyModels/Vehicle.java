@@ -7,6 +7,15 @@ public class Vehicle {
 	protected int year; 
 	protected String plateNumber;
 	
+	//constructor
+	public Vehicle(int id, String brand, String model, int year, String plateNumber) {
+		 this.id = id;
+		 this.brand = brand;
+		 this.model = model;
+		 this.year = year;
+		 this.plateNumber = plateNumber;
+	}
+	
 	//getters and setters
 	public int getCarID() {
 		return id;
