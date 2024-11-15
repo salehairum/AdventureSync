@@ -7,6 +7,21 @@ public class Person {
 	private LocalDate dob;
 	private String cnic;
 	private Account account;
+	
+	public Person()
+	{
+		name="";
+		dob = null;
+		cnic = "";
+		account = null;
+	}
+	//constructor without assigning any account
+	public Person(String name, LocalDate dob, String cnic)
+	{
+		this.name = name;
+		this.dob = dob;
+		this.cnic = cnic;
+	}
 
 	public String getName() {
 		return name;

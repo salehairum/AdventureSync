@@ -8,11 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -77,16 +75,6 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <HBox fx:id="carIDInput" alignment="CENTER" layoutX="99.0" layoutY="329.0" prefHeight="67.0" prefWidth="358.0">
-               <children>
-                  <Label prefHeight="35.0" prefWidth="172.0" text="Enter Food ID:" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="foodIDInput" prefHeight="26.0" prefWidth="212.0" promptText="e.g 1234" />
-               </children>
-            </HBox>
             <TableView fx:id="viewFoodTable" layoutX="94.0" layoutY="117.0" prefHeight="200.0" prefWidth="344.0" style="-fx-background-color: F9F7F3;">
                <columns>
                   <TableColumn prefWidth="68.0" text="Food ID" />
@@ -95,6 +83,18 @@
                   <TableColumn prefWidth="85.0" text="Price" />
                </columns>
             </TableView>
+            <Label layoutX="92.0" layoutY="329.0" prefHeight="35.0" prefWidth="134.0" text="Enter Food ID:" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="foodIDInput" layoutX="234.0" layoutY="334.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 1234" />
+            <Label layoutX="92.0" layoutY="364.0" prefHeight="35.0" prefWidth="134.0" text="Enter Quantity:" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="foodQuanInput" layoutX="234.0" layoutY="369.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 1234" />
          </children>
       </Pane>
    </children>
