@@ -49,6 +49,5 @@ public class TravelAgencyAddCarView {
         if (dobText != null) {
         	dobText.setText(profileDetail[3]);
         }
-        System.out.println("View");
     }
 }
