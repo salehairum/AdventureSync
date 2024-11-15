@@ -1,7 +1,10 @@
 package application;
 
+import java.util.HashMap;
 import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.DatabaseManager;
+import dbHandlers.ReturnListUtility;
+import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
 import tourist.TouristRatesBusTourView;
 import travelAgencyModels.Car;
@@ -16,14 +19,20 @@ import dbHandlers.TravelAgencyDBHandler;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-//		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
-//		DatabaseManager dbManager=new DatabaseManager(connectionString);
-//		
-//		TravelAgencyDBHandler db=new TravelAgencyDBHandler(dbManager.getConnection());
-//		Car car=new Car(1234, "Toyota", "Corolla", 2022, "XYZ-1234", false, 5000.0f, 15.0f);
-//		
-//		System.out.println(db.deleteCar(1));
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
+    //this is db handler stuff that i wass doing
+    
+		//TravelAgencyDBHandler db=new TravelAgencyDBHandler(dbManager.getConnection());
+		//Car car=new Car(12, "Toyota", "Corolla", 2022, "XYZ-1323", false, 5000.0f, 15.0f);
+		
+		//car.setBrand("bla bla");
+		
+		//String returnData=db.updateCar(car);
+		//System.out.println(returnData);
+
+
 		try {
 			
 			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();

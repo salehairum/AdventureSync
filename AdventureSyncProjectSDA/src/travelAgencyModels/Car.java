@@ -36,10 +36,10 @@ public class Car extends Vehicle{
 	public void setRentalFee(float rentalFee) {
 		this.rentalFee = rentalFee;
 	}
-	public float getcostPerKm() {
+	public float getCostPerKm() {
 		return costPerKm;
 	}
-	public void setcostPerKm(float costPerKm) {
+	public void setCostPerKm(float costPerKm) {
 		this.costPerKm = costPerKm;
 	}
 }
