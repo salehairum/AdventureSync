@@ -170,7 +170,7 @@
                   </Button>
                   <VBox alignment="CENTER" layoutX="141.0" layoutY="109.0" prefHeight="78.0" prefWidth="238.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="258.0" text="Enter Car ID" textFill="#eddea4">
+                        <Label prefHeight="35.0" prefWidth="258.0" text="Enter ID of Car to update:" textFill="#eddea4">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
