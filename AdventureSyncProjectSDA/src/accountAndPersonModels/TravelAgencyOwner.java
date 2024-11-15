@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import travelAgencyModels.Car;
 
-public class TravelAgencyOwner {
+public class TravelAgencyOwner extends Person {
 	private int agencyOwnerID;
 	private HashMap<Integer,Car> cars;
 	

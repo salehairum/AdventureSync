@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import travelAgencyModels.Seat;
 import travelAgencyModels.Car;
-import application.Room;
+import hotelModels.Room;
 
 public class Tourist extends Person {
 	private int touristID;

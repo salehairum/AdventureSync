@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+import accountAndPersonModels.Account;
+import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Car;
 
 public class TravelAgencyDBHandler {
@@ -142,7 +144,7 @@ public class TravelAgencyDBHandler {
 		}
 	}
 
-	public ReturnObjectUtility<Car> retrieveCarData(int carID) {
+	public ReturnObjectUtility<Car> retrieveCarObject(int carID) {
 		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		
 		try {
@@ -231,5 +233,100 @@ public class TravelAgencyDBHandler {
 		}
         return returnData;
 	}
+	
+	public String updateCarRentalStatus(int carID, boolean rentalStatus) {
+		PreparedStatement pstmt;
+		try {
+			 String sql = "UPDATE Car SET rentalStatus = ? WHERE carID = ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setBoolean(1,rentalStatus);
+			 pstmt.setInt(2, carID);
 
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 if(rentalStatus)
+					 return "Car is now rented.";
+				 else
+					 return "Car is no longer rented.";
+			 } else {
+				 return "Failed to update car rental status.";
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+				       return "Error: Car does not exist.";
+		        }else {
+		            return "Issue in updating car in db: " + errorMessage;
+		        }
+		    } else {
+		        return "An unknown error occurred.";
+		    }
+		}
+	}
+
+	//travel agency owner functions
+	public String updateAgencyOwner(TravelAgencyOwner owner) {
+		PreparedStatement pstmt;
+		try {
+			 //first update travel agency owner
+			 String sql = "UPDATE travelAgencyOwner SET aname = ?, dob = ?, cnic= ? where TravelAgencyOwnerId= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setString(1, owner.getName());
+			 pstmt.setObject(2, owner.getDob());
+			 pstmt.setString(3, owner.getCnic());
+			 pstmt.setInt(4, owner.getAgencyOwnerID());
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <=0 ) {
+				 return "Failed to update travel agency owner.";
+			 }
+			 
+			 //now update account
+			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 Account account=owner.getAccount();
+			 
+			 // Set parameters
+			 pstmt.setString(1, account.getUsername());
+			 pstmt.setObject(2, account.getEmail());
+			 pstmt.setString(3, account.getPassword());
+			 
+			 //get acc id
+			 //pstmt.setInt(4, account.get);
+
+			 // Execute the insert
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+		         return "Travel Agency Owner updated successfully.";
+			 } else {
+				 return "Failed to update travel agency owner.";
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		            return "Error: Invalid reference. Check if the related data exists.";
+		        } else {
+		            return "Issue in updating travel agency owner in db: " + errorMessage;
+		        }
+		    } else {
+		        return "An unknown error occurred.";
+		    }
+		}
+	}
 }
