@@ -17,10 +17,10 @@ public class Vehicle {
 	}
 	
 	//getters and setters
-	public int getCarID() {
+	public int getID() {
 		return id;
 	}
-	public void setCarID(int id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	public String getBrand() {
@@ -44,5 +44,9 @@ public class Vehicle {
 	public String getPlateNumber() {
 		return plateNumber;
 	}
-	//no setter for plate no, it can not be modified
+
+	public void setPlateNumber(String plateNumber) {
+		this.plateNumber = plateNumber;
+	}
+	
 }
