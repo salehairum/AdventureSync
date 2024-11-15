@@ -1,4 +1,4 @@
-package application;
+package hotelModels;
 
 public class FoodItem {
 	//variables

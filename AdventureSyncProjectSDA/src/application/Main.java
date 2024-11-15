@@ -1,5 +1,6 @@
 package application;
 
+import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.DatabaseManager;
 import javafx.application.Application;
 import tourist.TouristRatesBusTourView;
@@ -23,9 +24,10 @@ public class Main extends Application {
 //		
 //		System.out.println(db.deleteCar(1));
 		
-		try {		
-			TouristSignUpView busDriverMenu=new TouristSignUpView();
-			Parent root=busDriverMenu.getRoot();
+		try {
+			
+			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
+			Parent root = hotelOwnerMenu.getRoot();
 			
 			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
