@@ -1,11 +1,18 @@
 package accountAndPersonModels;
 
 public class Account {
+	private int accountID;
 	private String username;
 	private String password;
 	private String email;
 	private float balance;
 	//getters and setters
+	public int getAccountID() {
+		return accountID;
+	}
+	public void setAccountID(int accountID) {
+		this.accountID = accountID;
+	}
 	public String getUsername() {
 		return username;
 	}

@@ -12,15 +12,19 @@ public class TravelAgencyOwner extends Person {
 	private HashMap<Integer,Car> cars;
 	private TravelAgencyDBHandler travelAgencyDBHandler;
 	
+	//constructors
 	public TravelAgencyOwner()
 	{
 		super();
+		travelAgencyDBHandler=new TravelAgencyDBHandler();
 	}
 	public TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
 	{
 		super(name, dob, cnic);
 		this.agencyOwnerID = agencyOwnerID;
+		travelAgencyDBHandler=new TravelAgencyDBHandler();
 	}
+	
 	//getters and setters
 	public int getAgencyOwnerID() {
 		return agencyOwnerID;
@@ -35,6 +39,7 @@ public class TravelAgencyOwner extends Person {
 		this.cars = cars;
 	}
 	
+	//communication with db handler
 	public ReturnObjectUtility<TravelAgencyOwner> getDetail(int travelAgencyOwnerID)
 	{
 		ReturnObjectUtility<TravelAgencyOwner> returnData = travelAgencyDBHandler.retrieveTravelAgencyOwnerData(travelAgencyOwnerID);
@@ -43,4 +48,7 @@ public class TravelAgencyOwner extends Person {
 		return returnData;
 	}
 	
+	public ReturnObjectUtility<Boolean>  addCar(Car car) {
+		return travelAgencyDBHandler.addCar(car);
+	}
 }

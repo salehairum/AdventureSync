@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
+import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.TouristSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
@@ -25,7 +26,9 @@ import hotelModels.hotelOwnerController;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		//saleha: E85OBQM
+		//afsah: MHOGR9K
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());

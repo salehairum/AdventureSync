@@ -17,12 +17,25 @@ import travelAgencyModels.Car;
 
 public class TravelAgencyDBHandler {
 	static private Connection conn;
+	
+	//constructors
+	public TravelAgencyDBHandler() {}
+	
 	public TravelAgencyDBHandler(Connection c) {
 		conn = c;
 	}
 	
+	public static Connection getConnection() {
+		return conn;
+	}
+
+	public static void setConnection(Connection conn) {
+		TravelAgencyDBHandler.conn = conn;
+	}
+
 	//car related functions
-	public String addCar(Car car) {
+	public ReturnObjectUtility<Boolean> addCar(Car car) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		PreparedStatement pstmt;
 		try {
 			 String sql = "INSERT INTO Car (brand, model, manufactureYear, plateNumber, rentalStatus, rentalFee, costPerKm) VALUES (?, ?, ?, ?, 0, ?, ?);";
@@ -43,13 +56,15 @@ public class TravelAgencyDBHandler {
 				 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
 		                if (generatedKeys.next()) {
 		                    int newCarId = generatedKeys.getInt(1);
-		                    return "Car added successfully with ID: " + newCarId;
+		                    returnData.setMessage("Car added successfully with ID: " + newCarId);
 		                } else {
-		                    return "Car added, but ID retrieval failed.";
+		                	returnData.setMessage("Car added, but ID retrieval failed.");
 		                }
 		            }
+                 returnData.setSuccess(true);
 			 } else {
-				 return "Failed to add car.";
+				 returnData.setMessage("Failed to add car.");
+                 returnData.setSuccess(false);
 			 }
 			 
 		} catch (SQLException e) {
@@ -57,19 +72,23 @@ public class TravelAgencyDBHandler {
 			
 			if (errorMessage != null) {
 		        if (errorMessage.contains("unique constraint") || errorMessage.contains("duplicate")) {
-		            return "Please enter a unique plate number.";
+		        	returnData.setMessage("Please enter a unique plate number.");
 		        } else if (errorMessage.contains("foreign key constraint")) {
-		            return "Error: Invalid reference. Check if the related data exists.";
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 		        } else {
-		            return "Issue in adding car to db: " + errorMessage;
+		        	returnData.setMessage("Issue in adding car to db: " + errorMessage);
 		        }
 		    } else {
-		        return "An unknown error occurred.";
+		    	returnData.setMessage("An unknown error occurred.");
 		    }
+
+            returnData.setSuccess(false);
 		}
+		return returnData;
 	}
 	
-	public String updateCar(Car car) {
+	public ReturnObjectUtility<Boolean> updateCar(Car car) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		PreparedStatement pstmt;
 		try {
 			 String sql = "UPDATE Car SET brand = ?, model = ?, manufactureYear = ?, plateNumber = ?, rentalFee = ?, costPerKm = ? WHERE carID = ?";
@@ -88,9 +107,11 @@ public class TravelAgencyDBHandler {
 			 int rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected > 0) {
-		         return "Car updated successfully.";
+				 returnData.setMessage("Car updated successfully.");			
+				 returnData.setSuccess(true);
 			 } else {
-				 return "Failed to add car.";
+				returnData.setMessage("Failed to add car.");
+				returnData.setSuccess(false);
 			 }
 			 
 		} catch (SQLException e) {
@@ -98,26 +119,29 @@ public class TravelAgencyDBHandler {
 			
 			if (errorMessage != null) {
 		        if (errorMessage.contains("unique constraint") || errorMessage.contains("duplicate")) {
-		            return "Please enter a unique plate number.";
+		        	returnData.setMessage("Please enter a unique plate number.");
 		        } else if (errorMessage.contains("foreign key constraint")) {
-		            return "Error: Invalid reference. Check if the related data exists.";
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 		        } else {
-		            return "Issue in updating car in db: " + errorMessage;
+		        	returnData.setMessage("Issue in updating car in db: " + errorMessage);
 		        }
 		    } else {
-		        return "An unknown error occurred.";
+		    	returnData.setMessage("An unknown error occurred.");
 		    }
+			returnData.setSuccess(false);
 		}
+		return returnData;
 	}
 	
-	public String deleteCar(int carID) {
+	public ReturnObjectUtility<Boolean> deleteCar(int carID) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		try {
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select rentalStatus from car where carID="+carID);
 	        
 	        //car is already rented
 	        while(rSet.getBoolean(1)) {
-	        	return "Car is already rented";
+	        	returnData.setMessage("Car is already rented");
 	        }
 
 	        //now delete car
@@ -127,24 +151,25 @@ public class TravelAgencyDBHandler {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-            	return "Car with id "+carID+" deleted successfully";
+            	returnData.setMessage("Car with id "+carID+" deleted successfully");
             } else {
-            	return "Car could not be deleted";
+            	returnData.setMessage("Car could not be deleted");
             }
 		}
 		catch(SQLException e){
 			String errorMessage = e.getMessage().toLowerCase();
 		    
 		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
-		        return "Error: Cannot delete car as it is referenced in rental records. Remove related records first.";
+		    	returnData.setMessage("Error: Cannot delete car as it is referenced in rental records. Remove related records first.");
 		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		       return "Error: Car does not exist.";
+		    	returnData.setMessage("Error: Car does not exist.");
 		    } else {
-		        return "Issue in deleting car from database: " + e.getMessage();
+		    	returnData.setMessage("Issue in deleting car from database: " + e.getMessage());
 		    }
 		}
+		return returnData;
 	}
-
+	
 	public ReturnObjectUtility<Car> retrieveCarObject(int carID) {
 		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		
@@ -168,9 +193,11 @@ public class TravelAgencyDBHandler {
 	            // Set the Car object and success message
 	            returnData.setObject(car);
 	            returnData.setMessage("Car data retrieved successfully.");
+	            returnData.setSuccess(true);
 	        } else {
 	            // If no result is found, set an error message
 	            returnData.setMessage("Error: Car does not exist.");
+	            returnData.setSuccess(false);
 	        }
             
 		}
@@ -183,10 +210,12 @@ public class TravelAgencyDBHandler {
 		        // General case for other SQL exceptions
 		    	returnData.setMessage("Issue in retrieving car from database: " + e.getMessage());
 		    }
+
+            returnData.setSuccess(false);
 		}
         return returnData;
 	}
-
+	
 	public ReturnListUtility<Car> retrieveCarList() {
 		ReturnListUtility<Car> returnData=new ReturnListUtility();
 		
@@ -219,6 +248,7 @@ public class TravelAgencyDBHandler {
 	        	 
 	        	returnData.setList(carList);
 	        	returnData.setMessage("Cars retrieved successfully.");
+	            returnData.setSuccess(true);
 	        }
             
 		}
@@ -231,11 +261,13 @@ public class TravelAgencyDBHandler {
 		        // General case for other SQL exceptions
 		    	returnData.setMessage("Issue in retrieving cars from database: " + e.getMessage());
 		    }
+            returnData.setSuccess(false);
 		}
         return returnData;
 	}
-	
-	public String updateCarRentalStatus(int carID, boolean rentalStatus) {
+
+	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
+		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		try {
 			 String sql = "UPDATE Car SET rentalStatus = ? WHERE carID = ?";
@@ -249,12 +281,17 @@ public class TravelAgencyDBHandler {
 			 int rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected > 0) {
-				 if(rentalStatus)
-					 return "Car is now rented.";
-				 else
-					 return "Car is no longer rented.";
+				 if(rentalStatus) {
+					 returnData.setMessage("Car is now rented.");
+				 }
+				 else {
+					 returnData.setMessage("Car is no longer rented.");
+				 }
+
+		         returnData.setSuccess(true);
 			 } else {
-				 return "Failed to update car rental status.";
+				 returnData.setMessage("Failed to update car rental status.");
+		         returnData.setSuccess(false);
 			 }
 			 
 		} catch (SQLException e) {
@@ -262,18 +299,22 @@ public class TravelAgencyDBHandler {
 			
 			if (errorMessage != null) {
 		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-				       return "Error: Car does not exist.";
+		        	returnData.setMessage("Error: Car does not exist.");
 		        }else {
-		            return "Issue in updating car in db: " + errorMessage;
+		        	returnData.setMessage("Issue in updating car in db: " + errorMessage);
 		        }
 		    } else {
-		        return "An unknown error occurred.";
+		    	returnData.setMessage("An unknown error occurred.");
 		    }
+
+	        returnData.setSuccess(false);
 		}
+		return returnData;
 	}
 
-	//travel agency owner functions
-	public String updateAgencyOwner(TravelAgencyOwner owner) {
+	//travel agency owner functions 
+	public ReturnObjectUtility<Car> updateAgencyOwner(TravelAgencyOwner owner) {
+		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		try {
 			 //first update travel agency owner
@@ -290,7 +331,9 @@ public class TravelAgencyDBHandler {
 			 int rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected <=0 ) {
-				 return "Failed to update travel agency owner.";
+				 returnData.setMessage("Failed to update travel agency owner.");
+				 returnData.setSuccess(false);
+				 return returnData;
 			 }
 			 
 			 //now update account
@@ -303,17 +346,17 @@ public class TravelAgencyDBHandler {
 			 pstmt.setString(1, account.getUsername());
 			 pstmt.setObject(2, account.getEmail());
 			 pstmt.setString(3, account.getPassword());
+			 pstmt.setInt(4, account.getAccountID());
 			 
-			 //get acc id
-			 //pstmt.setInt(4, account.get);
-
 			 // Execute the insert
 			 rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected > 0) {
-		         return "Travel Agency Owner updated successfully.";
+				 returnData.setMessage("Travel Agency Owner updated successfully.");
+				 returnData.setSuccess(true);
 			 } else {
-				 return "Failed to update travel agency owner.";
+				 returnData.setMessage("Failed to update travel agency owner.");
+				 returnData.setSuccess(false);
 			 }
 			 
 		} catch (SQLException e) {
@@ -321,15 +364,18 @@ public class TravelAgencyDBHandler {
 			
 			if (errorMessage != null) {
 		        if (errorMessage.contains("foreign key constraint")) {
-		            return "Error: Invalid reference. Check if the related data exists.";
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 		        } else {
-		            return "Issue in updating travel agency owner in db: " + errorMessage;
+		        	returnData.setMessage("Issue in updating travel agency owner in db: " + errorMessage);
 		        }
 		    } else {
-		        return "An unknown error occurred.";
+		    	returnData.setMessage("An unknown error occurred.");
 		    }
+			returnData.setSuccess(false);
 		}
-	//travel agency owner related functions
+		return returnData;
+	}
+	
 	public static ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();
 		
@@ -337,8 +383,7 @@ public class TravelAgencyDBHandler {
 			Statement stmt = conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from TravelAgencyOwner where TravelAgencyOwnerId="+travelAgencyOwnerID);
 	        
-	        if (rSet.next()) { // Check if a result was found
-	            // Create and populate a hotel owner object
+	        if (rSet.next()) { 
 	            int travelAgencyOwnerIDRetrieved = rSet.getInt("TravelAgencyOwnerId");
 	            String name = rSet.getString("aName");
 	            Date date = rSet.getDate("dob");
@@ -350,11 +395,11 @@ public class TravelAgencyDBHandler {
 	            // Set the hotel owner object and success message
 	            returnData.setObject(travelAgencyOwner);
 	            returnData.setMessage("Travel Agency Owner data retrieved successfully.");
-	            System.out.println("DB successful");
+		        returnData.setSuccess(true);
 	        } else {
 	            // If no result is found, set an error message
 	            returnData.setMessage("Error: Travel Agency Owner does not exist.");
-	            System.out.println("DB unsuccessful");
+	            returnData.setSuccess(false);
 	        }
             
 		}
@@ -367,6 +412,7 @@ public class TravelAgencyDBHandler {
 		        // General case for other SQL exceptions
 		    	returnData.setMessage("Issue in retrieving Travel Agency owner from database: " + e.getMessage());
 		    }
+	        returnData.setSuccess(false);
 		}
         return returnData;
 	}

@@ -3,6 +3,7 @@ package dbHandlers;
 public class ReturnObjectUtility<T> {
 	String message;
 	T object;
+	boolean success;
 	public String getMessage() {
 		return message;
 	}
@@ -14,5 +15,11 @@ public class ReturnObjectUtility<T> {
 	}
 	public void setObject(T object) {
 		this.object = object;
+	}
+	public boolean isSuccess() {
+		return success;
+	}
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 }
