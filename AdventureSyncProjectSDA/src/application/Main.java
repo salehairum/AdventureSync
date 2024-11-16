@@ -30,29 +30,24 @@ public class Main extends Application {
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
 		TravelAgencyDBHandler tbd = new TravelAgencyDBHandler(dbManager.getConnection());
-    //this is db handler stuff that i wass doing
-    
-		//TravelAgencyDBHandler db=new TravelAgencyDBHandler(dbManager.getConnection());
-		//Car car=new Car(12, "Toyota", "Corolla", 2022, "XYZ-1323", false, 5000.0f, 15.0f);
-		
-		//car.setBrand("bla bla");
-		
-		//String returnData=db.updateCar(car);
-		//System.out.println(returnData);
-
 
 		try {
+		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
+
+
+//			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
+//			Parent root = hotelOwnerMenu.getRoot();
+//			
 			
 			TravelAgencyAddCarView hotelOwnerMenu = new TravelAgencyAddCarView();
 			Parent root = hotelOwnerMenu.getRoot();
-			
 			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
 	       
-		        // Set the scene to the primary stage
-		        primaryStage.setScene(scene);
-		        primaryStage.setTitle("Hotel Owner Menu");
-		        primaryStage.show();
+		    // Set the scene to the primary stage
+		    primaryStage.setScene(scene);
+		    primaryStage.setTitle("Hotel Owner Menu");
+		    primaryStage.show();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

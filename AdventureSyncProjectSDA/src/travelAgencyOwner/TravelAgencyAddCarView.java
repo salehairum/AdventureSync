@@ -2,26 +2,48 @@ package travelAgencyOwner;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import travelAgencyModels.travelAgencyOwnerController;
 
 public class TravelAgencyAddCarView {
-	private Pane sidePanel;
+	
 	@FXML
-	private Pane mainPanel;
+	private Button addButton;
+	@FXML
+	private TextField brandInput;
+	@FXML
+	private TextField modelInput;
+	@FXML
+	private TextField yearInput;
+	@FXML
+	private TextField rentalFeeInput;
+	@FXML
+	private TextField plateNoInput;
+	@FXML
+	private TextField costPerKmInput;
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyAddCarView() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerAddCar.fxml"));
+		loader.setController(this);
 		try {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	@FXML
+	private void initialize() {
+		buttonAssignment();
 		taoController = new travelAgencyOwnerController();
 		displayOwnerDetails();
 	}
@@ -30,6 +52,12 @@ public class TravelAgencyAddCarView {
 		return root;
 	}
 	
+	public void buttonAssignment() {
+		EventHandler<ActionEvent> addButtonHandler=(event)->{
+			System.out.println(brandInput.getText());
+		};
+		addButton.setOnAction(addButtonHandler);
+	}
 	// Method to set the name and ID fields dynamically
     public void displayOwnerDetails() {
         Text nameText = (Text) root.lookup("#name");

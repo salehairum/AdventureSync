@@ -7,7 +7,7 @@ import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Car;
 
-public class TravelAgencyOwner extends Person{
+public class TravelAgencyOwner extends Person {
 	private int agencyOwnerID;
 	private HashMap<Integer,Car> cars;
 	private TravelAgencyDBHandler travelAgencyDBHandler;
