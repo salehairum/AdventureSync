@@ -5,7 +5,14 @@ import java.util.HashMap;
 public class ReturnListUtility<T> {
 	HashMap<Integer, T> list;
 	String message;
-	
+	boolean success;
+
+	public boolean isSuccess() {
+		return success;
+	}
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 	public HashMap<Integer, T> getList() {
 		return list;
 	}

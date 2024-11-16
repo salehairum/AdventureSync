@@ -12,17 +12,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
-            <Label layoutX="100.0" layoutY="18.0" prefHeight="91.0" prefWidth="167.0" text="Add Car" textFill="#eddea4">
+            <Label layoutX="100.0" layoutY="8.0" prefHeight="91.0" prefWidth="167.0" text="Add Car" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/car.png" />
                </image>
@@ -120,11 +119,16 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="addButton" layoutX="141.0" layoutY="402.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Add Car" textFill="#f7a072">
+            <Button fx:id="addButton" disable="true" layoutX="141.0" layoutY="402.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Add Car" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Label layoutX="31.0" layoutY="91.0" prefHeight="35.0" prefWidth="258.0" text="Please fill out all fields." textFill="#f9f7f3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

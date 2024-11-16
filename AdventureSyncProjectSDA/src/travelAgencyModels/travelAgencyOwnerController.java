@@ -13,6 +13,8 @@ public class travelAgencyOwnerController {
 	{
 		travelAgencyOwner = new TravelAgencyOwner();
 	}
+	
+	//retrieve profile
 	public String[] getTravelAgencyOwnerProfileDetail(int travelAgecnyOwnerId)
     {
     	ReturnObjectUtility<TravelAgencyOwner> returnData = travelAgencyOwner.getDetail(travelAgecnyOwnerId);
@@ -26,4 +28,9 @@ public class travelAgencyOwnerController {
         System.out.println("Controller");
         return profileDetails;
     }
+	
+	//car related functions
+	public ReturnObjectUtility<Boolean> addCar(Car car) {
+		return travelAgencyOwner.addCar(car);
+	}
 }
