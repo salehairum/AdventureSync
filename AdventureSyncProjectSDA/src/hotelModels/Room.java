@@ -1,5 +1,6 @@
 package hotelModels;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import application.Feedback;
@@ -12,6 +13,8 @@ public class Room {
 	private boolean isBooked;
 	private ArrayList<Feedback> ratings;
 	private int hotelID;
+	private Date bookDate;
+	private Date checkoutDate;
 	//constructor
 	public Room() {
 		roomID = 0;
