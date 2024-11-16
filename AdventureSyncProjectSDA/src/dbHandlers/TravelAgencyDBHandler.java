@@ -15,7 +15,7 @@ import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Car;
 
 public class TravelAgencyDBHandler {
-	private Connection conn;
+	static private Connection conn;
 	public TravelAgencyDBHandler(Connection c) {
 		conn=c;
 	}
