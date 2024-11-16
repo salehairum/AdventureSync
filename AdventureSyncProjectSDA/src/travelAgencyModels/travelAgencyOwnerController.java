@@ -33,4 +33,9 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<Boolean> addCar(Car car) {
 		return travelAgencyOwner.addCar(car);
 	}
+	
+	//assigning tour to bus
+	public ReturnObjectUtility<Tour> assignTour(Tour tour){
+		return tour.assignTour(tour);
+	}
 }
