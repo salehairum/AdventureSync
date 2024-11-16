@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import travelAgencyModels.travelAgencyOwnerController;
 
 public class TravelAgencyOwnerMenuView extends AnchorPane{
 	@FXML
@@ -16,7 +18,7 @@ public class TravelAgencyOwnerMenuView extends AnchorPane{
 	private Pane mainPanel;
 	
 	Parent root;
-	
+	travelAgencyOwnerController taoController;
 	public TravelAgencyOwnerMenuView() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerMenu.fxml"));
 		try {
@@ -24,11 +26,32 @@ public class TravelAgencyOwnerMenuView extends AnchorPane{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
+		taoController = new travelAgencyOwnerController();
+		displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
 		return root;
 	}
 
+	// Method to set the name and ID fields dynamically
+    public void displayOwnerDetails() {
+        Text nameText = (Text) root.lookup("#name");
+        Text idText = (Text) root.lookup("#id");
+        Text cnicText = (Text) root.lookup("#cnic");
+        Text dobText = (Text) root.lookup("#dob");
+        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
+        if (nameText != null) {
+            nameText.setText(profileDetail[0]);
+        }
+        if (idText != null) {
+            idText.setText(profileDetail[1]);
+        }
+        if (cnicText != null) {
+        	cnicText.setText(profileDetail[2]);
+        }
+        if (dobText != null) {
+        	dobText.setText(profileDetail[3]);
+        }
+    }
 }

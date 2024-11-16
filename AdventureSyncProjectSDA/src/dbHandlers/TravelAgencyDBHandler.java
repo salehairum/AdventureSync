@@ -1,23 +1,24 @@
 package dbHandlers;
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashMap;
-
 import accountAndPersonModels.Account;
+import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Car;
 
 public class TravelAgencyDBHandler {
 	static private Connection conn;
 	public TravelAgencyDBHandler(Connection c) {
-		conn=c;
+		conn = c;
 	}
 	
 	//car related functions
@@ -328,5 +329,45 @@ public class TravelAgencyDBHandler {
 		        return "An unknown error occurred.";
 		    }
 		}
+	//travel agency owner related functions
+	public static ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
+		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();
+		
+		try {
+			Statement stmt = conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from TravelAgencyOwner where TravelAgencyOwnerId="+travelAgencyOwnerID);
+	        
+	        if (rSet.next()) { // Check if a result was found
+	            // Create and populate a hotel owner object
+	            int travelAgencyOwnerIDRetrieved = rSet.getInt("TravelAgencyOwnerId");
+	            String name = rSet.getString("aName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            TravelAgencyOwner travelAgencyOwner = new TravelAgencyOwner(travelAgencyOwnerIDRetrieved, name, dob, cnic);
+	            
+	            // Set the hotel owner object and success message
+	            returnData.setObject(travelAgencyOwner);
+	            returnData.setMessage("Travel Agency Owner data retrieved successfully.");
+	            System.out.println("DB successful");
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Travel Agency Owner does not exist.");
+	            System.out.println("DB unsuccessful");
+	        }
+            
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such Travel Agency owner") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Travel Agency Owner does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving Travel Agency owner from database: " + e.getMessage());
+		    }
+		}
+        return returnData;
 	}
 }

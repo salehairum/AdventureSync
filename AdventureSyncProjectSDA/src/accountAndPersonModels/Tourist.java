@@ -1,6 +1,7 @@
 package accountAndPersonModels;
 
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import travelAgencyModels.Seat;
@@ -12,6 +13,11 @@ public class Tourist extends Person {
 	private HashMap<Integer, Seat> bookedSeats;
 	private HashMap<Integer, Car> rentedCars;
 	private HashMap<Integer, Room> bookedRooms;
+	
+	public Tourist(String name, LocalDate dob, String cnic) {
+		super(name, dob, cnic);
+		// TODO Auto-generated constructor stub
+	}
 	
 	//getters and setters
 	public int getTouristID() {
