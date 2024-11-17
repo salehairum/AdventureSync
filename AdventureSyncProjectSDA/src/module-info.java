@@ -7,4 +7,5 @@ module AdventureSyncProjectSDA {
 	
 	opens application to javafx.graphics, javafx.fxml;
 	opens travelAgencyOwner to javafx.fxml;
+	opens hotelOwner to javafx.fxml;
 }

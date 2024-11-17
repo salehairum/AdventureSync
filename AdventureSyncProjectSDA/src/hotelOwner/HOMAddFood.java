@@ -8,22 +8,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import travelAgencyModels.travelAgencyOwnerController;
 
 public class HOMAddFood {
 	@FXML
 	private Pane sidePanel;
 	@FXML
 	private Pane mainPanel;
+	@FXML
+	private Text name;
+	@FXML
+	private Text id;
+	@FXML
+	private Text cnic;
+	@FXML
+	private Text dob;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
 	public HOMAddFood() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMAddFood.fxml"));
+		loader.setController(this);
 		try {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void initialize() {
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 	}
@@ -31,25 +45,14 @@ public class HOMAddFood {
 	public Parent getRoot() {
 		return root;
 	}
-	// Method to set the name and ID fields dynamically
+	
+	// Method to display profile
     public void displayOwnerDetails() {
-        Text nameText = (Text) root.lookup("#name");
-        Text idText = (Text) root.lookup("#id");
-        Text cnicText = (Text) root.lookup("#cnic");
-        Text dobText = (Text) root.lookup("#dob");
         String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(1);
-        if (nameText != null) {
-            nameText.setText(profileDetail[0]);
-        }
-        if (idText != null) {
-            idText.setText(profileDetail[1]);
-        }
-        if (cnicText != null) {
-        	cnicText.setText(profileDetail[2]);
-        }
-        if (dobText != null) {
-        	dobText.setText(profileDetail[3]);
-        }
+        name.setText(profileDetail[0]);
+        id.setText(profileDetail[1]);
+        cnic.setText(profileDetail[2]);
+        dob.setText(profileDetail[3]);
     }
 
 }

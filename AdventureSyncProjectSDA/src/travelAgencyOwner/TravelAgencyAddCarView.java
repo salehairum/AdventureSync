@@ -33,6 +33,14 @@ public class TravelAgencyAddCarView {
 	private TextField plateNoInput;
 	@FXML
 	private TextField costPerKmInput;
+	@FXML
+	private Text name;
+	@FXML
+	private Text id;
+	@FXML
+	private Text cnic;
+	@FXML
+	private Text dob;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
@@ -44,7 +52,7 @@ public class TravelAgencyAddCarView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 	
 	@FXML
@@ -52,7 +60,7 @@ public class TravelAgencyAddCarView {
 		listenersAssignment();
 		eventHandlersAssignment();
 		taoController = new travelAgencyOwnerController();
-		//displayOwnerDetails();
+		displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
@@ -153,22 +161,18 @@ public class TravelAgencyAddCarView {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        Text nameText = (Text) root.lookup("#name");
-        Text idText = (Text) root.lookup("#id");
-        Text cnicText = (Text) root.lookup("#cnic");
-        Text dobText = (Text) root.lookup("#dob");
         String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
-        if (nameText != null) {
-            nameText.setText(profileDetail[0]);
+        if (name != null) {
+            name.setText(profileDetail[0]);
         }
-        if (idText != null) {
-            idText.setText(profileDetail[1]);
+        if (id != null) {
+            id.setText(profileDetail[1]);
         }
-        if (cnicText != null) {
-        	cnicText.setText(profileDetail[2]);
+        if (cnic != null) {
+        	cnic.setText(profileDetail[2]);
         }
-        if (dobText != null) {
-        	dobText.setText(profileDetail[3]);
+        if (dob != null) {
+        	dob.setText(profileDetail[3]);
         }
     }
 }
