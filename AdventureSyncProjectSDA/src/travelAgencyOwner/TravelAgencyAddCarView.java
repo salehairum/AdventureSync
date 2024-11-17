@@ -82,23 +82,25 @@ public class TravelAgencyAddCarView {
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
 			alertInvalidInput.setTitle("Invalid Input"); 
 			
+			StringBuilder errorMessage = new StringBuilder();
+			
 			//check if inputs are numeric
 			if(!isNumeric(yearInput.getText())) {
-				alertInvalidInput.setContentText("Please enter numeric value for year"); 
-				alertInvalidInput.showAndWait(); 
-				return;
+				errorMessage.append("Please enter numeric value for year.\n");
 			}
 			if(!isNumeric(rentalFeeInput.getText())) { 
-				alertInvalidInput.setContentText("Please enter numeric value for rental fee"); 
-				alertInvalidInput.showAndWait(); 
-				return;
+	            errorMessage.append("Please enter numeric value for rental fee.\n");
 			}
 			if(!isNumeric(costPerKmInput.getText())) { 
-				alertInvalidInput.setContentText("Please enter numeric value for cost per km"); 
-				alertInvalidInput.showAndWait(); 
-				return;
+	            errorMessage.append("Please enter numeric value for cost per km.\n");
 			}
-			
+
+	        if (errorMessage.length() > 0) {
+	            alertInvalidInput.setContentText(errorMessage.toString());
+	            alertInvalidInput.showAndWait();
+	            return;
+	        }
+
 			//check if year of manufacture is valid
 			int year = Integer.parseInt(yearInput.getText());
 

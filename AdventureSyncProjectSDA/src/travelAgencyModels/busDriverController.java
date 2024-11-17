@@ -11,10 +11,19 @@ public class busDriverController {
 	BusDriver busDriver;
 	Bus bus;
 	public busDriverController() {
+		bus=new Bus();
 	}
 
 	public ReturnObjectUtility<Boolean> addBus(Bus newBus){
 		bus=newBus;
 		return bus.addBus(newBus);
+	}
+	
+	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
+		return bus.retrieveBusObject(busId);
+	}
+	
+	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
+		return bus.updateBus(bus);
 	}
 }

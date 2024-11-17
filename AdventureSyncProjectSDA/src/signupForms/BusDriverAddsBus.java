@@ -56,7 +56,6 @@ public class BusDriverAddsBus {
 		listenersAssignment();
 		eventHandlersAssignment();
 		bController = new busDriverController();
-		displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
@@ -149,7 +148,7 @@ public class BusDriverAddsBus {
 
 		HashMap<Integer, Seat> seats=createSeats(nRows, nSeats);
 	    // Create the Car object
-	    return new Bus(0, brand, model, year, plateNumber, nSeats,nRows, seatFee, seats); //does not have tour at start
+	    return new Bus(0, brand, model, year, plateNumber, seats,nSeats,nRows, seatFee); //does not have tour at start
 	}
 	
 	public HashMap<Integer, Seat> createSeats(int nRows, int nSeats) {
@@ -181,13 +180,4 @@ public class BusDriverAddsBus {
 	    addButton.setDisable(!allFieldsFilled);
 	}
 	
-	// Method to display profile
-    public void displayOwnerDetails() {
-//        String profileDetail[] = bController.getTravelAgencyOwnerProfileDetail(1);
-//           
-//        name.setText(profileDetail[0]);
-//        id.setText(profileDetail[1]);
-//        cnic.setText(profileDetail[2]);
-//        dob.setText(profileDetail[3]);
-    }
 }

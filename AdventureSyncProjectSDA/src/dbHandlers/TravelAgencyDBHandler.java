@@ -108,10 +108,10 @@ public class TravelAgencyDBHandler {
 			 int rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected > 0) {
-				 returnData.setMessage("Car updated successfully.");			
+				 returnData.setMessage("Car with car ID "+car.getID()+" updated successfully.");			
 				 returnData.setSuccess(true);
 			 } else {
-				returnData.setMessage("Failed to add car.");
+				returnData.setMessage("Failed to update car.");
 				returnData.setSuccess(false);
 			 }
 			 
