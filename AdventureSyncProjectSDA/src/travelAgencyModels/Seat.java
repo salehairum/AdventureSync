@@ -5,8 +5,21 @@ public class Seat {
 	private int busID;
 	boolean isBooked;
 	int rowNo;
-	String type;
 
+	public Seat(int seatID, int busID, boolean isBooked, int rowNo) {
+        this.seatID = seatID;
+        this.busID = busID;
+        this.isBooked = isBooked;
+        this.rowNo = rowNo;
+    }
+	//default booked=false
+	public Seat(int seatID, int busID, int rowNo) {
+        this.seatID = seatID;
+        this.busID = busID;
+        this.isBooked = false;
+        this.rowNo = rowNo;
+    }
+	
 	//getters and setters
 	public int getSeatID() {
 		return seatID;
@@ -31,11 +44,5 @@ public class Seat {
 	}
 	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
 	}
 }

@@ -14,6 +14,7 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Car;
+import travelAgencyModels.Tour;
 
 public class TravelAgencyDBHandler {
 	static private Connection conn;
@@ -107,10 +108,10 @@ public class TravelAgencyDBHandler {
 			 int rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected > 0) {
-				 returnData.setMessage("Car updated successfully.");			
+				 returnData.setMessage("Car with car ID "+car.getID()+" updated successfully.");			
 				 returnData.setSuccess(true);
 			 } else {
-				returnData.setMessage("Failed to add car.");
+				returnData.setMessage("Failed to update car.");
 				returnData.setSuccess(false);
 			 }
 			 
@@ -376,7 +377,7 @@ public class TravelAgencyDBHandler {
 		return returnData;
 	}
 	
-	public static ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
+	public ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();
 		
 		try {
@@ -415,5 +416,57 @@ public class TravelAgencyDBHandler {
 	        returnData.setSuccess(false);
 		}
         return returnData;
+	}
+
+	//assign tour to bus
+	public ReturnObjectUtility<Tour> assignTour(Tour tour){
+		ReturnObjectUtility<Tour> returnData = new ReturnObjectUtility();
+		
+		PreparedStatement pstmt;
+		try {
+			 String sql = "INSERT INTO Tour (origin, destination, date, busID) VALUES (?, ?, ?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			// Set parameters
+			pstmt.setString(1, tour.getOrigin());      // Set the origin
+			pstmt.setString(2, tour.getDestination()); // Set the destination
+			pstmt.setDate(3, new java.sql.Date(tour.getDate().getTime())); // Set the date (ensure it's a java.util.Date object)
+			pstmt.setInt(4, tour.getBusID());          // Set the bus ID
+
+			// Execute the insert
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				int newTourId=0;
+				try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+		                newTourId = generatedKeys.getInt(1);
+		                returnData.setMessage("Tour added successfully with ID: " + newTourId);
+		            } else {
+		            	returnData.setMessage("Tour added, but ID retrieval failed.");
+		            }
+		        }
+                returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to add tour.");
+                 returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the bus/tour exist.");
+		        } else {
+		        	returnData.setMessage("Issue in adding car to db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		
+		return returnData;
 	}
 }

@@ -124,7 +124,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="updateButton" layoutX="230.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update Car" textFill="#f7a072">
+            <Button fx:id="updateButton" disable="true" layoutX="230.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update Car" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
