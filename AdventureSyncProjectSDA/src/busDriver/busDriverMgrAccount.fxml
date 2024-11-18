@@ -4,101 +4,97 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="5.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
+      <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
-            <Pane fx:id="sidePanel" layoutY="-9.0" prefHeight="530.0" prefWidth="198.0" style="-fx-background-color: #EDDEA4;">
+            <Label layoutX="192.0" layoutY="38.0" prefHeight="53.0" prefWidth="292.0" text="Manage Account" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="busLogo" fitHeight="59.0" fitWidth="55.0" layoutX="129.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/account.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="updateAccount" alignment="CENTER" layoutX="69.0" layoutY="176.0" prefHeight="160.0" prefWidth="198.0">
                <children>
-                  <ImageView fx:id="logo" fitHeight="92.0" fitWidth="101.0" layoutX="48.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="updateLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/wandermate.png" />
+                        <Image url="@../resources/update.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="profile" layoutX="33.0" layoutY="184.0" prefHeight="200.0" prefWidth="134.0">
-                     <children>
-                        <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="name" prefHeight="40.0" prefWidth="166.0" text="Name" textFill="#0fa3b1">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ownerID" prefHeight="40.0" prefWidth="166.0" text="ID" textFill="#0fa3b1">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="40.0" prefWidth="166.0" text="Other attributes" textFill="#0fa3b1">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Label layoutX="20.0" layoutY="127.0" prefHeight="40.0" prefWidth="160.0" text="Bus Driver Account" textFill="#0fa3b1">
+                  <Label fx:id="viewBusLabel" alignment="CENTER" prefHeight="42.0" prefWidth="270.0" text="Update Account" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Button fx:id="menuButton" layoutX="219.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <VBox fx:id="deleteAccount" alignment="CENTER" layoutX="299.0" layoutY="176.0" prefHeight="160.0" prefWidth="198.0">
+               <children>
+                  <ImageView fx:id="deleteLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/delete.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="deleteLabel" alignment="CENTER" prefHeight="42.0" prefWidth="213.0" text="Delete Account" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="92.0" fitWidth="101.0" layoutX="48.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="profile" layoutX="33.0" layoutY="184.0" prefHeight="200.0" prefWidth="134.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="mainPanel" layoutX="198.0" layoutY="-9.0" prefHeight="530.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
-               <children>
-                  <Label layoutX="192.0" layoutY="38.0" prefHeight="53.0" prefWidth="292.0" text="Manage Account" textFill="#eddea4">
+                  <Label fx:id="name" prefHeight="40.0" prefWidth="166.0" text="Name" textFill="#0fa3b1">
                      <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="busLogo" fitHeight="59.0" fitWidth="55.0" layoutX="129.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/account.png" />
-                     </image>
-                  </ImageView>
-                  <VBox fx:id="updateAccount" alignment="CENTER" layoutX="69.0" layoutY="176.0" prefHeight="160.0" prefWidth="198.0">
-                     <children>
-                        <ImageView fx:id="updateLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/update.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="viewBusLabel" alignment="CENTER" prefHeight="42.0" prefWidth="270.0" text="Update Account" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Button fx:id="menuButton" layoutX="219.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+                  <Label fx:id="ownerID" prefHeight="40.0" prefWidth="166.0" text="ID" textFill="#0fa3b1">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
-                  </Button>
-                  <VBox fx:id="deleteAccount" alignment="CENTER" layoutX="299.0" layoutY="176.0" prefHeight="160.0" prefWidth="198.0">
-                     <children>
-                        <ImageView fx:id="deleteLogo" fitHeight="64.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/delete.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="deleteLabel" alignment="CENTER" prefHeight="42.0" prefWidth="213.0" text="Delete Account" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  </Label>
+                  <Label prefHeight="40.0" prefWidth="166.0" text="Other attributes" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
-            </Pane>
+            </VBox>
+            <Label layoutX="20.0" layoutY="127.0" prefHeight="40.0" prefWidth="160.0" text="Bus Driver Account" textFill="#0fa3b1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
-</AnchorPane>
+</Pane>
