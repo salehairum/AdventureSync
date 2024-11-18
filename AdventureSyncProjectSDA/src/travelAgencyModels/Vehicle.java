@@ -8,6 +8,8 @@ public class Vehicle {
 	protected String plateNumber;
 	
 	//constructor
+	public Vehicle() {}
+	
 	public Vehicle(int id, String brand, String model, int year, String plateNumber) {
 		 this.id = id;
 		 this.brand = brand;

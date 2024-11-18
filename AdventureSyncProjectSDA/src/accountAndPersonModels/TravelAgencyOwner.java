@@ -51,4 +51,12 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<Boolean>  addCar(Car car) {
 		return travelAgencyDBHandler.addCar(car);
 	}
+	
+	public ReturnObjectUtility<Car> retrieveCarObject(int carID) {
+		return travelAgencyDBHandler.retrieveCarObject(carID);
+	}
+	
+	public ReturnObjectUtility<Boolean> updateCar(Car car){
+		return travelAgencyDBHandler.updateCar(car);
+	}
 }

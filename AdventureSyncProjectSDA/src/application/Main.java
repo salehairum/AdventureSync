@@ -2,9 +2,11 @@ package application;
 
 import java.util.HashMap;
 
+import busDriver.BusDriverUpdateBusView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
 import hotelOwner.HotelOwnerMenuView;
+import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
 import dbHandlers.ReturnListUtility;
@@ -17,8 +19,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
+import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
+import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
+import signupForms.BusDriverAddsBus;
 import signupForms.TouristSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
 import hotelModels.hotelOwnerController;
@@ -33,6 +38,7 @@ public class Main extends Application {
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
 		TravelAgencyDBHandler tbd = new TravelAgencyDBHandler(dbManager.getConnection());
+		BusDBHandler bdb = new BusDBHandler(dbManager.getConnection());
 
 		try {
 		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
@@ -42,7 +48,7 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 			
-			TravelAgencyAddCarView hotelOwnerMenu = new TravelAgencyAddCarView();
+			BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
 			Parent root = hotelOwnerMenu.getRoot();
 			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

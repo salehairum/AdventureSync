@@ -25,12 +25,24 @@ public class travelAgencyOwnerController {
         LocalDate dob = returnData.getObject().getDob();
         String travelAgencyOwnerDob = dob.toString();
         String[] profileDetails = {travelAgencyOwnerName, travelAgencyOwnerIdStr, travelAgencyOwnerCnic, travelAgencyOwnerDob};
-        System.out.println("Controller");
         return profileDetails;
     }
 	
 	//car related functions
 	public ReturnObjectUtility<Boolean> addCar(Car car) {
 		return travelAgencyOwner.addCar(car);
+	}
+	
+	public ReturnObjectUtility<Car> retrieveCarObject(int carID) {
+		return travelAgencyOwner.retrieveCarObject(carID);
+	}
+	
+	public ReturnObjectUtility<Boolean> updateCar(Car car){
+		return travelAgencyOwner.updateCar(car);
+	}
+	
+	//assigning tour to bus
+	public ReturnObjectUtility<Tour> assignTour(Tour tour){
+		return tour.assignTour(tour);
 	}
 }
