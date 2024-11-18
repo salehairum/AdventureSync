@@ -49,7 +49,7 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 			
-			HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView();
+			TravelAgencyAddCarView hotelOwnerMenu = new TravelAgencyAddCarView();
 			//BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
 			Parent root = hotelOwnerMenu.getRoot();
 			// Create the scene and set it
