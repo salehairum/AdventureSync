@@ -118,7 +118,7 @@
       </ImageView>
       <ImageView fx:id="hotelLogo" fitHeight="79.0" fitWidth="89.0" layoutX="431.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/hotel.png" />
+            <Image url="@../resources/hotel2.png" />
          </image>
       </ImageView>
    </children>

@@ -16,7 +16,7 @@
       </Text>
       <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="286.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/hotel.png" />
+            <Image url="@../resources/hotel2.png" />
          </image>
       </ImageView>
       <Text fx:id="updHotelLabel" fill="#eddea4" layoutX="227.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Hotel" textAlignment="CENTER" wrappingWidth="218.13671875">
@@ -39,7 +39,7 @@
             <Image url="@../resources/view.png" />
          </image>
       </ImageView>
-      <Button fx:id="menuButton" layoutX="424.0" layoutY="411.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="424.0" layoutY="411.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

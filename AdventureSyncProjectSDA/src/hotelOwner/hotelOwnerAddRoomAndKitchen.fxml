@@ -13,7 +13,7 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Text>
-      <Text fx:id="addRoomLabel" fill="#eddea4" layoutX="227.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add atleast one Room" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="RoomLabel" fill="#eddea4" layoutX="227.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add atleast one Room" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -23,7 +23,7 @@
             <Image url="@../resources/room.png" />
          </image>
       </ImageView>
-      <Text fx:id="addKitchenLabel" fill="#eddea4" layoutX="480.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Kitchen" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="KitchenLabel" fill="#eddea4" layoutX="480.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Food to Kitchen" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

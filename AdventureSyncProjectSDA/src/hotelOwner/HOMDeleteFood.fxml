@@ -4,49 +4,49 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="menuButton" layoutX="505.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="502.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="delFoodButton" layoutX="375.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Delete Food" textFill="#f7a072">
+      <Button fx:id="delFoodButton" layoutX="370.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Delete Food" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fill="#eddea4" layoutX="393.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Food Item" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fill="#eddea4" layoutX="403.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Food Item" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Text>
-      <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="306.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="316.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/kitchen.png" />
          </image>
       </ImageView>
-      <Button fx:id="viewFoodButton" layoutX="398.0" layoutY="355.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="179.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
+      <Button fx:id="viewFoodButton" layoutX="349.0" layoutY="365.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <HBox alignment="CENTER" layoutX="255.0" layoutY="181.0" prefHeight="100.0" prefWidth="444.0">
-         <children>
-            <Text fx:id="delFoodIDLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter food ID" textAlignment="CENTER" wrappingWidth="218.13671875">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Text>
-            <TextField fx:id="foodIDInput" prefHeight="25.0" prefWidth="202.0" promptText="e.g 123" />
-         </children>
-      </HBox>
+      <Text fx:id="delFoodIDLabel" fill="#eddea4" layoutX="223.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter food ID" textAlignment="CENTER" wrappingWidth="218.13671875">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="foodIDInput" layoutX="487.0" layoutY="250.0" prefHeight="25.0" prefWidth="202.0" promptText="e.g 123" />
+      <Button fx:id="backButton" layoutX="512.0" layoutY="365.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">
          <children>
             <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="24.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -107,4 +107,4 @@
          </children>
       </Pane>
    </children>
-</AnchorPane>
+</Pane>
