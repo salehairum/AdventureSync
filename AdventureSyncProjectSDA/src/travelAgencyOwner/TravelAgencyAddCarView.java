@@ -52,7 +52,7 @@ public class TravelAgencyAddCarView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 	
 	@FXML
@@ -164,7 +164,7 @@ public class TravelAgencyAddCarView {
 	// Method to display profile
     public void displayOwnerDetails() {
         String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
-           
+
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
