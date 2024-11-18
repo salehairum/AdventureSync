@@ -1,7 +1,10 @@
 package application;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
+import accountAndPersonModels.Account;
+import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
@@ -26,6 +29,7 @@ import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
 import signupForms.TouristSignUpView;
+import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
 import hotelModels.hotelOwnerController;
 
@@ -48,13 +52,14 @@ public class Main extends Application {
 //			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
+
 			
-			TravelAgencyAddCarView hotelOwnerMenu = new TravelAgencyAddCarView();
-			//BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
+			TravelAgencyOwnerSignUpView hotelOwnerMenu = new TravelAgencyOwnerSignUpView();
+//			//BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
 			Parent root = hotelOwnerMenu.getRoot();
-			// Create the scene and set it
+//			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
-	       
+//	       
 		    // Set the scene to the primary stage
 		    primaryStage.setScene(scene);
 		    primaryStage.setTitle("Hotel Owner Menu");

@@ -6,6 +6,15 @@ public class Account {
 	private String password;
 	private String email;
 	private float balance;
+	
+	public Account(int accountID, String username, String password, String email, float balance) {
+	    this.accountID = accountID;
+	    this.username = username;
+	    this.password = password;
+	    this.email = email;
+	    this.balance = balance;
+	}
+	
 	//getters and setters
 	public int getAccountID() {
 		return accountID;

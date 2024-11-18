@@ -60,4 +60,7 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<Boolean> updateCar(Car car){
 		return car.updateCar(car);
 	}
+	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
+		return travelAgencyDBHandler.addAgencyOwner(owner);
+	}
 }

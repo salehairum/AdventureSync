@@ -7,153 +7,158 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="5.0" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
+      <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
-            <Pane fx:id="sidePanel" layoutY="-9.0" prefHeight="530.0" prefWidth="198.0" style="-fx-background-color: #EDDEA4;">
+            <Label layoutX="98.0" prefHeight="91.0" prefWidth="167.0" text="Signup" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/travel.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="26.0" layoutY="110.0" prefHeight="305.0" prefWidth="478.0">
                <children>
-                  <ImageView fx:id="logo" fitHeight="139.0" fitWidth="118.0" layoutX="40.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/wandermate.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="24.0" layoutY="311.0" prefHeight="59.0" prefWidth="150.0" text="Travel Agency Owner Account" textAlignment="CENTER" textFill="#0fa3b1" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="mainPanel" layoutX="198.0" layoutY="-9.0" prefHeight="530.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
-               <children>
-                  <Label layoutX="100.0" layoutY="18.0" prefHeight="91.0" prefWidth="167.0" text="Signup" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/travel.png" />
-                     </image>
-                  </ImageView>
-                  <VBox layoutX="31.0" layoutY="129.0" prefHeight="305.0" prefWidth="478.0">
+                  <HBox prefHeight="66.0" prefWidth="498.0">
                      <children>
-                        <HBox prefHeight="66.0" prefWidth="498.0">
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Name" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="nameInput" prefHeight="26.0" prefWidth="228.0" promptText="e.g Haris">
-                                       <VBox.margin>
-                                          <Insets right="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Date of Birth" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <DatePicker fx:id="dobInput" prefHeight="26.0" prefWidth="250.0" promptText="e.g 2004-12-02" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="87.0" prefWidth="495.0">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Email" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="emailInput" prefHeight="26.0" prefWidth="263.0" promptText="e.g abc@example.com">
-                                       <VBox.margin>
-                                          <Insets right="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Username" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="usernameInput" prefHeight="26.0" prefWidth="255.0" promptText="e.g haris12" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="87.0" prefWidth="495.0">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Password" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="passwordInput" prefHeight="26.0" prefWidth="263.0" promptText="Choose strong password">
-                                       <VBox.margin>
-                                          <Insets right="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Cnic" textFill="#eddea4">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="costPerKmInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <VBox prefHeight="98.0" prefWidth="462.0">
-                           <children>
-                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Initial Balance" textFill="#eddea4">
+                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Name" textFill="#eddea4">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="422.0" promptText="e.g 12000" />
+                              <TextField fx:id="nameInput" prefHeight="26.0" prefWidth="228.0" promptText="e.g Haris">
+                                 <VBox.margin>
+                                    <Insets right="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Date of Birth" textFill="#eddea4">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="dobInput" prefHeight="26.0" prefWidth="250.0" promptText="e.g 2004-12-02" />
                            </children>
                         </VBox>
                      </children>
-                  </VBox>
-                  <Button fx:id="signupButton" layoutX="221.0" layoutY="434.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="loginStatement" layoutX="31.0" layoutY="94.0" prefHeight="35.0" prefWidth="300.0" text="Already have an account? Login!" textFill="#f9f7f3">
+                  </HBox>
+                  <HBox prefHeight="87.0" prefWidth="495.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Email" textFill="#eddea4">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="emailInput" prefHeight="26.0" prefWidth="263.0" promptText="e.g abc@example.com">
+                                 <VBox.margin>
+                                    <Insets right="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Username" textFill="#eddea4">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="usernameInput" prefHeight="26.0" prefWidth="255.0" promptText="e.g haris12" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="87.0" prefWidth="495.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="98.0" prefWidth="462.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Initial Balance" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="422.0" promptText="e.g 12000" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets right="10.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
+                           <children>
+                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Cnic" textFill="#eddea4">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="cnicInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label prefHeight="35.0" prefWidth="258.0" text="Enter Password" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <Label prefHeight="30.0" prefWidth="486.0" text="length should be 8, including upper and lower case letters, numbers, special symbols" textFill="#f9f7f3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="passwordInput" prefHeight="26.0" prefWidth="263.0" promptText="Fill all conditions">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
                </children>
-            </Pane>
+            </VBox>
+            <Button fx:id="signupButton" layoutX="216.0" layoutY="433.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="loginStatement" layoutX="32.0" layoutY="75.0" prefHeight="35.0" prefWidth="300.0" text="Already have an account? Login!" textFill="#f9f7f3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
-      </AnchorPane>
+      </Pane>
+      <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="164.0" layoutX="18.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Text fill="#0fa3b1" layoutX="-15.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Travel Agency Owner" textAlignment="CENTER" wrappingWidth="218.13671875">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
-</AnchorPane>
+</Pane>

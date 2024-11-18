@@ -45,4 +45,9 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<Tour> assignTour(Tour tour){
 		return tour.assignTour(tour);
 	}
+	
+	//travel agency related functions
+	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
+		return travelAgencyOwner.addAgencyOwner(owner);
+	}
 }
