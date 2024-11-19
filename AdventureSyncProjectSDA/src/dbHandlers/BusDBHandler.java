@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import accountAndPersonModels.Account;
+import accountAndPersonModels.BusDriver;
+import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -209,5 +212,94 @@ public class BusDBHandler {
 	    
 	    return returnData;
 	}
+
+	//travel agency owner functions
+	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver busDriver) {
+		ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			// First Insert into Account table
+		    String sql = "INSERT INTO Account (username, email, accPassword, balance) VALUES (?, ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    // Set parameters
+		    Account account = busDriver.getAccount();
+		    pstmt.setString(1, account.getUsername());
+		    pstmt.setString(2, account.getEmail());
+		    pstmt.setString(3, account.getPassword());
+		    pstmt.setFloat(4, account.getBalance());
+
+		    // Execute the insert and fetch generated accountID
+		    int retrievedAccountID=0;
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	retrievedAccountID = rs.getInt(1);
+		        	account.setAccountID(retrievedAccountID);
+		            busDriver.getAccount().setAccountID(retrievedAccountID);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Account ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+		    } else {
+		        returnData.setMessage("Failed to insert into Account table.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		        // Step 2: Insert into TravelAgencyOwner table
+		        sql = "INSERT INTO busDriver (accountID, aName, dob, cnic) VALUES ( ?, ?, ?, ?)";
+		        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		        // Set parameters
+		        pstmt.setInt(1, busDriver.getAccount().getAccountID());
+		        pstmt.setString(2, busDriver.getName());
+		        pstmt.setObject(3, busDriver.getDob());
+		        pstmt.setString(4, busDriver.getCnic());
+
+		        // Execute the insert
+		        int retrievedOwnerID=0;
+		        rowsAffected = pstmt.executeUpdate();
+		        if (rowsAffected > 0) {
+		            rs = pstmt.getGeneratedKeys();
+		            if (rs.next()) {
+		            	retrievedOwnerID = rs.getInt(1);
+		            	returnData.setMessage("Bus Driver with id "+retrievedOwnerID+" added successfuly!");
+		                returnData.setSuccess(true);
+		                return returnData;
+		            } else {
+		                returnData.setMessage("Failed to retrieve generated Account ID.");
+		                returnData.setSuccess(false);
+		                return returnData;
+		            }
+		        } else {
+		            returnData.setMessage("Failed to insert into Bus Driver table.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else if (errorMessage.contains("unique key constraint")) {
+		                returnData.setMessage("Error: Duplicate username, email, or CNIC detected.");
+		            } else {
+		                returnData.setMessage("Issue in adding bus driver in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+		}
+
 
 }
