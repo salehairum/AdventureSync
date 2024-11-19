@@ -141,7 +141,7 @@ public class BusDriverUpdateBusView {
 	        bus.setModel(modelInput.getText().trim());
 	    }
 	    if (!plateNoInput.getText().trim().isEmpty()) {
-	        bus.setPlateNumber(plateNoInput.getText().trim());
+	        bus.setPlateNumber(plateNoInput.getText().trim().toUpperCase());
 	    }
 	    if (!yearInput.getText().trim().isEmpty()) {
 	        bus.setYear(Integer.parseInt(yearInput.getText().trim()));

@@ -138,7 +138,7 @@ public class BusDriverAddsBus {
 
 		String brand = brandInput.getText();
 	    String model = modelInput.getText();
-	    String plateNumber = plateNoInput.getText();
+	    String plateNumber = plateNoInput.getText().toUpperCase();
 	
 	    // Parse numeric values
 	    int year = Integer.parseInt(yearInput.getText());

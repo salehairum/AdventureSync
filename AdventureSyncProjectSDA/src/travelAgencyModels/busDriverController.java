@@ -12,6 +12,7 @@ public class busDriverController {
 	Bus bus;
 	public busDriverController() {
 		bus=new Bus();
+		busDriver=new BusDriver();
 	}
 
 	public ReturnObjectUtility<Boolean> addBus(Bus newBus){
@@ -25,5 +26,10 @@ public class busDriverController {
 	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
 		return bus.updateBus(bus);
+	}
+	
+	//db interaction functions
+	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver bDriver){
+		return busDriver.addBusDriver(bDriver);
 	}
 }

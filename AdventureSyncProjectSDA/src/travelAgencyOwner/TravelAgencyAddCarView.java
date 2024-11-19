@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import travelAgencyModels.Car;
@@ -137,7 +139,7 @@ public class TravelAgencyAddCarView {
 	public Car createCarObject() {
 		String brand = brandInput.getText();
 	    String model = modelInput.getText();
-	    String plateNumber = plateNoInput.getText();
+	    String plateNumber = plateNoInput.getText().toUpperCase();
 	
 	    // Parse numeric values
 	    int year = Integer.parseInt(yearInput.getText());
