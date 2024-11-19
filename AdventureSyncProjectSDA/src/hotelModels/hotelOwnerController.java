@@ -27,5 +27,7 @@ public class hotelOwnerController
         String[] profileDetails = {hotelOwnerName, hotelOwnerIdStr, hotelOwnerCnic, hotelOwnerDob};
         return profileDetails;
     }
-
+    public ReturnObjectUtility<HotelOwner> addHotelOwner(HotelOwner newHotelOwner) {
+		return hotelOwner.addHotelOwner(newHotelOwner);
+	}
 }

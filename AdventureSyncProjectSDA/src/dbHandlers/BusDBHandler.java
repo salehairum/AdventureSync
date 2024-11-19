@@ -345,5 +345,68 @@ public class BusDBHandler {
 		    return returnData;
 		}
 
+	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
+		ReturnObjectUtility<BusDriver> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 //first update travel agency owner
+			 String sql = "UPDATE busDriver SET bname = ?, dob = ?, cnic= ? where TravelAgencyOwnerId= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setString(1, busDriver.getName());
+			 pstmt.setObject(2, busDriver.getDob());
+			 pstmt.setString(3, busDriver.getCnic());
+			 pstmt.setInt(4, busDriver.getBusDriverID());
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <=0 ) {
+				 returnData.setMessage("Failed to update busDriver.");
+				 returnData.setSuccess(false);
+				 return returnData;
+			 }
+			 
+			 //now update account
+			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 Account account=busDriver.getAccount();
+			 
+			 // Set parameters
+			 pstmt.setString(1, account.getUsername());
+			 pstmt.setObject(2, account.getEmail());
+			 pstmt.setString(3, account.getPassword());
+			 pstmt.setInt(4, account.getAccountID());
+			 
+			 // Execute the insert
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 returnData.setMessage("Bus Driver with id "+busDriver.getBusDriverID()+" updated successfully.");
+				 returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update Bus Driver.");
+				 returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in updating Bus Driver in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+			returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
 
 }

@@ -24,16 +24,6 @@ public class BusDriver extends Person {
 		this.busDriverID = busDriverID;
 		busDBHandler=new BusDBHandler();
 	}
-	
-	public BusDriver(int busDriverID,String name, LocalDate dob, String cnic) {
-		super(name, dob, cnic);
-		this.busDriverID = busDriverID;
-		// TODO Auto-generated constructor stub
-	}
-	public BusDriver() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	//getters and setters
 	public int getBusDriverID() {
 		return busDriverID;

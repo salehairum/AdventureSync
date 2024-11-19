@@ -1,10 +1,12 @@
 package dbHandlers;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
@@ -116,6 +118,111 @@ public class TouristDBHandler {
 		    }
 		    return returnData;
 		}
+
+	//tourist account related
+	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
+			ReturnObjectUtility<Tourist> returnData=new ReturnObjectUtility();
+			PreparedStatement pstmt;
+			try {
+				 //first update travel agency owner
+				 String sql = "UPDATE tourist SET tname = ?, dob = ?, cnic= ? where TravelAgencyOwnerId= ?";
+				 pstmt = conn.prepareStatement(sql);
+				    
+				 // Set parameters
+				 pstmt.setString(1, tourist.getName());
+				 pstmt.setObject(2, tourist.getDob());
+				 pstmt.setString(3, tourist.getCnic());
+				 pstmt.setInt(4, tourist.getTouristID());
+
+				 // Execute the insert
+				 int rowsAffected = pstmt.executeUpdate();
+				    
+				 if (rowsAffected <=0 ) {
+					 returnData.setMessage("Failed to update tourist.");
+					 returnData.setSuccess(false);
+					 return returnData;
+				 }
+				 
+				 //now update account
+				 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+				 pstmt = conn.prepareStatement(sql);
+				    
+				 Account account=tourist.getAccount();
+				 
+				 // Set parameters
+				 pstmt.setString(1, account.getUsername());
+				 pstmt.setObject(2, account.getEmail());
+				 pstmt.setString(3, account.getPassword());
+				 pstmt.setInt(4, account.getAccountID());
+				 
+				 // Execute the insert
+				 rowsAffected = pstmt.executeUpdate();
+				    
+				 if (rowsAffected > 0) {
+					 returnData.setMessage("Tourist with id "+tourist.getTouristID()+" updated successfully.");
+					 returnData.setSuccess(true);
+				 } else {
+					 returnData.setMessage("Failed to update tourist.");
+					 returnData.setSuccess(false);
+				 }
+				 
+			} catch (SQLException e) {
+				String errorMessage = e.getMessage().toLowerCase();
+				
+				if (errorMessage != null) {
+			        if (errorMessage.contains("foreign key constraint")) {
+			        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+			        } else {
+			        	returnData.setMessage("Issue in updating tourist in db: " + errorMessage);
+			        }
+			    } else {
+			    	returnData.setMessage("An unknown error occurred.");
+			    }
+				returnData.setSuccess(false);
+			}
+			return returnData;
+		}
+
+	public ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
+		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+		
+		try {
+			Statement stmt = conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from tourist where TravelAgencyOwnerId="+touristID);
+	        
+	        if (rSet.next()) { 
+	            int touristIDRetrieved = rSet.getInt("touristId");
+	            String name = rSet.getString("aName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            Tourist tourist = new Tourist(touristIDRetrieved, name, dob, cnic);
+	            
+	            // Set the hotel owner object and success message
+	            returnData.setObject(tourist);
+	            returnData.setMessage("Tourist data retrieved successfully.");
+		        returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Tourist does not exist.");
+	            returnData.setSuccess(false);
+	        }
+            
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such Tourist") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Tourist does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving Tourist from database: " + e.getMessage());
+		    }
+	        returnData.setSuccess(false);
+		}
+        return returnData;
+	}
 
 
 }
