@@ -157,7 +157,7 @@ public class TravelAgencyUpdatesCarView {
 		     car.setModel(modelInput.getText());
 		 }
 		 if (!plateNoInput.getText().trim().isEmpty()) {
-		     car.setPlateNumber(plateNoInput.getText());
+		     car.setPlateNumber(plateNoInput.getText().toUpperCase());
 		 }
 		 if (!yearInput.getText().trim().isEmpty()) {
 		     car.setYear(Integer.parseInt(yearInput.getText()));

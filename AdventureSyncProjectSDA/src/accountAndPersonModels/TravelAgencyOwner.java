@@ -9,20 +9,23 @@ import travelAgencyModels.Car;
 
 public class TravelAgencyOwner extends Person {
 	private int agencyOwnerID;
-	private HashMap<Integer,Car> cars;
+	//private HashMap<Integer,Car> cars;
 	private TravelAgencyDBHandler travelAgencyDBHandler;
+	Car car;
 	
 	//constructors
 	public TravelAgencyOwner()
 	{
 		super();
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
+		car=new Car();
 	}
 	public TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
 	{
 		super(name, dob, cnic);
 		this.agencyOwnerID = agencyOwnerID;
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
+		car=new Car();
 	}
 	
 	//getters and setters
@@ -32,31 +35,32 @@ public class TravelAgencyOwner extends Person {
 	public void setAgencyOwnerID(int agencyOwnerID) {
 		this.agencyOwnerID = agencyOwnerID;
 	}
-	public HashMap<Integer, Car> getCars() {
-		return cars;
-	}
-	public void setCars(HashMap<Integer, Car> cars) {
-		this.cars = cars;
-	}
-	
+//	public HashMap<Integer, Car> getCars() {
+//		return cars;
+//	}
+//	public void setCars(HashMap<Integer, Car> cars) {
+//		this.cars = cars;
+//	}
+//	
 	//communication with db handler
 	public ReturnObjectUtility<TravelAgencyOwner> getDetail(int travelAgencyOwnerID)
 	{
 		ReturnObjectUtility<TravelAgencyOwner> returnData = travelAgencyDBHandler.retrieveTravelAgencyOwnerData(travelAgencyOwnerID);
-		System.out.println(returnData.getMessage());
-		System.out.println("Agency owner");
 		return returnData;
 	}
 	
 	public ReturnObjectUtility<Boolean>  addCar(Car car) {
-		return travelAgencyDBHandler.addCar(car);
+		return car.addCar(car);
 	}
 	
 	public ReturnObjectUtility<Car> retrieveCarObject(int carID) {
-		return travelAgencyDBHandler.retrieveCarObject(carID);
+		return car.retrieveCarObject(carID);
 	}
 	
 	public ReturnObjectUtility<Boolean> updateCar(Car car){
-		return travelAgencyDBHandler.updateCar(car);
+		return car.updateCar(car);
+	}
+	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
+		return travelAgencyDBHandler.addAgencyOwner(owner);
 	}
 }

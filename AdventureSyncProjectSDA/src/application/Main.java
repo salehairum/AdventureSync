@@ -1,8 +1,11 @@
 package application;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import busDriver.BusDriverMenuView;
+import accountAndPersonModels.Account;
+import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
@@ -19,6 +22,7 @@ import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
+import dbHandlers.TouristDBHandler;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
@@ -35,7 +39,9 @@ import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
+import signupForms.BusDriverSignUpView;
 import signupForms.TouristSignUpView;
+import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
 import hotelModels.hotelOwnerController;
 
@@ -48,8 +54,9 @@ public class Main extends Application {
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
-		TravelAgencyDBHandler tbd = new TravelAgencyDBHandler(dbManager.getConnection());
+		TravelAgencyDBHandler tadb = new TravelAgencyDBHandler(dbManager.getConnection());
 		BusDBHandler bdb = new BusDBHandler(dbManager.getConnection());
+		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
 		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
@@ -58,13 +65,14 @@ public class Main extends Application {
 //			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
+
 			
-			BusDriverMenuView hotelOwnerMenu = new BusDriverMenuView();
-			//BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
+
+			BusDriverSignUpView hotelOwnerMenu = new BusDriverSignUpView();
 			Parent root = hotelOwnerMenu.getRoot();
-			// Create the scene and set it
+//			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
-	       
+//	       
 		    // Set the scene to the primary stage
 		    primaryStage.setScene(scene);
 		    primaryStage.setTitle("Hotel Owner Menu");
