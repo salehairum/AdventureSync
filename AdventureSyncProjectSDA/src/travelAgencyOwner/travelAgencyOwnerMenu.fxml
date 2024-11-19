@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -29,14 +27,11 @@
                               <Image url="@../resources/car.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="carLabel" prefHeight="50.0" prefWidth="152.0" text="Manage Cars" textFill="#eddea4">
+                        <Text fx:id="carLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Cars">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
-                           <padding>
-                              <Insets top="15.0" />
-                           </padding>
-                        </Label>
+                        </Text>
                      </children>
                   </VBox>
                </children>
@@ -48,14 +43,11 @@
                         <Image url="@../resources/bus.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="busLabel" prefHeight="50.0" prefWidth="181.0" text="Manage Buses" textFill="#eddea4">
+                  <Text fx:id="busLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Buses">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox fx:id="viewFeedback" alignment="CENTER" layoutX="47.0" layoutY="237.0" prefHeight="182.0" prefWidth="188.0">
@@ -65,31 +57,25 @@
                         <Image url="@../resources/rating.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="feedbackLabel" prefHeight="50.0" prefWidth="178.0" text="View Feedback" textFill="#eddea4">
+                  <Text fx:id="ratingLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="View Feedback">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox fx:id="manageAccount" alignment="CENTER" layoutX="310.0" layoutY="237.0" prefHeight="182.0" prefWidth="204.0">
                <children>
-                  <ImageView fx:id="accLogo" fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="accountLogo" fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/account.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="accountLabel" prefHeight="50.0" prefWidth="218.0" text="Manage Account" textFill="#eddea4">
+                  <Text fx:id="accountLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Account">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
          </children>

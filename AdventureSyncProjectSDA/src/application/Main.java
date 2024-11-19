@@ -3,10 +3,14 @@ package application;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import busDriver.BusDriverCompletesTourView;
+import busDriver.BusDriverDeletesAccountView;
+import busDriver.BusDriverManageBusView;
 import busDriver.BusDriverMenuView;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
+import busDriver.BusDriverViewBusDetailsView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
 import hotelOwner.HOMDeleteFood;
@@ -34,8 +38,12 @@ import javafx.stage.Stage;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
+import travelAgencyOwner.TravelAgencyManageAccountView;
+import travelAgencyOwner.TravelAgencyManageBusView;
+import travelAgencyOwner.TravelAgencyManageCarsView;
 import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
+import travelAgencyOwner.TravelAgencyOwnerViewCarsView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
@@ -68,7 +76,7 @@ public class Main extends Application {
 
 			
 
-			BusDriverSignUpView hotelOwnerMenu = new BusDriverSignUpView();
+			TravelAgencyManageCarsView hotelOwnerMenu = new TravelAgencyManageCarsView();
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

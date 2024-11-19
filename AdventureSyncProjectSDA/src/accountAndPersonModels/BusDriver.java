@@ -16,23 +16,13 @@ public class BusDriver extends Person {
 	public BusDriver()
 	{
 		super();
-		busDBHandler=new BusDBHandler();
+		busDBHandler = new BusDBHandler();
 	}
 	public BusDriver(int busDriverID, String name, LocalDate dob, String cnic)
 	{
 		super(name, dob, cnic);
 		this.busDriverID = busDriverID;
-		busDBHandler=new BusDBHandler();
-	}
-	
-	public BusDriver(int busDriverID,String name, LocalDate dob, String cnic) {
-		super(name, dob, cnic);
-		this.busDriverID = busDriverID;
-		// TODO Auto-generated constructor stub
-	}
-	public BusDriver() {
-		super();
-		// TODO Auto-generated constructor stub
+		busDBHandler = new BusDBHandler();
 	}
 	//getters and setters
 	public int getBusDriverID() {

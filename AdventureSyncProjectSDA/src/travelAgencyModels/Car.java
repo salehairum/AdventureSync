@@ -1,5 +1,6 @@
 package travelAgencyModels;
 
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 
@@ -69,5 +70,9 @@ public class Car extends Vehicle{
 	//assigning tour to bus
 	public ReturnObjectUtility<Tour> assignTour(Tour tour){
 		return tour.assignTour(tour);
+	}
+	
+	public ReturnListUtility<Car> retrieveCarList() {
+		return travelAgencyDBHandler.retrieveCarList();
 	}
 }
