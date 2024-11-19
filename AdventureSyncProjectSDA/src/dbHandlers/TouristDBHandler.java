@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
+import hotelModels.Room;
 import travelAgencyModels.Seat;
 
 public class TouristDBHandler {
@@ -368,7 +369,7 @@ public class TouristDBHandler {
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from seat where seatID="+seatID);
 	        if(!rSet.next()) {
-	        	 returnData.setMessage("No car found with the entered Seat ID..");
+	        	 returnData.setMessage("No seat found with the entered Seat ID..");
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
@@ -416,6 +417,73 @@ public class TouristDBHandler {
 		                returnData.setMessage("Error: Invalid reference. Check if the seat/tourist exists.");
 		            } else {
 		                returnData.setMessage("Issue in renting seat in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+
+	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			//first see if car exists or not
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from room where roomID="+roomID);
+	        if(!rSet.next()) {
+	        	 returnData.setMessage("No room found with the entered room ID.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+			//if car exists, proceed with renting 
+	        
+		    String sql = "INSERT INTO TouristHasBookedRooms (touristId,roomID) VALUES (?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    // Set parameters
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, roomID);
+
+		    // Execute the insert and fetch generated accountID
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected <= 0) {
+		        returnData.setMessage("Failed to store booked room.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, roomID);
+		    pstmt.setString(3, "Book Hotel Room");
+		    
+		        // Execute the insert
+		    rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	returnData.setMessage("Room booked successfully.");
+		        returnData.setSuccess(true);
+		        return returnData;
+		    } else {
+		    	returnData.setMessage("Failed to book room.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the room/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in booking room in DB: " + errorMessage);
 		            }
 		        } else {
 		            returnData.setMessage("An unknown error occurred.");
