@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,67 +7,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="333.0" layoutY="24.0" prefHeight="50.0" prefWidth="218.0" text="Welcome!" textFill="#eddea4">
+      <Label layoutX="366.0" layoutY="31.0" prefHeight="50.0" prefWidth="218.0" text="Welcome!" textFill="#eddea4">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="completeLogo" fitHeight="58.0" fitWidth="59.0" layoutX="484.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="completeLogo" fitHeight="58.0" fitWidth="59.0" layoutX="559.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/complete.png" />
          </image>
       </ImageView>
-      <Label fx:id="completeLabel" alignment="CENTER" layoutX="442.0" layoutY="198.0" prefHeight="42.0" prefWidth="174.0" text="Complete Tour" textFill="#eddea4">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
       <ImageView fx:id="busLogo" fitHeight="177.0" fitWidth="59.0" layoutX="304.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/bus.png" />
          </image>
       </ImageView>
-      <Label fx:id="busLabel" alignment="CENTER" layoutX="247.0" layoutY="324.0" prefHeight="42.0" prefWidth="174.0" text="Manage Bus" textFill="#eddea4">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="ratingLogo" fitHeight="56.0" fitWidth="60.0" layoutX="505.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ratingLogo" fitHeight="56.0" fitWidth="60.0" layoutX="554.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/rating.png" />
          </image>
       </ImageView>
-      <Label fx:id="feedbackLabel" layoutX="463.0" layoutY="309.0" prefHeight="50.0" prefWidth="176.0" text="View Feedback" textFill="#eddea4">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <padding>
-            <Insets top="15.0" />
-         </padding>
-      </Label>
-      <ImageView fx:id="tourLogo" fitHeight="58.0" fitWidth="59.0" layoutX="292.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tourLogo" fitHeight="58.0" fitWidth="59.0" layoutX="304.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/route.png" />
          </image>
       </ImageView>
-      <Label fx:id="tourLabel" alignment="CENTER" layoutX="234.0" layoutY="198.0" prefHeight="42.0" prefWidth="174.0" text="View Tour" textFill="#eddea4">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="accountLogo" fitHeight="58.0" fitWidth="59.0" layoutX="401.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="accountLogo" fitHeight="58.0" fitWidth="59.0" layoutX="416.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/account.png" />
          </image>
       </ImageView>
-      <Label fx:id="accountLabel" alignment="CENTER" layoutX="333.0" layoutY="437.0" prefHeight="42.0" prefWidth="202.0" text="Manage Account" textFill="#eddea4">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">
          <children>
             <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="24.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -128,5 +98,30 @@
             </Text>
          </children>
       </Pane>
+      <Text fx:id="tourLabel" fill="#eddea4" layoutX="284.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Tour" wrappingWidth="122.13671875">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="completeLabel" fill="#eddea4" layoutX="487.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complete Tour" wrappingWidth="193.13671875">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="busLabel" fill="#eddea4" layoutX="269.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Bus" wrappingWidth="152.64059448242188">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="ratingLabel" fill="#eddea4" layoutX="496.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Feedback" wrappingWidth="193.13671875">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="accountLabel" fill="#eddea4" layoutX="344.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Account" wrappingWidth="193.13671875">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

@@ -61,8 +61,7 @@ public class BusDriverMenuView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
+		}
 	}
 	
 	public Parent getRoot() {
