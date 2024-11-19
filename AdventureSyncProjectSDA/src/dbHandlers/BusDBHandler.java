@@ -1,13 +1,17 @@
 package dbHandlers;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import accountAndPersonModels.BusDriver;
+import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.TravelAgencyOwner;
@@ -212,6 +216,46 @@ public class BusDBHandler {
 	    
 	    return returnData;
 	}
+	
+		//bus driver related functions
+		public static ReturnObjectUtility<BusDriver> retrieveBusDriverData(int busDriverID) {
+			ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility();
+			
+			try {
+				Statement stmt = conn.createStatement();
+		        ResultSet rSet=stmt.executeQuery("select * from BusDriver where busDriverId=" + busDriverID);
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            // Create and populate a hotel owner object
+		            int busDriverIDRetrieved = rSet.getInt("busDriverId");
+		            String name = rSet.getString("bName");
+		            Date date = rSet.getDate("dob");
+		            LocalDate dob = date.toLocalDate();
+		            String cnic = rSet.getString("cnic");
+
+		            BusDriver busDriver = new BusDriver(busDriverIDRetrieved, name, dob, cnic);
+		            
+		            // Set the hotel owner object and success message
+		            returnData.setObject(busDriver);
+		            returnData.setMessage("Bus Driver data retrieved successfully.");
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Bus Driver does not exist.");
+		        }
+	            
+			}
+			catch(SQLException e){
+				String errorMessage = e.getMessage().toLowerCase();
+			    
+			    if (errorMessage.contains("no such bus driver") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+			       returnData.setMessage("Error: Bus driver does not exist.");
+			    } else {
+			        // General case for other SQL exceptions
+			    	returnData.setMessage("Issue in retrieving bus driver from database: " + e.getMessage());
+			    }
+			}
+	        return returnData;
+		}
 
 	//bus driver agency owner functions
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver busDriver) {

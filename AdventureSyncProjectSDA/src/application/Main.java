@@ -3,11 +3,21 @@ package application;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import busDriver.BusDriverMenuView;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
+import hotelOwner.HOMDeleteFood;
+import hotelOwner.HOMDeleteRoom;
+import hotelOwner.HOMManageAccount;
+import hotelOwner.HOMManageHotel;
+import hotelOwner.HOMManageKitchen;
+import hotelOwner.HOMManageRoom;
+import hotelOwner.HOMUpdateFood;
+import hotelOwner.HOMUpdateHotel;
+import hotelOwner.HOMUpdateRoom;
 import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
@@ -40,7 +50,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -57,8 +67,8 @@ public class Main extends Application {
 //			
 
 			
+
 			BusDriverSignUpView hotelOwnerMenu = new BusDriverSignUpView();
-//			//BusDriverUpdateBusView  hotelOwnerMenu = new BusDriverUpdateBusView();
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

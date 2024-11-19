@@ -20,7 +20,7 @@
             </Text>
             <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="103.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/hotel.png" />
+                  <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
             <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="377.0">
@@ -37,7 +37,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="menuButton" layoutX="234.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="234.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

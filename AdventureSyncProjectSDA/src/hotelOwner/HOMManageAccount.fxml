@@ -39,7 +39,7 @@
             <Image url="@../resources/update.png" />
          </image>
       </ImageView>
-      <Button fx:id="menuButton" layoutX="442.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="424.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

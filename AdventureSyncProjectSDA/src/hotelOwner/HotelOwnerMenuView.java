@@ -26,6 +26,24 @@ public class HotelOwnerMenuView {
 	private Text dob;
 	@FXML
 	private ImageView roomLogo;
+	@FXML
+	private Text roomLabel;
+	@FXML
+	private ImageView kitchenLogo;
+	@FXML
+	private Text kitchenLabel;
+	@FXML
+	private ImageView ratingLogo;
+	@FXML
+	private Text ratingLabel;
+	@FXML
+	private ImageView accountLogo;
+	@FXML
+	private Text accountLabel;
+	@FXML
+	private ImageView hotelLogo;
+	@FXML
+	private Text hotelLabel;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
@@ -42,49 +60,14 @@ public class HotelOwnerMenuView {
 	@FXML
 	private void initialize() {
 		hoContoller = new hotelOwnerController();
-		eventHandlersAssignment();
 		displayOwnerDetails();
+		eventHandlersAssignment();
 	}
 	
 	public Parent getRoot() {
 		return root;
 	}
-	
-	public void eventHandlersAssignment() {
-		 EventHandler<MouseEvent> mngRoomButtonHandler = (event) -> {
-			 try {
-		        	String fxmlFile;
-		            String stageTitle;
-		            
-		            fxmlFile = "/hotelOwner/HOMManageRoom.fxml";
-		            stageTitle = "Manage room";
-		            
-		            // Load the new FXML file
-		            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-		            Parent newFormRoot = loader.load();
 
-		            // Create a new scene and stage for the new form
-		            Scene newFormScene = new Scene(newFormRoot);
-		            Stage newFormStage = new Stage();
-		            newFormStage.setScene(newFormScene);
-		            newFormStage.setTitle(stageTitle);
-
-		            // Show the new form
-		            newFormStage.show();
-
-		            // Close the current form
-		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-		            currentStage.close();
-		            
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		 };
-		 
-		roomLogo.setOnMouseClicked(mngRoomButtonHandler);
-		 
-	}
-	
 	// Method to display profile
     public void displayOwnerDetails() {
         String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(1);
@@ -92,6 +75,49 @@ public class HotelOwnerMenuView {
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
+    }
+    
+    // Method for button handling
+    public void eventHandlersAssignment() {
+	    // Using a custom handler factory method
+	    roomLogo.setOnMouseClicked(createButtonHandler(HOMManageRoom.class, "Manage Room"));
+	    roomLabel.setOnMouseClicked(createButtonHandler(HOMManageRoom.class, "Manage Room"));
+	    kitchenLogo.setOnMouseClicked(createButtonHandler(HOMManageKitchen.class, "Manage Kitchen"));
+	    kitchenLabel.setOnMouseClicked(createButtonHandler(HOMManageKitchen.class, "Manage Kitchen"));
+	    ratingLogo.setOnMouseClicked(createButtonHandler(HOMViewFeedback.class, "View Feedback"));
+	    ratingLabel.setOnMouseClicked(createButtonHandler(HOMViewFeedback.class, "View Feedback"));
+	    accountLogo.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account"));
+	    accountLabel.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account"));
+	    hotelLogo.setOnMouseClicked(createButtonHandler(HOMManageHotel.class, "Manage Hotel"));
+	    hotelLabel.setOnMouseClicked(createButtonHandler(HOMManageHotel.class, "Manage Hotel"));
+	}
+
+    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
     }
 
 }
