@@ -66,8 +66,7 @@ public class Car extends Vehicle{
 		return travelAgencyDBHandler.updateCar(car);
 	}
 	
-	//assigning tour to bus
-	public ReturnObjectUtility<Tour> assignTour(Tour tour){
-		return tour.assignTour(tour);
+	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
+		return travelAgencyDBHandler.updateCarRentalStatus(carID, rentalStatus);
 	}
 }

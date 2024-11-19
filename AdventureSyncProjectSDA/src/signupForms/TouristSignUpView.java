@@ -49,7 +49,6 @@ public class TouristSignUpView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
 	}
 	
 	@FXML

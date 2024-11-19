@@ -217,8 +217,165 @@ public class BusDBHandler {
 	    return returnData;
 	}
 	
-		//bus driver related functions
-		public static ReturnObjectUtility<BusDriver> retrieveBusDriverData(int busDriverID) {
+	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
+	    ReturnObjectUtility<Seat> returnData = new ReturnObjectUtility<>();
+	    
+	    try {
+	        // Create a Statement to execute the query
+	        Statement stmt = conn.createStatement();
+	        
+	        // Query to get a specific seat based on seatId and busId
+	        String query = "SELECT * FROM Seat WHERE busId = " + busId + " AND seatId = " + seatId;
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        if (rSet.next()) { // Check if a result was found
+	            // Retrieve the seat details from the ResultSet
+	            int retrievedSeatId = rSet.getInt("seatId");
+	            int rowNo = rSet.getInt("rowNo");
+	            boolean isBooked = rSet.getBoolean("isBooked");
+
+	            // Create a Seat object
+	            Seat seat = new Seat(retrievedSeatId, busId, isBooked, rowNo);
+
+	            // Set the Seat object and success message
+	            returnData.setObject(seat);
+	            returnData.setMessage("Seat data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Seat does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        
+	        if (errorMessage.contains("no such seat") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Seat does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving seat from database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    
+	    return returnData;
+	}
+
+	
+	public ReturnListUtility<Bus> retrieveBusList() {
+		ReturnListUtility<Bus> returnData=new ReturnListUtility();
+		
+		try {
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from bus");
+	        
+	        HashMap<Integer, Bus> busList=new HashMap<Integer, Bus>();
+	        
+	        if(!rSet.next()) {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Bus does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	        else {
+	        	 do { // Check if a result was found
+	        		int retrievedBusId = rSet.getInt("busId");
+	  	            String brand = rSet.getString("brand");
+	  	            String model = rSet.getString("model");
+	  	            int manufactureYear = rSet.getInt("manufactureYear");
+	  	            String plateNumber = rSet.getString("plateNumber");
+	  	            int noOfSeats = rSet.getInt("noOfSeats");
+	  	            int noOfRows = rSet.getInt("noOfRows");
+	  	            float priceOfSeat = rSet.getFloat("priceOfSeat");
+	  	            boolean hasTour = rSet.getBoolean("hasTour");
+
+	  	            // Retrieve seats for this bus
+	  	            HashMap<Integer, Seat> seats = new HashMap<>();
+	  	            ResultSet seatSet = stmt.executeQuery("SELECT * FROM Seat WHERE busId = " + retrievedBusId);
+	  	            while (seatSet.next()) {
+	  	                int seatId = seatSet.getInt("seatId");
+	  	                int rowNo = seatSet.getInt("rowNo");
+	  	                boolean isBooked = seatSet.getBoolean("isBooked");
+
+	  	                // Create a new Seat object
+	  	                Seat seat = new Seat(seatId, retrievedBusId, isBooked, rowNo);
+	  	                seats.put(seatId, seat); // Add seat to the HashMap
+	  	            }
+	  	            
+	  	            Bus bus = new Bus(retrievedBusId, brand, model, manufactureYear, plateNumber, seats, noOfSeats, noOfRows, priceOfSeat);
+	  	            busList.put(bus.getID(), bus);
+
+	 	        } while(rSet.next());
+	        	 
+	        	returnData.setList(busList);
+	        	returnData.setMessage("Buses retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+            
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Bus does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving buses from database: " + e.getMessage());
+		    }
+            returnData.setSuccess(false);
+		}
+        return returnData;
+	}
+	
+	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
+		ReturnObjectUtility<Seat> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "UPDATE Seat SET isBooked = ? WHERE seatID = ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setBoolean(1,bookingStatus);
+			 pstmt.setInt(2, seatID);
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 if(bookingStatus) {
+					 returnData.setMessage("Seat is now booked.");
+				 }
+				 else {
+					 returnData.setMessage("Seat is no longer booked.");
+				 }
+
+		         returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update seat booking status.");
+		         returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		        	returnData.setMessage("Error: Seat does not exist.");
+		        }else {
+		        	returnData.setMessage("Issue in updating seat in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+	        returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+
+	
+	//bus driver related functions
+	public static ReturnObjectUtility<BusDriver> retrieveBusDriverData(int busDriverID) {
 			ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility();
 			
 			try {

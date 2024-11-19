@@ -1,8 +1,10 @@
 package travelAgencyModels;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import dbHandlers.BusDBHandler;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 
 public class Bus extends Vehicle {
@@ -18,11 +20,14 @@ public class Bus extends Vehicle {
 	//with all parameters
 	public Bus() {
 		super();
+		seats=new HashMap<Integer, Seat>();
 		busHandler=new BusDBHandler();
 	}
 	
 	public Bus(int id, String brand, String model, int year, String plateNumber,HashMap<Integer, Seat> seats, int noOfSeats, int noOfRows, float priceOfSeats, boolean hasTour, Tour tour) {
 		super(id, brand, model, year, plateNumber);
+		
+		seats=new HashMap<Integer, Seat>();
 		this.seats = seats;
 		this.noOfSeats = noOfSeats;
 		this.priceOfSeats = priceOfSeats;
@@ -36,6 +41,7 @@ public class Bus extends Vehicle {
 	//without tour 
 	public Bus(int id, String brand, String model, int year, String plateNumber, HashMap<Integer, Seat> seats, int noOfSeats,int noOfRows, float priceOfSeats) {
 		super(id, brand, model, year, plateNumber);
+		seats=new HashMap<Integer, Seat>();
 		this.noOfSeats = noOfSeats;
 		this.priceOfSeats = priceOfSeats;
 		this.hasTour = false;
@@ -87,11 +93,26 @@ public class Bus extends Vehicle {
 		return busHandler.addBus(bus);
 	}
 	
-	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
-		return busHandler.retrieveBusObject(busId);
+	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
+		Seat seat=new Seat();
+		return seat.updateSeatBookingStatus(seatID, bookingStatus);
+	}
+	
+	public ReturnObjectUtility<Bus> retrieveBusObject(int newBusId) {
+		return busHandler.retrieveBusObject(newBusId);
 	}
 	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
 		return busHandler.updateBus(bus);
 	}
+	
+	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
+		Seat seat=new Seat();
+		return seat.retrieveSeatObject(seatId, busId);
+	}
+	
+	public ReturnListUtility<Bus> retrieveBusList() {
+		return busHandler.retrieveBusList();
+	}
 }
+

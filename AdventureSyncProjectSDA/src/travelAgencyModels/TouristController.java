@@ -12,4 +12,16 @@ public class TouristController {
 	public ReturnObjectUtility<Tourist> addTourist(Tourist newTourist){
 		return tourist.addTourist(newTourist);
 	}
+	
+	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+		return tourist.addCarToRentedCars(touristId, carID);
+	}
+	
+	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
+		return tourist.removeCarFromRentedCars(touristId, carID);
+	}
+	
+	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+		return tourist.addSeatToBookedSeats(touristId, seatID);
+	}
 }

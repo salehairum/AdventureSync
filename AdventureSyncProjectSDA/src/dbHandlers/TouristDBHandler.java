@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
+import travelAgencyModels.Seat;
 
 public class TouristDBHandler {
 	static private Connection conn;
@@ -29,7 +30,6 @@ public class TouristDBHandler {
 	public static void setConnection(Connection conn) {
 		TouristDBHandler.conn = conn;
 	}
-	
 	
 	//tourist account related
 	public ReturnObjectUtility<Tourist> addTourist(Tourist tourist) {
@@ -224,5 +224,205 @@ public class TouristDBHandler {
         return returnData;
 	}
 
+	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			//first see if car exists or not
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from car where carID="+carID);
+	        if(!rSet.next()) {
+	        	 returnData.setMessage("No car found with the entered Car ID..");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+			//if car exists, proceed with renting 
+	        
+		    String sql = "INSERT INTO TouristHasRentedCars (touristId,carID) VALUES (?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    // Set parameters
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, carID);
+
+		    // Execute the insert and fetch generated accountID
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected <= 0) {
+		        returnData.setMessage("Failed to store rented car.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, carID);
+		    pstmt.setString(3, "Rent Car");
+		    
+		        // Execute the insert
+		    rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	returnData.setMessage("Car rented successfully.");
+		        returnData.setSuccess(true);
+		        return returnData;
+		    } else {
+		    	returnData.setMessage("Failed to rent car.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the car/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in renting car in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+
+	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
+		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			//first see if car exists or not
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from TouristHasRentedCars where carID="+carID);
+	        if(!rSet.next()) {
+	        	 returnData.setMessage("No rented car found with the entered Car ID.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+			//if car exists, proceed with renting 
+	        
+	        String sql = "DELETE FROM TouristHasRentedCars WHERE touristId = ? AND carID = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setInt(1, touristId);
+	        pstmt.setInt(2, carID);
+
+		    // Execute the insert and fetch generated accountID
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected <= 0) {
+		        returnData.setMessage("Failed to return car.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, carID);
+		    pstmt.setString(3, "Return Car");
+		    
+		        // Execute the insert
+		    rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	returnData.setMessage("Car returned successfully.");
+		        returnData.setSuccess(true);
+		        return returnData;
+		    } else {
+		    	returnData.setMessage("Failed to return car.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the car/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in returning car in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+
+	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+		ReturnObjectUtility<Seat> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			//first see if car exists or not
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from seat where seatID="+seatID);
+	        if(!rSet.next()) {
+	        	 returnData.setMessage("No car found with the entered Seat ID..");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+			//if car exists, proceed with renting 
+	        
+		    String sql = "INSERT INTO TouristHasBookedSeats (touristId,seatID) VALUES (?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    // Set parameters
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, seatID);
+
+		    // Execute the insert and fetch generated accountID
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected <= 0) {
+		        returnData.setMessage("Failed to store booked Seat.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, seatID);
+		    pstmt.setString(3, "Book Bus Seat");
+		    
+		        // Execute the insert
+		    rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	returnData.setMessage("Seat booked successfully.");
+		        returnData.setSuccess(true);
+		        return returnData;
+		    } else {
+		    	returnData.setMessage("Failed to book seat.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the seat/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in renting seat in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
 
 }

@@ -2,6 +2,7 @@ package application;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 import busDriver.BusDriverCompletesTourView;
 import busDriver.BusDriverMenuView;
@@ -28,20 +29,26 @@ import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
 import tourist.TouristRatesBusTourView;
+import tourist.TouristRentCarView;
+import tourist.TouristReturnCarView;
+import tourist.TouristSelectSeatFromBusView;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.Seat;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tourist.TouristBooksSeatView;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
 import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
+import travelAgencyOwner.TravelAgencyOwnerViewCarsView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
 import signupForms.BusDriverSignUpView;
-import signupForms.HotelOwnerSignUpView;
 import signupForms.TouristSignUpView;
 import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
@@ -68,7 +75,9 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 
-			HotelOwnerSignUpView hotelOwnerMenu = new HotelOwnerSignUpView();
+			Bus bus=bdb.retrieveBusObject(15).getObject();
+			TouristSelectSeatFromBusView hotelOwnerMenu = new TouristSelectSeatFromBusView(3, bus);
+	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

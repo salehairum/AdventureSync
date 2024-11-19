@@ -1,9 +1,9 @@
 package tourist;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
-import accountAndPersonModels.Account;
 import accountAndPersonModels.Tourist;
 import dbHandlers.ReturnObjectUtility;
 import javafx.event.ActionEvent;
@@ -15,40 +15,47 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.Seat;
 import travelAgencyModels.TouristController;
+import travelAgencyModels.busDriverController;
 import travelAgencyModels.travelAgencyOwnerController;
 
-public class TouristRentCarView {
+public class TouristSelectSeatFromBusView {
 	@FXML
-	private TextField carIdInput;
+	private TextField seatIdInput;
 	@FXML
-	private Button rentButton;
+	private Button bookSeatButton;
 	
 	private int touristID;
 	
 	Parent root;
 	TouristController tController;
 	travelAgencyOwnerController toaController;
+	busDriverController bController;
+	Bus bus;
 	
-	public TouristRentCarView(int id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRentCars.fxml"));
+	public TouristSelectSeatFromBusView(int id, Bus newBus) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectSeatFromBus.fxml"));
 		loader.setController(this);
 		touristID=id;
+		bus=newBus;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
+		}
+
 	}
+	
 	@FXML
 	private void initialize() {
 		listenersAssignment();
 		eventHandlersAssignment();
 		tController = new TouristController();
 		toaController = new travelAgencyOwnerController();
+		bController = new busDriverController();
 	}
 	
 	public Parent getRoot() {
@@ -57,25 +64,29 @@ public class TouristRentCarView {
 	
 	//assigning buttons and listeners
 	public void listenersAssignment() {
-		carIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		seatIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
 		
 	public void eventHandlersAssignment() {
-		EventHandler<ActionEvent> rentButtonHandler=(event)->{
+		EventHandler<ActionEvent> bookSeatButtonHandler=(event)->{
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
 			alertInvalidInput.setTitle("Invalid input"); 
 			
 			StringBuilder errorMessage = new StringBuilder();
 			
-			if(!isNumeric(carIdInput.getText())) {
-				alertInvalidInput.setContentText("Please enter numeric value for car ID"); 
+			if(!isNumeric(seatIdInput.getText())) {
+				alertInvalidInput.setContentText("Please enter numeric value for seat ID"); 
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
 			
-			int carID=Integer.parseInt(carIdInput.getText());
-						
-			ReturnObjectUtility<Car> returnData= toaController.updateCarRentalStatus(carID, true);
+			int seatID=Integer.parseInt(seatIdInput.getText());
+			int busID=bus.getID();
+			//seats have already been retrieved in bus, so check there
+			//ReturnObjectUtility<Seat> returnData= bController.retrieveSeatObject(seatID, busID);
+
+			//if seat exists, then it must be booked
+			ReturnObjectUtility<Seat> returnData= bController.updateSeatBookingStatus(seatID, true);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -86,7 +97,7 @@ public class TouristRentCarView {
 			}
 			else {
 				//mark car as rented
-				ReturnObjectUtility<Tourist> returnData2=tController.addCarToRentedCars(touristID, carID);	
+				ReturnObjectUtility<Seat> returnData2=tController.addSeatToBookedSeats(touristID, seatID);
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -95,12 +106,11 @@ public class TouristRentCarView {
 				    alert.showAndWait();
 				    
 				if(!success)
-					toaController.updateCarRentalStatus(carID, false);   
-				//if transaction could not be made, set rental status as false
+					bController.updateSeatBookingStatus(seatID, false);
 			}
 		};
 			
-		rentButton.setOnAction(rentButtonHandler);
+		bookSeatButton.setOnAction(bookSeatButtonHandler);
 	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
@@ -112,8 +122,8 @@ public class TouristRentCarView {
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 
-	        !carIdInput.getText().trim().isEmpty();
+	        !seatIdInput.getText().trim().isEmpty();
 
-		   rentButton.setDisable(!allFieldsFilled);
+	    bookSeatButton.setDisable(!allFieldsFilled);
 	}
 }
