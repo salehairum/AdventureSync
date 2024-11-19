@@ -12,6 +12,7 @@ import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
+import dbHandlers.TouristDBHandler;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
@@ -43,8 +44,9 @@ public class Main extends Application {
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
-		TravelAgencyDBHandler tbd = new TravelAgencyDBHandler(dbManager.getConnection());
+		TravelAgencyDBHandler tadb = new TravelAgencyDBHandler(dbManager.getConnection());
 		BusDBHandler bdb = new BusDBHandler(dbManager.getConnection());
+		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
 		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();

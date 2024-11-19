@@ -213,7 +213,7 @@ public class BusDBHandler {
 	    return returnData;
 	}
 
-	//travel agency owner functions
+	//bus driver agency owner functions
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver busDriver) {
 		ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility<>();
 		PreparedStatement pstmt;
