@@ -7,6 +7,7 @@ import accountAndPersonModels.HotelOwner;
 import busDriver.BusDriverManageBusView;
 import busDriver.BusDriverMenuView;
 import busDriver.BusDriverMgrAccountView;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 
 public class busDriverController {
@@ -30,6 +31,10 @@ public class busDriverController {
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
 		return bus.updateBus(bus);
 	}
+	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
+		return bus.updateSeatBookingStatus(seatID, bookingStatus);
+	}
+	
 	public String[] getBusDriverProfileDetail(int busDriverId)
     {
     	ReturnObjectUtility<BusDriver> returnData = busDriver.getDetail(busDriverId);
@@ -46,5 +51,13 @@ public class busDriverController {
 	//db interaction functions
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver bDriver){
 		return busDriver.addBusDriver(bDriver);
+	}
+	
+	public ReturnListUtility<Bus> retrieveBusList() {
+		return bus.retrieveBusList();
+	}
+	
+	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
+		return bus.retrieveSeatObject(seatId, busId);
 	}
 }

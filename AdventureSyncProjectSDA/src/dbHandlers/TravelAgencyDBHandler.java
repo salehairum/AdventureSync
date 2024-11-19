@@ -163,7 +163,7 @@ public class TravelAgencyDBHandler {
 		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
 		    	returnData.setMessage("Error: Cannot delete car as it is referenced in rental records. Remove related records first.");
 		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		    	returnData.setMessage("Error: Car does not exist.");
+		    	returnData.setMessage("Error: The Car you are trying to delete does not exist.");
 		    } else {
 		    	returnData.setMessage("Issue in deleting car from database: " + e.getMessage());
 		    }
@@ -400,7 +400,6 @@ public class TravelAgencyDBHandler {
 	    }
 	    return returnData;
 	}
-
 
 	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData=new ReturnObjectUtility();

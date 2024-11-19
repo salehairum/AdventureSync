@@ -12,11 +12,13 @@ public class HotelOwner extends Person{
 	public HotelOwner()
 	{
 		super();
+		hotelDBHandler=new HotelDBHandler();
 	}
 	public HotelOwner(int hotelOwnerID, String name, LocalDate dob, String cnic)
 	{
 		super(name, dob, cnic);
 		this.hotelOwnerID = hotelOwnerID;
+		hotelDBHandler=new HotelDBHandler();
 	}
 	//getters and setters
 	public int getHotelOwnerID() {
@@ -31,5 +33,9 @@ public class HotelOwner extends Person{
 	{
 		ReturnObjectUtility<HotelOwner> returnData = hotelDBHandler.retrieveHotelOwnerData(hotelOwnerID);
 		return returnData;
+	}
+	
+	public ReturnObjectUtility<HotelOwner> addHotelOwner(HotelOwner hotelOwner) {
+		return hotelDBHandler.addHotelOwner(hotelOwner);
 	}
 }

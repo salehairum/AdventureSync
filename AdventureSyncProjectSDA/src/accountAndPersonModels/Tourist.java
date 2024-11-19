@@ -30,6 +30,13 @@ public class Tourist extends Person {
 		touristDBHandler=new TouristDBHandler();
 	}
 	
+	public Tourist(int touristID)
+	{
+		super();
+		this.touristID = touristID;
+		touristDBHandler=new TouristDBHandler();
+	}
+	
 	
 	//getters and setters
 	public int getTouristID() {
@@ -57,7 +64,20 @@ public class Tourist extends Person {
 		this.bookedRooms = bookedRooms;
 	}
 	
+	//db interactions
 	public ReturnObjectUtility<Tourist> addTourist(Tourist tourist){
 		return touristDBHandler.addTourist(tourist);
+	}
+	
+	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+		return touristDBHandler.addCarToRentedCars(touristId, carID);
+	}
+	
+	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
+		return touristDBHandler.removeCarFromRentedCars(touristId, carID);
+	}
+	
+	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+		return touristDBHandler.addSeatToBookedSeats(touristId, seatID);
 	}
 }
