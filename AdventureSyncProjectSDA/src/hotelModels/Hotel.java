@@ -8,6 +8,7 @@ public class Hotel {
 	private String location;
 	private ArrayList<Room> rooms;
 	private Kitchen kitchen;
+	private String hotelName;
 	//constructor
 	public Hotel()
 	{
