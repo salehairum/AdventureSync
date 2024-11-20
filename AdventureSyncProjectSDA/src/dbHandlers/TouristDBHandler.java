@@ -89,6 +89,8 @@ public class TouristDBHandler {
 		            rs = pstmt.getGeneratedKeys();
 		            if (rs.next()) {
 		            	retrievedOwnerID = rs.getInt(1);
+		            	tourist.setTouristID(retrievedOwnerID);
+		            	returnData.setObject(tourist);
 		            	returnData.setMessage("Tourist with id "+retrievedOwnerID+" added successfuly!");
 		                returnData.setSuccess(true);
 		                return returnData;
@@ -690,7 +692,7 @@ public class TouristDBHandler {
 	        }
 
 	        // Link feedback to bus in BusHasFeedback table
-	        String linkFeedbackSql = "INSERT INTO RoomHasFeedback (BusID, feedbackID) VALUES (?, ?)";
+	        String linkFeedbackSql = "INSERT INTO RoomHasFeedback (roomID, feedbackID) VALUES (?, ?)";
 	        pstmt = conn.prepareStatement(linkFeedbackSql);
 	        pstmt.setInt(1, RoomID);
 	        pstmt.setInt(2, feedbackID);

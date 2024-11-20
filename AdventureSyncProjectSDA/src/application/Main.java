@@ -37,6 +37,7 @@ import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import tourist.TouristSelectsFoodFromMenuView;
+import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -89,7 +90,7 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
-			TouristRatesBusView hotelOwnerMenu = new TouristRatesBusView(3);
+			touristRoomFeedbackView hotelOwnerMenu = new touristRoomFeedbackView(3);
 	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

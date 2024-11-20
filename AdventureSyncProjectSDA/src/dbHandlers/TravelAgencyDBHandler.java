@@ -371,6 +371,8 @@ public class TravelAgencyDBHandler {
 	            rs = pstmt.getGeneratedKeys();
 	            if (rs.next()) {
 	            	retrievedOwnerID = rs.getInt(1);
+	            	owner.setAgencyOwnerID(retrievedOwnerID);
+	            	returnData.setObject(owner);
 	            	returnData.setMessage("Travel agency owner with id "+retrievedOwnerID+" added successfuly!");
 	                returnData.setSuccess(true);
 	                return returnData;

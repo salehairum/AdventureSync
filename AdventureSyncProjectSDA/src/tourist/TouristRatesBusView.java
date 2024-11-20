@@ -69,7 +69,6 @@ public class TouristRatesBusView {
 		ratingInput.valueProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
 		
-	//afsah tumne yahan doosre form par lekar jana at the end
 	public void eventHandlersAssignment() {
 		EventHandler<ActionEvent> submitButtonHandler=(event)->{
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 

@@ -119,6 +119,9 @@ public class TravelAgencyOwnerSignUpView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    
+
+			int AgencyOwnerID=returnData.getObject().getAgencyOwnerID();
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);
