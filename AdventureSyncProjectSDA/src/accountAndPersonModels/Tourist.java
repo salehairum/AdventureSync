@@ -85,6 +85,7 @@ public class Tourist extends Person {
 	{
 		ReturnObjectUtility<Tourist> returnData = touristDBHandler.retrieveTouristData(touristID);
 		return returnData;
+	}
 	
 	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
 		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);

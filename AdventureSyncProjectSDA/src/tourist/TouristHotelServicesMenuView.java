@@ -8,13 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import travelAgencyModels.TouristController;
 
-public class TouristUpdatesAccountView {
+public class TouristHotelServicesMenuView {
 	@FXML
 	private Pane sidePanel;
 	@FXML
@@ -28,12 +29,28 @@ public class TouristUpdatesAccountView {
 	@FXML
 	private Text dob;
 	@FXML
-	private Button backButton;
-	
+	private ImageView bookRoomLogo;
+	@FXML
+	private Text bookRoomLabel;
+	@FXML
+	private ImageView checkoutRoomLogo;
+	@FXML
+	private Text checkoutRoomLabel;
+	@FXML
+	private ImageView orderFoodLogo;
+	@FXML
+	private Text orderFoodLabel;
+	@FXML
+	private ImageView feedbackRoomLogo;
+	@FXML
+	private Text feedbackRoomLabel;
+	@FXML
+	private Button menuButton;
 	Parent root;
 	TouristController tController;
-	public TouristUpdatesAccountView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristUpdateAccount.fxml"));
+	
+	public TouristHotelServicesMenuView() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristHotelServicesMenu.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();
@@ -54,7 +71,15 @@ public class TouristUpdatesAccountView {
 	}
 	public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
-    	backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account"));
+		menuButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class, "Menu"));
+		bookRoomLogo.setOnMouseClicked(createButtonHandler(TouristBooksRoomView.class, "Book Room"));
+		bookRoomLabel.setOnMouseClicked(createButtonHandler(TouristBooksRoomView.class, "Book Room"));
+		checkoutRoomLogo.setOnMouseClicked(createButtonHandler(TouristChecksOutRoomView.class, "Checkout Room"));
+		checkoutRoomLabel.setOnMouseClicked(createButtonHandler(TouristChecksOutRoomView.class, "Checkout Room"));
+		//orderFoodLogo.setOnMouseClicked(createButtonHandler(TouristOrderFoodView.class, "Order Food"));
+		//orderFoodLabel.setOnMouseClicked(createButtonHandler(TouristOrderFoodView.class, "Order Food"));
+		feedbackRoomLogo.setOnMouseClicked(createButtonHandler(touristRoomFeedbackView.class, "Room Feedback"));
+		feedbackRoomLabel.setOnMouseClicked(createButtonHandler(touristRoomFeedbackView.class, "Room Feedback"));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

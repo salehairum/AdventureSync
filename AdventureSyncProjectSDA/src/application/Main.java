@@ -87,7 +87,7 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 
-			TouristDeletesAccountView hotelOwnerMenu = new TouristDeletesAccountView();
+			TouristMenuView hotelOwnerMenu = new TouristMenuView();
 	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

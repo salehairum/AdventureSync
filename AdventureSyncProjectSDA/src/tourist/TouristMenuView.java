@@ -31,7 +31,7 @@ public class TouristMenuView {
 	@FXML
 	private ImageView accountLogo;
 	@FXML
-	private Text acoountLabel;
+	private Text accountLabel;
 	@FXML
 	private ImageView travelLogo;
 	@FXML
@@ -66,11 +66,11 @@ public class TouristMenuView {
 	public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
 		accountLogo.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account"));
-		accountLogo.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account"));
-		hotelLogo.setOnMouseClicked(createButtonHandler(TouristUpdatesAccountView.class, "Update Account"));
-		hotelLabel.setOnMouseClicked(createButtonHandler(TouristUpdatesAccountView.class, "Update Account"));
-		hotelLabel.setOnMouseClicked(createButtonHandler(TouristDeletesAccountView.class, "Delete Account"));
-		hotelLabel.setOnMouseClicked(createButtonHandler(TouristDeletesAccountView.class, "Delete Account"));
+		accountLabel.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account"));
+		hotelLogo.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services"));
+		hotelLabel.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services"));
+		travelLogo.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services"));
+		travelLabel.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services"));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {
