@@ -10,10 +10,12 @@ import javafx.scene.Parent;
 public class hotelOwnerController
 {
     private HotelOwner hotelOwner;
+    private Hotel hotel;
     
     public hotelOwnerController()
     {
     	hotelOwner = new HotelOwner();
+    	hotel = new Hotel();
     }
     public String[] getHotelOwnerProfileDetail(int hotelOwnerId)
     {
@@ -29,5 +31,9 @@ public class hotelOwnerController
     }
     public ReturnObjectUtility<HotelOwner> addHotelOwner(HotelOwner newHotelOwner) {
 		return hotelOwner.addHotelOwner(newHotelOwner);
+	}
+    
+    public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
+		return hotel.updateRoomBookingStatus(roomID, bookingStatus);
 	}
 }
