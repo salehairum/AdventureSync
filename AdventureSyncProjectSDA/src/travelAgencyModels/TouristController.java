@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
+import application.Feedback;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
@@ -60,5 +61,10 @@ public class TouristController {
 	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
 		return bus.retrieveBusObject(busId);
 	}
-	
+	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
+		return tourist.giveFeedbackToBus(feedback);
+	}
+	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
+		return tourist.giveFeedbackToRoom(feedback);
+	}
 }

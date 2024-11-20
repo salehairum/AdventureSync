@@ -2,6 +2,8 @@ package hotelModels;
 
 import java.util.ArrayList;
 
+import dbHandlers.ReturnObjectUtility;
+
 public class Kitchen {
 	//variables
 	private int kitchenID;
@@ -29,4 +31,9 @@ public class Kitchen {
 	public void setKitchenID(int kitchenID) {
 		this.kitchenID = kitchenID;
 	}
+	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+		FoodItem food=new FoodItem();
+		return food.updateFoodQuantity(foodID, quantity, add);
+	}
 }
+
