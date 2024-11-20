@@ -44,6 +44,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tourist.TouristBooksRoomView;
 import tourist.TouristBooksSeatView;
+import tourist.TouristDeletesAccountView;
 import tourist.TouristChecksOutRoomView;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
@@ -69,7 +70,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -80,8 +81,14 @@ public class Main extends Application {
 		try {
 		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
 
-			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
-			TouristChecksOutRoomView hotelOwnerMenu=new TouristChecksOutRoomView(3);
+
+
+//			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
+//			Parent root = hotelOwnerMenu.getRoot();
+//			
+
+			TouristDeletesAccountView hotelOwnerMenu = new TouristDeletesAccountView();
+	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

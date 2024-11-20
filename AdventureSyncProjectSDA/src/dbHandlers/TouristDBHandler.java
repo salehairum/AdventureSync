@@ -184,47 +184,6 @@ public class TouristDBHandler {
 			return returnData;
 		}
 
-	public ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
-		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
-		
-		try {
-			Statement stmt = conn.createStatement();
-	        ResultSet rSet=stmt.executeQuery("select * from tourist where TravelAgencyOwnerId="+touristID);
-	        
-	        if (rSet.next()) { 
-	            int touristIDRetrieved = rSet.getInt("touristId");
-	            String name = rSet.getString("aName");
-	            Date date = rSet.getDate("dob");
-	            LocalDate dob = date.toLocalDate();
-	            String cnic = rSet.getString("cnic");
-
-	            Tourist tourist = new Tourist(touristIDRetrieved, name, dob, cnic);
-	            
-	            // Set the hotel owner object and success message
-	            returnData.setObject(tourist);
-	            returnData.setMessage("Tourist data retrieved successfully.");
-		        returnData.setSuccess(true);
-	        } else {
-	            // If no result is found, set an error message
-	            returnData.setMessage("Error: Tourist does not exist.");
-	            returnData.setSuccess(false);
-	        }
-            
-		}
-		catch(SQLException e){
-			String errorMessage = e.getMessage().toLowerCase();
-		    
-		    if (errorMessage.contains("no such Tourist") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		       returnData.setMessage("Error: Tourist does not exist.");
-		    } else {
-		        // General case for other SQL exceptions
-		    	returnData.setMessage("Issue in retrieving Tourist from database: " + e.getMessage());
-		    }
-	        returnData.setSuccess(false);
-		}
-        return returnData;
-	}
-
 	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
 		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -493,6 +452,45 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 	
+	//bus driver related functions
+		public static ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
+				ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+				
+				try {
+					Statement stmt = conn.createStatement();
+			        ResultSet rSet=stmt.executeQuery("select * from Tourist where touristId=" + touristID);
+			        
+			        if (rSet.next()) { // Check if a result was found
+			            // Create and populate a hotel owner object
+			            int touristIDRetrieved = rSet.getInt("touristID");
+			            String name = rSet.getString("tName");
+			            Date date = rSet.getDate("dob");
+			            LocalDate dob = date.toLocalDate();
+			            String cnic = rSet.getString("cnic");
+
+			            Tourist tourist = new Tourist(touristIDRetrieved, name, dob, cnic);
+			            
+			            // Set the hotel owner object and success message
+			            returnData.setObject(tourist);
+			            returnData.setMessage("Tourist data retrieved successfully.");
+			        } else {
+			            // If no result is found, set an error message
+			            returnData.setMessage("Error: Tourist does not exist.");
+			        }
+		            
+				}
+				catch(SQLException e){
+					String errorMessage = e.getMessage().toLowerCase();
+				    
+				    if (errorMessage.contains("no such tourist") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+				       returnData.setMessage("Error: Tourist does not exist.");
+				    } else {
+				        // General case for other SQL exceptions
+				    	returnData.setMessage("Issue in retrieving tourist from database: " + e.getMessage());
+				    }
+				}
+		        return returnData;
+			}
 	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
 		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
