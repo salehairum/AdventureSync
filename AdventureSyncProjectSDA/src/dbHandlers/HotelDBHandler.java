@@ -174,6 +174,7 @@ public class HotelDBHandler {
 		            rs = pstmt.getGeneratedKeys();
 		            if (rs.next()) {
 		            	retrievedOwnerID = rs.getInt(1);
+		            	hotelOwner.setHotelOwnerID(retrievedOwnerID);
 		            	returnData.setMessage("Hotel Owner with id "+retrievedOwnerID+" added successfuly!");
 		                returnData.setSuccess(true);
 		                return returnData;

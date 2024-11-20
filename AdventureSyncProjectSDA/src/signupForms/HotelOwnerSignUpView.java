@@ -118,6 +118,9 @@ public class HotelOwnerSignUpView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    
+		//send hotel owner id
+		int hotelOwnerID=returnData.getObject().getHotelOwnerID();
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);

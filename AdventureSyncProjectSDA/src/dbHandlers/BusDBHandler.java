@@ -469,6 +469,8 @@ public class BusDBHandler {
 		            rs = pstmt.getGeneratedKeys();
 		            if (rs.next()) {
 		            	retrievedOwnerID = rs.getInt(1);
+		            	busDriver.setBusDriverID(retrievedOwnerID);
+		            	returnData.setObject(busDriver);
 		            	returnData.setMessage("Bus Driver with id "+retrievedOwnerID+" added successfuly!");
 		                returnData.setSuccess(true);
 		                return returnData;
