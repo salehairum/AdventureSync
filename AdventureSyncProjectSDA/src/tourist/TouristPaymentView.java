@@ -9,16 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import travelAgencyModels.TouristController;
 
-public class TouristUpdatesAccountView {
-	@FXML
-	private Pane sidePanel;
-	@FXML
-	private Pane mainPanel;
+public class TouristPaymentView {
 	@FXML
 	private Text name;
 	@FXML
@@ -29,11 +24,12 @@ public class TouristUpdatesAccountView {
 	private Text dob;
 	@FXML
 	private Button backButton;
-	
+	@FXML
+	private Button payButton;
 	Parent root;
 	TouristController tController;
-	public TouristUpdatesAccountView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristUpdateAccount.fxml"));
+	public TouristPaymentView() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();
@@ -54,7 +50,7 @@ public class TouristUpdatesAccountView {
 	}
 	public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
-    	backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class, "Menu"));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {
