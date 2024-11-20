@@ -8,14 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
+import hotelModels.Hotel;
+import hotelModels.Kitchen;
 import hotelModels.Room;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.Seat;
 
 public class HotelDBHandler {
 	private static Connection conn;
@@ -201,5 +206,104 @@ public class HotelDBHandler {
 		    return returnData;
 		}
 
-	
+	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
+	    ReturnObjectUtility<Hotel> returnData = new ReturnObjectUtility<>();
+	    
+	    try {
+	        Statement stmt = conn.createStatement();
+	        ResultSet hotelSet = stmt.executeQuery("SELECT * FROM Hotel WHERE hotelID = " + hotelID);
+
+	        if (hotelSet.next()) { // Check if the hotel exists
+	            // Retrieve hotel details
+	            int retrievedHotelID = hotelSet.getInt("hotelID");
+	            String hotelName = hotelSet.getString("hName");
+	            String location = hotelSet.getString("hLocation");
+	            int kitchenID = hotelSet.getInt("kitchenID");
+
+	            // Create a Kitchen object
+	            Kitchen kitchen = new Kitchen(kitchenID);
+
+	            // Retrieve rooms associated with the hotel
+	            ArrayList<Room> rooms = new ArrayList<>();
+	            ResultSet roomSet = stmt.executeQuery("SELECT * FROM Room WHERE hotelID = " + hotelID);
+	            while (roomSet.next()) {
+	                int roomID = roomSet.getInt("roomID");
+	                String description = roomSet.getString("rDescription");
+	                float pricePerNight = roomSet.getFloat("pricePerNight");
+	                boolean isBooked = roomSet.getBoolean("isBooked");
+
+	                // Create a Room object
+	                Room room = new Room(roomID, description, pricePerNight, isBooked, hotelID);
+	                rooms.add(room);
+	            }
+
+	            // Create a Hotel object
+	            Hotel hotel = new Hotel(retrievedHotelID, hotelName, location, kitchen, rooms);
+
+	            // Set the Hotel object and success message
+	            returnData.setObject(hotel);
+	            returnData.setMessage("Hotel data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no hotel is found, set an error message
+	            returnData.setMessage("Error: Hotel does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such hotel") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Hotel does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving hotel owner from database: " + e.getMessage());
+		    }
+		}
+        return returnData;
+	}
+	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
+		ReturnObjectUtility<Room> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "UPDATE room SET isBooked = ? WHERE roomid = ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setBoolean(1,bookingStatus);
+			 pstmt.setInt(2, roomID);
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 if(bookingStatus) {
+					 returnData.setMessage("Room is now booked.");
+				 }
+				 else {
+					 returnData.setMessage("Room is no longer booked.");
+				 }
+
+		         returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update room booking status.");
+		         returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("no such room") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		        	returnData.setMessage("Error: Room does not exist.");
+		        }else {
+		        	returnData.setMessage("Issue in updating room in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+	        returnData.setSuccess(false);
+		}
+		return returnData;
+	}
 }

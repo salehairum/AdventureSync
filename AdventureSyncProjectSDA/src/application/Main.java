@@ -34,6 +34,7 @@ import javafx.application.Application;
 import tourist.TouristRatesBusTourView;
 import tourist.TouristRentCarView;
 import tourist.TouristReturnCarView;
+import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
@@ -41,7 +42,9 @@ import travelAgencyModels.Seat;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tourist.TouristBooksRoomView;
 import tourist.TouristBooksSeatView;
+import tourist.TouristChecksOutRoomView;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
@@ -58,6 +61,7 @@ import signupForms.BusDriverSignUpView;
 import signupForms.TouristSignUpView;
 import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
+import hotelModels.Hotel;
 import hotelModels.hotelOwnerController;
 
 public class Main extends Application {
@@ -76,13 +80,8 @@ public class Main extends Application {
 		try {
 		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
 
-
-//			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
-//			Parent root = hotelOwnerMenu.getRoot();
-//			
-
-			TouristSelectSeatFromBusView hotelOwnerMenu = new TouristSelectSeatFromBusView(3, bus);
-	
+			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
+			TouristChecksOutRoomView hotelOwnerMenu=new TouristChecksOutRoomView(3);
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

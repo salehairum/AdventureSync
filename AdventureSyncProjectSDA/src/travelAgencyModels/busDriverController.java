@@ -24,15 +24,15 @@ public class busDriverController {
 		return bus.addBus(newBus);
 	}
 	
-	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
-		return bus.retrieveBusObject(busId);
-	}
-	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
 		return bus.updateBus(bus);
 	}
 	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
 		return bus.updateSeatBookingStatus(seatID, bookingStatus);
+	}
+	
+	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
+		return bus.retrieveBusObject(busId);
 	}
 	
 	public String[] getBusDriverProfileDetail(int busDriverId)

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import application.Feedback;
+import dbHandlers.HotelDBHandler;
+import dbHandlers.ReturnObjectUtility;
 
 public class Room {
 	//variables
@@ -13,14 +15,35 @@ public class Room {
 	private boolean isBooked;
 	private ArrayList<Feedback> ratings;
 	private int hotelID;
-	private Date bookDate;
-	private Date checkoutDate;
+	private HotelDBHandler hotelDbHandler;
 	//constructor
 	public Room() {
 		roomID = 0;
 		description = "";
 		isBooked = false;
+		hotelDbHandler=new HotelDBHandler();
 	}
+	public Room(int roomID, String description, float pricePerNight, boolean isBooked, 
+            ArrayList<Feedback> ratings, int hotelID) {
+	    this.roomID = roomID;
+	    this.description = description;
+	    this.pricePerNight = pricePerNight;
+	    this.isBooked = isBooked;
+	    this.ratings = ratings != null ? ratings : new ArrayList<>(); // Initialize with empty list if null
+	    this.hotelID = hotelID;
+		hotelDbHandler=new HotelDBHandler();
+	}
+	
+	public Room(int roomID, String description, float pricePerNight, boolean isBooked, int hotelID) {
+	    this.roomID = roomID;
+	    this.description = description;
+	    this.pricePerNight = pricePerNight;
+	    this.isBooked = isBooked;
+	    this.ratings =new ArrayList<>(); 
+	    this.hotelID = hotelID;
+		hotelDbHandler=new HotelDBHandler();
+	}
+	
 	//getter and setter
 	public int getRoomID() {
 		return roomID;
@@ -58,5 +81,10 @@ public class Room {
 	public void setRatings(ArrayList<Feedback> ratings) {
 		this.ratings = ratings;
 	}
-	
+	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
+		return hotelDbHandler.updateRoomBookingStatus(roomID, bookingStatus);
+	}
+//	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+//		return hotelDbHandler.add
+//	}
 }

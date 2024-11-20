@@ -359,7 +359,7 @@ public class BusDBHandler {
 			String errorMessage = e.getMessage().toLowerCase();
 			
 			if (errorMessage != null) {
-		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		        if (errorMessage.contains("no such seat") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
 		        	returnData.setMessage("Error: Seat does not exist.");
 		        }else {
 		        	returnData.setMessage("Issue in updating seat in db: " + errorMessage);
@@ -453,7 +453,7 @@ public class BusDBHandler {
 		    }
 
 		        // Step 2: Insert into TravelAgencyOwner table
-		        sql = "INSERT INTO busDriver (accountID, aName, dob, cnic) VALUES ( ?, ?, ?, ?)";
+		        sql = "INSERT INTO busDriver (accountID, bName, dob, cnic) VALUES ( ?, ?, ?, ?)";
 		        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		        // Set parameters

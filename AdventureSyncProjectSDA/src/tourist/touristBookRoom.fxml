@@ -8,11 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -56,23 +54,22 @@
       </Pane>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1;">
          <children>
-            <Label layoutX="205.0" layoutY="31.0" prefHeight="53.0" prefWidth="200.0" text="Book Room" textFill="#eddea4">
+            <Label layoutX="155.0" layoutY="35.0" prefHeight="53.0" prefWidth="309.0" text="Book Hotel Room" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
             <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
-            <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="125.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="79.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/room.png" />
+                  <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <TableView fx:id="carTable" layoutX="13.0" layoutY="157.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="hotelTable" layoutX="13.0" layoutY="157.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
-                  <TableColumn prefWidth="104.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
-                  <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
-                  <TableColumn prefWidth="236.0" style="-fx-background-color: #F9F7F3;" text="Description" />
+                  <TableColumn prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="HotelID" />
+                  <TableColumn prefWidth="285.60003662109375" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
+                  <TableColumn prefWidth="193.5999755859375" style="-fx-background-color: #f9f7f3;" text="Location" />
                </columns>
             </TableView>
             <Button fx:id="menuButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
@@ -80,21 +77,17 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="bookButton" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Book" textFill="#f7a072">
+            <Label layoutX="89.0" layoutY="378.0" prefHeight="35.0" prefWidth="172.0" text="Enter Bus ID:" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hotelIDInput" layoutX="220.0" layoutY="382.0" prefHeight="26.0" prefWidth="272.0" promptText="e.g 1234" />
+            <Button fx:id="selectHotelButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Next" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <HBox fx:id="carIDInput" alignment="CENTER" layoutX="99.0" layoutY="329.0" prefHeight="67.0" prefWidth="358.0">
-               <children>
-                  <Label prefHeight="35.0" prefWidth="172.0" text="Enter Room ID:" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="roomIDInput" prefHeight="26.0" prefWidth="212.0" promptText="e.g 1234" />
-               </children>
-            </HBox>
          </children>
       </Pane>
    </children>

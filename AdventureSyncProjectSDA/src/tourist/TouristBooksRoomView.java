@@ -2,9 +2,9 @@ package tourist;
 
 import java.io.IOException;
 
-import accountAndPersonModels.Tourist;
-import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.Hotel;
+import hotelModels.hotelOwnerController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,28 +14,25 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Pane;
 import travelAgencyModels.Bus;
-import travelAgencyModels.Car;
 import travelAgencyModels.TouristController;
 import travelAgencyModels.busDriverController;
 import travelAgencyModels.travelAgencyOwnerController;
 
-public class TouristBooksSeatView {
+public class TouristBooksRoomView {
 	@FXML
-	private TextField busIdInput;
+	private TextField hotelIDInput;
 	@FXML
-	private Button selectBusButton;
+	private Button selectHotelButton;
 	
 	private int touristID;
 	
 	Parent root;
 	TouristController tController;
-	travelAgencyOwnerController toaController;
-	busDriverController bController;
+	hotelOwnerController hController;
 	
-	public TouristBooksSeatView(int id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookSeat.fxml"));
+	public TouristBooksRoomView(int id) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookRoom.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {
@@ -51,8 +48,7 @@ public class TouristBooksSeatView {
 		listenersAssignment();
 		eventHandlersAssignment();
 		tController = new TouristController();
-		toaController = new travelAgencyOwnerController();
-		bController = new busDriverController();
+		hController = new hotelOwnerController();
 	}
 	
 	public Parent getRoot() {
@@ -61,10 +57,10 @@ public class TouristBooksSeatView {
 	
 	//assigning buttons and listeners
 	public void listenersAssignment() {
-		busIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		hotelIDInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
 		
-	//afsah tumne yahan doosre form par lekar jana at the end
+	//afsah tumne yahan doosre form par lekar jana at the end-->this is just like book seat
 	public void eventHandlersAssignment() {
 		EventHandler<ActionEvent> selectBusButtonHandler=(event)->{
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
@@ -72,15 +68,15 @@ public class TouristBooksSeatView {
 			
 			StringBuilder errorMessage = new StringBuilder();
 			
-			if(!isNumeric(busIdInput.getText())) {
-				alertInvalidInput.setContentText("Please enter numeric value for bus ID"); 
+			if(!isNumeric(hotelIDInput.getText())) {
+				alertInvalidInput.setContentText("Please enter numeric value for hotel ID"); 
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
 			
-			int busID=Integer.parseInt(busIdInput.getText());
+			int hotelID=Integer.parseInt(hotelIDInput.getText());
 						
-			ReturnObjectUtility<Bus> returnData=tController.retrieveBusObject(busID);
+			ReturnObjectUtility<Hotel> returnData=tController.retrieveHotelObject(hotelID);
 			boolean success=returnData.isSuccess();
 			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 		    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -90,13 +86,13 @@ public class TouristBooksSeatView {
 		    
 		    if(success) {
 		    	//go to next form
-		    	//just send poori bus since ab woh seats aa chuki hain us 
-		    	//pass this bus
-		    	Bus bus=returnData.getObject();
+		    	//just send poora hotel since ab woh rooms aa chuke hain uskay 
+		    	//pass this room
+		    	Hotel hotel=returnData.getObject();
 		    }
 		};
 			
-		selectBusButton.setOnAction(selectBusButtonHandler);
+		selectHotelButton.setOnAction(selectBusButtonHandler);
 	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
@@ -108,8 +104,8 @@ public class TouristBooksSeatView {
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 
-	        !busIdInput.getText().trim().isEmpty();
+	        !hotelIDInput.getText().trim().isEmpty();
 
-	    selectBusButton.setDisable(!allFieldsFilled);
+	    selectHotelButton.setDisable(!allFieldsFilled);
 	}
 }
