@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="sidePanel" layoutX="-2.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
@@ -41,7 +40,17 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <VBox layoutX="31.0" layoutY="129.0" prefHeight="305.0" prefWidth="478.0">
+            <Button fx:id="signupButton" layoutX="221.0" layoutY="434.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="loginStatement" layoutX="31.0" layoutY="94.0" prefHeight="35.0" prefWidth="300.0" text="Already have an account? Login!" textFill="#f9f7f3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <VBox layoutX="28.0" layoutY="122.0" prefHeight="305.0" prefWidth="478.0">
                <children>
                   <HBox prefHeight="66.0" prefWidth="498.0">
                      <children>
@@ -103,16 +112,19 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
                            <children>
-                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter Password" textFill="#eddea4">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="passwordInput" prefHeight="26.0" prefWidth="263.0" promptText="Choose strong password">
+                              <VBox alignment="CENTER_LEFT" prefHeight="98.0" prefWidth="462.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="258.0" text="Enter Initial Balance" textFill="#eddea4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="422.0" promptText="e.g 12000" />
+                                 </children>
                                  <VBox.margin>
                                     <Insets right="10.0" />
                                  </VBox.margin>
-                              </TextField>
+                              </VBox>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
@@ -122,33 +134,28 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="costPerKmInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
+                              <TextField fx:id="cnicInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="98.0" prefWidth="462.0">
-                     <children>
-                        <Label prefHeight="35.0" prefWidth="258.0" text="Enter Initial Balance" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="422.0" promptText="e.g 12000" />
-                     </children>
-                  </VBox>
+                  <Label prefHeight="35.0" prefWidth="258.0" text="Enter Password" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="30.0" prefWidth="486.0" text="length should be 8, including upper and lower case letters, numbers, special symbols" textFill="#f9f7f3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="passwordInput" prefHeight="26.0" prefWidth="263.0" promptText="Fill all conditions">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
                </children>
             </VBox>
-            <Button fx:id="signupButton" layoutX="221.0" layoutY="434.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-            <Label fx:id="loginStatement" layoutX="31.0" layoutY="94.0" prefHeight="35.0" prefWidth="300.0" text="Already have an account? Login!" textFill="#f9f7f3">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </children>

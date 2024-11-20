@@ -45,6 +45,10 @@ public class travelAgencyOwnerController {
 		return travelAgencyOwner.updateCar(car);
 	}
 	
+	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
+		return travelAgencyOwner.updateCarRentalStatus(carID, rentalStatus);
+	}
+	
 	//assigning tour to bus
 	public ReturnObjectUtility<Tour> assignTour(Tour tour){
 		return tour.assignTour(tour);

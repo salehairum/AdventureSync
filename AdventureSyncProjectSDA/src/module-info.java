@@ -11,4 +11,5 @@ module AdventureSyncProjectSDA {
 	opens busDriver to javafx.fxml;
 	opens signupForms to javafx.fxml;
 	opens travelAgencyModels to javafx.base;
+	opens tourist to javafx.fxml;
 }

@@ -22,7 +22,7 @@ public class BusDriver extends Person {
 	{
 		super(name, dob, cnic);
 		this.busDriverID = busDriverID;
-		busDBHandler = new BusDBHandler();
+		busDBHandler=new BusDBHandler();
 	}
 	//getters and setters
 	public int getBusDriverID() {

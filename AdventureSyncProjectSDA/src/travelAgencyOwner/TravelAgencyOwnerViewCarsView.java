@@ -49,7 +49,7 @@ public class TravelAgencyOwnerViewCarsView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyOwnerViewCarsView() {
-		//FXMLLoader loader = new FXMLLoader(getClass().getResource("travelAgencyOwner/travelAgencyOwnerViewsCars.fxml"));
+    
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("travelAgencyOwnerViewsCars.fxml"));
 		loader.setController(this);
 		try {
@@ -57,6 +57,8 @@ public class TravelAgencyOwnerViewCarsView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		taoController = new travelAgencyOwnerController();
+		//displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
@@ -135,4 +137,25 @@ public class TravelAgencyOwnerViewCarsView {
             carTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }
+	
+	// Method to set the name and ID fields dynamically
+//    public void displayOwnerDetails() {
+//        Text nameText = (Text) root.lookup("#name");
+//        Text idText = (Text) root.lookup("#id");
+//        Text cnicText = (Text) root.lookup("#cnic");
+//        Text dobText = (Text) root.lookup("#dob");
+//        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
+//        if (nameText != null) {
+//            nameText.setText(profileDetail[0]);
+//        }
+//        if (idText != null) {
+//            idText.setText(profileDetail[1]);
+//        }
+//        if (cnicText != null) {
+//        	cnicText.setText(profileDetail[2]);
+//        }
+//        if (dobText != null) {
+//        	dobText.setText(profileDetail[3]);
+//        }
+//    }
 }

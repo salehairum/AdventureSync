@@ -11,14 +11,25 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.time.LocalDate;
 
+import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
+import accountAndPersonModels.Tourist;
 import hotelModels.Room;
 import travelAgencyModels.Car;
 
 public class HotelDBHandler {
 	private static Connection conn;
+	public HotelDBHandler() {}
 	public HotelDBHandler(Connection c) {
 		conn = c;
+	}
+	
+	public static Connection getConnection() {
+		return conn;
+	}
+
+	public static void setConnection(Connection conn) {
+		HotelDBHandler.conn = conn;
 	}
 	//room related functions
 	public String addRoom(Room room) {
@@ -102,4 +113,93 @@ public class HotelDBHandler {
 		}
         return returnData;
 	}
+	
+	public ReturnObjectUtility<HotelOwner> addHotelOwner(HotelOwner hotelOwner) {
+		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility<>();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			// First Insert into Account table
+		    String sql = "INSERT INTO Account (username, email, accPassword, balance) VALUES (?, ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    // Set parameters
+		    Account account = hotelOwner.getAccount();
+		    pstmt.setString(1, account.getUsername());
+		    pstmt.setString(2, account.getEmail());
+		    pstmt.setString(3, account.getPassword());
+		    pstmt.setFloat(4, account.getBalance());
+
+		    // Execute the insert and fetch generated accountID
+		    int retrievedAccountID=0;
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	retrievedAccountID = rs.getInt(1);
+		        	account.setAccountID(retrievedAccountID);
+		        	hotelOwner.getAccount().setAccountID(retrievedAccountID);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Account ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+		    } else {
+		        returnData.setMessage("Failed to insert into Account table.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		        // Step 2: Insert into TravelAgencyOwner table
+		        sql = "INSERT INTO HotelOwner (accountID, aName, dob, cnic) VALUES ( ?, ?, ?, ?)";
+		        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		        // Set parameters
+		        pstmt.setInt(1, hotelOwner.getAccount().getAccountID());
+		        pstmt.setString(2, hotelOwner.getName());
+		        pstmt.setObject(3, hotelOwner.getDob());
+		        pstmt.setString(4, hotelOwner.getCnic());
+
+		        // Execute the insert
+		        int retrievedOwnerID=0;
+		        rowsAffected = pstmt.executeUpdate();
+		        if (rowsAffected > 0) {
+		            rs = pstmt.getGeneratedKeys();
+		            if (rs.next()) {
+		            	retrievedOwnerID = rs.getInt(1);
+		            	returnData.setMessage("Hotel Owner with id "+retrievedOwnerID+" added successfuly!");
+		                returnData.setSuccess(true);
+		                return returnData;
+		            } else {
+		                returnData.setMessage("Failed to retrieve generated Account ID.");
+		                returnData.setSuccess(false);
+		                return returnData;
+		            }
+		        } else {
+		            returnData.setMessage("Failed to insert into Hotel Owner table.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else if (errorMessage.contains("unique key constraint")) {
+		                returnData.setMessage("Error: Duplicate username, email, or CNIC detected.");
+		            } else {
+		                returnData.setMessage("Issue in adding Hotel Owner in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+		}
+
+	
 }

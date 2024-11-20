@@ -68,5 +68,9 @@ public class TravelAgencyOwner extends Person {
 	public ReturnListUtility<Car> getAllCars() {
 	    // Fetch car data from the database handler
 	    return car.retrieveCarList();
+  }
+	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
+		return car.updateCarRentalStatus(carID, rentalStatus);
+
 	}
 }

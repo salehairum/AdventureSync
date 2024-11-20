@@ -1,16 +1,21 @@
 package travelAgencyModels;
 
+import dbHandlers.BusDBHandler;
+import dbHandlers.ReturnObjectUtility;
+
 public class Seat {
 	private int seatID;
 	private int busID;
 	boolean isBooked;
 	int rowNo;
+	private BusDBHandler busHandler;
 
 	public Seat(int seatID, int busID, boolean isBooked, int rowNo) {
         this.seatID = seatID;
         this.busID = busID;
         this.isBooked = isBooked;
         this.rowNo = rowNo;
+        busHandler=new BusDBHandler();
     }
 	//default booked=false
 	public Seat(int seatID, int busID, int rowNo) {
@@ -18,7 +23,12 @@ public class Seat {
         this.busID = busID;
         this.isBooked = false;
         this.rowNo = rowNo;
+        busHandler=new BusDBHandler();
     }
+	
+	public Seat() {
+        busHandler=new BusDBHandler();
+	}
 	
 	//getters and setters
 	public int getSeatID() {
@@ -44,5 +54,13 @@ public class Seat {
 	}
 	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
+	}
+	
+	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
+		return busHandler.updateSeatBookingStatus(seatID, bookingStatus);
+	}
+	
+	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
+		return busHandler.retrieveSeatObject(seatId, busId);
 	}
 }

@@ -2,6 +2,7 @@ package application;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 import busDriver.BusDriverCompletesTourView;
 import busDriver.BusDriverDeletesAccountView;
@@ -31,10 +32,16 @@ import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
 import tourist.TouristRatesBusTourView;
+import tourist.TouristRentCarView;
+import tourist.TouristReturnCarView;
+import tourist.TouristSelectSeatFromBusView;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.Seat;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tourist.TouristBooksSeatView;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
@@ -58,7 +65,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -74,9 +81,8 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 
-			
-
-			TravelAgencyManageCarsView hotelOwnerMenu = new TravelAgencyManageCarsView();
+			TouristSelectSeatFromBusView hotelOwnerMenu = new TouristSelectSeatFromBusView(3, bus);
+	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
