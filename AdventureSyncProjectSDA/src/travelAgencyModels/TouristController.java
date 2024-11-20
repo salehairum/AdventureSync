@@ -5,12 +5,17 @@ import java.time.LocalDate;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.Hotel;
+import hotelModels.Room;
 
 public class TouristController {
 	Tourist tourist;
+	Hotel hotel;
+	Bus bus;
 	public TouristController() {
 		tourist=new Tourist();
-		tourist=new Tourist();
+		hotel=new Hotel();
+		bus=new Bus();
 	}
 	public ReturnObjectUtility<Tourist> addTourist(Tourist newTourist){
 		return tourist.addTourist(newTourist);
@@ -39,4 +44,21 @@ public class TouristController {
         String[] profileDetails = {touristName, touristIdStr, touristCnic, touristDob};
         return profileDetails;
     }
+	
+	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+		return tourist.addRoomToBookedRooms(touristId, roomID);
+	}
+	
+	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+		return tourist.removeRoomFromBookedRooms(touristId, roomID);
+	}
+	
+	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
+		return hotel.retrieveHotelObject(hotelID);
+	}
+
+	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
+		return bus.retrieveBusObject(busId);
+	}
+	
 }

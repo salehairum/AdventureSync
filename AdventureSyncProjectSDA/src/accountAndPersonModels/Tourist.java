@@ -80,9 +80,17 @@ public class Tourist extends Person {
 	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
 		return touristDBHandler.addSeatToBookedSeats(touristId, seatID);
 	}
+
 	public ReturnObjectUtility<Tourist> getDetail(int touristID)
 	{
 		ReturnObjectUtility<Tourist> returnData = touristDBHandler.retrieveTouristData(touristID);
 		return returnData;
+	
+	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);
+	}
+	
+	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+		return touristDBHandler.removeRoomFromBookedRooms(touristId, roomID);
 	}
 }

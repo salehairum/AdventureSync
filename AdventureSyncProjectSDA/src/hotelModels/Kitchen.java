@@ -10,6 +10,11 @@ public class Kitchen {
 	public Kitchen() {
 		menu = null;
 	}
+	public Kitchen(int kitchenID) {
+		this.kitchenID=kitchenID;
+		menu = null;
+	}
+	
 	//getter and setter
 	public ArrayList<FoodItem> getMenu() {
 		return menu;

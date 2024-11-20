@@ -491,5 +491,71 @@ public class TouristDBHandler {
 				}
 		        return returnData;
 			}
+	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+			//first see if car exists or not
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from TouristHasBookedRooms where roomID="+roomID);
+	        if(!rSet.next()) {
+	        	 returnData.setMessage("No booked Room found with the entered Room ID.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+			//if car exists, proceed with renting 
+	        
+	        String sql = "DELETE FROM TouristHasBookedRooms WHERE touristId = ? AND roomID = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setInt(1, touristId);
+	        pstmt.setInt(2, roomID);
+
+		    // Execute the insert and fetch generated accountID
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected <= 0) {
+		        returnData.setMessage("Failed to checkout from hotel.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, roomID);
+		    pstmt.setString(3, "Checkout Hotel Room");
+		    
+		        // Execute the insert
+		    rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	returnData.setMessage("Room checked out successfully.");
+		        returnData.setSuccess(true);
+		        return returnData;
+		    } else {
+		    	returnData.setMessage("Failed to checkout from hotel.");
+		        returnData.setSuccess(false);
+		        return returnData;
+		    }
+
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the hotel room/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in checkout from hotel in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
 
 }

@@ -1,11 +1,12 @@
 package tourist;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import accountAndPersonModels.Tourist;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.Hotel;
+import hotelModels.Room;
+import hotelModels.hotelOwnerController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,32 +16,27 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
-import travelAgencyModels.Seat;
 import travelAgencyModels.TouristController;
-import travelAgencyModels.busDriverController;
 import travelAgencyModels.travelAgencyOwnerController;
 
-public class TouristSelectSeatFromBusView {
+public class TouristChecksOutRoomView {
 	@FXML
-	private TextField seatIdInput;
+	private TextField roomIDInput;
 	@FXML
-	private Button bookSeatButton;
+	private Button checkoutButton;
 	
 	private int touristID;
 	
 	Parent root;
 	TouristController tController;
-	travelAgencyOwnerController toaController;
-	busDriverController bController;
-	Bus bus;
+	hotelOwnerController hController;
+	Hotel hotel;
 	
-	public TouristSelectSeatFromBusView(int id, Bus newBus) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectSeatFromBus.fxml"));
+	public TouristChecksOutRoomView(int id) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristCheckoutRoom.fxml"));
 		loader.setController(this);
 		touristID=id;
-		bus=newBus;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -54,8 +50,7 @@ public class TouristSelectSeatFromBusView {
 		listenersAssignment();
 		eventHandlersAssignment();
 		tController = new TouristController();
-		toaController = new travelAgencyOwnerController();
-		bController = new busDriverController();
+		hController = new hotelOwnerController();
 	}
 	
 	public Parent getRoot() {
@@ -64,26 +59,25 @@ public class TouristSelectSeatFromBusView {
 	
 	//assigning buttons and listeners
 	public void listenersAssignment() {
-		seatIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		roomIDInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
 		
 	public void eventHandlersAssignment() {
-		EventHandler<ActionEvent> bookSeatButtonHandler=(event)->{
+		EventHandler<ActionEvent> rentButtonHandler=(event)->{
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
 			alertInvalidInput.setTitle("Invalid input"); 
 			
 			StringBuilder errorMessage = new StringBuilder();
 			
-			if(!isNumeric(seatIdInput.getText())) {
-				alertInvalidInput.setContentText("Please enter numeric value for seat ID"); 
+			if(!isNumeric(roomIDInput.getText())) {
+				alertInvalidInput.setContentText("Please enter numeric value for room ID"); 
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
 			
-			int seatID=Integer.parseInt(seatIdInput.getText());
-			int busID=bus.getID();
-			//if seat exists, then it must be booked
-			ReturnObjectUtility<Seat> returnData= bController.updateSeatBookingStatus(seatID, true);
+			int roomID=Integer.parseInt(roomIDInput.getText());
+						
+			ReturnObjectUtility<Room> returnData= hController.updateRoomBookingStatus(roomID, false);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -93,8 +87,8 @@ public class TouristSelectSeatFromBusView {
 			    alert.showAndWait();
 			}
 			else {
-				//mark car as rented
-				ReturnObjectUtility<Seat> returnData2=tController.addSeatToBookedSeats(touristID, seatID);
+				//mark room as not booked
+				ReturnObjectUtility<Room> returnData2=tController.removeRoomFromBookedRooms(touristID, roomID);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -103,11 +97,12 @@ public class TouristSelectSeatFromBusView {
 				    alert.showAndWait();
 				    
 				if(!success)
-					bController.updateSeatBookingStatus(seatID, false);
+					hController.updateRoomBookingStatus(roomID, true); 
+				//if transaction could not be made, set isBooked as true i.e it is still booked.
 			}
 		};
 			
-		bookSeatButton.setOnAction(bookSeatButtonHandler);
+		checkoutButton.setOnAction(rentButtonHandler);
 	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
@@ -119,8 +114,8 @@ public class TouristSelectSeatFromBusView {
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 
-	        !seatIdInput.getText().trim().isEmpty();
+	        !roomIDInput.getText().trim().isEmpty();
 
-	    bookSeatButton.setDisable(!allFieldsFilled);
+	    checkoutButton.setDisable(!allFieldsFilled);
 	}
 }
