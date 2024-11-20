@@ -1,5 +1,6 @@
 package travelAgencyModels;
 
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 
@@ -68,5 +69,9 @@ public class Car extends Vehicle{
 	
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return travelAgencyDBHandler.updateCarRentalStatus(carID, rentalStatus);
+	}
+	
+	public ReturnListUtility<Car> retrieveCarList() {
+		return travelAgencyDBHandler.retrieveCarList();
 	}
 }

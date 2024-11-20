@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
@@ -31,11 +30,11 @@
                         <Image url="@../resources/add.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="addLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="Add Cars" textFill="#eddea4">
+                  <Text fx:id="addLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Cars" wrappingWidth="152.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox fx:id="deleteCars" alignment="CENTER" layoutX="308.0" layoutY="100.0" prefHeight="160.0" prefWidth="160.0">
@@ -45,11 +44,11 @@
                         <Image url="@../resources/delete.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="deleteLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="Delete Cars" textFill="#eddea4">
+                  <Text fx:id="deleteLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Cars" wrappingWidth="152.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox fx:id="updateCars" alignment="CENTER" layoutX="77.0" layoutY="260.0" prefHeight="182.0" prefWidth="160.0">
@@ -59,11 +58,11 @@
                         <Image url="@../resources/update.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="updateLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="Update Cars" textFill="#eddea4">
+                  <Text fx:id="updateLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Cars" wrappingWidth="152.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox fx:id="viewCars" alignment="CENTER" layoutX="308.0" layoutY="260.0" prefHeight="182.0" prefWidth="160.0">
@@ -73,14 +72,14 @@
                         <Image url="@../resources/view.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="viewLabel" alignment="CENTER" prefHeight="42.0" prefWidth="174.0" text="View Cars" textFill="#eddea4">
+                  <Text fx:id="viewLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="View Cars" wrappingWidth="152.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
-            <Button fx:id="menuButton" layoutX="219.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="menuButton" layoutX="219.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

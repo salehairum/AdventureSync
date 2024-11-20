@@ -1,10 +1,14 @@
 package travelAgencyModels;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.TravelAgencyOwner;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class travelAgencyOwnerController {
 	TravelAgencyOwner travelAgencyOwner;
@@ -53,5 +57,10 @@ public class travelAgencyOwnerController {
 	//travel agency related functions
 	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
 		return travelAgencyOwner.addAgencyOwner(owner);
+	}
+	
+	public ReturnListUtility<Car> getCarDetails() {
+	    // Call the TravelAgencyOwner to fetch car details
+		return travelAgencyOwner.getAllCars();
 	}
 }

@@ -2,7 +2,9 @@ package accountAndPersonModels;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Car;
@@ -63,7 +65,12 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
 		return travelAgencyDBHandler.addAgencyOwner(owner);
 	}
+	public ReturnListUtility<Car> getAllCars() {
+	    // Fetch car data from the database handler
+	    return car.retrieveCarList();
+  }
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return car.updateCarRentalStatus(carID, rentalStatus);
+
 	}
 }

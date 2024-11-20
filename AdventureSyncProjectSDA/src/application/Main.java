@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import busDriver.BusDriverCompletesTourView;
+import busDriver.BusDriverDeletesAccountView;
+import busDriver.BusDriverManageBusView;
 import busDriver.BusDriverMenuView;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
+import busDriver.BusDriverViewBusDetailsView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
 import hotelOwner.HOMDeleteFood;
@@ -42,6 +45,9 @@ import tourist.TouristBooksSeatView;
 import tourist.TouristMenuView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
+import travelAgencyOwner.TravelAgencyManageAccountView;
+import travelAgencyOwner.TravelAgencyManageBusView;
+import travelAgencyOwner.TravelAgencyManageCarsView;
 import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwner.TravelAgencyOwnerViewCarsView;
@@ -75,7 +81,6 @@ public class Main extends Application {
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
 
-			Bus bus=bdb.retrieveBusObject(15).getObject();
 			TouristSelectSeatFromBusView hotelOwnerMenu = new TouristSelectSeatFromBusView(3, bus);
 	
 			Parent root = hotelOwnerMenu.getRoot();

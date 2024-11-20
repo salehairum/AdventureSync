@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
@@ -25,22 +24,32 @@
                   <Image url="@../resources/car.png" />
                </image>
             </ImageView>
-            <Button fx:id="menuButton" layoutX="203.0" layoutY="428.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="menuButton" layoutX="345.0" layoutY="427.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TableView fx:id="carTable" layoutX="13.0" layoutY="207.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="carTable" layoutX="5.0" layoutY="114.0" prefHeight="292.0" prefWidth="539.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Car ID" />
-                  <TableColumn prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
-                  <TableColumn prefWidth="67.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
-                  <TableColumn prefWidth="127.20001220703125" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
-                  <TableColumn prefWidth="75.99993896484375" style="-fx-background-color: #f9f7f3;" text="Plate No." />
-                  <TableColumn prefWidth="76.79998779296875" style="-fx-background-color: #f9f7f3;" text="RentalFee" />
-                  <TableColumn prefWidth="56.0" style="-fx-background-color: #f9f7f3;" text="Cost/Km" />
+                  <TableColumn fx:id="colCarId" prefWidth="45.0" style="-fx-background-color: #f9f7f3;" text="Car ID" />
+                  <TableColumn fx:id="colModel" prefWidth="75.0" style="-fx-background-color: #f9f7f3;" text="Model" />
+                  <TableColumn fx:id="colBrand" prefWidth="69.0" style="-fx-background-color: #f9f7f3;" text="Brand" />
+                  <TableColumn fx:id="colYear" prefWidth="120.0" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
+                  <TableColumn fx:id="colPlateNo" prefWidth="78.0" style="-fx-background-color: #f9f7f3;" text="Plate No." />
+                  <TableColumn fx:id="colRentalFee" style="-fx-background-color: #f9f7f3;" text="RentalFee" />
+                  <TableColumn fx:id="colCost" prefWidth="76.0" style="-fx-background-color: #f9f7f3;" text="Cost/Km" />
                </columns>
             </TableView>
+            <Button fx:id="updateButton" layoutX="216.0" layoutY="427.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteButton" layoutX="92.0" layoutY="427.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Delete" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">
