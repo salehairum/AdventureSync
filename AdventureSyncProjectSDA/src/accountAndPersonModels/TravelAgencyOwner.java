@@ -7,6 +7,7 @@ import java.util.List;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 
 public class TravelAgencyOwner extends Person {
@@ -14,7 +15,7 @@ public class TravelAgencyOwner extends Person {
 	//private HashMap<Integer,Car> cars;
 	private TravelAgencyDBHandler travelAgencyDBHandler;
 	Car car;
-	
+	Bus bus;
 	//constructors
 	public TravelAgencyOwner()
 	{
@@ -28,6 +29,7 @@ public class TravelAgencyOwner extends Person {
 		this.agencyOwnerID = agencyOwnerID;
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		car=new Car();
+		bus=new Bus();
 	}
 	
 	//getters and setters
@@ -68,7 +70,11 @@ public class TravelAgencyOwner extends Person {
 	public ReturnListUtility<Car> getAllCars() {
 	    // Fetch car data from the database handler
 	    return car.retrieveCarList();
-  }
+	}
+	public ReturnListUtility<Bus> getAllBus() {
+	    // Fetch car data from the database handler
+	    return bus.retrieveBusList();
+	}
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return car.updateCarRentalStatus(carID, rentalStatus);
 
