@@ -11,7 +11,9 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
+import application.Feedback;
 import hotelModels.Room;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Seat;
 
 public class TouristDBHandler {
@@ -453,7 +455,7 @@ public class TouristDBHandler {
 	}
 	
 	//bus driver related functions
-		public static ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
+	public static ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
 				ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
 				
 				try {
@@ -491,6 +493,7 @@ public class TouristDBHandler {
 				}
 		        return returnData;
 			}
+	
 	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
 		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -557,5 +560,164 @@ public class TouristDBHandler {
 		    }
 		    return returnData;
 	}
+	
+	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
+	    ReturnObjectUtility<Feedback> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    ResultSet rs;
 
+	    try {
+	        // First, check if the bus exists
+	        String checkBusSql = "SELECT * FROM Bus WHERE busID = ?";
+	        pstmt = conn.prepareStatement(checkBusSql);
+	        int busID=feedback.getServiceID();
+	        pstmt.setInt(1,busID );
+	        rs = pstmt.executeQuery();
+
+	        if (!rs.next()) {
+	            returnData.setMessage("No bus found with the entered bus ID.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Insert feedback into Feedback table
+	        String insertFeedbackSql = "INSERT INTO Feedback (rating, comment, touristID, serviceID, typeOfFeedback) " +
+	                                   "VALUES (?, ?, ?, ?, ?)";
+	        pstmt = conn.prepareStatement(insertFeedbackSql, Statement.RETURN_GENERATED_KEYS);
+	        pstmt.setInt(1, feedback.getRating());
+	        pstmt.setString(2, feedback.getComment());
+	        pstmt.setInt(3, feedback.getTouristID());
+	        pstmt.setInt(4, busID);
+	        pstmt.setString(5, feedback.getTypeOfFeedback());
+
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        if (rowsAffected <= 0) {
+	            returnData.setMessage("Failed to store feedback.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Get the generated feedback ID
+	        rs = pstmt.getGeneratedKeys();
+	        int feedbackID = -1;
+	        if (rs.next()) {
+	            feedbackID = rs.getInt(1);
+	        } else {
+	            returnData.setMessage("Failed to retrieve feedback ID.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Link feedback to bus in BusHasFeedback table
+	        String linkFeedbackSql = "INSERT INTO BusHasFeedback (BusID, feedbackID) VALUES (?, ?)";
+	        pstmt = conn.prepareStatement(linkFeedbackSql);
+	        pstmt.setInt(1, busID);
+	        pstmt.setInt(2, feedbackID);
+
+	        rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Feedback submitted successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to link feedback to bus.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the bus or tourist exists.");
+	            } else {
+	                returnData.setMessage("Issue in storing feedback in DB: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
+	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
+	    ReturnObjectUtility<Feedback> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+
+	    try {
+	        // First, check if the bus exists
+	        String checkBusSql = "SELECT * FROM Room WHERE RoomID = ?";
+	        pstmt = conn.prepareStatement(checkBusSql);
+	        int RoomID=feedback.getServiceID();
+	        pstmt.setInt(1,RoomID );
+	        rs = pstmt.executeQuery();
+
+	        if (!rs.next()) {
+	            returnData.setMessage("No Room found with the entered Room ID.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Insert feedback into Feedback table
+	        String insertFeedbackSql = "INSERT INTO Feedback (rating, comment, touristID, serviceID, typeOfFeedback) " +
+	                                   "VALUES (?, ?, ?, ?, ?)";
+	        pstmt = conn.prepareStatement(insertFeedbackSql, Statement.RETURN_GENERATED_KEYS);
+	        pstmt.setInt(1, feedback.getRating());
+	        pstmt.setString(2, feedback.getComment());
+	        pstmt.setInt(3, feedback.getTouristID());
+	        pstmt.setInt(4, RoomID);
+	        pstmt.setString(5, feedback.getTypeOfFeedback());
+
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        if (rowsAffected <= 0) {
+	            returnData.setMessage("Failed to store feedback.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Get the generated feedback ID
+	        rs = pstmt.getGeneratedKeys();
+	        int feedbackID = -1;
+	        if (rs.next()) {
+	            feedbackID = rs.getInt(1);
+	        } else {
+	            returnData.setMessage("Failed to retrieve feedback ID.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        // Link feedback to bus in BusHasFeedback table
+	        String linkFeedbackSql = "INSERT INTO RoomHasFeedback (BusID, feedbackID) VALUES (?, ?)";
+	        pstmt = conn.prepareStatement(linkFeedbackSql);
+	        pstmt.setInt(1, RoomID);
+	        pstmt.setInt(2, feedbackID);
+
+	        rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Feedback submitted successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to link feedback to bus.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the Room or tourist exists.");
+	            } else {
+	                returnData.setMessage("Issue in storing feedback in DB: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
 }

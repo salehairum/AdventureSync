@@ -55,7 +55,7 @@
          </children></Pane>
       <Pane fx:id="mainPanel" layoutX="196.0" layoutY="-2.0" prefHeight="510.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1;">
          <children>
-            <Label layoutX="187.0" layoutY="31.0" prefHeight="53.0" prefWidth="249.0" text="Rate Bus Tour" textFill="#eddea4">
+            <Label layoutX="213.0" layoutY="31.0" prefHeight="53.0" prefWidth="166.0" text="Rate Bus " textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -72,9 +72,8 @@
                   <TableColumn prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
                   <TableColumn prefWidth="75.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
                   <TableColumn prefWidth="124.00001525878906" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
-                  <TableColumn prefWidth="80.00006103515625" style="-fx-background-color: #f9f7f3;" text="Plate No." />
-                  <TableColumn prefWidth="64.800048828125" style="-fx-background-color: #f9f7f3;" text="DriverID" />
-                  <TableColumn prefWidth="56.0" style="-fx-background-color: #f9f7f3;" text="HasTour" />
+                  <TableColumn prefWidth="98.4000244140625" style="-fx-background-color: #f9f7f3;" text="Plate No." />
+                  <TableColumn prefWidth="102.39996337890625" style="-fx-background-color: #f9f7f3;" text="DriverID" />
                </columns>
             </TableView>
             <Button fx:id="menuButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
@@ -82,12 +81,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="nextButton" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Next" textFill="#f7a072">
+            <Button fx:id="submitButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Submit" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="11.0" layoutY="114.0" prefHeight="35.0" prefWidth="282.0" text="Bus tours that you have taken:" textFill="#eddea4">
+            <Label layoutX="11.0" layoutY="114.0" prefHeight="35.0" prefWidth="282.0" text="Bus that you have taken:" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

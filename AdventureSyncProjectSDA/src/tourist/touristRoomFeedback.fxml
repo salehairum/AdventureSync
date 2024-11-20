@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
@@ -70,20 +69,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TableView fx:id="carTable" layoutX="11.0" layoutY="163.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
-               <columns>
-                  <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
-                  <TableColumn prefWidth="104.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
-                  <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
-                  <TableColumn prefWidth="236.0" style="-fx-background-color: #F9F7F3;" text="Description" />
-               </columns>
-            </TableView>
             <Button fx:id="menuButton" layoutX="162.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="nextButton" layoutX="294.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Next" textFill="#f7a072">
+            <Button fx:id="submitButton" disable="true" layoutX="294.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Submit" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -106,6 +97,15 @@
                </font>
             </Label>
             <ComboBox fx:id="ratingInput" layoutX="264.0" layoutY="359.0" prefHeight="26.0" prefWidth="203.0" promptText="Out of 5 stars..." />
+            <TableView fx:id="roomTable" layoutX="11.0" layoutY="160.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+               <columns>
+                  <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
+                  <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
+                  <TableColumn prefWidth="141.60003662109375" style="-fx-background-color: #F9F7F3;" text="Description" />
+                  <TableColumn prefWidth="70.40008544921875" style="-fx-background-color: #f9f7f3;" text="Hotel ID" />
+                  <TableColumn prefWidth="127.199951171875" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

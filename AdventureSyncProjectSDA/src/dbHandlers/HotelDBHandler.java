@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
+import hotelModels.FoodItem;
 import hotelModels.Hotel;
 import hotelModels.Kitchen;
 import hotelModels.Room;
@@ -261,6 +262,7 @@ public class HotelDBHandler {
 		}
         return returnData;
 	}
+	
 	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		ReturnObjectUtility<Room> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -306,4 +308,47 @@ public class HotelDBHandler {
 		}
 		return returnData;
 	}
+	
+	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+	    ReturnObjectUtility<FoodItem> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    try {
+	        // Adjust the SQL statement based on the `add` flag
+	        String sql = "UPDATE FoodItem SET quantity = quantity " + (add ? "+ ?" : "- ?") + " WHERE foodID = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setInt(1, quantity);
+	        pstmt.setInt(2, foodID);
+
+	        // Execute the update
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Food quantity successfully updated.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to update food quantity. Food item may not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("check constraint") || errorMessage.contains("negative")) {
+	                returnData.setMessage("Error: Quantity cannot be negative.");
+	            } else if (errorMessage.contains("no such fooditem") || errorMessage.contains("does not exist")) {
+	                returnData.setMessage("Error: Food item does not exist.");
+	            } else {
+	                returnData.setMessage("Issue updating food quantity in database: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+
 }
