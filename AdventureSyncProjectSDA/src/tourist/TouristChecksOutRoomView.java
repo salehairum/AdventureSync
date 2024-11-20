@@ -12,10 +12,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import travelAgencyModels.Car;
 import travelAgencyModels.TouristController;
 import travelAgencyModels.travelAgencyOwnerController;
@@ -25,6 +29,16 @@ public class TouristChecksOutRoomView {
 	private TextField roomIDInput;
 	@FXML
 	private Button checkoutButton;
+	@FXML
+	private Button backButton;
+	@FXML
+	private Text name;
+	@FXML
+	private Text id;
+	@FXML
+	private Text cnic;
+	@FXML
+	private Text dob;
 	
 	private int touristID;
 	
@@ -51,6 +65,7 @@ public class TouristChecksOutRoomView {
 		eventHandlersAssignment();
 		tController = new TouristController();
 		hController = new hotelOwnerController();
+		displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
@@ -101,9 +116,38 @@ public class TouristChecksOutRoomView {
 				//if transaction could not be made, set isBooked as true i.e it is still booked.
 			}
 		};
-			
 		checkoutButton.setOnAction(rentButtonHandler);
+		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services"));
 	}
+	
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+    }
+	
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;
@@ -118,4 +162,13 @@ public class TouristChecksOutRoomView {
 
 	    checkoutButton.setDisable(!allFieldsFilled);
 	}
+	// Method to display profile
+    public void displayOwnerDetails() {
+        String profileDetail[] = tController.getTouristProfileDetail(1);
+
+        name.setText(profileDetail[0]);
+        id.setText(profileDetail[1]);
+        cnic.setText(profileDetail[2]);
+        dob.setText(profileDetail[3]);
+    }
 }

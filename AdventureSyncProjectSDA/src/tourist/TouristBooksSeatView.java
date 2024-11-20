@@ -108,7 +108,6 @@ public class TouristBooksSeatView {
 		    	//just send poori bus since ab woh seats aa chuki hain us 
 		    	//pass this bus
 		    	Bus bus=returnData.getObject();
-		    	//selectBusButton.setOnMouseClicked(createSeatButtonHandler(1, bus));
 		    	try {
 		            // Create an instance of the controller using its constructor
 		            TouristSelectSeatFromBusView controllerInstance = new TouristSelectSeatFromBusView(touristID, bus);
@@ -136,7 +135,7 @@ public class TouristBooksSeatView {
 		};
 			
 		selectBusButton.setOnAction(selectBusButtonHandler);
-		menuButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class,"Menu"));
+		menuButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class,"Travel Services"));
 	}
 
 	

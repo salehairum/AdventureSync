@@ -8,59 +8,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="sidePanel" layoutY="-15.0" prefHeight="523.0" prefWidth="198.0" style="-fx-background-color: #EDDEA4;">
-         <children>
-            <ImageView fx:id="logo" fitHeight="103.0" fitWidth="114.0" layoutX="42.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/wandermate.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="32.0" layoutY="149.0" prefHeight="40.0" prefWidth="134.0" text="Tourist Account" textFill="#0fa3b1">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <VBox fx:id="profile" layoutX="32.0" layoutY="213.0" prefHeight="200.0" prefWidth="134.0">
-               <children>
-                  <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="name" prefHeight="40.0" prefWidth="166.0" text="Name" textFill="#0fa3b1">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="ownerID" prefHeight="40.0" prefWidth="166.0" text="ID" textFill="#0fa3b1">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="40.0" prefWidth="166.0" text="Other attributes" textFill="#0fa3b1">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-         </children></Pane>
-      <Pane fx:id="mainPanel" layoutX="196.0" layoutY="-2.0" prefHeight="510.0" prefWidth="555.0" style="-fx-background-color: #0FA3B1;">
+      <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1;">
          <children>
             <Label layoutX="187.0" layoutY="31.0" prefHeight="53.0" prefWidth="249.0" text="Rate Bus Tour" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
             <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="113.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/rating.png" />
@@ -77,7 +38,7 @@
                   <TableColumn prefWidth="56.0" style="-fx-background-color: #f9f7f3;" text="HasTour" />
                </columns>
             </TableView>
-            <Button fx:id="menuButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -122,6 +83,66 @@
                   <ComboBox fx:id="ratingInput" prefHeight="26.0" prefWidth="203.0" promptText="Out of 5 stars..." />
                </children>
             </HBox>
-         </children></Pane>
+         </children>
+      </Pane>
+      <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tourist" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" fill="#0fa3b1" layoutX="75.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="id" fill="#0fa3b1" layoutX="75.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="cnic" fill="#0fa3b1" layoutX="75.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNIC" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dob" fill="#0fa3b1" layoutX="75.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="69.125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="61.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNIC:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
-</AnchorPane>
+</Pane>
