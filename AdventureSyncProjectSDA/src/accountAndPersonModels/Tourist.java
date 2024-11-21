@@ -71,7 +71,7 @@ public class Tourist extends Person {
 		return touristDBHandler.addTourist(tourist);
 	}
 	
-	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+	public ReturnObjectUtility<Integer> addCarToRentedCars(int touristId,int carID){
 		return touristDBHandler.addCarToRentedCars(touristId, carID);
 	}
 	
@@ -79,7 +79,7 @@ public class Tourist extends Person {
 		return touristDBHandler.removeCarFromRentedCars(touristId, carID);
 	}
 	
-	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+	public ReturnObjectUtility<Integer> addSeatToBookedSeats(int touristId,int seatID){
 		return touristDBHandler.addSeatToBookedSeats(touristId, seatID);
 	}
 
@@ -101,5 +101,12 @@ public class Tourist extends Person {
 	}
 	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
 		return touristDBHandler.giveFeedbackToRoom(feedback);
+	}
+	
+	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID,boolean deduct){
+		return touristDBHandler.deductMoney(touristID, bill, transactionID,deduct);
+	}
+	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
+		return touristDBHandler.checkBalance(touristID, bill);
 	}
 }

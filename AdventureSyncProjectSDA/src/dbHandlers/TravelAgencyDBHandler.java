@@ -561,4 +561,76 @@ public class TravelAgencyDBHandler {
 		
 		return returnData;
 	}
+	
+	public ReturnObjectUtility<Float> getBill(int carID){
+	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+		 try {
+		        Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("SELECT rentalFee FROM Car WHERE carID = " + carID);
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            float priceOfSeat = rSet.getFloat("rentalFee");
+
+		            returnData.setObject(priceOfSeat);
+		            returnData.setMessage("Car bill retrieved successfully.");
+		            returnData.setSuccess(true);
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Car does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Car does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving car from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
+	
+	public ReturnObjectUtility<Float> addMoney(float bill){
+		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+		 PreparedStatement pstmt;
+		 try {
+			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT travelAgencyOwnerID FROM travelAgencyOwner)";
+		        pstmt = conn.prepareStatement(sql);
+
+		        // Set parameters
+		        pstmt.setFloat(1, bill); // Deduction amount
+
+		        // Execute the update
+		        int rowsAffected = pstmt.executeUpdate();
+
+		        if (rowsAffected > 0) {
+		            returnData.setMessage("Balance updated successfully for agency owner");
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to update balance for agency owner");
+		            returnData.setSuccess(false);
+		        }
+		        
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else {
+		                returnData.setMessage("Issue in deducting money in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+	
 }

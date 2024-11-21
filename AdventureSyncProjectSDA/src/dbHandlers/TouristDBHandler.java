@@ -188,8 +188,8 @@ public class TouristDBHandler {
 			return returnData;
 		}
 
-	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
-		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<Integer> addCarToRentedCars(int touristId,int carID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -229,6 +229,16 @@ public class TouristDBHandler {
 		        // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		        	returnData.setObject(tID); 
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+		    	
 		    	returnData.setMessage("Car rented successfully.");
 		        returnData.setSuccess(true);
 		        return returnData;
@@ -322,8 +332,8 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 
-	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
-		ReturnObjectUtility<Seat> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<Integer> addSeatToBookedSeats(int touristId,int seatID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -363,15 +373,16 @@ public class TouristDBHandler {
 		        // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		    	returnData.setMessage("Seat booked successfully.");
-		        returnData.setSuccess(true);
-		        return returnData;
-		    } else {
-		    	returnData.setMessage("Failed to book seat.");
-		        returnData.setSuccess(false);
-		        return returnData;
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		        	returnData.setObject(tID); 
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
 		    }
-
 		    } catch (SQLException e) {
 		        String errorMessage = e.getMessage().toLowerCase();
 
@@ -722,4 +733,98 @@ public class TouristDBHandler {
 
 	    return returnData;
 	}
+	
+	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID, boolean deduct){
+		 ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility<>();
+		 PreparedStatement pstmt;
+		 String sql;
+		 int rowsAffected;
+		 try {
+				 if(deduct) {				        
+				        
+					 	sql = "UPDATE account SET balance = balance - ? WHERE accountID = (SELECT accountID FROM tourist WHERE touristID = ?)";
+				        pstmt = conn.prepareStatement(sql);
+	
+				        // Set parameters
+				        pstmt.setFloat(1, bill); // Deduction amount
+				        pstmt.setInt(2, touristID); // Tourist ID
+	
+				        // Execute the update
+				        rowsAffected= pstmt.executeUpdate();
+	
+				        if (rowsAffected > 0) {
+				            returnData.setMessage("Balance updated successfully for tourist ID: " + touristID);
+				            returnData.setSuccess(true);
+				        } else {
+				            returnData.setMessage("Failed to update balance for tourist ID: " + touristID);
+				            returnData.setSuccess(false);
+				        }
+				 }
+			        
+		        sql = "UPDATE transactionHistory SET paymentStatus = ? WHERE transactionID =  ?";
+		        pstmt = conn.prepareStatement(sql);
+
+		        // Set parameters
+		        pstmt.setBoolean(1, true); 
+		        pstmt.setInt(2, transactionID); 
+
+		        // Execute the update
+		        rowsAffected = pstmt.executeUpdate();
+
+		        if (rowsAffected > 0) {
+		            returnData.setMessage("Transaction updated successfully");
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to update transaction");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else {
+		                returnData.setMessage("Issue in deducting money in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+		}
+
+	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
+		 ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<>();
+		 PreparedStatement pstmt;
+		 String sql;
+		 int rowsAffected;
+		 try {
+			 Statement stmt = conn.createStatement();
+		     ResultSet rSet=stmt.executeQuery("select balance from tourist inner join account on account.accountID=tourist.accountID where touristID=" + touristID);
+		     if(rSet.next()) {
+		        float balance= rSet.getInt("balance");
+		        if(balance<bill) {
+		        	returnData.setMessage("You do not have enough balance");
+		            returnData.setSuccess(false);
+		        }
+		     }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else {
+		                returnData.setMessage("Issue in retrieving in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+		}
+
 }

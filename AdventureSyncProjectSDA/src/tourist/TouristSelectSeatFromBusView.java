@@ -107,8 +107,8 @@ public class TouristSelectSeatFromBusView {
 			    alert.showAndWait();
 			}
 			else {
-				//mark car as rented
-				ReturnObjectUtility<Seat> returnData2=tController.addSeatToBookedSeats(touristID, seatID);
+				//add seat to booked seats
+				ReturnObjectUtility<Integer> returnData2=tController.addSeatToBookedSeats(touristID, seatID);
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -118,6 +118,12 @@ public class TouristSelectSeatFromBusView {
 				    
 				if(!success)
 					bController.updateSeatBookingStatus(seatID, false);
+				else {
+					//go to payment
+					//pass busId, nottt seatID!!
+					//pass transactionID
+					int transactionID=returnData2.getObject();
+				}
 			}
 		};
 			

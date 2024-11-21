@@ -114,5 +114,9 @@ public class Bus extends Vehicle {
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return busHandler.retrieveBusList();
 	}
+
+	public ReturnObjectUtility<Float> getBill(int busId){
+		return busHandler.getBill(busId);
+	}
 }
 

@@ -32,14 +32,15 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fill="#eddea4" layoutX="246.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fill="#eddea4" layoutX="315.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TableView fx:id="commentTable" layoutX="472.0" layoutY="178.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: F9F7F3;">
+      <TableView fx:id="commentTable" layoutX="286.0" layoutY="203.0" prefHeight="200.0" prefWidth="396.0" style="-fx-background-color: F9F7F3;">
         <columns>
-          <TableColumn fx:id="commentTable" prefWidth="199.0" text="Comments" />
+            <TableColumn minWidth="0.0" prefWidth="97.60015869140625" text="Bus ID" />
+          <TableColumn fx:id="commentTable" prefWidth="296.79998779296875" text="Comments" />
         </columns>
       </TableView>
       <Label fx:id="busesRatingLabel" layoutX="476.0" layoutY="122.0" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: F9F7F3;" text="Buses Rating" textAlignment="CENTER" textFill="#f7a072">
