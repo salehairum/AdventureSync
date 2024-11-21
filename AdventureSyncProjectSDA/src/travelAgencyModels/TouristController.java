@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
+import application.Feedback;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
@@ -21,7 +22,7 @@ public class TouristController {
 		return tourist.addTourist(newTourist);
 	}
 	
-	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+	public ReturnObjectUtility<Integer> addCarToRentedCars(int touristId,int carID){
 		return tourist.addCarToRentedCars(touristId, carID);
 	}
 	
@@ -29,7 +30,7 @@ public class TouristController {
 		return tourist.removeCarFromRentedCars(touristId, carID);
 	}
 	
-	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+	public ReturnObjectUtility<Integer> addSeatToBookedSeats(int touristId,int seatID){
 		return tourist.addSeatToBookedSeats(touristId, seatID);
 	}
 	public String[] getTouristProfileDetail(int touristId)
@@ -60,5 +61,17 @@ public class TouristController {
 	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
 		return bus.retrieveBusObject(busId);
 	}
+	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
+		return tourist.giveFeedbackToBus(feedback);
+	}
+	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
+		return tourist.giveFeedbackToRoom(feedback);
+	}
 	
+	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID,boolean deduct){
+		return tourist.deductMoney(touristID, bill, transactionID, deduct);
+	}
+	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
+		return tourist.checkBalance(touristID, bill);
+	}
 }

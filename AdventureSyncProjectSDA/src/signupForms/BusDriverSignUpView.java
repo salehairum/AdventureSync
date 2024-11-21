@@ -41,6 +41,7 @@ public class BusDriverSignUpView {
 	
 	Parent root;
 	busDriverController bController;
+	int busID;
 	
 	public BusDriverSignUpView() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/signupForms/busDriverSignup.fxml"));
@@ -119,6 +120,9 @@ public class BusDriverSignUpView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    
+			//send bus driver id 
+			int busDriverID=returnData.getObject().getBusDriverID();
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);

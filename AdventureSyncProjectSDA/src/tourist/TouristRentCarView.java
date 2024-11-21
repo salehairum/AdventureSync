@@ -100,7 +100,7 @@ public class TouristRentCarView {
 			}
 			else {
 				//mark car as rented
-				ReturnObjectUtility<Tourist> returnData2=tController.addCarToRentedCars(touristID, carID);	
+				ReturnObjectUtility<Integer> returnData2=tController.addCarToRentedCars(touristID, carID);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -111,6 +111,7 @@ public class TouristRentCarView {
 				if(!success)
 					toaController.updateCarRentalStatus(carID, false);   
 				//if transaction could not be made, set rental status as false
+				//send ahead transaction ID
 			}
 		};
 			

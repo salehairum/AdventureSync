@@ -3,10 +3,19 @@ package application;
 public class Feedback {
 	//variables
 	private int feedbackID;
+	private int serviceID;
 	private int rating;
 	private String comment;
 	private String typeOfFeedback;
-	int touristID;
+	private int touristID;
+	public Feedback(int feedbackID, int serviceID, int rating, String comment, String typeOfFeedback, int touristID) {
+	        this.feedbackID = feedbackID;
+	        this.serviceID = serviceID;
+	        this.rating = rating;
+	        this.comment = comment;
+	        this.typeOfFeedback = typeOfFeedback;
+	        this.touristID = touristID;
+	    }
 	//constructor
 	public Feedback() {
 		feedbackID = 0;
@@ -44,6 +53,13 @@ public class Feedback {
 	}
 	public void setTouristID(int touristID) {
 		this.touristID = touristID;
+	}
+
+	public int getServiceID() {
+		return serviceID;
+	}
+	public void setServiceID(int serviceID) {
+		this.serviceID = serviceID;
 	}
 
 }

@@ -22,12 +22,7 @@
                   <Image url="@../resources/credit.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="47.0" layoutY="159.0" prefHeight="53.0" prefWidth="177.0" text="Amount" textFill="#eddea4">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="amountLabel" alignment="CENTER" layoutX="271.0" layoutY="159.0" prefHeight="53.0" prefWidth="177.0" style="-fx-background-color: F9F7F3;" text="Amount" textFill="#f7a072">
+            <Label layoutX="176.0" layoutY="158.0" prefHeight="53.0" prefWidth="111.0" text="Amount:" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -47,6 +42,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Text fx:id="amountText" fill="#f9f7f3" layoutX="294.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: #f9f7f3;" text="Amount">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

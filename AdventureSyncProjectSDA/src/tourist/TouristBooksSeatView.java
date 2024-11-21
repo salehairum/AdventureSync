@@ -45,8 +45,6 @@ public class TouristBooksSeatView {
 	
 	Parent root;
 	TouristController tController;
-	travelAgencyOwnerController toaController;
-	busDriverController bController;
 	
 	public TouristBooksSeatView(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookSeat.fxml"));
@@ -65,8 +63,6 @@ public class TouristBooksSeatView {
 		listenersAssignment();
 		eventHandlersAssignment();
 		tController = new TouristController();
-		toaController = new travelAgencyOwnerController();
-		bController = new busDriverController();
 		displayOwnerDetails();
 	}
 	

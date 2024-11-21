@@ -4,10 +4,12 @@ package accountAndPersonModels;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import application.Feedback;
 import dbHandlers.BusDBHandler;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TouristDBHandler;
 import travelAgencyModels.Seat;
+import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import hotelModels.Room;
 
@@ -69,7 +71,7 @@ public class Tourist extends Person {
 		return touristDBHandler.addTourist(tourist);
 	}
 	
-	public ReturnObjectUtility<Tourist> addCarToRentedCars(int touristId,int carID){
+	public ReturnObjectUtility<Integer> addCarToRentedCars(int touristId,int carID){
 		return touristDBHandler.addCarToRentedCars(touristId, carID);
 	}
 	
@@ -77,7 +79,7 @@ public class Tourist extends Person {
 		return touristDBHandler.removeCarFromRentedCars(touristId, carID);
 	}
 	
-	public ReturnObjectUtility<Seat> addSeatToBookedSeats(int touristId,int seatID){
+	public ReturnObjectUtility<Integer> addSeatToBookedSeats(int touristId,int seatID){
 		return touristDBHandler.addSeatToBookedSeats(touristId, seatID);
 	}
 
@@ -86,12 +88,25 @@ public class Tourist extends Person {
 		ReturnObjectUtility<Tourist> returnData = touristDBHandler.retrieveTouristData(touristID);
 		return returnData;
 	}
-	
+
 	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
 		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);
 	}
 	
 	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
 		return touristDBHandler.removeRoomFromBookedRooms(touristId, roomID);
+	}
+	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
+		return touristDBHandler.giveFeedbackToBus(feedback);
+	}
+	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
+		return touristDBHandler.giveFeedbackToRoom(feedback);
+	}
+	
+	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID,boolean deduct){
+		return touristDBHandler.deductMoney(touristID, bill, transactionID,deduct);
+	}
+	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
+		return touristDBHandler.checkBalance(touristID, bill);
 	}
 }

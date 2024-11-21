@@ -19,8 +19,8 @@ public class Hotel {
 		hotelID = 0;
 		location = "";
 		rooms = null;
-		kitchen = null;
 		hotelName="";
+		kitchen=new Kitchen();
         hotelDbHandler=new HotelDBHandler();
 	}
 	public Hotel(int hotelID, String hotelName, String location, Kitchen kitchen, ArrayList<Room> rooms) {
@@ -70,5 +70,8 @@ public class Hotel {
 	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		Room room=new Room();
 		return room.updateRoomBookingStatus(roomID, bookingStatus);
+	}
+	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+		return kitchen.updateFoodQuantity(foodID, quantity, add);
 	}
 }

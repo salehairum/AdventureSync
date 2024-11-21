@@ -19,37 +19,27 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Bus;
 import travelAgencyModels.TouristController;
 
-public class touristRoomFeedbackView {
+public class TouristRatesBusView {
 	@FXML
-	private Pane sidePanel;
-	@FXML
-	private Pane mainPanel;
-	@FXML
-	private Text name;
-	@FXML
-	private Text id;
-	@FXML
-	private Text cnic;
-	@FXML
-	private Text dob;
-	@FXML
-	private TextField roomIdInput;
+	private TextField busIdInput;
 	@FXML
 	private TextField commentsInput;
 	@FXML
 	private ComboBox<String> ratingInput;
 	@FXML
-	private Button backButton;
+	private Button menuButton;
 	@FXML
 	private Button submitButton;
-	Parent root;
-	TouristController tController;
 	private int touristID;
 	
-	public touristRoomFeedbackView(int id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRoomFeedback.fxml"));
+	Parent root;
+	TouristController tController;
+	
+	public TouristRatesBusView(int id) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRatesBus.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {
@@ -59,26 +49,26 @@ public class touristRoomFeedbackView {
 		} 
 		
 	}
+
+	@FXML
+	private void initialize() {
+		listenersAssignment();
+		eventHandlersAssignment();
+		ratingInput.getItems().addAll("1", "2", "3","4","5");
+		tController = new TouristController();
+	}
 	
 	public Parent getRoot() {
 		return root;
 	}
-	@FXML
-	private void initialize() {
-		listenersAssignment();
-		tController = new TouristController();
-		ratingInput.getItems().addAll("1", "2", "3","4","5");
-		displayOwnerDetails();
-		eventHandlersAssignment();
-	}
 	
+	//assigning buttons and listeners
 	public void listenersAssignment() {
-		roomIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		busIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 		commentsInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 		ratingInput.valueProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
-	
-	
+		
 	public void eventHandlersAssignment() {
 		EventHandler<ActionEvent> submitButtonHandler=(event)->{
 			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
@@ -86,7 +76,7 @@ public class touristRoomFeedbackView {
 			
 			StringBuilder errorMessage = new StringBuilder();
 			
-			if(!isNumeric(roomIdInput.getText())) {
+			if(!isNumeric(busIdInput.getText())) {
 				alertInvalidInput.setContentText("Please enter numeric value for bus ID"); 
 				alertInvalidInput.showAndWait(); 
 				return;
@@ -94,7 +84,7 @@ public class touristRoomFeedbackView {
 
 			Feedback feedback=createFeedbackObject();
 						
-			ReturnObjectUtility<Feedback> returnData=tController.giveFeedbackToRoom(feedback);
+			ReturnObjectUtility<Feedback> returnData=tController.giveFeedbackToBus(feedback);
 			boolean success=returnData.isSuccess();
 			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 		    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -104,9 +94,10 @@ public class touristRoomFeedbackView {
 		};
 			
 		submitButton.setOnAction(submitButtonHandler);
-        // Assign handlers with parameters for specific FXMLs and classes
-		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services"));
-    }
+		menuButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class,"Menu"));
+	}
+
+	
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {
             try {
@@ -144,10 +135,10 @@ public class touristRoomFeedbackView {
 	// Feedback related methods
 	public Feedback createFeedbackObject() {
 	    // Extract input values
-	    int serviceID = Integer.parseInt(roomIdInput.getText()); // Assuming service ID corresponds to bus ID
+	    int serviceID = Integer.parseInt(busIdInput.getText()); // Assuming service ID corresponds to bus ID
 	    String comment = commentsInput.getText();
 	    int rating = Integer.parseInt(ratingInput.getValue()); // Get selected rating value from ComboBox
-	    String typeOfFeedback = "Room";
+	    String typeOfFeedback = "Bus";
 	    
 	    // Create and return the Feedback object
 	    return new Feedback(0, serviceID, rating, comment, typeOfFeedback, touristID);
@@ -157,21 +148,11 @@ public class touristRoomFeedbackView {
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 
-	        !roomIdInput.getText().trim().isEmpty()&&
+	        !busIdInput.getText().trim().isEmpty()&&
 	    !commentsInput.getText().trim().isEmpty()&&
 	    ratingInput.getValue()!=null;
 	    
 
 	    submitButton.setDisable(!allFieldsFilled);
 	}
-	
-	// Method to display profile
-    public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
-
-        name.setText(profileDetail[0]);
-        id.setText(profileDetail[1]);
-        cnic.setText(profileDetail[2]);
-        dob.setText(profileDetail[3]);
-    }
 }

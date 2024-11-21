@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="103.0" fitWidth="114.0" layoutX="42.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="32.0" layoutY="149.0" prefHeight="40.0" prefWidth="134.0" text="Tourist Account" textFill="#0fa3b1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <VBox fx:id="profile" layoutX="32.0" layoutY="213.0" prefHeight="200.0" prefWidth="134.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="166.0" text="Profile" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="name" prefHeight="40.0" prefWidth="166.0" text="Name" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ownerID" prefHeight="40.0" prefWidth="166.0" text="ID" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="40.0" prefWidth="166.0" text="Other attributes" textFill="#0fa3b1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1;">
+         <children>
+            <Label layoutX="205.0" layoutY="31.0" prefHeight="53.0" prefWidth="200.0" text="Order Food" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
+            <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="125.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/food.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="menuButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="orderButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Order" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <TableView fx:id="viewFoodTable" layoutX="94.0" layoutY="117.0" prefHeight="200.0" prefWidth="344.0" style="-fx-background-color: F9F7F3;">
+               <columns>
+                  <TableColumn prefWidth="68.0" text="Food ID" />
+                  <TableColumn prefWidth="108.0" text="Name" />
+                  <TableColumn prefWidth="82.0" text="Quantity" />
+                  <TableColumn prefWidth="85.0" text="Price" />
+               </columns>
+            </TableView>
+            <Label layoutX="92.0" layoutY="329.0" prefHeight="35.0" prefWidth="134.0" text="Enter Food ID:" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="foodIDInput" layoutX="234.0" layoutY="334.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 1234" />
+            <Label layoutX="92.0" layoutY="364.0" prefHeight="35.0" prefWidth="134.0" text="Enter Quantity:" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="foodQuanInput" layoutX="234.0" layoutY="369.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 5" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

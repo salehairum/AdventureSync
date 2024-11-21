@@ -31,11 +31,13 @@ import dbHandlers.TouristDBHandler;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import javafx.application.Application;
-import tourist.TouristRatesBusTourView;
+import tourist.TouristRatesBusView;
 import tourist.TouristRentCarView;
 import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
+import tourist.TouristSelectsFoodFromMenuView;
+import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -47,6 +49,8 @@ import tourist.TouristBooksSeatView;
 import tourist.TouristDeletesAccountView;
 import tourist.TouristChecksOutRoomView;
 import tourist.TouristMenuView;
+import tourist.TouristOrdersFoodView;
+import tourist.TouristPaymentView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
 import travelAgencyOwner.TravelAgencyManageAccountView;
@@ -70,7 +74,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -86,6 +90,7 @@ public class Main extends Application {
 //			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
+
 
 			TravelAgencyViewBusesView hotelOwnerMenu = new TravelAgencyViewBusesView();
 	

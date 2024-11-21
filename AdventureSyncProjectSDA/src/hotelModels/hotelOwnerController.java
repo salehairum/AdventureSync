@@ -36,4 +36,8 @@ public class hotelOwnerController
     public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		return hotel.updateRoomBookingStatus(roomID, bookingStatus);
 	}
+    
+    public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+		return hotel.updateFoodQuantity(foodID, quantity, add);
+	}
 }

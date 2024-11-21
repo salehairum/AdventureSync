@@ -79,4 +79,11 @@ public class TravelAgencyOwner extends Person {
 		return car.updateCarRentalStatus(carID, rentalStatus);
 
 	}
+
+	public ReturnObjectUtility<Float> getBill(int carID){
+		return car.getBill(carID);
+	}
+	public ReturnObjectUtility<Float> addMoney(float bill){
+		return car.addMoney(bill);
+	}
 }

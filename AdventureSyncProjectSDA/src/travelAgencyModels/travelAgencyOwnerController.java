@@ -66,5 +66,13 @@ public class travelAgencyOwnerController {
 	public ReturnListUtility<Bus> getBusDetails() {
 	    // Call the TravelAgencyOwner to fetch car details
 		return travelAgencyOwner.getAllBus();
+  }
+	
+
+	public ReturnObjectUtility<Float> getBill(int carID){
+		return travelAgencyOwner.getBill(carID);
+	}
+	public ReturnObjectUtility<Float> addMoney(float bill){
+		return travelAgencyOwner.addMoney(bill);
 	}
 }

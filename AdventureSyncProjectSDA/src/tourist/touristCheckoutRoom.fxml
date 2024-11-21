@@ -51,8 +51,8 @@
                   <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
                   <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
                   <TableColumn prefWidth="141.60003662109375" style="-fx-background-color: #F9F7F3;" text="Description" />
-                  <TableColumn prefWidth="70.40008544921875" text="Hotel ID" />
-                  <TableColumn prefWidth="127.199951171875" text="Hotel Name" />
+                  <TableColumn prefWidth="70.40008544921875" style="-fx-background-color: #f9f7f3;" text="Hotel ID" />
+                  <TableColumn prefWidth="127.199951171875" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
                </columns>
             </TableView>
          </children>
