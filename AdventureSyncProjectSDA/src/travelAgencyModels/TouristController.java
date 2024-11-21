@@ -46,7 +46,7 @@ public class TouristController {
         return profileDetails;
     }
 	
-	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+	public ReturnObjectUtility<Integer> addRoomToBookedRooms(int touristId,int roomID){
 		return tourist.addRoomToBookedRooms(touristId, roomID);
 	}
 	

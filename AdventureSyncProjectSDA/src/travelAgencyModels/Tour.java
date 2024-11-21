@@ -1,9 +1,11 @@
 package travelAgencyModels;
 
-import java.sql.Date;
-
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
+
+import java.util.Date;
+
+import dbHandlers.BusDBHandler;
 
 public class Tour {
 	protected int tourID;
@@ -12,6 +14,12 @@ public class Tour {
 	protected Date date;
 	private int busID;	//id of the bus to which this tour is assigned
 	private TravelAgencyDBHandler travelAgencyDBHandler;
+	private BusDBHandler busDBHandler;
+	
+	public Tour() {
+		busDBHandler = new BusDBHandler();
+		travelAgencyDBHandler=new TravelAgencyDBHandler();
+	}
 	
 	public Tour(int tourID, String origin, String destination, Date date, int busID) {
         this.tourID = tourID;
@@ -20,6 +28,7 @@ public class Tour {
         this.date = date;
         this.busID = busID;
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
+		busDBHandler=new BusDBHandler();
     }
 	//getters and setters
 	public int getBusID() {
@@ -56,5 +65,9 @@ public class Tour {
 	//assign tour to bus
 	public ReturnObjectUtility<Tour> assignTour(Tour tour){
 		return travelAgencyDBHandler.assignTour(tour);
+	}
+	
+	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
+		return busDBHandler.retrieveTourID(busDriverID);
 	}
 }

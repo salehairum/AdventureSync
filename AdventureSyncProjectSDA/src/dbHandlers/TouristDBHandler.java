@@ -377,6 +377,8 @@ public class TouristDBHandler {
 		        if (rs.next()) {
 		        	int tID = rs.getInt(1);
 		        	returnData.setObject(tID); 
+					 returnData.setMessage("Retrieved generated Transaction ID.");
+			         returnData.setSuccess(true);
 		        } else {
 		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
 		            returnData.setSuccess(false);
@@ -400,8 +402,8 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 
-	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
-		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<Integer> addRoomToBookedRooms(int touristId,int roomID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -441,13 +443,17 @@ public class TouristDBHandler {
 		        // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		    	returnData.setMessage("Room booked successfully.");
-		        returnData.setSuccess(true);
-		        return returnData;
-		    } else {
-		    	returnData.setMessage("Failed to book room.");
-		        returnData.setSuccess(false);
-		        return returnData;
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		            returnData.setMessage("Successfully retrieved generated Transaction ID.");
+		        	returnData.setObject(tID); 
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
 		    }
 
 		    } catch (SQLException e) {
@@ -740,15 +746,15 @@ public class TouristDBHandler {
 		 String sql;
 		 int rowsAffected;
 		 try {
-				 if(deduct) {				        
-				        
+				 if(deduct) {		
+				     
 					 	sql = "UPDATE account SET balance = balance - ? WHERE accountID = (SELECT accountID FROM tourist WHERE touristID = ?)";
 				        pstmt = conn.prepareStatement(sql);
 	
 				        // Set parameters
 				        pstmt.setFloat(1, bill); // Deduction amount
 				        pstmt.setInt(2, touristID); // Tourist ID
-	
+;				        
 				        // Execute the update
 				        rowsAffected= pstmt.executeUpdate();
 	
@@ -771,10 +777,7 @@ public class TouristDBHandler {
 		        // Execute the update
 		        rowsAffected = pstmt.executeUpdate();
 
-		        if (rowsAffected > 0) {
-		            returnData.setMessage("Transaction updated successfully");
-		            returnData.setSuccess(true);
-		        } else {
+		        if (rowsAffected <= 0) {
 		            returnData.setMessage("Failed to update transaction");
 		            returnData.setSuccess(false);
 		        }
@@ -808,6 +811,10 @@ public class TouristDBHandler {
 		        if(balance<bill) {
 		        	returnData.setMessage("You do not have enough balance");
 		            returnData.setSuccess(false);
+		        }
+		        else {
+		        	returnData.setMessage("Transac");
+		            returnData.setSuccess(true);
 		        }
 		     }
 		    } catch (SQLException e) {

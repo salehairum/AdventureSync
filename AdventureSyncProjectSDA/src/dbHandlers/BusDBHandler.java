@@ -19,6 +19,8 @@ import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
+import travelAgencyModels.Tour;
+
 
 public class BusDBHandler {
 	static private Connection conn;
@@ -263,7 +265,6 @@ public class BusDBHandler {
 	    return returnData;
 	}
 
-	
 	public ReturnListUtility<Bus> retrieveBusList() {
 		ReturnListUtility<Bus> returnData=new ReturnListUtility();
 		
@@ -445,8 +446,99 @@ public class BusDBHandler {
 		    }
 		    return returnData;
 	}
+
+	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
+	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
+		 try {
+		        Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("select tourID from tour inner join BusDriverDrivesBus on BusDriverDrivesBus.busID=tour.busID where busDriverID=" + busDriverID);
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            int tourID = rSet.getInt("tourID");
+
+		            returnData.setObject(tourID);
+		            returnData.setMessage("Tour retrieved successfully.");
+		            returnData.setSuccess(true);
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Tour does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Tour does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving tour from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
 	
-	
+	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
+	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<>();
+	    try {
+	        // Step 1: Retrieve the Bus ID associated with the tour
+	        String busIDQuery = "SELECT busID, date FROM tour WHERE tourID = ?";
+	        PreparedStatement pstmt = conn.prepareStatement(busIDQuery);
+	        pstmt.setInt(1, tourID);
+	        ResultSet rSet = pstmt.executeQuery();
+	        
+	        if (!rSet.next()) {
+	            returnData.setMessage("Error: The tour does not exist.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+	        
+	        int busID = rSet.getInt("busID");
+	        LocalDate tourDate = rSet.getDate("date").toLocalDate();
+
+	        if (tourDate.isAfter(LocalDate.now())) {
+	            returnData.setMessage("Error: The tour date is in the future. Cannot complete the tour.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+
+	        String updateBusQuery = "UPDATE Bus SET hasTour = 0 WHERE busID = ?";
+	        pstmt = conn.prepareStatement(updateBusQuery);
+	        pstmt.setInt(1, busID);
+	        int rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected <= 0) {
+	            returnData.setMessage("Error: Unable to update Bus information.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        } 
+	        
+	        String deleteQuery = "DELETE FROM tour WHERE tourID = ?";
+	        pstmt = conn.prepareStatement(deleteQuery);
+	        pstmt.setInt(1, tourID);
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Tour with ID " + tourID + " completed successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Tour could not be completed.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
+	            returnData.setMessage("Error: Cannot delete tour as it is referenced in rental records. Remove related records first.");
+	        } else {
+	            returnData.setMessage("Issue in completing the tour: " + e.getMessage());
+	        }
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+
 	//bus driver related functions
 	public static ReturnObjectUtility<BusDriver> retrieveBusDriverData(int busDriverID) {
 			ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility();

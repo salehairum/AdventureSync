@@ -516,13 +516,25 @@ public class TravelAgencyDBHandler {
 		
 		PreparedStatement pstmt;
 		try {
+			
+			String checkBusSql = "SELECT hasTour FROM Bus WHERE busID = ?";
+	        pstmt = conn.prepareStatement(checkBusSql);
+	        pstmt.setInt(1, tour.getBusID());
+
+	        ResultSet rs = pstmt.executeQuery();
+	        if (rs.next() && rs.getBoolean("hasTour")) {
+	            returnData.setMessage("The bus already has a tour assigned.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        }
+	        
 			 String sql = "INSERT INTO Tour (origin, destination, date, busID) VALUES (?, ?, ?, ?);";
 			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			// Set parameters
 			pstmt.setString(1, tour.getOrigin());      // Set the origin
 			pstmt.setString(2, tour.getDestination()); // Set the destination
-			pstmt.setDate(3, new java.sql.Date(tour.getDate().getTime())); // Set the date (ensure it's a java.util.Date object)
+			pstmt.setDate(3, new Date(tour.getDate().getTime())); // Set the date (ensure it's a java.util.Date object)
 			pstmt.setInt(4, tour.getBusID());          // Set the bus ID
 
 			// Execute the insert
@@ -542,6 +554,18 @@ public class TravelAgencyDBHandler {
 				 returnData.setMessage("Failed to add tour.");
                  returnData.setSuccess(false);
 			 }
+			
+
+	        String updateBusQuery = "UPDATE Bus SET hasTour = 1 WHERE busID = ?";
+	        pstmt = conn.prepareStatement(updateBusQuery);
+	        pstmt.setInt(1, tour.getBusID());
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected <= 0) {
+	            returnData.setMessage("Error: Unable to update Bus information.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        } 
 			 
 		} catch (SQLException e) {
 			String errorMessage = e.getMessage().toLowerCase();

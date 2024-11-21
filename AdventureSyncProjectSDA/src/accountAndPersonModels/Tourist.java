@@ -89,7 +89,7 @@ public class Tourist extends Person {
 		return returnData;
 	}
 
-	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
+	public ReturnObjectUtility<Integer> addRoomToBookedRooms(int touristId,int roomID){
 		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);
 	}
 	

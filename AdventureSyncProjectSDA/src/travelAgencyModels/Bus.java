@@ -22,6 +22,7 @@ public class Bus extends Vehicle {
 		super();
 		seats=new HashMap<Integer, Seat>();
 		busHandler=new BusDBHandler();
+		tour=new Tour();
 	}
 	
 	public Bus(int id, String brand, String model, int year, String plateNumber,HashMap<Integer, Seat> seats, int noOfSeats, int noOfRows, float priceOfSeats, boolean hasTour, Tour tour) {
@@ -47,6 +48,7 @@ public class Bus extends Vehicle {
 		this.hasTour = false;
 		this.noOfRows = noOfRows;
 		this.seats = seats;
+		tour=new Tour();
 		
 		busHandler=new BusDBHandler();
 	}
@@ -117,6 +119,10 @@ public class Bus extends Vehicle {
 
 	public ReturnObjectUtility<Float> getBill(int busId){
 		return busHandler.getBill(busId);
+	}
+	
+	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
+		return tour.retrieveTourID(busDriverID);
 	}
 }
 

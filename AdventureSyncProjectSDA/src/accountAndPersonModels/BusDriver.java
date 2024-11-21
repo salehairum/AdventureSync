@@ -45,4 +45,8 @@ public class BusDriver extends Person {
 	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
 		return busDBHandler.addMoney(busId, bill);
 	}
+	
+	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
+		return busDBHandler.completeTour(tourID);
+	}
 }
