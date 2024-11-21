@@ -49,4 +49,12 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
 		return hotelDBHandler.addMoney(roomID, bill);
 	}
+	
+	public ReturnObjectUtility<Integer> getHotelID(int hotelOwnerID){
+		return hotelDBHandler.getHotelID(hotelOwnerID);
+	}
+	
+	public ReturnObjectUtility<Boolean> addRoom(Room room) {
+		return room.addRoom(room);
+	}
 }

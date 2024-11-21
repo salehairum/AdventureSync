@@ -18,6 +18,13 @@ public class FoodItem {
 		price = 0;
         hotelDbHandler=new HotelDBHandler();
 	}
+	public FoodItem(int foodID, String name, int quantity, float price) {
+        this.foodID = foodID;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.hotelDbHandler = new HotelDBHandler(); // Initialize database handler
+    }
 	//getter and setter
 	public int getFoodID() {
 		return foodID;
@@ -45,5 +52,8 @@ public class FoodItem {
 	}
 	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotelDbHandler.updateFoodQuantity(foodID, quantity, add);
+	}
+	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
+		return hotelDbHandler.addFoodItem(foodItem, hotelID);
 	}
 }

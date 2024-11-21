@@ -38,7 +38,10 @@ public class HotelDBHandler {
 		HotelDBHandler.conn = conn;
 	}
 	//room related functions
-	public String addRoom(Room room) {
+	
+	//hotel owner related functions
+	public ReturnObjectUtility<Boolean> addRoom(Room room) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		PreparedStatement pstmt;
 		try {
 			 String sql = "INSERT INTO Room (hotelID, rDescription, pricePerNight) VALUES (?, ?, ?);";
@@ -55,14 +58,16 @@ public class HotelDBHandler {
 			 if (rowsAffected > 0) {
 				 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
 		                if (generatedKeys.next()) {
-		                    int newRoomId = generatedKeys.getInt(1);
-		                    return "Car added successfully with ID: " + newRoomId;
+		                    int newCarId = generatedKeys.getInt(1);
+		                    returnData.setMessage("Room added successfully with ID: " + newCarId);
 		                } else {
-		                    return "Car added, but ID retrieval failed.";
+		                	returnData.setMessage("Room added, but ID retrieval failed.");
 		                }
 		            }
+                 returnData.setSuccess(true);
 			 } else {
-				 return "Failed to add car.";
+				 returnData.setMessage("Failed to add room.");
+                 returnData.setSuccess(false);
 			 }
 			 
 		} catch (SQLException e) {
@@ -70,17 +75,19 @@ public class HotelDBHandler {
 			
 			if (errorMessage != null) {
 		        if (errorMessage.contains("foreign key constraint")) {
-		            return "Error: Invalid reference. Check if the related data exists.";
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 		        } else {
-		            return "Issue in adding room to db: " + errorMessage;
+		        	returnData.setMessage("Issue in adding room to db: " + errorMessage);
 		        }
 		    } else {
-		        return "An unknown error occurred.";
+		    	returnData.setMessage("An unknown error occurred.");
 		    }
+
+            returnData.setSuccess(false);
 		}
+		return returnData;
 	}
 	
-	//hotel owner related functions
 	public static ReturnObjectUtility<HotelOwner> retrieveHotelOwnerData(int hotelOwnerID) {
 		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility();
 		
@@ -424,5 +431,104 @@ public class HotelDBHandler {
 		    return returnData;
 	}
 	
+	public ReturnObjectUtility<Integer> getHotelID(int hotelOwnerID){
+	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
+		 try {
+		        Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("select hotelId from HotelOwnerOwnsHotel where hotelOwnerID=" + hotelOwnerID);
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            int hotelID= rSet.getInt("hotelID");
 
+		            returnData.setObject(hotelID);
+		            returnData.setMessage("HotelID retrieved successfully.");
+		            returnData.setSuccess(true);
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Hotel does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Hotel does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving Hotel from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
+	
+	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
+	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();
+	    PreparedStatement pstmt;
+	    try {
+	        String sql = "INSERT INTO FoodItem (fname, quantity, price) VALUES (?, ?, ?);";
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+	        // Set parameters
+	        pstmt.setString(1, foodItem.getName());
+	        pstmt.setInt(2, foodItem.getQuantity());
+	        pstmt.setFloat(3, foodItem.getPrice());
+
+	        // Execute the insert into the Food table
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+	                if (generatedKeys.next()) {
+	                    int newFoodID = generatedKeys.getInt(1);
+	                    returnData.setMessage("Food item added successfully with ID: " + newFoodID);
+
+	                    String kitchenCheckSql = "SELECT kitchenID FROM HotelHasKitchen WHERE hotelID = ?;";
+	                    pstmt = conn.prepareStatement(kitchenCheckSql);
+	                    pstmt.setInt(1, hotelID);
+	                    ResultSet kitchenResult = pstmt.executeQuery();
+
+	                    if (kitchenResult.next()) {
+	                        String insertKitchenHasFoodSql = "INSERT INTO KitchenHasFood (kitchenID, foodID) VALUES (?, ?);";
+	                        pstmt = conn.prepareStatement(insertKitchenHasFoodSql);
+	                        pstmt.setInt(1, kitchenResult.getInt("kitchenID"));
+	                        pstmt.setInt(2, newFoodID);
+	                        pstmt.executeUpdate();
+	                        returnData.setSuccess(true);
+	                    } else {
+	                        returnData.setMessage("Error: Hotel does not have a kitchen.");
+	                        returnData.setSuccess(false);
+	                    }
+	                } else {
+	                    returnData.setMessage("Food item added, but ID retrieval failed.");
+	                    returnData.setSuccess(false);
+	                }
+	            }
+	        } else {
+	            returnData.setMessage("Failed to add food item.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            } else {
+	                returnData.setMessage("Issue in adding food item to db: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+
+	
+	
 }

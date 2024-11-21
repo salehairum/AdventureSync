@@ -8,13 +8,16 @@ public class Kitchen {
 	//variables
 	private int kitchenID;
 	private ArrayList<FoodItem> menu;
+	private FoodItem food;
 	//constructor
 	public Kitchen() {
 		menu = null;
+		food=new FoodItem();
 	}
 	public Kitchen(int kitchenID) {
 		this.kitchenID=kitchenID;
 		menu = null;
+		food=new FoodItem();
 	}
 	
 	//getter and setter
@@ -32,8 +35,10 @@ public class Kitchen {
 		this.kitchenID = kitchenID;
 	}
 	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
-		FoodItem food=new FoodItem();
 		return food.updateFoodQuantity(foodID, quantity, add);
+	}
+	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
+		return food.addFoodItem(foodItem, hotelID);
 	}
 }
 

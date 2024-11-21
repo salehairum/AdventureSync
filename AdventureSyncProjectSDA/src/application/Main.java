@@ -102,7 +102,7 @@ public class Main extends Application {
 			Bus bus=bdb.retrieveBusObject(15).getObject();
 				
 			
-			TravelAgencyOwnerAssignsTourToBusView hotelOwnerMenu = new TravelAgencyOwnerAssignsTourToBusView();
+			HOMAddFood hotelOwnerMenu = new HOMAddFood(1);
 		//	TouristSelectRoomFromHotelView hotelOwnerMenu=new TouristSelectRoomFromHotelView(2, hotel);
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

@@ -90,4 +90,7 @@ public class Room {
 	public ReturnObjectUtility<Float> getBill(int roomID){
 		return hotelDbHandler.getBill(roomID);
 	}
+	public ReturnObjectUtility<Boolean> addRoom(Room room) {
+		return hotelDbHandler.addRoom(room);
+	}
 }
