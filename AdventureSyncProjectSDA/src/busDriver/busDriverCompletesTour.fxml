@@ -47,7 +47,11 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Text fx:id="tourIDText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="tourIDText" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="69.0" prefWidth="500.0">
