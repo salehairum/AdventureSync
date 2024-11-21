@@ -74,8 +74,12 @@ public class Car extends Vehicle{
 	public ReturnListUtility<Car> retrieveCarList() {
 		return travelAgencyDBHandler.retrieveCarList();
 	}
-	
-
+	public ReturnListUtility<Car> retrieveNotRentedCarList() {
+		return travelAgencyDBHandler.retrieveNotRentedCarList();
+	}
+	public ReturnListUtility<Car> retrieveTouristRentedCarList(int touristID) {
+		return travelAgencyDBHandler.retrieveTouristRentedCarList(touristID);
+	}
 	public ReturnObjectUtility<Float> getBill(int carID){
 		return travelAgencyDBHandler.getBill(carID);
 	}

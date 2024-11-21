@@ -63,9 +63,17 @@ public class travelAgencyOwnerController {
 	    // Call the TravelAgencyOwner to fetch car details
 		return travelAgencyOwner.getAllCars();
 	}
-	public ReturnListUtility<Bus> getBusDetails() {
+	public ReturnListUtility<Car> getNotRentedCarDetails() {
 	    // Call the TravelAgencyOwner to fetch car details
-		return travelAgencyOwner.getAllBus();
+		return travelAgencyOwner.getAllNotRentedCars();
+	}
+	public ReturnListUtility<Car> getTouristRentedCarDetails(int touristID) {
+	    // Call the TravelAgencyOwner to fetch car details
+		return travelAgencyOwner.getAllTouristRentedCars(touristID);
+	}
+	public ReturnListUtility<Bus> getBusDetailsWithBusDriverID() {
+	    // Call the TravelAgencyOwner to fetch car details
+		return travelAgencyOwner.getAllBusWithBusDriverID();
   }
 	
 

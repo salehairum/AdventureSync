@@ -24,7 +24,7 @@
                   <Image url="@../resources/car.png" />
                </image>
             </ImageView>
-            <Button fx:id="menuButton" layoutX="345.0" layoutY="427.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="345.0" layoutY="427.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

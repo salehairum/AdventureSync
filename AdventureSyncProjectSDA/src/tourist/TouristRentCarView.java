@@ -5,7 +5,10 @@ import java.time.LocalDate;
 
 import accountAndPersonModels.Account;
 import accountAndPersonModels.Tourist;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,8 +17,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -39,6 +45,10 @@ public class TouristRentCarView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private TableView<Car> carTable;
+	@FXML
+	private TableColumn<Car, String> colCarId, colModel, colBrand, colYear, colPlateNo, colRentalFee, colCost;
 	private int touristID;
 	
 	Parent root;
@@ -53,8 +63,7 @@ public class TouristRentCarView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
+		}
 	}
 	@FXML
 	private void initialize() {
@@ -63,6 +72,7 @@ public class TouristRentCarView {
 		tController = new TouristController();
 		toaController = new travelAgencyOwnerController();
 		displayOwnerDetails();
+		loadCarTable();
 	}
 	
 	public Parent getRoot() {
@@ -167,5 +177,28 @@ public class TouristRentCarView {
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
+    }
+    public void loadCarTable() {
+        // Initialize table columns
+        colCarId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colModel.setCellValueFactory(new PropertyValueFactory<>("Model"));
+        colBrand.setCellValueFactory(new PropertyValueFactory<>("Brand"));
+        colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
+        colPlateNo.setCellValueFactory(new PropertyValueFactory<>("PlateNumber"));
+        colRentalFee.setCellValueFactory(new PropertyValueFactory<>("RentalFee"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("CostPerKm"));
+
+        // Get car details from the controller
+        ReturnListUtility<Car> returnData = toaController.getNotRentedCarDetails();
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Car> carList = FXCollections.observableArrayList(returnData.getList().values());
+            carTable.setItems(carList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading cars: " + returnData.getMessage());
+            carTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
     }
 }

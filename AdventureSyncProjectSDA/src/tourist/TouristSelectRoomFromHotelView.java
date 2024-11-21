@@ -2,10 +2,13 @@ package tourist;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,8 +17,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,6 +43,11 @@ public class TouristSelectRoomFromHotelView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private TableView<Room> roomTable;
+	@FXML
+	private TableColumn<Room, String> colRoomId, colRating, colPrice, colDesc;
+	
 	private int touristID;
 	
 	Parent root;
@@ -65,6 +76,7 @@ public class TouristSelectRoomFromHotelView {
 		tController = new TouristController();
 		hController = new hotelOwnerController();
 		displayOwnerDetails();
+		loadRoomTable();
 	}
 	
 	public Parent getRoot() {
@@ -114,6 +126,7 @@ public class TouristSelectRoomFromHotelView {
 				    
 				if(!success)
 					hController.updateRoomBookingStatus(roomID, false);
+					
 			}
 		};
 			
@@ -170,5 +183,23 @@ public class TouristSelectRoomFromHotelView {
 
 	   bookButton.setDisable(!allFieldsFilled);
 	}
-	
+	public void loadRoomTable() {
+        // Initialize table columns
+    	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomID"));
+    	colRating.setCellValueFactory(new PropertyValueFactory<>("OverallRating"));
+    	colPrice.setCellValueFactory(new PropertyValueFactory<>("PricePerNight"));
+    	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        // Get car details from the controller
+        ReturnListUtility<Room> returnData = tController.getRoomDetails(hotel.getHotelID());
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Room> roomList = FXCollections.observableArrayList(returnData.getList().values());
+            roomTable.setItems(roomList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            roomTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
 }

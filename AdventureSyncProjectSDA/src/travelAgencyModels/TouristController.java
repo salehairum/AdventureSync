@@ -5,18 +5,26 @@ import java.time.LocalDate;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
 import application.Feedback;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
+import hotelModels.RoomWithHotel;
 
 public class TouristController {
 	Tourist tourist;
 	Hotel hotel;
 	Bus bus;
+	Seat seat;
+	Room room;
+	RoomWithHotel roomWithHotel;
 	public TouristController() {
 		tourist=new Tourist();
 		hotel=new Hotel();
 		bus=new Bus();
+		seat=new Seat();
+		room = new Room();
+		roomWithHotel = new RoomWithHotel();
 	}
 	public ReturnObjectUtility<Tourist> addTourist(Tourist newTourist){
 		return tourist.addTourist(newTourist);
@@ -60,6 +68,21 @@ public class TouristController {
 
 	public ReturnObjectUtility<Bus> retrieveBusObject(int busId) {
 		return bus.retrieveBusObject(busId);
+	}
+	public ReturnListUtility<Bus> getBusDetailsWithBusDriverID() {
+		return bus.retrieveBusListWithBusDriverID();
+	}
+	public ReturnListUtility<Seat> getSeatDetails(int busID) {
+		return seat.getSeatDetails(busID);
+	}
+	public ReturnListUtility<Hotel> getHotelDetails() {
+		return hotel.getHotelDetails();
+	}
+	public ReturnListUtility<Room> getRoomDetails(int hotelID) {
+		return room.getRoomDetails(hotelID);
+	}
+	public ReturnListUtility<RoomWithHotel> getBookedRoomDetails(int touristID) {
+		return roomWithHotel.getBookedRoomDetails(touristID);
 	}
 	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
 		return tourist.giveFeedbackToBus(feedback);

@@ -40,4 +40,5 @@ public class hotelOwnerController
     public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotel.updateFoodQuantity(foodID, quantity, add);
 	}
+    
 }

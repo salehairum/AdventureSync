@@ -74,7 +74,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -92,7 +92,7 @@ public class Main extends Application {
 //			
 
 
-			TravelAgencyViewBusesView hotelOwnerMenu = new TravelAgencyViewBusesView();
+			TouristChecksOutRoomView hotelOwnerMenu = new TouristChecksOutRoomView(1);
 	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
