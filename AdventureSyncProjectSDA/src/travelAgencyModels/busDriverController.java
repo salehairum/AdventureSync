@@ -60,4 +60,12 @@ public class busDriverController {
 	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
 		return bus.retrieveSeatObject(seatId, busId);
 	}
+	
+	public ReturnObjectUtility<Float> getBill(int busId){
+		return bus.getBill(busId);
+	}
+	
+	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
+		return busDriver.addMoney(busId, bill);
+	}
 }

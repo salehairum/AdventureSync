@@ -42,4 +42,7 @@ public class BusDriver extends Person {
 		return busDBHandler.addBusDriver(bDriver);
 	}
 	
+	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
+		return busDBHandler.addMoney(busId, bill);
+	}
 }

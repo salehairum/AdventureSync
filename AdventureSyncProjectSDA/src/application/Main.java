@@ -37,6 +37,7 @@ import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import tourist.TouristSelectsFoodFromMenuView;
+import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -49,6 +50,7 @@ import tourist.TouristDeletesAccountView;
 import tourist.TouristChecksOutRoomView;
 import tourist.TouristMenuView;
 import tourist.TouristOrdersFoodView;
+import tourist.TouristPaymentView;
 import travelAgencyOwner.TravelAgencyAddCarView;
 import travelAgencyOwner.TravelAgencyDeleteCarsView;
 import travelAgencyOwner.TravelAgencyManageAccountView;
@@ -88,8 +90,9 @@ public class Main extends Application {
 //			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
-			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
-			TouristRatesBusView hotelOwnerMenu = new TouristRatesBusView(3);
+			Bus bus=bdb.retrieveBusObject(20).getObject();
+			
+			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(3, 3, "Rent",2);
 	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

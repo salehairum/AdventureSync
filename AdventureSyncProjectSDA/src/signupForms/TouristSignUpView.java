@@ -118,6 +118,9 @@ public class TouristSignUpView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    
+			//pass this id
+			int touristID=returnData.getObject().getTouristID();
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);
