@@ -2,6 +2,7 @@ package travelAgencyOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnListUtility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -10,12 +11,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Bus;
+import travelAgencyModels.Car;
 import travelAgencyModels.travelAgencyOwnerController;
 
 public class TravelAgencyViewBusesView {
@@ -37,6 +42,10 @@ public class TravelAgencyViewBusesView {
 	private Button deleteButton;
 	@FXML 
 	private Button backButton;
+	@FXML
+	private TableView<Bus> carTable;
+	@FXML
+	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo, colDriverID, colHasTour;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
@@ -58,6 +67,7 @@ public class TravelAgencyViewBusesView {
 		taoController = new travelAgencyOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadBusTable();
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
@@ -99,5 +109,29 @@ public class TravelAgencyViewBusesView {
                 e.printStackTrace();
             }
         };
+    }
+    
+    public void loadBusTable() {
+        // Initialize table columns
+        colBusId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colModel.setCellValueFactory(new PropertyValueFactory<>("Model"));
+        colBrand.setCellValueFactory(new PropertyValueFactory<>("Brand"));
+        colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
+        colPlateNo.setCellValueFactory(new PropertyValueFactory<>("PlateNumber"));
+        colDriverID.setCellValueFactory(new PropertyValueFactory<>("driverID")); //yeh yahan masla karay gaa i think
+        colHasTour.setCellValueFactory(new PropertyValueFactory<>("Tour"));
+
+        // Get car details from the controller
+        ReturnListUtility<Bus> returnData = taoController.getBusDetails();
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Bus> busList = FXCollections.observableArrayList(returnData.getList().values());
+            carTable.setItems(busList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            carTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
     }
 }

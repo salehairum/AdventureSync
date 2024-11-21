@@ -90,9 +90,9 @@ public class Main extends Application {
 //			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
 //			Parent root = hotelOwnerMenu.getRoot();
 //			
-			Bus bus=bdb.retrieveBusObject(20).getObject();
-			
-			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(3, 3, "Rent",2);
+
+
+			TravelAgencyViewBusesView hotelOwnerMenu = new TravelAgencyViewBusesView();
 	
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
