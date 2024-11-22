@@ -29,6 +29,7 @@ public class Hotel {
 		this.hotelID = hotelID;
 		this.hotelName = hotelName;
 		this.location = location;
+        hotelDbHandler=new HotelDBHandler();
 	}
 	public Hotel(int hotelID, String hotelName, String location, Kitchen kitchen, ArrayList<Room> rooms) {
 	        this.hotelID = hotelID;
@@ -83,5 +84,8 @@ public class Hotel {
 	}
 	public ReturnListUtility<Hotel> getHotelDetails() {
 		return hotelDbHandler.retrieveHotelList();
+	}
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
+		return hotelDbHandler.addHotel(hotel, hotelOwnerID);
 	}
 }

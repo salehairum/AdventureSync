@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="userNameInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="209.0" promptText="e.g Cathe" />
+                  <TextField fx:id="usernameInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="209.0" promptText="e.g Cathe" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="61.0" layoutY="202.0" prefHeight="87.0" prefWidth="397.0">

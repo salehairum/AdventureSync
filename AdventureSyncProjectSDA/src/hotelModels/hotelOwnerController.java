@@ -60,4 +60,13 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
 		return kitchen.getFoodBill(foodID, quantity);
 	}
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return kitchen.getHotelOwnerID(foodID);
+	}
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
+		return hotelOwner.addHotel(hotel, hotelOwnerID);
+	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return hotelOwner.checkPassword(enteredPassword, username);
+	}
 }

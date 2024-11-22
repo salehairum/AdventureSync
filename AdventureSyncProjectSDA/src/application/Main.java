@@ -13,6 +13,7 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import busDriver.BusDriverViewBusDetailsView;
+import busDriver.busDriverLogin;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
 import hotelOwner.HOMDeleteFood;
@@ -25,6 +26,7 @@ import hotelOwner.HOMUpdateFood;
 import hotelOwner.HOMUpdateHotel;
 import hotelOwner.HOMUpdateRoom;
 import hotelOwner.HotelOwnerMenuView;
+import hotelOwner.hotelOwnerLogin;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
@@ -38,6 +40,7 @@ import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import tourist.TouristSelectsFoodFromMenuView;
+import tourist.touristLogin;
 import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
@@ -64,6 +67,7 @@ import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
 import signupForms.BusDriverSignUpView;
+import signupForms.HotelOwnerAddsHotel;
 import signupForms.TouristSignUpView;
 import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
@@ -98,7 +102,7 @@ public class Main extends Application {
 	
  		//	TouristSelectRoomFromHotelView
  			//TouristChecksOutRoomView
- 			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(1,1,"Room", 33,0);
+ 			hotelOwnerLogin hotelOwnerMenu = new hotelOwnerLogin();
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

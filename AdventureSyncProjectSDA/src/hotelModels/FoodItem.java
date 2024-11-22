@@ -59,4 +59,7 @@ public class FoodItem {
 	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
 		return hotelDbHandler.getFoodBill(foodID, quantity);
 	}
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return hotelDbHandler.getHotelOwnerID(foodID);
+	}
 }

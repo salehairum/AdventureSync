@@ -89,11 +89,27 @@ public class TouristSelectsFoodFromMenuView {
 
 			ReturnObjectUtility<FoodItem> returnData= hController.updateFoodQuantity(foodID, foodQuantity, false);
 			boolean success=returnData.isSuccess();
-			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-		    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-		    alert.setHeaderText(null);
-		    alert.setContentText(returnData.getMessage());
-		    alert.showAndWait();
+			if(!success) {
+				Alert alert = new Alert(AlertType.ERROR);
+			    alert.setTitle("Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+			}
+			else {
+				//add to transaction history
+				ReturnObjectUtility<Integer> returnData2=tController.orderFood(touristID, foodID);
+				success=returnData2.isSuccess();
+				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+				    alert.setHeaderText(null);
+				    alert.setContentText(returnData2.getMessage());
+				    alert.showAndWait();
+				    
+				if(success) {
+					int transactionID=returnData2.getObject();
+				}
+			}
 		};
 			
 		orderButton.setOnAction(orderButtonHandler);
