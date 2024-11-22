@@ -2,17 +2,22 @@ package busDriver;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnObjectUtility;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Bus;
 import travelAgencyModels.busDriverController;
 
 public class BusDriverCompletesTourView {
@@ -32,13 +37,19 @@ public class BusDriverCompletesTourView {
 	private Button menuButton;
 	@FXML
 	private Button viewDetailsButton;
+	@FXML
+	private Button yesButton;
+	@FXML
+	private Text tourIDText;
 	
 	Parent root;
 	busDriverController bdController;
+	int busDriverID;
 	
-	public BusDriverCompletesTourView() {
+	public BusDriverCompletesTourView(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverCompletesTour.fxml"));
 		loader.setController(this);
+		busDriverID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -54,6 +65,7 @@ public class BusDriverCompletesTourView {
 		bdController = new busDriverController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		tourIDText.setText(Integer.toString(getTourID()));
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
@@ -66,7 +78,19 @@ public class BusDriverCompletesTourView {
     
     // Method for button handling
     public void eventHandlersAssignment() {
-        // Assign handlers with parameters for specific FXMLs and classes
+    	 EventHandler<ActionEvent> yesButtonHandler = (event) -> {
+ 	        // Create a single alert instance to avoid repeated showAndWait() calls
+
+    		ReturnObjectUtility<Boolean> returnData=bdController.completeTour(getTourID());
+ 	        boolean success = returnData.isSuccess();
+ 	        Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+ 	        alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+ 	        alert.setHeaderText(null);
+ 	        alert.setContentText(returnData.getMessage());
+ 	        alert.showAndWait();
+ 	    };
+ 	   yesButton.setOnAction(yesButtonHandler);
+    	
         menuButton.setOnMouseClicked(createButtonHandler(BusDriverMenuView.class, "Bus Driver Menu"));
         viewDetailsButton.setOnMouseClicked(createButtonHandler(BusDriverViewsTourDetailsView.class, "View Tour Detail"));
     }
@@ -97,5 +121,19 @@ public class BusDriverCompletesTourView {
                 e.printStackTrace();
             }
         };
+    }
+    
+    public int getTourID() {
+    	ReturnObjectUtility<Integer> returnData=bdController.retrieveTourID(busDriverID);
+    	boolean success=returnData.isSuccess();
+    	if(!success) {
+    		Alert alert = new Alert(AlertType.ERROR);
+		    alert.setTitle("Operation Failed");
+		    alert.setHeaderText(null);
+		    alert.setContentText(returnData.getMessage());
+		    alert.showAndWait();
+		    return 0;
+    	}
+    	return returnData.getObject();
     }
 }

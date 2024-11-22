@@ -109,7 +109,7 @@ public class TouristPaymentView {
 	    	        alert.setContentText(isPaymentPossible.getMessage());
 	    	        alert.showAndWait();
 	    	        
-	    	        payCashButton.setDisable(false); // Disable further clicking
+	    	        payCashButton.setDisable(false); 
 	    	        return;
 	        	}
 	        }
@@ -122,15 +122,18 @@ public class TouristPaymentView {
 	        alert.setHeaderText(null);
 	        alert.setContentText(returnData.getMessage());
 	        alert.showAndWait();
-
+	        
 	        if (success && isCreditPayment) {
 	            // Add money
 	        	ReturnObjectUtility<Float> returnData2=new ReturnObjectUtility<Float>();
 	        	if(typeOfTransaction=="Bus") {
-	        		bController.addMoney(serviceID, bill);
+	        		returnData2=bController.addMoney(serviceID, bill);
 	        	}
 	        	else if(typeOfTransaction=="Rent") {
-	        		taController.addMoney(bill);
+	        		returnData2=taController.addMoney(bill);
+	        	}
+	        	else if(typeOfTransaction=="Room") {
+	        		returnData2=hController.addMoney(serviceID, bill);
 	        	}
   	            success = returnData2.isSuccess();
   	            alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
@@ -187,6 +190,7 @@ public class TouristPaymentView {
     	}
     	else if(typeOfTransaction=="Room")  //hotel room was booked
     	{
+    		returnData=hController.getBill(serviceID);
     	}
     	else if(typeOfTransaction=="Rent")  //car was rented
     	{

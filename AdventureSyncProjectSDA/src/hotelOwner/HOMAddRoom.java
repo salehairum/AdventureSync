@@ -2,17 +2,24 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnObjectUtility;
+import hotelModels.Room;
 import hotelModels.hotelOwnerController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Car;
 
 public class HOMAddRoom {
 	@FXML
@@ -31,12 +38,22 @@ public class HOMAddRoom {
 	private Button menuButton;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button addRoomButton;
+	@FXML
+	private TextField descInput;
+	@FXML
+	private TextField pricerPerNightInput;
+	
+	private int hotelID;
+	private int hotelOwnerID;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
-	public HOMAddRoom() {
+	public HOMAddRoom(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMAddRoom.fxml"));
 		loader.setController(this);
+		hotelOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -46,9 +63,11 @@ public class HOMAddRoom {
 	
 	@FXML
 	private void initialize() {
+		listenersAssignment();
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 	}
 	
 	public Parent getRoot() {
@@ -65,6 +84,33 @@ public class HOMAddRoom {
     
     // Method for button handling
     public void eventHandlersAssignment() {
+    	
+    	EventHandler<ActionEvent> addButtonHandler=(event)->{
+			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
+			alertInvalidInput.setTitle("Invalid Input"); 
+			
+			StringBuilder errorMessage = new StringBuilder();
+			
+			//check if inputs are numeric
+			if(!isNumeric(pricerPerNightInput.getText())) {
+				errorMessage.append("Please enter numeric value for price per night.\n");
+			}
+	        if (errorMessage.length() > 0) {
+	            alertInvalidInput.setContentText(errorMessage.toString());
+	            alertInvalidInput.showAndWait();
+	            return;
+	        }
+			Room room=createRoomObject();
+			ReturnObjectUtility<Boolean> returnData=hoContoller.addRoom(room);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		addRoomButton.setOnAction(addButtonHandler);
 	    // Using a custom handler factory method
 	    menuButton.setOnMouseClicked(createButtonHandler(HotelOwnerMenuView.class, "Menu"));
 	    backButton.setOnMouseClicked(createButtonHandler(HOMManageRoom.class, "Manage Room"));
@@ -96,5 +142,38 @@ public class HOMAddRoom {
             }
         };
     }
-    
+    public void assignHotelID(){
+		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
+	}
+	public boolean isNumeric(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    return str.matches("\\d+(\\.\\d+)?"); // Matches integers or decimals
+	}
+
+	public Room createRoomObject(){
+	    // Retrieve inputs
+	    String description = descInput.getText();
+	    float pricePerNight = Float.parseFloat(pricerPerNightInput.getText());
+
+	    // Create and return the Room object
+	    return new Room(0, description, pricePerNight, false, hotelID);
+	}
+
+
+	//assigning buttons and listeners
+	public void listenersAssignment() {
+		pricerPerNightInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		descInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+	}
+	//check if all inputs have been given
+	private void validateInputs() {
+	    boolean allFieldsFilled = 
+	        !pricerPerNightInput.getText().trim().isEmpty() &&
+	        !descInput.getText().trim().isEmpty();
+
+	    addRoomButton.setDisable(!allFieldsFilled);
+	}
+	
 }

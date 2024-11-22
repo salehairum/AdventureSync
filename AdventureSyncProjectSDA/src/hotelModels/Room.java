@@ -106,4 +106,10 @@ public class Room {
 //	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
 //		return hotelDbHandler.add
 //	}
+	public ReturnObjectUtility<Float> getBill(int roomID){
+		return hotelDbHandler.getBill(roomID);
+	}
+	public ReturnObjectUtility<Boolean> addRoom(Room room) {
+		return hotelDbHandler.addRoom(room);
+	}
 }

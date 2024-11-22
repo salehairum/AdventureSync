@@ -68,4 +68,11 @@ public class busDriverController {
 	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
 		return busDriver.addMoney(busId, bill);
 	}
+	
+	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
+		return bus.retrieveTourID(busDriverID);
+	}
+	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
+		return busDriver.completeTour(tourID);
+	}
 }

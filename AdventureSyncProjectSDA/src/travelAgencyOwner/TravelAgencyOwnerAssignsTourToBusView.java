@@ -93,7 +93,7 @@ public class TravelAgencyOwnerAssignsTourToBusView {
 			}
 			
 			LocalDate selectedDate = dateInput.getValue(); // Get the date from DatePicker
-			if(!selectedDate.isAfter(LocalDate.now())) {
+			if(selectedDate.isBefore(LocalDate.now())) {
 				alertInvalidInput.setContentText("Please enter date of future"); 
 				alertInvalidInput.showAndWait(); 
 				return;

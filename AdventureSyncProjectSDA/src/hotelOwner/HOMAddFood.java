@@ -2,13 +2,20 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnObjectUtility;
+import hotelModels.FoodItem;
+import hotelModels.Room;
 import hotelModels.hotelOwnerController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -32,12 +39,24 @@ public class HOMAddFood {
 	private Button menuButton;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button addFoodButton;
+	@FXML
+	private TextField foodNameInput;
+	@FXML
+	private TextField foodQuanInput;
+	@FXML
+	private TextField foodPriceInput;
+	
+	private int hotelID;
+	private int hotelOwnerID;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
-	public HOMAddFood() {
+	public HOMAddFood(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMAddFood.fxml"));
 		loader.setController(this);
+		hotelOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -47,9 +66,11 @@ public class HOMAddFood {
 	
 	@FXML
 	private void initialize() {
+		listenersAssignment();
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 	}
 	
 	public Parent getRoot() {
@@ -66,7 +87,36 @@ public class HOMAddFood {
     }
     
     // Method for button handling
-    public void eventHandlersAssignment() {
+    public void eventHandlersAssignment() {	
+    	EventHandler<ActionEvent> addButtonHandler=(event)->{
+			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
+			alertInvalidInput.setTitle("Invalid Input"); 
+			
+			StringBuilder errorMessage = new StringBuilder();
+			
+			//check if inputs are numeric
+			if(!isNumeric(foodQuanInput.getText())) {
+				errorMessage.append("Please enter numeric value for food quantity.\n");
+			}
+			if(!isNumeric(foodPriceInput.getText())) {
+				errorMessage.append("Please enter numeric value for food quantity.\n");
+			}
+	        if (errorMessage.length() > 0) {
+	            alertInvalidInput.setContentText(errorMessage.toString());
+	            alertInvalidInput.showAndWait();
+	            return;
+	        }
+			FoodItem food=createFoodItemObject();
+			ReturnObjectUtility<Boolean> returnData=hoContoller.addFoodItem(food, hotelID);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		addFoodButton.setOnAction(addButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
         menuButton.setOnMouseClicked(createButtonHandler(HotelOwnerMenuView.class, "Menu"));
         backButton.setOnMouseClicked(createButtonHandler(HOMManageKitchen.class, "Manage Kitchen"));
@@ -99,5 +149,41 @@ public class HOMAddFood {
             }
         };
     }
+    public void assignHotelID(){
+		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
+	}
+	public boolean isNumeric(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    return str.matches("\\d+(\\.\\d+)?"); // Matches integers or decimals
+	}
 
+	public FoodItem createFoodItemObject() {
+	    // Retrieve inputs from the corresponding TextFields
+	    String name = foodNameInput.getText();
+	    int quantity = Integer.parseInt(foodQuanInput.getText());
+	    float price = Float.parseFloat(foodPriceInput.getText());
+
+	    // Create and return the FoodItem object
+	    return new FoodItem(0, name, quantity, price);
+	}
+
+
+
+	//assigning buttons and listeners
+	public void listenersAssignment() {
+		foodQuanInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		foodPriceInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		foodNameInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+	}
+	//check if all inputs have been given
+	private void validateInputs() {
+	    boolean allFieldsFilled = 
+	        !foodQuanInput.getText().trim().isEmpty() &&
+	        !foodPriceInput.getText().trim().isEmpty() &&
+	    !foodNameInput.getText().trim().isEmpty();
+
+	    addFoodButton.setDisable(!allFieldsFilled);
+	}
 }

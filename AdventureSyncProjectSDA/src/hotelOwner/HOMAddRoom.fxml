@@ -8,10 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="addDescLabel" fill="#eddea4" layoutX="237.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter description" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="addDescLabel" fill="#eddea4" layoutX="229.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter description" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -21,18 +20,18 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="addRoomButton" layoutX="359.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Add Room" textFill="#f7a072">
+      <Button fx:id="addRoomButton" disable="true" layoutX="359.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Add Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="descInput" layoutX="448.0" layoutY="242.0" prefHeight="25.0" prefWidth="218.0" promptText="e.g room with window view" />
-      <Text fx:id="addDescLabel1" fill="#eddea4" layoutX="229.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter price per night" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <TextField fx:id="descInput" layoutX="447.0" layoutY="195.0" prefHeight="25.0" prefWidth="218.0" promptText="e.g room with window view" />
+      <Text fx:id="addDescLabel1" fill="#eddea4" layoutX="229.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter price per night" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="pricerPerNightInput" layoutX="447.0" layoutY="304.0" prefHeight="25.0" prefWidth="225.0" promptText="e.g 1000" />
+      <TextField fx:id="pricerPerNightInput" layoutX="444.0" layoutY="251.0" prefHeight="25.0" prefWidth="225.0" promptText="e.g 1000" />
       <Button fx:id="backButton" layoutX="417.0" layoutY="436.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />

@@ -1,6 +1,7 @@
 package application;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +68,7 @@ import signupForms.TouristSignUpView;
 import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
 import hotelModels.Hotel;
+import hotelModels.Room;
 import hotelModels.hotelOwnerController;
 
 public class Main extends Application {
@@ -83,17 +85,18 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
-
-
-
-//			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
-//			Parent root = hotelOwnerMenu.getRoot();
-//			
-
-
-			TouristChecksOutRoomView hotelOwnerMenu = new TouristChecksOutRoomView(1);
+			
+// 			Hotel hotel=hdb.retrieveHotelObject(2).getObject();
+// 			ArrayList<Room> rooms=hotel.getRooms();
+// 			for (Room room : rooms) {
+// 			    // Access properties or methods of each room
+// 			    System.out.println("Room ID: " + room.getRoomID());}
+			
+// 			Bus bus=bdb.retrieveBusObject(15).getObject();
+				
 	
+			TouristChecksOutRoomView hotelOwnerMenu = new TouristChecksOutRoomView(1);
+
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

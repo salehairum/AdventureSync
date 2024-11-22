@@ -86,7 +86,6 @@ public class TravelAgencyOwner extends Person {
 	}
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return car.updateCarRentalStatus(carID, rentalStatus);
-
 	}
 
 	public ReturnObjectUtility<Float> getBill(int carID){

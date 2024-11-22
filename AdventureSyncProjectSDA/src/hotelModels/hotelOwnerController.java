@@ -11,11 +11,13 @@ public class hotelOwnerController
 {
     private HotelOwner hotelOwner;
     private Hotel hotel;
+    private Kitchen kitchen;
     
     public hotelOwnerController()
     {
     	hotelOwner = new HotelOwner();
     	hotel = new Hotel();
+    	kitchen=new Kitchen();
     }
     public String[] getHotelOwnerProfileDetail(int hotelOwnerId)
     {
@@ -40,5 +42,19 @@ public class hotelOwnerController
     public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotel.updateFoodQuantity(foodID, quantity, add);
 	}
-    
+	public ReturnObjectUtility<Float> getBill(int roomID){
+		return hotelOwner.getBill(roomID);
+	}
+	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
+		return hotelOwner.addMoney(roomID, bill);
+	}
+	public ReturnObjectUtility<Integer> getHotelID(int hotelOwnerID){
+		return hotelOwner.getHotelID(hotelOwnerID);
+	}
+	public ReturnObjectUtility<Boolean> addRoom(Room room) {
+		return hotelOwner.addRoom(room);
+	}
+	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
+		return kitchen.addFoodItem(foodItem, hotelID);
+	}
 }
