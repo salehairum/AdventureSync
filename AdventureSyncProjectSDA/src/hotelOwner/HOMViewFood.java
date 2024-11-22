@@ -2,13 +2,20 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnListUtility;
+import hotelModels.FoodItem;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -33,6 +40,10 @@ public class HOMViewFood {
 	private Button updFoodButton;
 	@FXML
 	private Button delFoodButton;
+	@FXML
+	private TableView<FoodItem> foodTable;
+	@FXML
+	private TableColumn<FoodItem, String> colFoodId, colName, colQuan, colPrice;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
@@ -51,6 +62,7 @@ public class HOMViewFood {
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadFoodTable();
 	}
 	
 	public Parent getRoot() {
@@ -101,5 +113,23 @@ public class HOMViewFood {
             }
         };
     }
-    
+    public void loadFoodTable() {
+        // Initialize table columns
+    	colFoodId.setCellValueFactory(new PropertyValueFactory<>("FoodID"));
+    	colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+    	colQuan.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+    	colPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        // Get car details from the controller
+        ReturnListUtility<FoodItem> returnData = hoContoller.getFoodDetails(1);
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<FoodItem> foodList = FXCollections.observableArrayList(returnData.getList().values());
+            foodTable.setItems(foodList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading food items: " + returnData.getMessage());
+            foodTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
 }

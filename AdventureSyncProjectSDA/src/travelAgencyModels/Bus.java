@@ -3,6 +3,7 @@ package travelAgencyModels;
 import java.util.HashMap;
 import java.util.Map;
 
+import application.Feedback;
 import dbHandlers.BusDBHandler;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
@@ -136,6 +137,9 @@ public class Bus extends Vehicle {
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return busHandler.retrieveBusList();
 	}
+	public ReturnListUtility<Feedback> retrieveFeedbackList(int busID) {
+		return busHandler.retrieveFeedbackList(busID);
+	}
 	public ReturnListUtility<Bus> retrieveBusListWithBusDriverID() {
 		return busHandler.retrieveBusListWithBusDriverID();
 	}
@@ -145,6 +149,9 @@ public class Bus extends Vehicle {
 	
 	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
 		return tour.retrieveTourID(busDriverID);
+	}
+	public ReturnObjectUtility<Float> getOverallRating(int busID){
+		return busHandler.getOverallRating(busID);
 	}
 }
 

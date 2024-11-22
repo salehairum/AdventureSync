@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
+import application.Feedback;
+import hotelModels.FeedbackWithRoomID;
 import hotelModels.FoodItem;
 import hotelModels.Hotel;
 import hotelModels.Kitchen;
@@ -22,6 +24,7 @@ import hotelModels.Room;
 import hotelModels.RoomWithHotel;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.FeedbackWithBusID;
 import travelAgencyModels.Seat;
 
 public class HotelDBHandler {
@@ -828,6 +831,91 @@ public class HotelDBHandler {
 	    
 	    return returnData;
 	}
+	public ReturnObjectUtility<Float> getOverallRating(int hotelID) {
+	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 
+	    try {
+	        // Create the SQL query to retrieve the average rating for the bus
+	        String query = "SELECT ROUND(AVG(CAST(f.rating AS FLOAT)), 2) AS overallAverageRating " +
+	                       "FROM RoomHasFeedback rhf " +
+	                       "JOIN Feedback f ON rhf.feedbackID = f.feedbackID " +
+	                       "JOIN Room r ON r.roomID = rhf.roomID " +
+	                       "WHERE f.typeOfFeedback = 'room' and r.hotelID = " + hotelID;
+	        
+	        // Execute the query
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        // Check if a result is found
+	        if (rSet.next()) {
+	            float overallAverageRating = rSet.getFloat("overallAverageRating");
+
+	            // Set the retrieved rating in the return object
+	            returnData.setObject(overallAverageRating);
+	            returnData.setMessage("Overall rating retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: No feedback found for this bus.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        
+	        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Bus does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving bus rating from database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    
+	    return returnData;
+	}
+	public static ReturnListUtility<FeedbackWithRoomID> retrieveFeedbackList(int hotelID) {
+	    ReturnListUtility<FeedbackWithRoomID> returnData = new ReturnListUtility<>();
+	    
+	    try {
+	        // Create statement and execute the feedback query
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery("SELECT f.feedbackID, f.comment, rhf.roomID FROM RoomHasFeedback rhf JOIN Feedback f ON rhf.feedbackID = f.feedbackID " +
+	                                           "JOIN Room r ON r.roomID = rhf.roomID " +
+	                                           "WHERE f.typeOfFeedback = 'room' and r.hotelID = " + hotelID);
+	      //SELECT f.feedbackID, f.comment, rhf.roomID FROM RoomHasFeedback rhf JOIN Feedback f ON rhf.feedbackID = f.feedbackID JOIN Room r ON r.roomID = rhf.roomID 
+	        //WHERE f.typeOfFeedback = 'room' and r.hotelID = 1
+	        // List to store feedback details
+	        HashMap<Integer, FeedbackWithRoomID> feedbackList=new HashMap<Integer, FeedbackWithRoomID>();
+	        // Process the result set
+	        while (rSet.next()) {
+	        	int feedbackID = rSet.getInt("feedbackID");
+	            int roomId = rSet.getInt("roomID");
+	            String comment = rSet.getString("comment");
+
+	            // Create FeedbackWithBusID object and add to the list
+	            FeedbackWithRoomID feedback = new FeedbackWithRoomID(feedbackID, roomId, comment);
+	            feedbackList.put(feedback.getFeedbackID(), feedback);
+	        }
+
+	        // Set the result in the returnData object
+	        if (feedbackList.isEmpty()) {
+	            returnData.setMessage("No feedback found for buses.");
+	            returnData.setSuccess(false);
+	        } else {
+	            returnData.setList(feedbackList);
+	            returnData.setMessage("Feedback details retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	        
+	    } catch (SQLException e) {
+	        // Handle SQL exceptions
+	        returnData.setMessage("Error retrieving feedback details: " + e.getMessage());
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+	
 	
 }

@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backButton" layoutX="515.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
@@ -27,11 +26,11 @@
             <Image url="@../resources/room.png" />
          </image>
       </ImageView>
-      <TableView fx:id="viewRoomTable" layoutX="282.0" layoutY="160.0" prefHeight="200.0" prefWidth="425.0" style="-fx-background-color: F9F7F3;">
+      <TableView fx:id="roomTable" layoutX="282.0" layoutY="160.0" prefHeight="200.0" prefWidth="425.0" style="-fx-background-color: F9F7F3;">
          <columns>
-            <TableColumn prefWidth="75.0" text="Room ID" />
-            <TableColumn prefWidth="104.0" text="Booking Status" />
-            <TableColumn prefWidth="245.0" text="Description" />
+            <TableColumn fx:id="colRoomId" prefWidth="75.0" text="Room ID" />
+            <TableColumn fx:id="colStatus" prefWidth="104.0" text="Booking Status" />
+            <TableColumn fx:id="colDesc" prefWidth="245.0" text="Description" />
          </columns>
       </TableView>
       <Button fx:id="updRoomButton" layoutX="413.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Update" textFill="#f7a072">

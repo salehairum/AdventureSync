@@ -13,6 +13,7 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import busDriver.BusDriverViewBusDetailsView;
+import busDriver.BusDriverViewsFeedbackView;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
 import hotelOwner.HOMDeleteFood;
@@ -24,6 +25,9 @@ import hotelOwner.HOMManageRoom;
 import hotelOwner.HOMUpdateFood;
 import hotelOwner.HOMUpdateHotel;
 import hotelOwner.HOMUpdateRoom;
+import hotelOwner.HOMViewFeedback;
+import hotelOwner.HOMViewFood;
+import hotelOwner.HOMViewRoom;
 import hotelOwner.HotelOwnerMenuView;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
@@ -93,6 +97,8 @@ public class Main extends Application {
 // 			ArrayList<Room> rooms=hotel.getRooms();
 // 			for (Room room : rooms) {
 // 			    // Access properties or methods of each room
+			
+			
 // 			    System.out.println("Room ID: " + room.getRoomID());}
 			
 // 			Bus bus=bdb.retrieveBusObject(15).getObject();
@@ -102,7 +108,7 @@ public class Main extends Application {
  			//TouristChecksOutRoomView
  			Hotel hotel = new Hotel();
  			hotel.setHotelID(1);
- 			TravelAgencyOwnerViewsFeedbackView hotelOwnerMenu = new TravelAgencyOwnerViewsFeedbackView();
+ 			HOMViewFeedback hotelOwnerMenu = new HOMViewFeedback();
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

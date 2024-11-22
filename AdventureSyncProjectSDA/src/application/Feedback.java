@@ -23,6 +23,10 @@ public class Feedback {
 		comment = "";
 		touristID = 0;
 	}
+	public Feedback(int fID, String comment) {
+		feedbackID = fID;
+		this.comment = comment;
+	}
 	//getter and setter
 	public int getFeedbackID() {
 		return feedbackID;
