@@ -65,7 +65,15 @@ public class TouristPaymentView {
 			e.printStackTrace();
 		} 
 	}
-	
+	public TouristPaymentView() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));
+		loader.setController(this);
+		try {
+			root = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
 	public Parent getRoot() {
 		return root;
 	}

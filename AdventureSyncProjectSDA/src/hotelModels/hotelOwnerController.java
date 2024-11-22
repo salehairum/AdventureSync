@@ -42,7 +42,6 @@ public class hotelOwnerController
     public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotel.updateFoodQuantity(foodID, quantity, add);
 	}
-	
 	public ReturnObjectUtility<Float> getBill(int roomID){
 		return hotelOwner.getBill(roomID);
 	}

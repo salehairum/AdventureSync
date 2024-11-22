@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import accountAndPersonModels.Tourist;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,8 +17,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -41,6 +47,11 @@ public class TouristSelectSeatFromBusView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private TableView<Seat> seatTable;
+	@FXML
+	private TableColumn<Seat, String> colSeatId, colRowNo;
+	
 	private int touristID;
 	
 	Parent root;
@@ -61,7 +72,6 @@ public class TouristSelectSeatFromBusView {
 		}
 
 	}
-	
 	@FXML
 	private void initialize() {
 		listenersAssignment();
@@ -70,6 +80,7 @@ public class TouristSelectSeatFromBusView {
 		toaController = new travelAgencyOwnerController();
 		bController = new busDriverController();
 		displayOwnerDetails();
+		loadSeatTable();
 	}
 	
 	public Parent getRoot() {
@@ -123,6 +134,14 @@ public class TouristSelectSeatFromBusView {
 					//pass busId, nottt seatID!!
 					//pass transactionID
 					int transactionID=returnData2.getObject();
+					try {
+	                    // Dynamically load and show the TouristPaymentView
+	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	                    currentStage.close();
+	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
 				}
 			}
 		};
@@ -182,4 +201,22 @@ public class TouristSelectSeatFromBusView {
 
 	    bookSeatButton.setDisable(!allFieldsFilled);
 	}
+	public void loadSeatTable() {
+        // Initialize table columns
+        colSeatId.setCellValueFactory(new PropertyValueFactory<>("SeatID"));
+        colRowNo.setCellValueFactory(new PropertyValueFactory<>("RowNo"));
+
+        // Get car details from the controller
+        ReturnListUtility<Seat> returnData = tController.getSeatDetails(bus.getID());
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Seat> seatList = FXCollections.observableArrayList(returnData.getList().values());
+            seatTable.setItems(seatList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            seatTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
 }

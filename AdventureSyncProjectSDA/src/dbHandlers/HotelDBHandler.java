@@ -19,6 +19,7 @@ import hotelModels.FoodItem;
 import hotelModels.Hotel;
 import hotelModels.Kitchen;
 import hotelModels.Room;
+import hotelModels.RoomWithHotel;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -358,7 +359,6 @@ public class HotelDBHandler {
 	    }
 	    return returnData;
 	}
-	
 	public ReturnObjectUtility<Float> getBill(int roomID){
 	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 try {
@@ -522,6 +522,163 @@ public class HotelDBHandler {
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
+
+	    return returnData;
+	}
+	public ReturnListUtility<Hotel> retrieveHotelList() {
+	    ReturnListUtility<Hotel> returnData = new ReturnListUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery("SELECT hotelID, hLocation, hName FROM Hotel");
+
+	        HashMap<Integer, Hotel> hotelList = new HashMap<>();
+
+	        if (!rSet.next()) {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: No hotels found in the database.");
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve hotel details from the result set
+	                int hotelID = rSet.getInt("hotelID");
+	                String location = rSet.getString("hLocation");
+	                String hotelName = rSet.getString("hName");
+
+	                // Create a Hotel object
+	                Hotel hotel = new Hotel(hotelID, location, hotelName);
+
+	                // Add the Hotel object to the HashMap
+	                hotelList.put(hotelID, hotel);
+	            } while (rSet.next());
+
+	            returnData.setList(hotelList);
+	            returnData.setMessage("Hotels retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such hotel") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Hotel table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving hotels from the database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+	public ReturnListUtility<Room> retrieveRoomList(int hotelID) {
+	    ReturnListUtility<Room> returnData = new ReturnListUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT r.roomID, r.rDescription, r.pricePerNight, " +
+	                "(SELECT COALESCE(AVG(f.rating), 0) " +
+	                " FROM Feedback f JOIN RoomHasFeedback rhf ON f.feedbackID = rhf.feedbackID " +
+	                " WHERE rhf.roomID = r.roomID) AS overallRating " +
+	                "FROM Room r " +
+	                "WHERE r.hotelID = " + hotelID + "and r.isBooked = 0";
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        HashMap<Integer, Room> roomList = new HashMap<>();
+
+	        if (!rSet.next()) {
+	            // No rooms found for the given hotelID
+	            returnData.setMessage("Error: No rooms found for the given hotel ID: " + hotelID);
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve room details from the result set
+	                int roomID = rSet.getInt("roomID");
+	                String description = rSet.getString("rDescription");
+	                float pricePerNight = rSet.getFloat("pricePerNight");
+	                int overallRating = rSet.getInt("overallRating");
+
+	                // Create a Room object
+	                Room room = new Room(roomID, overallRating, pricePerNight, description);
+
+	                // Add the Room object to the HashMap
+	                roomList.put(roomID, room);
+	            } while (rSet.next());
+
+	            returnData.setList(roomList);
+	            returnData.setMessage("Rooms retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Room table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving rooms from the database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+	
+	public ReturnListUtility<RoomWithHotel> getBookedRoomDetails(int touristID) {
+	    ReturnListUtility<RoomWithHotel> returnData = new ReturnListUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        
+	        // Updated query to get booked rooms for the tourist along with hotel ID
+	        String query = "SELECT r.roomID, r.rDescription, r.pricePerNight, r.hotelID, h.hName, " +
+	                "(SELECT COALESCE(AVG(f.rating), 0) " +
+	                " FROM Feedback f JOIN RoomHasFeedback rhf ON f.feedbackID = rhf.feedbackID " +
+	                " WHERE rhf.roomID = r.roomID) AS overallRating " +
+	                "FROM Room r " +
+	                "JOIN TouristHasBookedRooms tbr ON r.roomID = tbr.roomID " +
+	                "JOIN Hotel h ON r.hotelID = h.hotelID " +
+	                "WHERE tbr.touristID = " + touristID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        HashMap<Integer, RoomWithHotel> roomList = new HashMap<>();
+
+	        if (!rSet.next()) {
+	            // No rooms found for the given touristID
+	            returnData.setMessage("Error: No rooms found for the given tourist ID: " + touristID);
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve room details from the result set
+	                int roomID = rSet.getInt("roomID");
+	                String description = rSet.getString("rDescription");
+	                float pricePerNight = rSet.getFloat("pricePerNight");
+	                int hotelID = rSet.getInt("hotelID");
+	                String hotelName = rSet.getString("hName");
+	                int overallRating = rSet.getInt("overallRating");
+
+	                // Create RoomWithHotel object (with both room and hotel information)
+	                RoomWithHotel roomWithHotel = new RoomWithHotel(roomID, pricePerNight, description, hotelID, hotelName);
+
+	                // Add the RoomWithHotel object to the HashMap
+	                roomList.put(roomID, roomWithHotel);
+	            } while (rSet.next());
+
+	            returnData.setList(roomList);
+	            returnData.setMessage("Booked rooms retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Room table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving rooms from the database: " + e.getMessage());
 	        }
 
 	        returnData.setSuccess(false);

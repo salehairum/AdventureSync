@@ -25,11 +25,10 @@
                   <Image url="@../resources/bus.png" />
                </image>
             </ImageView>
-            <TableView fx:id="seatTable" layoutX="106.0" layoutY="157.0" prefHeight="66.0" prefWidth="375.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="seatTable" layoutX="137.0" layoutY="99.0" prefHeight="249.0" prefWidth="249.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Seat ID" />
-                  <TableColumn prefWidth="192.79998779296875" style="-fx-background-color: #f9f7f3;" text="Row Number" />
-                  <TableColumn prefWidth="131.99993896484375" style="-fx-background-color: #f9f7f3;" text="Type" />
+                  <TableColumn fx:id="colSeatId" prefWidth="76.0" style="-fx-background-color: #f9f7f3;" text="Seat ID" />
+                  <TableColumn fx:id="colRowNo" prefWidth="172.0" style="-fx-background-color: #f9f7f3;" text="Row Number" />
                </columns>
             </TableView>
             <Button fx:id="backButton" layoutX="128.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">

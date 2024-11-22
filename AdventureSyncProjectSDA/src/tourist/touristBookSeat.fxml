@@ -25,17 +25,6 @@
                   <Image url="@../resources/bus.png" />
                </image>
             </ImageView>
-            <TableView fx:id="busTable" layoutX="13.0" layoutY="157.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
-               <columns>
-                  <TableColumn prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Bus ID" />
-                  <TableColumn prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
-                  <TableColumn prefWidth="75.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
-                  <TableColumn prefWidth="124.00001525878906" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
-                  <TableColumn prefWidth="80.00006103515625" style="-fx-background-color: #f9f7f3;" text="Plate No." />
-                  <TableColumn prefWidth="64.800048828125" style="-fx-background-color: #f9f7f3;" text="DriverID" />
-                  <TableColumn prefWidth="56.0" style="-fx-background-color: #f9f7f3;" text="HasTour" />
-               </columns>
-            </TableView>
             <Button fx:id="menuButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -52,6 +41,17 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <TableView fx:id="busTable" layoutX="8.0" layoutY="95.0" prefHeight="275.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
+               <columns>
+                  <TableColumn fx:id="colBusId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Bus ID" />
+                  <TableColumn fx:id="colModel" prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
+                  <TableColumn fx:id="colBrand" prefWidth="75.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
+                  <TableColumn fx:id="colYear" prefWidth="124.00001525878906" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
+                  <TableColumn fx:id="colPlateNo" prefWidth="80.00006103515625" style="-fx-background-color: #f9f7f3;" text="Plate No." />
+                  <TableColumn fx:id="colDriverID" prefWidth="64.800048828125" style="-fx-background-color: #f9f7f3;" text="DriverID" />
+                  <TableColumn fx:id="colHasTour" prefWidth="61.0" style="-fx-background-color: #f9f7f3;" text="HasTour" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

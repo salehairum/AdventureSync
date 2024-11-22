@@ -76,7 +76,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -85,25 +85,18 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-		//	TravelAgencyAddCarView view= new TravelAgencyAddCarView();
-
-
-
-//			HotelOwnerMenuView hotelOwnerMenu=new HotelOwnerMenuView();
-//			Parent root = hotelOwnerMenu.getRoot();
-//			
-
-			Hotel hotel=hdb.retrieveHotelObject(2).getObject();
-			ArrayList<Room> rooms=hotel.getRooms();
-			for (Room room : rooms) {
-			    // Access properties or methods of each room
-			    System.out.println("Room ID: " + room.getRoomID());}
 			
-			Bus bus=bdb.retrieveBusObject(15).getObject();
+// 			Hotel hotel=hdb.retrieveHotelObject(2).getObject();
+// 			ArrayList<Room> rooms=hotel.getRooms();
+// 			for (Room room : rooms) {
+// 			    // Access properties or methods of each room
+// 			    System.out.println("Room ID: " + room.getRoomID());}
+			
+// 			Bus bus=bdb.retrieveBusObject(15).getObject();
 				
-			
-			HOMAddFood hotelOwnerMenu = new HOMAddFood(1);
-		//	TouristSelectRoomFromHotelView hotelOwnerMenu=new TouristSelectRoomFromHotelView(2, hotel);
+	
+			TouristChecksOutRoomView hotelOwnerMenu = new TouristChecksOutRoomView(1);
+
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

@@ -16,7 +16,9 @@ public class Bus extends Vehicle {
 	private boolean hasTour;
 	private Tour tour;
 	private BusDBHandler busHandler;
+	private int busDriverID;
 	
+
 	//with all parameters
 	public Bus() {
 		super();
@@ -52,7 +54,16 @@ public class Bus extends Vehicle {
 		
 		busHandler=new BusDBHandler();
 	}
-	
+	//without tour and seat with bus driver id 
+	public Bus(int id, String brand, String model, int year, String plateNumber, int noOfSeats,int noOfRows, float priceOfSeats, int bdID) {
+		super(id, brand, model, year, plateNumber);
+		this.noOfSeats = noOfSeats;
+		this.priceOfSeats = priceOfSeats;
+		this.hasTour = false;
+		this.noOfRows = noOfRows;
+		busDriverID = bdID;
+		//busHandler=new BusDBHandler();
+	}
 	//getters and setters
 	public int getNoOfSeats() {
 		return noOfSeats;
@@ -90,6 +101,15 @@ public class Bus extends Vehicle {
 	public void setNoOfRows(int noOfRows) {
 		this.noOfRows = noOfRows;
 	}
+	public int getBusDriverID() {
+		return busDriverID;
+	}
+	public void setBusDriverID(int busDriverID) {
+		this.busDriverID = busDriverID;
+	}
+	public boolean isHasTour() {
+		return hasTour;
+	}
 
 	public ReturnObjectUtility<Boolean> addBus(Bus bus){
 		return busHandler.addBus(bus);
@@ -116,7 +136,9 @@ public class Bus extends Vehicle {
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return busHandler.retrieveBusList();
 	}
-
+	public ReturnListUtility<Bus> retrieveBusListWithBusDriverID() {
+		return busHandler.retrieveBusListWithBusDriverID();
+	}
 	public ReturnObjectUtility<Float> getBill(int busId){
 		return busHandler.getBill(busId);
 	}
