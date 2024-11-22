@@ -83,6 +83,10 @@ public class Car extends Vehicle{
 	public ReturnObjectUtility<Float> getBill(int carID){
 		return travelAgencyDBHandler.getBill(carID);
 	}
+	public ReturnObjectUtility<Float> getKmsTravelledBill(int carID, int nKms){
+		return travelAgencyDBHandler.getKmsTravelledBill(carID, nKms);
+	}
+	
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return travelAgencyDBHandler.addMoney(bill);
 	}

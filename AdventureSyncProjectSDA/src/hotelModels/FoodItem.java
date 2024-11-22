@@ -56,4 +56,7 @@ public class FoodItem {
 	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
 		return hotelDbHandler.addFoodItem(foodItem, hotelID);
 	}
+	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
+		return hotelDbHandler.getFoodBill(foodID, quantity);
+	}
 }

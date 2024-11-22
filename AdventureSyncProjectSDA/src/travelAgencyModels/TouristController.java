@@ -34,7 +34,7 @@ public class TouristController {
 		return tourist.addCarToRentedCars(touristId, carID);
 	}
 	
-	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
+	public ReturnObjectUtility<Integer> removeCarFromRentedCars(int touristId,int carID){
 		return tourist.removeCarFromRentedCars(touristId, carID);
 	}
 	

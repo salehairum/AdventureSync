@@ -32,6 +32,8 @@ public class TouristReturnCarView {
 	@FXML
 	private TextField carIdInput;
 	@FXML
+	private TextField kmsTravelledInput;
+	@FXML
 	private Button returnButton;
 	@FXML
 	private Text name;
@@ -82,6 +84,7 @@ public class TouristReturnCarView {
 	//assigning buttons and listeners
 	public void listenersAssignment() {
 		carIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+		kmsTravelledInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
 	}
 		
 	public void eventHandlersAssignment() {
@@ -96,8 +99,14 @@ public class TouristReturnCarView {
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
+			if(!isNumeric(kmsTravelledInput.getText())) {
+				alertInvalidInput.setContentText("Please enter numeric value for number of kms travelled."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
 			
 			int carID=Integer.parseInt(carIdInput.getText());
+			int nKms=Integer.parseInt(kmsTravelledInput.getText());
 						
 			ReturnObjectUtility<Car> returnData= toaController.updateCarRentalStatus(carID, false);
 			boolean success=returnData.isSuccess();
@@ -110,7 +119,7 @@ public class TouristReturnCarView {
 			}
 			else {
 				//mark car as rented
-				ReturnObjectUtility<Tourist> returnData2=tController.removeCarFromRentedCars(touristID, carID);	
+				ReturnObjectUtility<Integer> returnData2=tController.removeCarFromRentedCars(touristID, carID);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -121,12 +130,13 @@ public class TouristReturnCarView {
 				if(!success)
 					toaController.updateCarRentalStatus(carID, true);   
 					//if transaction could not be made, set rental status as true i.e it is still rented.
-				if (success) {
+				else  {
+					int transactionID=returnData2.getObject();
 	                try {
 	                    // Dynamically load and show the TouristPaymentView
 	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 	                    currentStage.close();
-	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
+	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway"/*, touristID,carID, "Return", transactionID,nKms*/).handle(null);;
 	                } catch (Exception e) {
 	                    e.printStackTrace();
 	                }
@@ -147,13 +157,21 @@ public class TouristReturnCarView {
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 
-	        !carIdInput.getText().trim().isEmpty();
+	        !carIdInput.getText().trim().isEmpty()&&
+	        !kmsTravelledInput.getText().trim().isEmpty();
 
 		   returnButton.setDisable(!allFieldsFilled);
 	}
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle/*, Object... params*/) {
         return event -> {
             try {
+//            	Class<?>[] paramTypes = new Class<?>[params.length];
+//                for (int i = 0; i < params.length; i++) {
+//                    paramTypes[i] = params[i].getClass();
+//                }
+//                java.lang.reflect.Constructor<T> constructor = viewObject.getConstructor(paramTypes);
+
+            	
                 // Dynamically create an instance of the specified class
                 T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
 

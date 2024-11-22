@@ -45,6 +45,7 @@ public class TouristPaymentView {
 	private int serviceID;
 	private String typeOfTransaction;
 	private int transactionID;
+	int numberOfUnits;
 	Parent root;
 	
 	TouristController tController;
@@ -52,13 +53,17 @@ public class TouristPaymentView {
 	hotelOwnerController hController;
 	travelAgencyOwnerController taController;
 	
-	public TouristPaymentView(int tID, int sID, String type, int trID) {
+	//n can be 
+	//food quantity
+	//number of kms travelled
+	public TouristPaymentView(int tID, int sID, String type, int trID, int n) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));
 		loader.setController(this);
 		touristID=tID;
 		serviceID=sID;
 		typeOfTransaction=type;
 		transactionID=trID;
+		numberOfUnits=n;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -129,10 +134,10 @@ public class TouristPaymentView {
 	        	if(typeOfTransaction=="Bus") {
 	        		returnData2=bController.addMoney(serviceID, bill);
 	        	}
-	        	else if(typeOfTransaction=="Rent") {
+	        	else if(typeOfTransaction=="Rent" || typeOfTransaction=="Return") {
 	        		returnData2=taController.addMoney(bill);
 	        	}
-	        	else if(typeOfTransaction=="Room") {
+	        	else if(typeOfTransaction=="Room" || typeOfTransaction=="Order") {
 	        		returnData2=hController.addMoney(serviceID, bill);
 	        	}
   	            success = returnData2.isSuccess();
@@ -190,7 +195,7 @@ public class TouristPaymentView {
     	}
     	else if(typeOfTransaction=="Room")  //hotel room was booked
     	{
-    		returnData=hController.getBill(serviceID);
+    		returnData=hController.getBill(serviceID, touristID);
     	}
     	else if(typeOfTransaction=="Rent")  //car was rented
     	{
@@ -198,11 +203,11 @@ public class TouristPaymentView {
     	}
     	else if(typeOfTransaction=="Return")  //car was returned
     	{
-
+    		returnData=taController.getKmsTravelledBill(serviceID, numberOfUnits);
     	}
     	else //food was ordered
     	{
-    		
+    		 returnData=hController.getFoodBill(serviceID, numberOfUnits);
     	}
     	
     	boolean success=returnData.isSuccess();

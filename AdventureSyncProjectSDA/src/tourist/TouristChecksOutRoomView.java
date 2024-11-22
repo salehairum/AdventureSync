@@ -125,14 +125,14 @@ public class TouristChecksOutRoomView {
 				if(!success)
 					hController.updateRoomBookingStatus(roomID, true); 
 				//if transaction could not be made, set isBooked as true i.e it is still booked.
-				try {
-                    // Dynamically load and show the TouristPaymentView
-                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                    currentStage.close();
-                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//				try {
+//                    // Dynamically load and show the TouristPaymentView
+//                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+//                    currentStage.close();
+//                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 			}
 		};
 		checkoutButton.setOnAction(rentButtonHandler);

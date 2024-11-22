@@ -94,4 +94,8 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return car.addMoney(bill);
 	}
+	
+	public ReturnObjectUtility<Float> getKmsTravelledBill(int carID, int nKms){
+		return car.getKmsTravelledBill(carID, nKms);
+	}
 }

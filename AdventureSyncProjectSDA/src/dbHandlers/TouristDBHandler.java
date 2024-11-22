@@ -233,6 +233,8 @@ public class TouristDBHandler {
 		        if (rs.next()) {
 		        	int tID = rs.getInt(1);
 		        	returnData.setObject(tID); 
+		            returnData.setMessage("Successfully retrieved generated Transaction ID.");
+		            returnData.setSuccess(true);
 		        } else {
 		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
 		            returnData.setSuccess(false);
@@ -265,8 +267,8 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 
-	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
-		ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<Integer> removeCarFromRentedCars(int touristId,int carID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -306,9 +308,17 @@ public class TouristDBHandler {
 		        // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		    	returnData.setMessage("Car returned successfully.");
-		        returnData.setSuccess(true);
-		        return returnData;
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		        	returnData.setObject(tID); 
+		            returnData.setMessage("Car returned successfully.");
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
 		    } else {
 		    	returnData.setMessage("Failed to return car.");
 		        returnData.setSuccess(false);
@@ -750,11 +760,13 @@ public class TouristDBHandler {
 				     
 					 	sql = "UPDATE account SET balance = balance - ? WHERE accountID = (SELECT accountID FROM tourist WHERE touristID = ?)";
 				        pstmt = conn.prepareStatement(sql);
-	
 				        // Set parameters
 				        pstmt.setFloat(1, bill); // Deduction amount
 				        pstmt.setInt(2, touristID); // Tourist ID
-;				        
+			        
+				        System.out.println(bill);
+				        System.out.println(touristID);
+
 				        // Execute the update
 				        rowsAffected= pstmt.executeUpdate();
 	
@@ -765,6 +777,9 @@ public class TouristDBHandler {
 				            returnData.setMessage("Failed to update balance for tourist ID: " + touristID);
 				            returnData.setSuccess(false);
 				        }
+
+				        System.out.println("Rows affected in account update: " + rowsAffected);
+
 				 }
 			        
 		        sql = "UPDATE transactionHistory SET paymentStatus = ? WHERE transactionID =  ?";

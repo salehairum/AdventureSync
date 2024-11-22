@@ -40,5 +40,8 @@ public class Kitchen {
 	public ReturnObjectUtility<Boolean> addFoodItem(FoodItem foodItem, int hotelID) {
 		return food.addFoodItem(foodItem, hotelID);
 	}
+	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
+		return food.getFoodBill(foodID, quantity);
+	}
 }
 

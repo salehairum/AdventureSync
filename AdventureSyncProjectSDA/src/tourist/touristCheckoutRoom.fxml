@@ -31,7 +31,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="checkoutButton" layoutX="292.0" layoutY="428.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Checkout" textFill="#f7a072">
+            <Button fx:id="checkoutButton" disable="true" layoutX="292.0" layoutY="428.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Checkout" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

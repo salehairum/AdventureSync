@@ -26,7 +26,7 @@
                   <Image url="@../resources/car.png" />
                </image>
             </ImageView>
-            <TableView fx:id="carTable" layoutX="9.0" layoutY="101.0" prefHeight="236.0" prefWidth="534.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="carTable" layoutX="9.0" layoutY="101.0" prefHeight="195.0" prefWidth="534.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colCarId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Car ID" />
                   <TableColumn fx:id="colModel" prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
@@ -47,14 +47,24 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <HBox fx:id="carIDInput" alignment="CENTER" layoutX="99.0" layoutY="329.0" prefHeight="67.0" prefWidth="358.0">
+            <HBox fx:id="carIDInput" alignment="CENTER" layoutX="45.0" layoutY="309.0" prefHeight="53.0" prefWidth="479.0">
                <children>
                   <Label prefHeight="35.0" prefWidth="172.0" text="Enter Car ID:" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="carIdInput" prefHeight="26.0" prefWidth="272.0" promptText="e.g 1234" />
+                  <TextField fx:id="carIdInput" prefHeight="26.0" prefWidth="210.0" promptText="e.g 1234" />
+               </children>
+            </HBox>
+            <HBox fx:id="carIDInput1" alignment="CENTER_LEFT" layoutX="26.0" layoutY="355.0" prefHeight="67.0" prefWidth="499.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="238.0" text="Enter Kms Travelled:" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="kmsTravelledInput" prefHeight="26.0" prefWidth="210.0" promptText="e.g 300" />
                </children>
             </HBox>
          </children>
