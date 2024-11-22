@@ -63,4 +63,7 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
 		return kitchen.getHotelOwnerID(foodID);
 	}
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
+		return hotelOwner.addHotel(hotel, hotelOwnerID);
+	}
 }

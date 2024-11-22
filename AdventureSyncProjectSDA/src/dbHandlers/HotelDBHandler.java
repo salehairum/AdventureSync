@@ -89,6 +89,66 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int  hotelOwnerID) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "INSERT INTO Hotel (hlocation, hname) VALUES (?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setString(1, hotel.getLocation());
+			 pstmt.setString(2, hotel.getHotelName());;
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			 int newHotelId=0;
+			 if (rowsAffected > 0) {
+				 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+		                if (generatedKeys.next()) {
+		                    newHotelId= generatedKeys.getInt(1);
+		                    returnData.setMessage("Hotel added successfully with ID: " + newHotelId);
+		                } else {
+		                	returnData.setMessage("Hotel added, but ID retrieval failed.");
+		                }
+		            }
+                 returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to add hotel.");
+                 returnData.setSuccess(false);
+			 }
+			 sql = "INSERT INTO HotelOwnerOwnsHotel (hotelID, hotelOwnerID) VALUES (?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setInt(1,newHotelId);
+			 pstmt.setInt(2, hotelOwnerID);;
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <= 0) {
+				 returnData.setMessage("Failed to assign hotel to hotel owner.");
+                 returnData.setSuccess(false);
+			 }
+
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in adding hotels to db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
+	
 	public static ReturnObjectUtility<HotelOwner> retrieveHotelOwnerData(int hotelOwnerID) {
 		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility();
 		

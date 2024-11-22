@@ -64,6 +64,7 @@ import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
 import signupForms.BusDriverSignUpView;
+import signupForms.HotelOwnerAddsHotel;
 import signupForms.TouristSignUpView;
 import signupForms.TravelAgencyOwnerSignUpView;
 import dbHandlers.TravelAgencyDBHandler;
@@ -98,7 +99,7 @@ public class Main extends Application {
 	
  		//	TouristSelectRoomFromHotelView
  			//TouristChecksOutRoomView
- 			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(1,5,"Order", 33,5);
+ 			BusDriverSignUpView hotelOwnerMenu = new BusDriverSignUpView();
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

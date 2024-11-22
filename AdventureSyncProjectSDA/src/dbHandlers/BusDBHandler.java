@@ -41,7 +41,7 @@ public class BusDBHandler {
 	}
 
 	//bus handling functions	
-	public ReturnObjectUtility<Boolean> addBus(Bus bus) {
+	public ReturnObjectUtility<Boolean> addBus(Bus bus,int busDriverID) {
 		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		PreparedStatement pstmt;
 		try {
@@ -59,9 +59,9 @@ public class BusDBHandler {
 			
 			// Execute the insert
 			int rowsAffected = pstmt.executeUpdate();
+			int newBusId=0;
 			if(rowsAffected>0) {
 				//generate id of bus just added
-				int newBusId=0;
 			    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
 	                if (generatedKeys.next()) {
 	                	newBusId= generatedKeys.getInt(1);
@@ -92,7 +92,18 @@ public class BusDBHandler {
 				 returnData.setMessage("Failed to add bus.");
                  returnData.setSuccess(false);
 			 }
-			 
+			 sql = "INSERT INTO BusDriverDrivesBus (busDriverID, busID) VALUES (?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setInt(1,busDriverID);
+			 pstmt.setInt(2, newBusId);;
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <= 0) {
+				 returnData.setMessage("Failed to assign hotel to hotel owner.");
+                 returnData.setSuccess(false);
+			 }	 
 		} catch (SQLException e) {
 			String errorMessage = e.getMessage().toLowerCase();
 			

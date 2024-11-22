@@ -19,9 +19,9 @@ public class busDriverController {
 		busDriver=new BusDriver();
 	}
 
-	public ReturnObjectUtility<Boolean> addBus(Bus newBus){
+	public ReturnObjectUtility<Boolean> addBus(Bus newBus,int busDriverID){
 		bus=newBus;
-		return bus.addBus(newBus);
+		return bus.addBus(newBus, busDriverID);
 	}
 	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
