@@ -101,4 +101,7 @@ public class TouristController {
 	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
 		return tourist.checkBalance(touristID, bill);
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return tourist.checkPassword(enteredPassword, username);
+	}
 }

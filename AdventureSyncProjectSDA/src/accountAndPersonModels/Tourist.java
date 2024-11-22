@@ -112,4 +112,7 @@ public class Tourist extends Person {
 	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
 		return touristDBHandler.checkBalance(touristID, bill);
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return touristDBHandler.checkPassword(enteredPassword, username);
+	}
 }

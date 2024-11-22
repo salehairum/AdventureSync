@@ -66,4 +66,7 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
 		return hotelOwner.addHotel(hotel, hotelOwnerID);
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return hotelOwner.checkPassword(enteredPassword, username);
+	}
 }

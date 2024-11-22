@@ -75,4 +75,7 @@ public class busDriverController {
 	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
 		return busDriver.completeTour(tourID);
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return busDriver.checkPassword(enteredPassword, username);
+	}
 }

@@ -61,4 +61,8 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
 		return hotel.addHotel(hotel, hotelOwnerID);
 	}
+	
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return hotelDBHandler.checkPassword(enteredPassword, username);
+	}
 }
