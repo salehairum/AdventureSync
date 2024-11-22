@@ -765,6 +765,39 @@ public class TravelAgencyDBHandler {
 		    return returnData;
 	}
 	
+	public ReturnObjectUtility<Float> getKmsTravelledBill(int carID, int nKms){
+	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+		 try {
+		        Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("SELECT costPerKm FROM Car WHERE carID = " + carID);
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            float costPerKm = rSet.getFloat("costPerKm")*nKms;
+
+		            returnData.setObject(costPerKm);
+		            returnData.setMessage("Car bill retrieved successfully.");
+		            returnData.setSuccess(true);
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Car does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Car does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving car from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
+	
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;

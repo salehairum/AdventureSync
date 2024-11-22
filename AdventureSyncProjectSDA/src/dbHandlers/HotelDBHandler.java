@@ -359,19 +359,35 @@ public class HotelDBHandler {
 	    }
 	    return returnData;
 	}
-	public ReturnObjectUtility<Float> getBill(int roomID){
+	public ReturnObjectUtility<Float> getBill(int roomID, int touristID){
 	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 try {
-		        Statement stmt = conn.createStatement();
-		        ResultSet rSet = stmt.executeQuery("SELECT pricePerNight FROM room WHERE roomID = " + roomID);
-		        
-		        if (rSet.next()) { // Check if a result was found
-		            float priceOfSeat = rSet.getFloat("pricePerNight");
+			 String sql = " SELECT thb.bookingDate, r.pricePerNight FROM TouristHasBookedRooms thb JOIN room r ON thb.roomID = r.roomID WHERE thb.roomID = ? AND thb.touristID = ?";
+			 PreparedStatement pstmt = conn.prepareStatement(sql);
+			 pstmt.setInt(1, roomID);
+			 pstmt.setInt(2, touristID);
 
-		            returnData.setObject(priceOfSeat);
-		            returnData.setMessage("Room bill retrieved successfully.");
+			 ResultSet rSet = pstmt.executeQuery();
+
+			 if (rSet.next()) {
+			       Date bookingDate = rSet.getDate("bookingDate");
+			       float pricePerNight = rSet.getFloat("pricePerNight");
+			       Date today = new java.sql.Date(System.currentTimeMillis());
+		            long diffInMillis = today.getTime() - bookingDate.getTime();
+		            int nightsStayed = (int) (diffInMillis / (1000 * 60 * 60 * 24)); // Convert ms to days
+
+		            if (nightsStayed <= 0) {
+		                nightsStayed = 1; // Handle edge case where today is bookingDate
+		            }
+
+		            // Calculate the total bill
+		            float totalBill = pricePerNight * nightsStayed;
+
+		            // Set return values
+		            returnData.setObject(totalBill);
+		            returnData.setMessage("Total bill calculated successfully.");
 		            returnData.setSuccess(true);
-		        } else {
+			 } else {
 		            // If no result is found, set an error message
 		            returnData.setMessage("Error: Room does not exist.");
 		            returnData.setSuccess(false);
@@ -391,6 +407,43 @@ public class HotelDBHandler {
 		    
 		    return returnData;
 	}
+	
+	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
+	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+		 try {
+			 String sql = " SELECT price from foodItem where foodID= ?";
+			 PreparedStatement pstmt = conn.prepareStatement(sql);
+			 pstmt.setInt(1, foodID);
+
+			 ResultSet rSet = pstmt.executeQuery();
+
+			 if (rSet.next()) {
+			       float price = rSet.getFloat("price")*quantity;
+		            // Set return values
+		            returnData.setObject(price);
+		            returnData.setMessage("Total bill calculated successfully.");
+		            returnData.setSuccess(true);
+			 } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Room does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Room does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving Room from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
+	
 	
 	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
@@ -522,9 +575,11 @@ public class HotelDBHandler {
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
-
+	       }
+	    }
 	    return returnData;
 	}
+	        
 	public ReturnListUtility<Hotel> retrieveHotelList() {
 	    ReturnListUtility<Hotel> returnData = new ReturnListUtility<>();
 
@@ -686,6 +741,42 @@ public class HotelDBHandler {
 	    return returnData;
 	}
 
-	
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
+	    try {
+	        String sql = "SELECT HOH.hotelOwnerID FROM KitchenHasFood KHF JOIN HotelHasKitchen HHK ON KHF.kitchenID = HHK.kitchenID JOIN HotelOwnerOwnsHotel HOH ON HHK.hotelID = HOH.hotelID WHERE KHF.foodID = ?";
+
+	        PreparedStatement pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, foodID); // Set the foodID parameter
+	        
+	        ResultSet rSet = pstmt.executeQuery();
+	        
+	        if (rSet.next()) { // Check if a result was found
+	            int hotelOwnerID = rSet.getInt("hotelOwnerID");
+
+	            returnData.setObject(hotelOwnerID);
+	            returnData.setMessage("HotelOwnerID retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: No hotel owner associated with the given foodID.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        
+	        if (errorMessage.contains("foreign key constraint")) {
+	            returnData.setMessage("Error: Invalid foodID reference.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving HotelOwnerID from database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    
+	    return returnData;
+	}
+
 	
 }

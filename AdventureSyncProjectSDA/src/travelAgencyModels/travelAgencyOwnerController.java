@@ -75,7 +75,9 @@ public class travelAgencyOwnerController {
 	    // Call the TravelAgencyOwner to fetch car details
 		return travelAgencyOwner.getAllBusWithBusDriverID();
   }
-	
+	public ReturnObjectUtility<Float> getKmsTravelledBill(int carID, int nKms){
+		return travelAgencyOwner.getKmsTravelledBill(carID, nKms);
+	}
 
 	public ReturnObjectUtility<Float> getBill(int carID){
 		return travelAgencyOwner.getBill(carID);

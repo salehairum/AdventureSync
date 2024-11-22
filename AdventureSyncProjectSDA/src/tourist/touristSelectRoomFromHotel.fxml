@@ -39,7 +39,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="bookButton" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Book" textFill="#f7a072">
+            <Button fx:id="bookButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Book" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

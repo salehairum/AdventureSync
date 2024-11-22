@@ -75,7 +75,7 @@ public class Tourist extends Person {
 		return touristDBHandler.addCarToRentedCars(touristId, carID);
 	}
 	
-	public ReturnObjectUtility<Tourist> removeCarFromRentedCars(int touristId,int carID){
+	public ReturnObjectUtility<Integer> removeCarFromRentedCars(int touristId,int carID){
 		return touristDBHandler.removeCarFromRentedCars(touristId, carID);
 	}
 	
