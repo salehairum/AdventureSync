@@ -60,4 +60,7 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
 		return kitchen.getFoodBill(foodID, quantity);
 	}
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return kitchen.getHotelOwnerID(foodID);
+	}
 }

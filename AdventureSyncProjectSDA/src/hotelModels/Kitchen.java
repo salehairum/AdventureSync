@@ -43,5 +43,8 @@ public class Kitchen {
 	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
 		return food.getFoodBill(foodID, quantity);
 	}
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return food.getHotelOwnerID(foodID);
+	}
 }
 

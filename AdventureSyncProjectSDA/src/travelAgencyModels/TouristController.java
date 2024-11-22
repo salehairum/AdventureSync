@@ -90,6 +90,10 @@ public class TouristController {
 	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
 		return tourist.giveFeedbackToRoom(feedback);
 	}
+
+	public ReturnObjectUtility<Integer> orderFood(int touristId,int foodID){
+		return tourist.orderFood(touristId, foodID);
+	}	
 	
 	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID,boolean deduct){
 		return tourist.deductMoney(touristID, bill, transactionID, deduct);

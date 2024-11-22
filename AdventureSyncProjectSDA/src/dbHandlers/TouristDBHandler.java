@@ -412,6 +412,52 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 
+	public ReturnObjectUtility<Integer> orderFood(int touristId,int foodID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		try {
+		    String sql = "INSERT INTO TransactionHistory (touristID, serviceID, typeOfTransaction) VALUES ( ?, ?, ?)";
+		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		    pstmt.setInt(1, touristId);
+		    pstmt.setInt(2, foodID);
+		    pstmt.setString(3, "Order Food");
+		    
+		    // Execute the insert
+		    int rowsAffected = pstmt.executeUpdate();
+		    if (rowsAffected > 0) {
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		        	returnData.setObject(tID); 
+					 returnData.setMessage("Retrieved generated Transaction ID.");
+			         returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
+		    }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the seat/tourist exists.");
+		            } else {
+		                returnData.setMessage("Issue in renting seat in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+
+	
 	public ReturnObjectUtility<Integer> addRoomToBookedRooms(int touristId,int roomID){
 		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;

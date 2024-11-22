@@ -98,7 +98,7 @@ public class Main extends Application {
 	
  		//	TouristSelectRoomFromHotelView
  			//TouristChecksOutRoomView
- 			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(1,1,"Room", 33,0);
+ 			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(1,5,"Order", 33,5);
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
