@@ -7,6 +7,7 @@ import accountAndPersonModels.Tourist;
 import application.Feedback;
 import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.FoodItem;
 import hotelModels.Hotel;
 import hotelModels.Room;
 import hotelModels.RoomWithHotel;
@@ -18,6 +19,7 @@ public class TouristController {
 	Seat seat;
 	Room room;
 	RoomWithHotel roomWithHotel;
+	FoodItem food;
 	public TouristController() {
 		tourist=new Tourist();
 		hotel=new Hotel();
@@ -25,6 +27,7 @@ public class TouristController {
 		seat=new Seat();
 		room = new Room();
 		roomWithHotel = new RoomWithHotel();
+		food = new FoodItem();
 	}
 	public ReturnObjectUtility<Tourist> addTourist(Tourist newTourist){
 		return tourist.addTourist(newTourist);
@@ -77,6 +80,9 @@ public class TouristController {
 	}
 	public ReturnListUtility<Hotel> getHotelDetails() {
 		return hotel.getHotelDetails();
+	}
+	public ReturnListUtility<FoodItem> getFoodDetails(int hotelID) {
+		return food.getFoodDetails(hotelID);
 	}
 	public ReturnListUtility<Room> getRoomDetails(int hotelID) {
 		return room.getRoomDetails(hotelID);

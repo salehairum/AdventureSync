@@ -3,6 +3,7 @@ package travelAgencyModels;
 import java.time.LocalDate;
 import java.util.List;
 
+import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.TravelAgencyOwner;
 import dbHandlers.ReturnListUtility;
@@ -74,13 +75,24 @@ public class travelAgencyOwnerController {
 	public ReturnListUtility<Bus> getBusDetailsWithBusDriverID() {
 	    // Call the TravelAgencyOwner to fetch car details
 		return travelAgencyOwner.getAllBusWithBusDriverID();
-  }
+	}
+	public ReturnListUtility<BusDriver> getBusDriverDetails() {
+	    // Call the TravelAgencyOwner to fetch car details
+		return travelAgencyOwner.getBusDriverDetails();
+	}
+	public ReturnListUtility<FeedbackWithBusID> getFeedbackDetailsWithBusID() {
+	    // Call the TravelAgencyOwner to fetch car details
+		return travelAgencyOwner.getFeedbackDetailsWithBusID();
+	}
 	public ReturnObjectUtility<Float> getKmsTravelledBill(int carID, int nKms){
 		return travelAgencyOwner.getKmsTravelledBill(carID, nKms);
 	}
 
 	public ReturnObjectUtility<Float> getBill(int carID){
 		return travelAgencyOwner.getBill(carID);
+	}
+	public ReturnObjectUtility<Float> getOverallRating(){
+		return travelAgencyOwner.getOverallRating();
 	}
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return travelAgencyOwner.addMoney(bill);

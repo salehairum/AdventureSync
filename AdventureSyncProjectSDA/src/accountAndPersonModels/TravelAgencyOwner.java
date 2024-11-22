@@ -9,6 +9,7 @@ import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.FeedbackWithBusID;
 
 public class TravelAgencyOwner extends Person {
 	private int agencyOwnerID;
@@ -16,6 +17,8 @@ public class TravelAgencyOwner extends Person {
 	private TravelAgencyDBHandler travelAgencyDBHandler;
 	Car car;
 	Bus bus;
+	BusDriver busDriver;
+	FeedbackWithBusID fBusID;
 	//constructors
 	public TravelAgencyOwner()
 	{
@@ -23,6 +26,8 @@ public class TravelAgencyOwner extends Person {
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		car=new Car();
 		bus=new Bus();
+		busDriver = new BusDriver();
+		fBusID = new FeedbackWithBusID();
 	}
 	public TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
 	{
@@ -84,12 +89,23 @@ public class TravelAgencyOwner extends Person {
 	    // Fetch car data from the database handler
 	    return bus.retrieveBusListWithBusDriverID();
 	}
+	public ReturnListUtility<BusDriver> getBusDriverDetails() {
+	    // Fetch car data from the database handler
+	    return busDriver.getBusDriverDetails();
+	}
+	public ReturnListUtility<FeedbackWithBusID> getFeedbackDetailsWithBusID() {
+	    // Fetch car data from the database handler
+	    return fBusID.retrieveBusListWithBusDriverID();
+	}
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return car.updateCarRentalStatus(carID, rentalStatus);
 	}
 
 	public ReturnObjectUtility<Float> getBill(int carID){
 		return car.getBill(carID);
+	}
+	public ReturnObjectUtility<Float> getOverallRating(){
+		return fBusID.getOverallRating();
 	}
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return car.addMoney(bill);

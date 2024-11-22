@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -21,13 +20,12 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
             <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="79.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <TableView fx:id="hotelTable" layoutX="8.0" layoutY="157.0" prefHeight="207.0" prefWidth="534.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="hotelTable" layoutX="7.0" layoutY="109.0" prefHeight="255.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colHotelId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="HotelID" />
                   <TableColumn fx:id="colHotelName" prefWidth="285.60003662109375" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />

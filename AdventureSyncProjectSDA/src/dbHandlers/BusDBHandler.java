@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import accountAndPersonModels.BusDriver;
@@ -18,6 +20,7 @@ import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
+import travelAgencyModels.FeedbackWithBusID;
 import travelAgencyModels.Seat;
 import travelAgencyModels.Tour;
 
@@ -219,7 +222,54 @@ public class BusDBHandler {
 	    
 	    return returnData;
 	}
-	
+	public static ReturnListUtility<BusDriver> retrieveBusDriverList() {
+	    ReturnListUtility<BusDriver> returnData = new ReturnListUtility<>();
+	    HashMap<Integer, BusDriver> busDriverList = new HashMap<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        // Query to retrieve all bus drivers
+	        ResultSet rSet = stmt.executeQuery("SELECT * FROM BusDriver");
+
+	        if (!rSet.next()) { // Check if no bus drivers exist
+	            returnData.setMessage("Error: No bus drivers found in the database.");
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve and populate bus driver attributes
+	                int busDriverID = rSet.getInt("busDriverID");
+	                String name = rSet.getString("bname");
+	                LocalDate dob = rSet.getDate("dob").toLocalDate(); // Convert SQL Date to LocalDate
+	                String cnic = rSet.getString("cnic");
+
+	                // Create a new BusDriver object
+	                BusDriver busDriver = new BusDriver(busDriverID, name, dob, cnic);
+
+	                // Add the BusDriver object to the list
+	                busDriverList.put(busDriverID, busDriver);
+	            } while (rSet.next());
+
+	            // Set the list and success message
+	            returnData.setList(busDriverList);
+	            returnData.setMessage("Bus driver list retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such busdriver") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Bus driver table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving bus driver list from database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
 	    ReturnObjectUtility<Seat> returnData = new ReturnObjectUtility<>();
 	    
@@ -380,6 +430,48 @@ public class BusDBHandler {
 		}
         return returnData;
 	}
+	public static ReturnListUtility<FeedbackWithBusID> getFeedbackDetailsWithBusID() {
+	    ReturnListUtility<FeedbackWithBusID> returnData = new ReturnListUtility<>();
+	    
+	    try {
+	        // Create statement and execute the feedback query
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery("SELECT f.feedbackID, bhf.BusID, f.comment FROM BusHasFeedback bhf " +
+	                                           "JOIN Feedback f ON bhf.feedbackID = f.feedbackID " +
+	                                           "WHERE f.typeOfFeedback = 'bus'");
+
+	        // List to store feedback details
+	        HashMap<Integer, FeedbackWithBusID> feedbackList=new HashMap<Integer, FeedbackWithBusID>();
+	        // Process the result set
+	        while (rSet.next()) {
+	        	int feedbackID = rSet.getInt("feedbackID");
+	            int busId = rSet.getInt("BusID");
+	            String comment = rSet.getString("comment");
+
+	            // Create FeedbackWithBusID object and add to the list
+	            FeedbackWithBusID feedback = new FeedbackWithBusID(feedbackID, busId, comment);
+	            feedbackList.put(feedback.getFeedbackID(), feedback);
+	        }
+
+	        // Set the result in the returnData object
+	        if (feedbackList.isEmpty()) {
+	            returnData.setMessage("No feedback found for buses.");
+	            returnData.setSuccess(false);
+	        } else {
+	            returnData.setList(feedbackList);
+	            returnData.setMessage("Feedback details retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	        
+	    } catch (SQLException e) {
+	        // Handle SQL exceptions
+	        returnData.setMessage("Error retrieving feedback details: " + e.getMessage());
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
 	public ReturnListUtility<Bus> retrieveBusListWithBusDriverID() {
 		ReturnListUtility<Bus> returnData=new ReturnListUtility();
 		
@@ -515,7 +607,48 @@ public class BusDBHandler {
 		    
 		    return returnData;
 	}
-	
+	public ReturnObjectUtility<Float> getOverallRating() {
+	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        // Create the SQL query to retrieve the average rating for the bus
+	        String query = "SELECT ROUND(AVG(CAST(f.rating AS FLOAT)), 2) AS overallAverageRating " +
+	                       "FROM BusHasFeedback bhf " +
+	                       "JOIN Feedback f ON bhf.feedbackID = f.feedbackID " +
+	                       "WHERE f.typeOfFeedback = 'bus'";
+	        // Execute the query
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        // Check if a result is found
+	        if (rSet.next()) {
+	            float overallAverageRating = rSet.getFloat("overallAverageRating");
+
+	            // Set the retrieved rating in the return object
+	            returnData.setObject(overallAverageRating);
+	            returnData.setMessage("Overall rating retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: No feedback found for this bus.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+	        
+	        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Bus does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving bus rating from database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+	    
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;

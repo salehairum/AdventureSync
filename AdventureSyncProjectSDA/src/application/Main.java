@@ -60,6 +60,8 @@ import travelAgencyOwner.TravelAgencyManageCarsView;
 import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwner.TravelAgencyOwnerViewCarsView;
+import travelAgencyOwner.TravelAgencyOwnerViewsBusDriversView;
+import travelAgencyOwner.TravelAgencyOwnerViewsFeedbackView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
@@ -77,7 +79,7 @@ public class Main extends Application {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
 		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -87,7 +89,7 @@ public class Main extends Application {
 
 		try {
 			
- 			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
+ 			//Hotel hotel=hdb.retrieveHotelObject(1).getObject();
 // 			ArrayList<Room> rooms=hotel.getRooms();
 // 			for (Room room : rooms) {
 // 			    // Access properties or methods of each room
@@ -98,7 +100,9 @@ public class Main extends Application {
 	
  		//	TouristSelectRoomFromHotelView
  			//TouristChecksOutRoomView
- 			TouristPaymentView hotelOwnerMenu = new TouristPaymentView(1,1,"Room", 33,0);
+ 			Hotel hotel = new Hotel();
+ 			hotel.setHotelID(1);
+ 			TravelAgencyOwnerViewsFeedbackView hotelOwnerMenu = new TravelAgencyOwnerViewsFeedbackView();
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

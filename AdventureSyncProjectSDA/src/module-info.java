@@ -13,4 +13,5 @@ module AdventureSyncProjectSDA {
 	opens travelAgencyModels to javafx.base;
 	opens tourist to javafx.fxml;
 	opens hotelModels to javafx.base;
+	opens accountAndPersonModels to javafx.base;
 }

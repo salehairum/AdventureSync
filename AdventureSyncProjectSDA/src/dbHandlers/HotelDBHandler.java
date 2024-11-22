@@ -680,7 +680,58 @@ public class HotelDBHandler {
 
 	    return returnData;
 	}
-	
+	public ReturnListUtility<FoodItem> retrieveFoodList(int hotelID) {
+	    ReturnListUtility<FoodItem> returnData = new ReturnListUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT fi.foodID, fi.fName, fi.quantity, fi.price " +
+                    "FROM FoodItem fi " +
+                    "JOIN KitchenHasFood khf ON fi.foodID = khf.foodID " +
+                    "JOIN Hotel h ON h.kitchenID = khf.kitchenID WHERE fi.quantity > 0 and h.hotelID =" + hotelID;
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        HashMap<Integer, FoodItem> foodList = new HashMap<>();
+
+	        if (!rSet.next()) {
+	            // No food items found for the given hotelID
+	            returnData.setMessage("Error: No food items found for the given hotel ID: " + hotelID);
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve food item details from the result set
+	                int foodID = rSet.getInt("foodID");
+	                String name = rSet.getString("fName");
+	                int quantity = rSet.getInt("quantity");
+	                float price = rSet.getFloat("price");
+
+	                // Create a FoodItem object
+	                FoodItem foodItem = new FoodItem(foodID, name, quantity, price);
+
+	                // Add the FoodItem object to the HashMap
+	                foodList.put(foodID, foodItem);
+	            } while (rSet.next());
+
+	            returnData.setList(foodList);
+	            returnData.setMessage("Food items retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such table") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Required table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving food items from the database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
 	public ReturnListUtility<RoomWithHotel> getBookedRoomDetails(int touristID) {
 	    ReturnListUtility<RoomWithHotel> returnData = new ReturnListUtility<>();
 

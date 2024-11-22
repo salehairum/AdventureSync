@@ -3,6 +3,7 @@ package accountAndPersonModels;
 import java.time.LocalDate;
 
 import dbHandlers.BusDBHandler;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Bus;
@@ -37,7 +38,11 @@ public class BusDriver extends Person {
 		ReturnObjectUtility<BusDriver> returnData = BusDBHandler.retrieveBusDriverData(busDriverID);
 		return returnData;
 	}
-	
+	public ReturnListUtility<BusDriver> getBusDriverDetails()
+	{
+		ReturnListUtility<BusDriver> returnData = BusDBHandler.retrieveBusDriverList();
+		return returnData;
+	}
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver bDriver){
 		return busDBHandler.addBusDriver(bDriver);
 	}
