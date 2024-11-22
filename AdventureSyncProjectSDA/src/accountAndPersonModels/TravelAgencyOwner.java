@@ -22,6 +22,7 @@ public class TravelAgencyOwner extends Person {
 		super();
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		car=new Car();
+		bus=new Bus();
 	}
 	public TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
 	{
@@ -71,9 +72,17 @@ public class TravelAgencyOwner extends Person {
 	    // Fetch car data from the database handler
 	    return car.retrieveCarList();
 	}
-	public ReturnListUtility<Bus> getAllBus() {
+	public ReturnListUtility<Car> getAllNotRentedCars() {
 	    // Fetch car data from the database handler
-	    return bus.retrieveBusList();
+	    return car.retrieveNotRentedCarList();
+	}
+	public ReturnListUtility<Car> getAllTouristRentedCars(int touristID) {
+	    // Fetch car data from the database handler
+	    return car.retrieveTouristRentedCarList(touristID);
+	}
+	public ReturnListUtility<Bus> getAllBusWithBusDriverID() {
+	    // Fetch car data from the database handler
+	    return bus.retrieveBusListWithBusDriverID();
 	}
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		return car.updateCarRentalStatus(carID, rentalStatus);

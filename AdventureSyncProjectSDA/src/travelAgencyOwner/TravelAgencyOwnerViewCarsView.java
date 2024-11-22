@@ -58,7 +58,6 @@ public class TravelAgencyOwnerViewCarsView {
 			e.printStackTrace();
 		}
 		taoController = new travelAgencyOwnerController();
-		//displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {

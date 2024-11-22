@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -22,18 +21,17 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
             <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="125.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/room.png" />
                </image>
             </ImageView>
-            <TableView fx:id="carTable" layoutX="13.0" layoutY="157.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="roomTable" layoutX="7.0" layoutY="94.0" prefHeight="249.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
-                  <TableColumn prefWidth="104.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
-                  <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
-                  <TableColumn prefWidth="236.0" style="-fx-background-color: #F9F7F3;" text="Description" />
+                  <TableColumn fx:id="colRoomId" prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
+                  <TableColumn fx:id="colRating" prefWidth="104.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
+                  <TableColumn fx:id="colPrice" prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
+                  <TableColumn fx:id="colDesc" prefWidth="236.0" style="-fx-background-color: #F9F7F3;" text="Description" />
                </columns>
             </TableView>
             <Button fx:id="backButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">

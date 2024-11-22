@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -22,21 +21,20 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="138.0" prefHeight="103.0" prefWidth="166.0" />
             <ImageView fitHeight="86.0" fitWidth="67.0" layoutX="125.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/car.png" />
                </image>
             </ImageView>
-            <TableView fx:id="carTable" layoutX="14.0" layoutY="190.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="carTable" layoutX="7.0" layoutY="103.0" prefHeight="237.0" prefWidth="536.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Car ID" />
-                  <TableColumn prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
-                  <TableColumn prefWidth="67.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
-                  <TableColumn prefWidth="127.20001220703125" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
-                  <TableColumn prefWidth="75.99993896484375" style="-fx-background-color: #f9f7f3;" text="Plate No." />
-                  <TableColumn prefWidth="76.79998779296875" style="-fx-background-color: #f9f7f3;" text="RentalFee" />
-                  <TableColumn prefWidth="56.0" style="-fx-background-color: #f9f7f3;" text="Cost/Km" />
+                  <TableColumn fx:id="colCarId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Car ID" />
+                  <TableColumn fx:id="colModel" prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
+                  <TableColumn fx:id="colBrand" prefWidth="67.20001220703125" style="-fx-background-color: #f9f7f3;" text="Brand" />
+                  <TableColumn fx:id="colYear" prefWidth="127.20001220703125" style="-fx-background-color: #F9F7F3;" text="Year of Manufacture" />
+                  <TableColumn fx:id="colPlateNo" prefWidth="75.99993896484375" style="-fx-background-color: #f9f7f3;" text="Plate No." />
+                  <TableColumn fx:id="colRentalFee" prefWidth="76.79998779296875" style="-fx-background-color: #f9f7f3;" text="RentalFee" />
+                  <TableColumn fx:id="colCost" prefWidth="60.0" style="-fx-background-color: #f9f7f3;" text="Cost/Km" />
                </columns>
             </TableView>
             <Button fx:id="backButton" layoutX="146.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
@@ -44,7 +42,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="rentButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Return" textFill="#f7a072">
+            <Button fx:id="rentButton" disable="true" layoutX="278.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Rent" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

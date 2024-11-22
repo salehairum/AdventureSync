@@ -3,10 +3,14 @@ package tourist;
 import java.io.IOException;
 
 import accountAndPersonModels.Tourist;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
+import hotelModels.RoomWithHotel;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,8 +19,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -39,6 +46,10 @@ public class TouristChecksOutRoomView {
 	private Text cnic;
 	@FXML
 	private Text dob;
+	@FXML
+	private TableView<RoomWithHotel> roomTable;
+	@FXML
+	private TableColumn<RoomWithHotel, String> colRoomId, colPrice, colDesc, colHotelId, colHotelName;
 	
 	private int touristID;
 	
@@ -56,7 +67,6 @@ public class TouristChecksOutRoomView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	@FXML
@@ -66,6 +76,7 @@ public class TouristChecksOutRoomView {
 		tController = new TouristController();
 		hController = new hotelOwnerController();
 		displayOwnerDetails();
+		loadRoomTable();
 	}
 	
 	public Parent getRoot() {
@@ -114,6 +125,14 @@ public class TouristChecksOutRoomView {
 				if(!success)
 					hController.updateRoomBookingStatus(roomID, true); 
 				//if transaction could not be made, set isBooked as true i.e it is still booked.
+				try {
+                    // Dynamically load and show the TouristPaymentView
+                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                    currentStage.close();
+                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 			}
 		};
 		checkoutButton.setOnAction(rentButtonHandler);
@@ -170,5 +189,25 @@ public class TouristChecksOutRoomView {
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
+    }
+    public void loadRoomTable() {
+        // Initialize table columns
+    	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomId"));
+    	colPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+    	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+    	colHotelId.setCellValueFactory(new PropertyValueFactory<>("HotelId"));
+    	colHotelName.setCellValueFactory(new PropertyValueFactory<>("HotelName"));
+        // Get car details from the controller
+        ReturnListUtility<RoomWithHotel> returnData = tController.getBookedRoomDetails(touristID);
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<RoomWithHotel> bookedRoomList = FXCollections.observableArrayList(returnData.getList().values());
+            roomTable.setItems(bookedRoomList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            roomTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
     }
 }

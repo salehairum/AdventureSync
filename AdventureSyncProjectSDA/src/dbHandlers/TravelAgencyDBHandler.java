@@ -269,7 +269,153 @@ public class TravelAgencyDBHandler {
 		}
         return returnData;
 	}
+	public ReturnListUtility<Car> retrieveNotRentedCarList() {
+		ReturnListUtility<Car> returnData=new ReturnListUtility();
+		
+		try {
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from car where rentalStatus=0");
+	        
+	        HashMap<Integer, Car> carList=new HashMap<Integer, Car>();
+	        
+	        if(!rSet.next()) {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Car does not exist.");
+	        }
+	        else {
+	        	 do { // Check if a result was found
+	 	            // Create and populate a Car object
+	 	            int carIDRetrieved = rSet.getInt("carID");
+	 	            String brand = rSet.getString("brand");
+	 	            String model = rSet.getString("model");
+	 	            int year = rSet.getInt("manufactureYear");
+	 	            String plateNumber = rSet.getString("plateNumber");
+	 	            boolean rentalStatus = rSet.getBoolean("rentalStatus");
+	 	            float rentalFee = rSet.getFloat("rentalFee");
+	 	            float costPerKm = rSet.getFloat("costPerKm");
 
+	 	            Car car = new Car(carIDRetrieved, brand, model, year, plateNumber, rentalStatus, rentalFee,costPerKm);
+	 	            
+	 	            carList.put(car.getID(), car);
+	 	        } while(rSet.next());
+	        	 
+	        	returnData.setList(carList);
+	        	returnData.setMessage("Cars retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+            
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Car does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving cars from database: " + e.getMessage());
+		    }
+            returnData.setSuccess(false);
+		}
+        return returnData;
+	}
+	public ReturnListUtility<Car> retrieveTouristRentedCarList(int touristID) {
+		ReturnListUtility<Car> returnData=new ReturnListUtility();
+		
+		try {
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("SELECT c.carID, c.brand, c.model, c.manufactureYear, c.plateNumber, c.rentalStatus, " +
+                    "c.rentalFee, c.costPerKm " +
+                    "FROM car c " +
+                    "JOIN TouristHasRentedCars thrc ON c.carID = thrc.carID " +
+                    "WHERE thrc.touristID = " + touristID);
+	        
+	        HashMap<Integer, Car> carList=new HashMap<Integer, Car>();
+	        
+	        if(!rSet.next()) {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Car does not exist.");
+	        }
+	        else {
+	        	 do { // Check if a result was found
+	 	            // Create and populate a Car object
+	 	            int carIDRetrieved = rSet.getInt("carID");
+	 	            String brand = rSet.getString("brand");
+	 	            String model = rSet.getString("model");
+	 	            int year = rSet.getInt("manufactureYear");
+	 	            String plateNumber = rSet.getString("plateNumber");
+	 	            boolean rentalStatus = rSet.getBoolean("rentalStatus");
+	 	            float rentalFee = rSet.getFloat("rentalFee");
+	 	            float costPerKm = rSet.getFloat("costPerKm");
+
+	 	            Car car = new Car(carIDRetrieved, brand, model, year, plateNumber, rentalStatus, rentalFee,costPerKm);
+	 	            
+	 	            carList.put(car.getID(), car);
+	 	        } while(rSet.next());
+	        	 
+	        	returnData.setList(carList);
+	        	returnData.setMessage("Cars retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+            
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Car does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving cars from database: " + e.getMessage());
+		    }
+            returnData.setSuccess(false);
+		}
+        return returnData;
+	}
+	/*public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
+		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "UPDATE Car SET rentalStatus = ? WHERE carID = ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setBoolean(1,rentalStatus);
+			 pstmt.setInt(2, carID);
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 if(rentalStatus) {
+					 returnData.setMessage("Car is now rented.");
+				 }
+				 else {
+					 returnData.setMessage("Car is no longer rented.");
+				 }
+
+		         returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update car rental status.");
+		         returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		        	returnData.setMessage("Error: Car does not exist.");
+		        }else {
+		        	returnData.setMessage("Issue in updating car in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+	        returnData.setSuccess(false);
+		}
+		return returnData;
+	}*/
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;

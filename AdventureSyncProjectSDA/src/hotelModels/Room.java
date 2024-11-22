@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import application.Feedback;
 import dbHandlers.HotelDBHandler;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 
 public class Room {
@@ -16,12 +17,20 @@ public class Room {
 	private ArrayList<Feedback> ratings;
 	private int hotelID;
 	private HotelDBHandler hotelDbHandler;
+	private int overallRating;
 	//constructor
 	public Room() {
 		roomID = 0;
 		description = "";
 		isBooked = false;
 		hotelDbHandler=new HotelDBHandler();
+	}
+	public Room(int roomID, int overallRating, float pricePerNight, String description) 
+	{
+		this.roomID = roomID;
+		this.description = description;
+		this.pricePerNight = pricePerNight;
+		this.overallRating = overallRating;
 	}
 	public Room(int roomID, String description, float pricePerNight, boolean isBooked, 
             ArrayList<Feedback> ratings, int hotelID) {
@@ -50,6 +59,13 @@ public class Room {
 	}
 	public void setRoomID(int roomID) {
 		this.roomID = roomID;
+	}
+	
+	public int getOverallRating() {
+		return overallRating;
+	}
+	public void setOverallRating(int overallRating) {
+		this.overallRating = overallRating;
 	}
 	public int getHotelID() {
 		return hotelID;
@@ -83,6 +99,9 @@ public class Room {
 	}
 	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		return hotelDbHandler.updateRoomBookingStatus(roomID, bookingStatus);
+	}
+	public ReturnListUtility<Room> getRoomDetails(int hotelID) {
+		return hotelDbHandler.retrieveRoomList(hotelID);
 	}
 //	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
 //		return hotelDbHandler.add

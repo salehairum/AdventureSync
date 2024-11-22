@@ -43,7 +43,7 @@ public class TravelAgencyViewBusesView {
 	@FXML 
 	private Button backButton;
 	@FXML
-	private TableView<Bus> carTable;
+	private TableView<Bus> busTable;
 	@FXML
 	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo, colDriverID, colHasTour;
 	
@@ -118,20 +118,20 @@ public class TravelAgencyViewBusesView {
         colBrand.setCellValueFactory(new PropertyValueFactory<>("Brand"));
         colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
         colPlateNo.setCellValueFactory(new PropertyValueFactory<>("PlateNumber"));
-        colDriverID.setCellValueFactory(new PropertyValueFactory<>("driverID")); //yeh yahan masla karay gaa i think
-        colHasTour.setCellValueFactory(new PropertyValueFactory<>("Tour"));
+        colDriverID.setCellValueFactory(new PropertyValueFactory<>("BusDriverID"));
+        colHasTour.setCellValueFactory(new PropertyValueFactory<>("HasTour"));
 
         // Get car details from the controller
-        ReturnListUtility<Bus> returnData = taoController.getBusDetails();
+        ReturnListUtility<Bus> returnData = taoController.getBusDetailsWithBusDriverID();
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList
             ObservableList<Bus> busList = FXCollections.observableArrayList(returnData.getList().values());
-            carTable.setItems(busList); // Set data to the table
+            busTable.setItems(busList); // Set data to the table
         } else {
             // Handle the error (e.g., log or show a message)
             System.out.println("Error loading bus: " + returnData.getMessage());
-            carTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+            busTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }
 }

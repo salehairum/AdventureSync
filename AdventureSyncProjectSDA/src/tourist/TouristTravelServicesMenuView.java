@@ -72,7 +72,7 @@ public class TouristTravelServicesMenuView {
 	public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
 		menuButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class, "Menu"));
-		rentLogo.setOnMouseClicked(createButtonHandler(TouristRentCarView.class, "Rent Car"));
+		rentLogo.setOnMouseClicked(createButtonHandler(TouristRentCarView.class, "Rent Car")); //pass tourist ID
 		rentLabel.setOnMouseClicked(createButtonHandler(TouristRentCarView.class, "Rent Car"));
 		returnLogo.setOnMouseClicked(createButtonHandler(TouristReturnCarView.class, "Return Car"));
 		returnLabel.setOnMouseClicked(createButtonHandler(TouristReturnCarView.class, "Return Car"));

@@ -1,6 +1,7 @@
 package travelAgencyModels;
 
 import dbHandlers.BusDBHandler;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 
 public class Seat {
@@ -62,5 +63,8 @@ public class Seat {
 	
 	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
 		return busHandler.retrieveSeatObject(seatId, busId);
+	}
+	public ReturnListUtility<Seat> getSeatDetails(int busId) {
+		return busHandler.getSeatDetails(busId);
 	}
 }

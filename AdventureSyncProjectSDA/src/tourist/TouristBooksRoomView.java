@@ -2,9 +2,12 @@ package tourist;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,8 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,7 +43,11 @@ public class TouristBooksRoomView {
 	@FXML
 	private Button selectHotelButton;
 	@FXML
-	private Button menuButton;
+	private Button backButton;
+	@FXML
+	private TableView<Hotel> hotelTable;
+	@FXML
+	private TableColumn<Hotel, String> colHotelId, colHotelName, colHotelLoc;
 	private int touristID;
 	
 	Parent root;
@@ -63,6 +73,7 @@ public class TouristBooksRoomView {
 		tController = new TouristController();
 		hController = new hotelOwnerController();
 		displayOwnerDetails();
+		loadHotelTable();
 	}
 	
 	public Parent getRoot() {
@@ -130,7 +141,7 @@ public class TouristBooksRoomView {
 		};
 			
 		selectHotelButton.setOnAction(selectBusButtonHandler);
-		menuButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class,"Travel Services"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class,"Hotel Services"));
 	}
 	
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
@@ -182,5 +193,24 @@ public class TouristBooksRoomView {
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
+    }
+    public void loadHotelTable() {
+        // Initialize table columns
+    	colHotelId.setCellValueFactory(new PropertyValueFactory<>("HotelID"));
+        colHotelName.setCellValueFactory(new PropertyValueFactory<>("HotelName"));
+        colHotelLoc.setCellValueFactory(new PropertyValueFactory<>("Location"));
+
+        // Get car details from the controller
+        ReturnListUtility<Hotel> returnData = tController.getHotelDetails();
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Hotel> hotelList = FXCollections.observableArrayList(returnData.getList().values());
+            hotelTable.setItems(hotelList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            hotelTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
     }
 }

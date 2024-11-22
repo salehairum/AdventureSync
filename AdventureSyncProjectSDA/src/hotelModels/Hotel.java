@@ -3,6 +3,7 @@ package hotelModels;
 import java.util.ArrayList;
 
 import dbHandlers.HotelDBHandler;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 
 public class Hotel {
@@ -22,6 +23,12 @@ public class Hotel {
 		hotelName="";
 		kitchen=new Kitchen();
         hotelDbHandler=new HotelDBHandler();
+	}
+	public Hotel(int hotelID, String location, String hotelName)
+	{
+		this.hotelID = hotelID;
+		this.hotelName = hotelName;
+		this.location = location;
 	}
 	public Hotel(int hotelID, String hotelName, String location, Kitchen kitchen, ArrayList<Room> rooms) {
 	        this.hotelID = hotelID;
@@ -73,5 +80,8 @@ public class Hotel {
 	}
 	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return kitchen.updateFoodQuantity(foodID, quantity, add);
+	}
+	public ReturnListUtility<Hotel> getHotelDetails() {
+		return hotelDbHandler.retrieveHotelList();
 	}
 }
