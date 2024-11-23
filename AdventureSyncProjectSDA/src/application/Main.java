@@ -74,6 +74,7 @@ import travelAgencyOwner.TravelAgencyOwnerViewsBusDriversView;
 import travelAgencyOwner.TravelAgencyOwnerViewsFeedbackView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
+import signupForms.AccountMenuView;
 import signupForms.BusDriverAddsBus;
 import signupForms.BusDriverSignUpView;
 import signupForms.HotelOwnerAddsHotel;
@@ -102,27 +103,14 @@ public class Main extends Application {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
 			TravelAgencyOwnerUpdatesAccountView hotelOwnerMenu = new TravelAgencyOwnerUpdatesAccountView(1);
- 			//Hotel hotel=hdb.retrieveHotelObject(1).getObject();
-// 			ArrayList<Room> rooms=hotel.getRooms();
-// 			for (Room room : rooms) {
-// 			    // Access properties or methods of each room
-			
-			
-// 			    System.out.println("Room ID: " + room.getRoomID());}
-			
-// 			Bus bus=bdb.retrieveBusObject(15).getObject();
-				
-	
- 		//	TouristSelectRoomFromHotelView
- 			//TouristChecksOutRoomView
 
-			Parent root = hotelOwnerMenu.getRoot();
+			Parent root = accountMenuView.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
 //	       
 		    // Set the scene to the primary stage
 		    primaryStage.setScene(scene);
-		    primaryStage.setTitle("Hotel Owner Menu");
+		    primaryStage.setTitle("Account Menu");
 		    primaryStage.show();
 			} catch(Exception e) {
 				e.printStackTrace();

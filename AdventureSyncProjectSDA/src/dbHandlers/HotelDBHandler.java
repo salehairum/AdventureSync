@@ -1234,7 +1234,7 @@ public class HotelDBHandler {
 
 	    return returnData;
 	}
-	public ReturnListUtility<FoodItem> retrieveFoodList(int hotelID) {
+	public ReturnListUtility<FoodItem> retrieveFoodList(int hotelId) {
 	    ReturnListUtility<FoodItem> returnData = new ReturnListUtility<>();
 
 	    try {
@@ -1242,14 +1242,14 @@ public class HotelDBHandler {
 	        String query = "SELECT fi.foodID, fi.fName, fi.quantity, fi.price " +
                     "FROM FoodItem fi " +
                     "JOIN KitchenHasFood khf ON fi.foodID = khf.foodID " +
-                    "JOIN Hotel h ON h.kitchenID = khf.kitchenID WHERE fi.quantity > 0 and h.hotelID =" + hotelID;
+                    "JOIN Kitchen k ON k.kitchenID = khf.kitchenID WHERE fi.quantity > 0 and k.hotelID = " + hotelId;
 	        ResultSet rSet = stmt.executeQuery(query);
 
 	        HashMap<Integer, FoodItem> foodList = new HashMap<>();
 
 	        if (!rSet.next()) {
 	            // No food items found for the given hotelID
-	            returnData.setMessage("Error: No food items found for the given hotel ID: " + hotelID);
+	            returnData.setMessage("Error: No food items found for the given hotel ID: " + hotelId);
 	            returnData.setSuccess(false);
 	        } else {
 	            do {

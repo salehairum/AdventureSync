@@ -48,10 +48,10 @@ public class touristRoomFeedbackView {
 	TouristController tController;
 	private int touristID;
 	
-	public touristRoomFeedbackView(int id) {
+	public touristRoomFeedbackView(Integer id) {
+		touristID=id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRoomFeedback.fxml"));
 		loader.setController(this);
-		touristID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -167,7 +167,7 @@ public class touristRoomFeedbackView {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);

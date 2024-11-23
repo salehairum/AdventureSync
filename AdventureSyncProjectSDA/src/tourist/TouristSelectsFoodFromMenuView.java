@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -22,7 +23,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import travelAgencyModels.TouristController;
 
 public class TouristSelectsFoodFromMenuView {
@@ -54,10 +57,10 @@ public class TouristSelectsFoodFromMenuView {
 	hotelOwnerController hController;
 	Hotel hotel;
 	
-	public TouristSelectsFoodFromMenuView(int id, Hotel newHotel) {
+	public TouristSelectsFoodFromMenuView(Integer id, Hotel newHotel) {
+		touristID=id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectsFoodFromMenu.fxml"));
 		loader.setController(this);
-		touristID=id;
 		hotel=newHotel;
 		try {
 			root = loader.load();
@@ -108,7 +111,13 @@ public class TouristSelectsFoodFromMenuView {
 			}
 			
 			int foodID=Integer.parseInt(foodIDInput.getText());					
-			int foodQuantity=Integer.parseInt(foodQuanInput.getText());					
+			int foodQuantity=Integer.parseInt(foodQuanInput.getText());
+			
+			if(foodQuantity<=0) {
+				alertInvalidInput.setContentText("Food quantity should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
 
 			if(foodQuantity<=0) {
 				alertInvalidInput.setContentText("Food quantity should be greater than zero."); 
@@ -136,13 +145,79 @@ public class TouristSelectsFoodFromMenuView {
 				    alert.showAndWait();
 				    
 				if(success) {
-					int transactionID=returnData2.getObject();
+					Integer transactionID=returnData2.getObject();
+					try 
+				    {
+				    	String transactionType = "Order";
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, foodID, transactionType, transactionID, foodQuantity);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Payment Gateway");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
 				}
 			}
 		};
 			
 		orderButton.setOnAction(orderButtonHandler);
+		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class,"Hotel Services", touristID));
 	}
+	
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
+
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
+
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
+
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
+
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
+	
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;
@@ -160,7 +235,7 @@ public class TouristSelectsFoodFromMenuView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
