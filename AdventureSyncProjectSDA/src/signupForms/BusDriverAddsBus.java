@@ -40,10 +40,12 @@ public class BusDriverAddsBus {
 	private TextField nRowsInput;
 	Parent root;
 	busDriverController bController;
+	int busDriverID;
 	
-	public BusDriverAddsBus() {
+	public BusDriverAddsBus(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/signupForms/busDriverAddsBus.fxml"));
 		loader.setController(this);
+		busDriverID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -112,7 +114,7 @@ public class BusDriverAddsBus {
 	        // Perform the operation
 	        Bus bus = createBusObject();
 
-	        ReturnObjectUtility<Boolean> returnData = bController.addBus(bus);
+	        ReturnObjectUtility<Boolean> returnData = bController.addBus(bus, busDriverID);
 
 	        // Show success or failure message
 	        boolean success = returnData.isSuccess();

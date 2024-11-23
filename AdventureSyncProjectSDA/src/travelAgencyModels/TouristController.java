@@ -96,11 +96,18 @@ public class TouristController {
 	public ReturnObjectUtility<Feedback> giveFeedbackToRoom(Feedback feedback) {
 		return tourist.giveFeedbackToRoom(feedback);
 	}
+
+	public ReturnObjectUtility<Integer> orderFood(int touristId,int foodID){
+		return tourist.orderFood(touristId, foodID);
+	}	
 	
 	public ReturnObjectUtility<Tourist> deductMoney(int touristID, float bill, int transactionID,boolean deduct){
 		return tourist.deductMoney(touristID, bill, transactionID, deduct);
 	}
 	public ReturnObjectUtility<Boolean> checkBalance(int touristID, float bill){
 		return tourist.checkBalance(touristID, bill);
+	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return tourist.checkPassword(enteredPassword, username);
 	}
 }

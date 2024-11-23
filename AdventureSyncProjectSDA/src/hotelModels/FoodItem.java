@@ -62,5 +62,8 @@ public class FoodItem {
 	}
 	public ReturnListUtility<FoodItem> getFoodDetails(int hotelID) {
 		return hotelDbHandler.retrieveFoodList(hotelID);
+  }
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return hotelDbHandler.getHotelOwnerID(foodID);
 	}
 }

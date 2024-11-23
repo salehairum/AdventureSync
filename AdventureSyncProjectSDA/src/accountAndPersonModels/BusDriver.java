@@ -47,6 +47,10 @@ public class BusDriver extends Person {
 		return busDBHandler.addBusDriver(bDriver);
 	}
 	
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return busDBHandler.checkPassword(enteredPassword, username);
+	}
+	
 	public ReturnObjectUtility<Float> addMoney(int busId, float bill){
 		return busDBHandler.addMoney(busId, bill);
 	}

@@ -97,4 +97,7 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return travelAgencyOwner.addMoney(bill);
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return travelAgencyOwner.checkPassword(enteredPassword, username);
+	}
 }
