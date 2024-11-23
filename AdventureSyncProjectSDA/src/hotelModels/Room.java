@@ -115,4 +115,7 @@ public class Room {
 	public ReturnObjectUtility<Boolean> addRoom(Room room) {
 		return hotelDbHandler.addRoom(room);
 	}
+	public ReturnObjectUtility<Boolean> deleteRoom(int roomID) {
+		return hotelDbHandler.deleteRoom(roomID);
+	}
 }

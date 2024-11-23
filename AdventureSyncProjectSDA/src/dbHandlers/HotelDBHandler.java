@@ -92,6 +92,119 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
+	public ReturnObjectUtility<Boolean> deleteRoom(int roomID) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
+		try {
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select isBooked from room where roomID="+roomID);
+	        
+	        while(rSet.next() && rSet.getBoolean(1)) {
+	        	returnData.setMessage("Room is booked, cannot be deleted");
+            	returnData.setSuccess(false);
+            	return returnData;
+	        }
+
+	        //now delete car
+			String deleteQuery = "DELETE FROM room WHERE roomId = ?";
+            PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
+            pstmt.setInt(1, roomID);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+            	returnData.setMessage("Room with id "+roomID+" deleted successfully");
+            	returnData.setSuccess(true);
+            } else {
+            	returnData.setMessage("Room could not be deleted");
+            	returnData.setSuccess(false);
+            }
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
+		    	returnData.setMessage("Error: Cannot delete Room as it is referenced in rental records. Remove related records first.");
+		    } else if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist")) {
+		    	returnData.setMessage("Error: The Room you are trying to delete does not exist."); 
+		    } else {
+		    	returnData.setMessage("Issue in deleting Room from database: " + e.getMessage());
+		    }
+        	returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
+	
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int  hotelOwnerID) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "INSERT INTO Hotel (hlocation, hname) VALUES (?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setString(1, hotel.getLocation());
+			 pstmt.setString(2, hotel.getHotelName());;
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			 int newHotelId=0;
+			 if (rowsAffected > 0) {
+				 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+		                if (generatedKeys.next()) {
+		                    newHotelId= generatedKeys.getInt(1);
+		                    returnData.setMessage("Hotel added successfully with ID: " + newHotelId);
+		                } else {
+		                	returnData.setMessage("Hotel added, but ID retrieval failed.");
+		                }
+		            }
+                 returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to add hotel.");
+                 returnData.setSuccess(false);
+			 }
+			 sql = "INSERT INTO HotelOwnerOwnsHotel (hotelID, hotelOwnerID) VALUES (?, ?);";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setInt(1,newHotelId);
+			 pstmt.setInt(2, hotelOwnerID);;
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <= 0) {
+				 returnData.setMessage("Failed to assign hotel to hotel owner.");
+                 returnData.setSuccess(false);
+			 }
+			 sql = "INSERT INTO kitchen (hotelID) VALUES (?)";
+			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			    
+			 // Set parameters
+			 pstmt.setInt(1,newHotelId);
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <= 0) {
+				 returnData.setMessage("Failed to add kitchen.");
+                 returnData.setSuccess(false);
+			 }
+
+
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in adding hotels to db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
 	public static ReturnObjectUtility<HotelOwner> retrieveHotelOwnerData(int hotelOwnerID) {
 		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility();
 		
@@ -219,6 +332,115 @@ public class HotelDBHandler {
 		    return returnData;
 		}
 
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		ReturnObjectUtility<Integer> returnData=new ReturnObjectUtility<Integer>();
+		PreparedStatement pstmt;
+		try {
+			 Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("select accPassword, accountID from account where username='" + username+"'");
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            String accPassword= rSet.getString("accPassword");
+			        int accountID=rSet.getInt("accountID");
+		            Statement stmtForAccount = conn.createStatement();
+			        ResultSet rSetForAccount = stmt.executeQuery("select hotelOwnerID from account inner join hotelOwner on hotelOwner.accountID=account.accountID where account.accountID=" + accountID);
+			        if(!rSetForAccount.next()) {
+			        	returnData.setMessage("This username does not belong to a hotel owner account!");
+			            returnData.setSuccess(false);
+			            return returnData;
+			        }
+		            
+			        int hotelOwnerID=rSetForAccount.getInt("hotelOwnerID");
+			        System.out.println("Actual: "+accPassword);
+			        System.out.println("Entered: "+enteredPassword);
+			        if(accPassword.equals(enteredPassword)) {
+			        	returnData.setObject(hotelOwnerID);
+			            returnData.setMessage("Logged in successfully");
+			            returnData.setSuccess(true);
+			            return returnData;
+			        }
+			        else {
+			        	returnData.setObject(hotelOwnerID);
+			            returnData.setMessage("Incorrect Password");
+			            returnData.setSuccess(false);
+			            return returnData;
+			        }
+
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: User does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in logging in: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+
+	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
+		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
+		try {
+			Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select * from foodITEM where foodID="+foodID);
+	        
+	        while(!rSet.next()) {
+            	returnData.setMessage("Food item that you want to delete does not exist.");
+            	returnData.setSuccess(false);
+            	return returnData;
+	        }
+	
+			String deleteQuery = "DELETE FROM kitchenHasFood WHERE foodId = ?";
+            PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
+            pstmt.setInt(1, foodID);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected <= 0) {
+            	returnData.setMessage("Food could not be removed from kitchen");
+            	returnData.setSuccess(false);
+            }
+			deleteQuery = "DELETE FROM FoodItem WHERE foodId = ?";
+            pstmt = conn.prepareStatement(deleteQuery);
+            pstmt.setInt(1, foodID);
+            rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+            	returnData.setMessage("Food with "+foodID+" deleted successfully!");
+            	returnData.setSuccess(true);
+            }
+            else {
+                	returnData.setMessage("Food with "+foodID+" could not be deleted!");
+                	returnData.setSuccess(false);
+                }
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
+		    	returnData.setMessage("Error: Cannot delete Food as it is referenced in rental records. Remove related records first.");
+		    } else if (errorMessage.contains("no such Food") || errorMessage.contains("does not exist")) {
+		    	returnData.setMessage("Error: The Food you are trying to delete does not exist."); 
+		    } else {
+		    	returnData.setMessage("Issue in deleting Food from database: " + e.getMessage());
+		    }
+        	returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
+	
+	
 	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
 	    ReturnObjectUtility<Hotel> returnData = new ReturnObjectUtility<>();
 	    
@@ -231,11 +453,18 @@ public class HotelDBHandler {
 	            int retrievedHotelID = hotelSet.getInt("hotelID");
 	            String hotelName = hotelSet.getString("hName");
 	            String location = hotelSet.getString("hLocation");
-	            int kitchenID = hotelSet.getInt("kitchenID");
+	            ResultSet kitchenSet = stmt.executeQuery("SELECT kitchenID FROM Kitchen WHERE hotelID = " + hotelID);
+	            Kitchen kitchen = null;
 
-	            // Create a Kitchen object
-	            Kitchen kitchen = new Kitchen(kitchenID);
-
+	            if (kitchenSet.next()) {
+	                int kitchenID = kitchenSet.getInt("kitchenID");
+	                // Create a Kitchen object
+	                kitchen = new Kitchen(kitchenID);
+	            } else {
+	 	            returnData.setMessage("Kitchen not retrieved.");
+	 	            returnData.setSuccess(false);
+	 	        }
+	            
 	            // Retrieve rooms associated with the hotel
 	            ArrayList<Room> rooms = new ArrayList<>();
 	            ResultSet roomSet = stmt.executeQuery("SELECT * FROM Room WHERE hotelID = " + hotelID);
@@ -447,7 +676,6 @@ public class HotelDBHandler {
 		    return returnData;
 	}
 	
-	
 	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;
@@ -507,7 +735,7 @@ public class HotelDBHandler {
 		    } catch (SQLException e) {
 		        String errorMessage = e.getMessage().toLowerCase();
 		        
-		        if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		        if (errorMessage.contains("no such hotel") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
 		            returnData.setMessage("Error: Hotel does not exist.");
 		        } else {
 		            // General case for other SQL exceptions
@@ -541,7 +769,7 @@ public class HotelDBHandler {
 	                    int newFoodID = generatedKeys.getInt(1);
 	                    returnData.setMessage("Food item added successfully with ID: " + newFoodID);
 
-	                    String kitchenCheckSql = "SELECT kitchenID FROM HotelHasKitchen WHERE hotelID = ?;";
+	                    String kitchenCheckSql = "SELECT kitchenID FROM kitchen WHERE hotelID = ?;";
 	                    pstmt = conn.prepareStatement(kitchenCheckSql);
 	                    pstmt.setInt(1, hotelID);
 	                    ResultSet kitchenResult = pstmt.executeQuery();
@@ -798,7 +1026,7 @@ public class HotelDBHandler {
 	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
 	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
 	    try {
-	        String sql = "SELECT HOH.hotelOwnerID FROM KitchenHasFood KHF JOIN HotelHasKitchen HHK ON KHF.kitchenID = HHK.kitchenID JOIN HotelOwnerOwnsHotel HOH ON HHK.hotelID = HOH.hotelID WHERE KHF.foodID = ?";
+	        String sql = "SELECT HOH.hotelOwnerID FROM KitchenHasFood KHF JOIN Kitchen HHK ON KHF.kitchenID = HHK.kitchenID JOIN HotelOwnerOwnsHotel HOH ON HHK.hotelID = HOH.hotelID WHERE KHF.foodID = ?";
 
 	        PreparedStatement pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, foodID); // Set the foodID parameter

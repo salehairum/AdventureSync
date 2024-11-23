@@ -78,5 +78,20 @@ public class hotelOwnerController
 	}
 	public ReturnListUtility<FeedbackWithRoomID> retrieveFeedbackList(int hotelID) {
 		return fRoom.retrieveFeedbackList(hotelID);
+  }
+	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
+		return kitchen.getHotelOwnerID(foodID);
+	}
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
+		return hotelOwner.addHotel(hotel, hotelOwnerID);
+	}
+	public ReturnObjectUtility<Boolean> deleteRoom(int roomID) {
+		return hotelOwner.deleteRoom(roomID);
+	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return hotelOwner.checkPassword(enteredPassword, username);
+	}
+	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
+		return kitchen.deleteFoodItem(foodID);
 	}
 }

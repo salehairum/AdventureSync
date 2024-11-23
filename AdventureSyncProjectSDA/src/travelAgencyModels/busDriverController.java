@@ -20,9 +20,9 @@ public class busDriverController {
 		busDriver=new BusDriver();
 	}
 
-	public ReturnObjectUtility<Boolean> addBus(Bus newBus){
+	public ReturnObjectUtility<Boolean> addBus(Bus newBus,int busDriverID){
 		bus=newBus;
-		return bus.addBus(newBus);
+		return bus.addBus(newBus, busDriverID);
 	}
 	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
@@ -80,5 +80,8 @@ public class busDriverController {
 	}
 	public ReturnObjectUtility<Float> getOverallRating(int busID){
 		return bus.getOverallRating(busID);
+  }
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return busDriver.checkPassword(enteredPassword, username);
 	}
 }

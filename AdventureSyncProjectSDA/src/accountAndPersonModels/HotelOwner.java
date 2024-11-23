@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import dbHandlers.HotelDBHandler;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.Hotel;
 import hotelModels.Room;
 
 public class HotelOwner extends Person{
@@ -57,5 +58,13 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<Boolean> addRoom(Room room) {
 		return room.addRoom(room);
 	}
-	
+	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
+		return hotel.addHotel(hotel, hotelOwnerID);
+	}
+	public ReturnObjectUtility<Boolean> deleteRoom(int roomID) {
+		return room.deleteRoom(roomID);
+	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		return hotelDBHandler.checkPassword(enteredPassword, username);
+	}
 }

@@ -144,8 +144,10 @@ public class TravelAgencyDBHandler {
 	        ResultSet rSet=stmt.executeQuery("select rentalStatus from car where carID="+carID);
 	        
 	        //car is already rented
-	        while(rSet.getBoolean(1)) {
-	        	returnData.setMessage("Car is already rented");
+	        while(rSet.next() && rSet.getBoolean(1)) {
+	        	returnData.setMessage("Car is already rented, cannot be deleted");
+            	returnData.setSuccess(false);
+            	return returnData;
 	        }
 
 	        //now delete car
@@ -156,8 +158,10 @@ public class TravelAgencyDBHandler {
 
             if (rowsAffected > 0) {
             	returnData.setMessage("Car with id "+carID+" deleted successfully");
+            	returnData.setSuccess(true);
             } else {
             	returnData.setMessage("Car could not be deleted");
+            	returnData.setSuccess(false);
             }
 		}
 		catch(SQLException e){
@@ -165,11 +169,12 @@ public class TravelAgencyDBHandler {
 		    
 		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
 		    	returnData.setMessage("Error: Cannot delete car as it is referenced in rental records. Remove related records first.");
-		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		    	returnData.setMessage("Error: The Car you are trying to delete does not exist.");
+		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist")) {
+		    	returnData.setMessage("Error: The Car you are trying to delete does not exist."); 
 		    } else {
 		    	returnData.setMessage("Issue in deleting car from database: " + e.getMessage());
 		    }
+        	returnData.setSuccess(false);
 		}
 		return returnData;
 	}
@@ -551,7 +556,64 @@ public class TravelAgencyDBHandler {
 	    }
 	    return returnData;
 	}
+	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
+		ReturnObjectUtility<Integer> returnData=new ReturnObjectUtility<Integer>();
+		PreparedStatement pstmt;
+		try {
+			 Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("select accPassword, accountID from account where username='" + username+"'");
+		        
+		        if (rSet.next()) { // Check if a result was found
+		            String accPassword= rSet.getString("accPassword");
+			        int accountID=rSet.getInt("accountID");
+		            Statement stmtForAccount = conn.createStatement();
+			        ResultSet rSetForAccount = stmt.executeQuery("select travelAgencyOwnerID from account inner join travelAgencyOwner on travelAgencyOwner.accountID=account.accountID where account.accountID=" + accountID);
+			        if(!rSetForAccount.next()) {
+			        	returnData.setMessage("This username does not belong to a travel agency owner account!");
+			            returnData.setSuccess(false);
+			            return returnData;
+			        }
+		            
+			        int travelAgencyOwnerID=rSetForAccount.getInt("travelAgencyOwnerID");
+			        System.out.println("Actual: "+accPassword);
+			        System.out.println("Entered: "+enteredPassword);
+			        if(accPassword.equals(enteredPassword)) {
+			        	returnData.setObject(travelAgencyOwnerID);
+			            returnData.setMessage("Logged in successfully");
+			            returnData.setSuccess(true);
+			            return returnData;
+			        }
+			        else {
+			        	returnData.setObject(travelAgencyOwnerID);
+			            returnData.setMessage("Incorrect Password");
+			            returnData.setSuccess(false);
+			            return returnData;
+			        }
 
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: User does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in logging in: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+
+	
 	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;

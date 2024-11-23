@@ -112,8 +112,8 @@ public class Bus extends Vehicle {
 		return hasTour;
 	}
 
-	public ReturnObjectUtility<Boolean> addBus(Bus bus){
-		return busHandler.addBus(bus);
+	public ReturnObjectUtility<Boolean> addBus(Bus bus,int busDriverID){
+		return busHandler.addBus(bus, busDriverID);
 	}
 	
 	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
