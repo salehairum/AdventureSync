@@ -940,7 +940,6 @@ public class BusDBHandler {
 	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
 	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<>();
 	    try {
-	        // Step 1: Retrieve the Bus ID associated with the tour
 	        String busIDQuery = "SELECT busID, date FROM tour WHERE tourID = ?";
 	        PreparedStatement pstmt = conn.prepareStatement(busIDQuery);
 	        pstmt.setInt(1, tourID);
@@ -972,7 +971,33 @@ public class BusDBHandler {
 	            return returnData;
 	        } 
 	        
-	        String deleteQuery = "DELETE FROM tour WHERE tourID = ?";
+	        //all seats need to be unbooked
+	        String updateSeatQuery = "UPDATE Seat SET isBooked= 0 WHERE busID = ?";
+	        pstmt = conn.prepareStatement(updateBusQuery);
+	        pstmt.setInt(1, busID);
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected <= 0) {
+	            returnData.setMessage("Error: Unable to update Seat information.");
+	            returnData.setSuccess(false);
+	            return returnData;
+	        } 
+	        
+	        //remove association with tourist
+	        String deleteQuery = "DELETE FROM touristBookedSeats inner join seat on touristBookedSeats.seatId=seat.seatID where busid = ?";
+	        pstmt = conn.prepareStatement(deleteQuery);
+	        pstmt.setInt(1, busID);
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Tour with ID " + tourID + " completed successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Tour could not be completed.");
+	            returnData.setSuccess(false);
+	        }
+	        
+	        deleteQuery = "DELETE FROM tour WHERE tourID = ?";
 	        pstmt = conn.prepareStatement(deleteQuery);
 	        pstmt.setInt(1, tourID);
 	        rowsAffected = pstmt.executeUpdate();

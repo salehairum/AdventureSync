@@ -47,8 +47,8 @@ public class HotelOwner extends Person{
 		return hotelDBHandler.addHotelOwner(hotelOwner);
 	}
 	
-	public ReturnObjectUtility<Float> getBill(int roomID, int touristID){
-		return room.getBill(roomID,touristID);
+	public ReturnObjectUtility<Float> getBill(int roomID, int nNights){
+		return room.getBill(roomID,nNights);
 	}
 	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
 		return hotelDBHandler.addMoney(roomID, bill);
@@ -87,5 +87,8 @@ public class HotelOwner extends Person{
 	}
 	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
 		return hotelDBHandler.retrieveAllHotelOwnerData(HotelOwnerID);
+	}
+	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
+		return hotel.getNumberOfNights(roomID, touristID);
 	}
 }

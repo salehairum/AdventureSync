@@ -260,6 +260,11 @@ public class TouristDBHandler {
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
+	        else if(rSet.getBoolean("rentalStatus")){
+	        	 returnData.setMessage("Car is already rented.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
 			//if car exists, proceed with renting 
 	        
 		    String sql = "INSERT INTO TouristHasRentedCars (touristId,carID) VALUES (?, ?)";
@@ -414,6 +419,12 @@ public class TouristDBHandler {
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
+	        else if(rSet.getBoolean("isBooked")){
+	        	 returnData.setMessage("Seat is already booked.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
+	        
 			//if car exists, proceed with renting 
 	        
 		    String sql = "INSERT INTO TouristHasBookedSeats (touristId,seatID) VALUES (?, ?)";
@@ -529,7 +540,11 @@ public class TouristDBHandler {
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
-			//if car exists, proceed with renting 
+	        else if(rSet.getBoolean("isBooked")){
+	        	 returnData.setMessage("Room is already booked.");
+		         returnData.setSuccess(false);
+		         return returnData;
+	        }
 	        
 		    String sql = "INSERT INTO TouristHasBookedRooms (touristId,roomID) VALUES (?, ?)";
 		    pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

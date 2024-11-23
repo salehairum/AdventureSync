@@ -407,7 +407,6 @@ public class HotelDBHandler {
 	    return returnData;
 	}
 
-	
 	public static ReturnObjectUtility<HotelOwner> retrieveHotelOwnerData(int hotelOwnerID) {
 		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility();
 		
@@ -875,7 +874,22 @@ public class HotelDBHandler {
 	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 	    ReturnObjectUtility<FoodItem> returnData = new ReturnObjectUtility<>();
 	    PreparedStatement pstmt;
+	    ResultSet rs;
 	    try {
+	    	 String retrieveSql = "SELECT quantity FROM FoodItem WHERE foodID = ?";
+	         pstmt = conn.prepareStatement(retrieveSql);
+	         pstmt.setInt(1, foodID);
+	         rs = pstmt.executeQuery();
+
+	         if (rs.next()) {
+	             int currentQuantity = rs.getInt("quantity");
+	             if(quantity>currentQuantity) {
+	            	returnData.setMessage("Cannot order more food than quantity.");
+	 	            returnData.setSuccess(false);
+	 	            return returnData;
+	             }   
+	         }
+
 	        // Adjust the SQL statement based on the `add` flag
 	        String sql = "UPDATE FoodItem SET quantity = quantity " + (add ? "+ ?" : "- ?") + " WHERE foodID = ?";
 	        pstmt = conn.prepareStatement(sql);
@@ -914,29 +928,19 @@ public class HotelDBHandler {
 	    return returnData;
 	}
 	
-	public ReturnObjectUtility<Float> getBill(int roomID, int touristID){
+	public ReturnObjectUtility<Float> getBill(int roomID, int nNights){
 	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 try {
-			 String sql = " SELECT thb.bookingDate, r.pricePerNight FROM TouristHasBookedRooms thb JOIN room r ON thb.roomID = r.roomID WHERE thb.roomID = ? AND thb.touristID = ?";
+			 String sql = " SELECT pricePerNight FROM  room WHERE roomID = ?";
 			 PreparedStatement pstmt = conn.prepareStatement(sql);
 			 pstmt.setInt(1, roomID);
-			 pstmt.setInt(2, touristID);
-
+			 
 			 ResultSet rSet = pstmt.executeQuery();
 
 			 if (rSet.next()) {
-			       Date bookingDate = rSet.getDate("bookingDate");
 			       float pricePerNight = rSet.getFloat("pricePerNight");
-			       Date today = new java.sql.Date(System.currentTimeMillis());
-		            long diffInMillis = today.getTime() - bookingDate.getTime();
-		            int nightsStayed = (int) (diffInMillis / (1000 * 60 * 60 * 24)); // Convert ms to days
-
-		            if (nightsStayed <= 0) {
-		                nightsStayed = 1; // Handle edge case where today is bookingDate
-		            }
-
 		            // Calculate the total bill
-		            float totalBill = pricePerNight * nightsStayed;
+		            float totalBill = pricePerNight * nNights;
 
 		            // Set return values
 		            returnData.setObject(totalBill);
@@ -1524,5 +1528,48 @@ public class HotelDBHandler {
 	    return returnData;
 	}
 	
+	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
+	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
+		 try {
+			 String sql = " SELECT thb.bookingDate FROM TouristHasBookedRooms thb JOIN room r ON thb.roomID = r.roomID WHERE thb.roomID = ? AND thb.touristID = ?";
+			 PreparedStatement pstmt = conn.prepareStatement(sql);
+			 pstmt.setInt(1, roomID);
+			 pstmt.setInt(2, touristID);
+
+			 ResultSet rSet = pstmt.executeQuery();
+
+			 if (rSet.next()) {
+			       Date bookingDate = rSet.getDate("bookingDate");
+			       Date today = new java.sql.Date(System.currentTimeMillis());
+		            long diffInMillis = today.getTime() - bookingDate.getTime();
+		            int nightsStayed = (int) (diffInMillis / (1000 * 60 * 60 * 24)); // Convert ms to days
+
+		            if (nightsStayed <= 0) {
+		                nightsStayed = 1; // Handle edge case where today is bookingDate
+		            }
+
+		            returnData.setObject(nightsStayed);
+		            returnData.setMessage("Number of nights calculated successfully.");
+		            returnData.setSuccess(true);
+			 } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: Room does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+		        
+		        if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+		            returnData.setMessage("Error: Room does not exist.");
+		        } else {
+		            // General case for other SQL exceptions
+		            returnData.setMessage("Issue in retrieving Room from database: " + e.getMessage());
+		        }
+
+		        returnData.setSuccess(false);
+		    }
+		    
+		    return returnData;
+	}
 	
 }

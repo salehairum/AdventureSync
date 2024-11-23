@@ -91,4 +91,7 @@ public class Hotel {
 	public ReturnObjectUtility<Boolean> updateHotel(Hotel hotel) {
 		return hotelDbHandler.updateHotel(hotel);
 	}
+	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
+		return hotelDbHandler.getNumberOfNights(roomID, touristID);
+	}
 }
