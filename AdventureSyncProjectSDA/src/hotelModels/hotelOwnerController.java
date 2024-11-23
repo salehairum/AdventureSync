@@ -3,6 +3,8 @@ package hotelModels;
 import java.time.LocalDate;
 
 import accountAndPersonModels.HotelOwner;
+import application.Feedback;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
 import hotelOwner.HotelOwnerMenuView;
 import javafx.scene.Parent;
@@ -12,12 +14,17 @@ public class hotelOwnerController
     private HotelOwner hotelOwner;
     private Hotel hotel;
     private Kitchen kitchen;
-    
+    private Room room;
+    private FoodItem food;
+    private FeedbackWithRoomID fRoom;
     public hotelOwnerController()
     {
     	hotelOwner = new HotelOwner();
     	hotel = new Hotel();
     	kitchen=new Kitchen();
+    	room=new Room();
+    	food=new FoodItem();
+    	fRoom= new FeedbackWithRoomID();
     }
     public String[] getHotelOwnerProfileDetail(int hotelOwnerId)
     {
@@ -60,6 +67,18 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Float> getFoodBill(int foodID, int quantity){
 		return kitchen.getFoodBill(foodID, quantity);
 	}
+	public ReturnListUtility<Room> getRoomDetails(int hotelID){
+		return room.getRoomDetails(hotelID);
+	}
+	public ReturnListUtility<FoodItem> getFoodDetails(int hotelID) {
+		return food.getFoodDetails(hotelID);
+	}
+	public ReturnObjectUtility<Float> getOverallRating(int hotelID){
+		return fRoom.getOverallRating(hotelID);
+	}
+	public ReturnListUtility<FeedbackWithRoomID> retrieveFeedbackList(int hotelID) {
+		return fRoom.retrieveFeedbackList(hotelID);
+  }
 	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
 		return kitchen.getHotelOwnerID(foodID);
 	}

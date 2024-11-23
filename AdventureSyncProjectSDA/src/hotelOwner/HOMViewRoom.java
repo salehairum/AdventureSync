@@ -2,13 +2,20 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnListUtility;
+import hotelModels.Room;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -34,9 +41,13 @@ public class HOMViewRoom {
 	private Button updRoomButton;
 	@FXML
 	private Button delRoomButton;
+	@FXML
+	private TableView<Room> roomTable;
+	@FXML
+	private TableColumn<Room, String> colRoomId, colStatus, colDesc;
 	
 	Parent root;
-	hotelOwnerController hoContoller;
+	hotelOwnerController hoController;
 	public HOMViewRoom() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMViewRoom.fxml"));
 		loader.setController(this);
@@ -49,9 +60,10 @@ public class HOMViewRoom {
 	
 	@FXML
 	private void initialize() {
-		hoContoller = new hotelOwnerController();
+		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadRoomTable();
 	}
 	
 	public Parent getRoot() {
@@ -60,7 +72,7 @@ public class HOMViewRoom {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(1);
+        String profileDetail[] = hoController.getHotelOwnerProfileDetail(1);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
@@ -102,5 +114,22 @@ public class HOMViewRoom {
             }
         };
     }
+    public void loadRoomTable() {
+        // Initialize table columns
+    	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomID"));
+    	colStatus.setCellValueFactory(new PropertyValueFactory<>("IsBooked"));
+    	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        // Get car details from the controller
+        ReturnListUtility<Room> returnData = hoController.getRoomDetails(1);
 
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Room> roomList = FXCollections.observableArrayList(returnData.getList().values());
+            roomTable.setItems(roomList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            roomTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
 }

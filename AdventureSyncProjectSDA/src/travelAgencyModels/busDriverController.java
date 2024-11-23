@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.HotelOwner;
+import application.Feedback;
 import busDriver.BusDriverManageBusView;
 import busDriver.BusDriverMenuView;
 import busDriver.BusDriverMgrAccountView;
@@ -56,7 +57,9 @@ public class busDriverController {
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return bus.retrieveBusList();
 	}
-	
+	public ReturnListUtility<Feedback> retrieveFeedbackList(int busID) {
+		return bus.retrieveFeedbackList(busID);
+	}
 	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
 		return bus.retrieveSeatObject(seatId, busId);
 	}
@@ -75,6 +78,9 @@ public class busDriverController {
 	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
 		return busDriver.completeTour(tourID);
 	}
+	public ReturnObjectUtility<Float> getOverallRating(int busID){
+		return bus.getOverallRating(busID);
+  }
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return busDriver.checkPassword(enteredPassword, username);
 	}

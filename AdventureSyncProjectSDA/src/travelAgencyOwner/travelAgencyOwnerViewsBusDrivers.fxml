@@ -24,17 +24,17 @@
                   <Image url="@../resources/busDriver.png" />
                </image>
             </ImageView>
-            <Button fx:id="menuButton" layoutX="203.0" layoutY="428.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="203.0" layoutY="428.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TableView fx:id="busTable" layoutX="13.0" layoutY="214.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="busDriverTable" layoutX="11.0" layoutY="109.0" prefHeight="306.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
                <columns>
-                  <TableColumn prefWidth="82.40010070800781" style="-fx-background-color: #f9f7f3;" text="Bus Driver ID" />
-                  <TableColumn prefWidth="149.60003662109375" style="-fx-background-color: #f9f7f3;" text="Name" />
-                  <TableColumn prefWidth="136.0" style="-fx-background-color: #f9f7f3;" text="DOB" />
-                  <TableColumn prefWidth="160.79998779296875" style="-fx-background-color: #F9F7F3;" text="CNIC" />
+                  <TableColumn fx:id="colBDriverID" prefWidth="82.40010070800781" style="-fx-background-color: #f9f7f3;" text="Bus Driver ID" />
+                  <TableColumn fx:id="colName" prefWidth="149.60003662109375" style="-fx-background-color: #f9f7f3;" text="Name" />
+                  <TableColumn fx:id="colDOB" prefWidth="136.0" style="-fx-background-color: #f9f7f3;" text="DOB" />
+                  <TableColumn fx:id="colCNIC" prefWidth="160.79998779296875" style="-fx-background-color: #F9F7F3;" text="CNIC" />
                </columns>
             </TableView>
          </children>

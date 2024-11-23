@@ -2,16 +2,26 @@ package travelAgencyOwner;
 
 import java.io.IOException;
 
+import application.Feedback;
+import dbHandlers.ReturnListUtility;
+import dbHandlers.ReturnObjectUtility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Bus;
+import travelAgencyModels.FeedbackWithBusID;
 import travelAgencyModels.travelAgencyOwnerController;
 
 public class TravelAgencyOwnerViewsFeedbackView {
@@ -29,6 +39,12 @@ public class TravelAgencyOwnerViewsFeedbackView {
 	private Text dob;
 	@FXML
 	private Button menuButton;
+	@FXML
+	private TableView<FeedbackWithBusID> commentTable;
+	@FXML
+	private TableColumn<FeedbackWithBusID, String> colBusId, colComment;
+	@FXML
+	private Text ratingLabel;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
@@ -51,6 +67,8 @@ public class TravelAgencyOwnerViewsFeedbackView {
 		taoController = new travelAgencyOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadCommentTable();
+		loadRatingLabel();
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
@@ -92,5 +110,28 @@ public class TravelAgencyOwnerViewsFeedbackView {
                 e.printStackTrace();
             }
         };
+    }
+    public void loadCommentTable() {
+        // Initialize table columns
+        colBusId.setCellValueFactory(new PropertyValueFactory<>("BusID"));
+        colComment.setCellValueFactory(new PropertyValueFactory<>("Comments"));
+
+        // Get car details from the controller
+        ReturnListUtility<FeedbackWithBusID> returnData = taoController.getFeedbackDetailsWithBusID();
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<FeedbackWithBusID> feedbackWithBusIDList = FXCollections.observableArrayList(returnData.getList().values());
+            commentTable.setItems(feedbackWithBusIDList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            commentTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
+    public void loadRatingLabel() {
+        // Initialize table columns
+    	ReturnObjectUtility<Float> overallRating = taoController.getOverallRating();
+        ratingLabel.setText(Float.toString(overallRating.getObject()));
     }
 }

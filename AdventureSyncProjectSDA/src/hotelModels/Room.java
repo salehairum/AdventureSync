@@ -82,6 +82,9 @@ public class Room {
 	public boolean isBooked() {
 		return isBooked;
 	}
+	public boolean getIsBooked() {
+		return isBooked;
+	}
 	public void setBooked(boolean isBooked) {
 		this.isBooked = isBooked;
 	}
