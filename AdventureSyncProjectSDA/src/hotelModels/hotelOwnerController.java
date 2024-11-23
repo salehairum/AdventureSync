@@ -49,8 +49,8 @@ public class hotelOwnerController
     public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotel.updateFoodQuantity(foodID, quantity, add);
 	}
-	public ReturnObjectUtility<Float> getBill(int roomID, int touristID){
-		return hotelOwner.getBill(roomID, touristID);
+	public ReturnObjectUtility<Float> getBill(int roomID, int nNights){
+		return hotelOwner.getBill(roomID, nNights);
 	}
 	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
 		return hotelOwner.addMoney(roomID, bill);
@@ -118,5 +118,8 @@ public class hotelOwnerController
 	}
 	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
 		return hotelOwner.retrieveAllHotelOwnerData(HotelOwnerID);
+	}
+	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
+		return hotelOwner.getNumberOfNights(roomID, touristID);
 	}
 }

@@ -687,7 +687,6 @@ public class TravelAgencyDBHandler {
 	    return returnData;
 	}
 
-	
 	public ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();
 		

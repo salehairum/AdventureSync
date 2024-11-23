@@ -102,9 +102,9 @@ public class Main extends Application {
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
-			TravelAgencyOwnerUpdatesAccountView hotelOwnerMenu = new TravelAgencyOwnerUpdatesAccountView(1);
+			TouristDeletesAccountView hotelOwnerMenu = new TouristDeletesAccountView();
 
-			Parent root = accountMenuView.getRoot();
+			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
 //	       
