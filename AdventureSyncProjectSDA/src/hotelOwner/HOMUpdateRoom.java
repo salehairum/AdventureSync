@@ -2,13 +2,20 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnObjectUtility;
+import hotelModels.Hotel;
+import hotelModels.Room;
 import hotelModels.hotelOwnerController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -33,9 +40,17 @@ public class HOMUpdateRoom {
 	private Button viewRoomButton;
 	@FXML
 	private Button backButton;
+	@FXML
+	private TextField roomIDInput;
+	@FXML
+	private TextField descInput;
+	@FXML
+	private TextField pricePerNightInput;
+	@FXML
+	private Button updRoomButton;	
 	
 	Parent root;
-	hotelOwnerController hoContoller;
+	hotelOwnerController hoController;
 	public HOMUpdateRoom() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMUpdateRoom.fxml"));
 		loader.setController(this);
@@ -48,7 +63,8 @@ public class HOMUpdateRoom {
 	
 	@FXML
 	private void initialize() {
-		hoContoller = new hotelOwnerController();
+		listenersAssignment();
+		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
 	}
@@ -59,15 +75,57 @@ public class HOMUpdateRoom {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(1);
+        String profileDetail[] = hoController.getHotelOwnerProfileDetail(1);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
-    // Method for button handling
-    public void eventHandlersAssignment() {
-	    // Using a custom handler factory method
+
+   	//assigning buttons and listeners
+   	public void listenersAssignment() {
+   		descInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+   		pricePerNightInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+   		roomIDInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+   	}
+   	
+   	public void eventHandlersAssignment() {
+   	    EventHandler<ActionEvent> updateButtonHandler = (event) -> {
+   	    	Alert alertInvalidInput = new Alert(AlertType.ERROR);
+	        alertInvalidInput.setTitle("Invalid Input");
+
+	        if(!roomIDInput.getText().trim().isEmpty()) {
+				if(!isNumeric(roomIDInput.getText())) {
+					alertInvalidInput.setContentText("Please enter numeric value for room id"); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+	        }
+   	        int roomID = Integer.parseInt(roomIDInput.getText());
+   	        ReturnObjectUtility<Room> roomData=hoController.retrieveRoomObject(roomID);
+   	        
+   	        if(!roomData.isSuccess()) {
+   				Alert alert = new Alert(AlertType.ERROR);
+   			    alert.setTitle("Operation Failed");
+   			    alert.setHeaderText(null);
+   			    alert.setContentText(roomData.getMessage());
+   			    alert.showAndWait();
+   			    return;
+   			}
+   	        
+   	        Room room=updateRoomObject(roomData.getObject());
+   	        
+   	        ReturnObjectUtility<Boolean> returnData=hoController.updateRoom(room);
+   	        
+   	        // Show success or failure message
+   	        boolean success = returnData.isSuccess();
+   	        Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+   	        alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+   	        alert.setHeaderText(null);
+   	        alert.setContentText(returnData.getMessage());
+   	        alert.showAndWait();
+   	    };
+   	    updRoomButton.setOnAction(updateButtonHandler);
 	    menuButton.setOnMouseClicked(createButtonHandler(HotelOwnerMenuView.class, "Menu"));
 	    backButton.setOnMouseClicked(createButtonHandler(HOMManageRoom.class, "Manage Room"));
 	    viewRoomButton.setOnMouseClicked(createButtonHandler(HOMViewRoom.class, "View Room"));
@@ -99,4 +157,35 @@ public class HOMUpdateRoom {
             }
         };
     }
+    
+	public boolean isNumeric(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    return str.matches("\\d+(\\.\\d+)?"); // Matches integers or decimals
+	}
+
+	//bus related methods
+	public Room updateRoomObject(Room room) {
+	    if (!descInput.getText().trim().isEmpty()) {
+	    	room.setDescription(descInput.getText().trim());
+	    }
+	    if (!pricePerNightInput.getText().trim().isEmpty()) {
+	    	room.setPricePerNight(Float.parseFloat(pricePerNightInput.getText().trim()));
+	    }
+	    return room;
+	}
+	
+	//check if all inputs have been given
+	private void validateInputs() {
+	    boolean roomIDFilled = !roomIDInput.getText().trim().isEmpty();
+
+	    // Check if at least one of the other fields is filled
+	    boolean atLeastOneOtherFieldFilled = 
+	        !pricePerNightInput.getText().trim().isEmpty() ||
+	        !descInput.getText().trim().isEmpty();
+
+	    // Enable the button if Bus ID is filled and at least one other field is filled
+	    updRoomButton.setDisable(!(roomIDFilled && atLeastOneOtherFieldFilled));
+	}
 }

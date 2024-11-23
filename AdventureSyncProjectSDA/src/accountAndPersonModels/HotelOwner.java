@@ -11,12 +11,14 @@ public class HotelOwner extends Person{
 	private int hotelOwnerID;
 	private HotelDBHandler hotelDBHandler;
 	private Room room;
+	private Hotel hotel;
 
 	public HotelOwner()
 	{
 		super();
 		hotelDBHandler=new HotelDBHandler();
 		room=new Room();
+		hotel=new Hotel();
 	}
 	public HotelOwner(int hotelOwnerID, String name, LocalDate dob, String cnic)
 	{
@@ -24,6 +26,7 @@ public class HotelOwner extends Person{
 		this.hotelOwnerID = hotelOwnerID;
 		hotelDBHandler=new HotelDBHandler();
 		room=new Room();
+		hotel=new Hotel();
 	}
 	//getters and setters
 	public int getHotelOwnerID() {
@@ -66,5 +69,17 @@ public class HotelOwner extends Person{
 	}
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return hotelDBHandler.checkPassword(enteredPassword, username);
+	}
+	public ReturnObjectUtility<Boolean> updateHotel(Hotel hotel) {
+		return hotel.updateHotel(hotel);
+	}
+	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
+		return hotel.retrieveHotelObject(hotelID);
+	}
+	public ReturnObjectUtility<Boolean> updateRoom(Room room) {
+		return this.room.updateRoom(room);
+	}
+	public ReturnObjectUtility<Room> retrieveRoomObject(int roomID) {
+		return room.retrieveRoomObject(roomID);
 	}
 }

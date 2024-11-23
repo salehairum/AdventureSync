@@ -133,7 +133,51 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
-	
+	public ReturnObjectUtility<Boolean> updateRoom(Room room) {
+	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+
+	    try {
+	        // SQL Query to update the Room table
+	        String sql = "UPDATE Room SET rDescription = ?, pricePerNight = ? WHERE roomID = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setString(1, room.getDescription());         
+	        pstmt.setFloat(2, room.getPricePerNight());                 
+	        pstmt.setInt(3, room.getRoomID());                
+
+	        // Execute the update
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        // Check if the update was successful
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Room with room ID " + room.getRoomID() + " updated successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to update room.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        // Handle SQL errors with specific messages
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("unique constraint") || errorMessage.contains("duplicate")) {
+	                returnData.setMessage("Unique constraint violation: Please ensure unique data where required.");
+	            } else if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Foreign key constraint error: Check if the associated hotel exists.");
+	            } else {
+	                returnData.setMessage("Issue in updating room in database: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unexpected error occurred while updating the room.");
+	        }
+	    }
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int  hotelOwnerID) {
 		ReturnObjectUtility<Boolean> returnData=new ReturnObjectUtility<Boolean>();
 		PreparedStatement pstmt;
@@ -202,6 +246,48 @@ public class HotelDBHandler {
 
             returnData.setSuccess(false);
 		}
+		return returnData;
+	}
+	public ReturnObjectUtility<Boolean> updateHotel(Hotel hotel) {
+	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();
+	    PreparedStatement pstmt;
+
+	    try {
+	        // SQL Query to update the Bus table
+	        String sql = "UPDATE Hotel SET hname= ?, hlocation= ? where hotelID=?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setString(1, hotel.getHotelName());              
+	        pstmt.setString(2, hotel.getLocation());              
+	        pstmt.setInt(3, hotel.getHotelID());
+	        
+	        // Execute the update
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        // Check if the update was successful
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Hotel with hotel ID " + hotel.getHotelID() + " updated successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to update hotel.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        // Handle SQL errors with specific messages
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("unique constraint") || errorMessage.contains("duplicate")) {
+	                returnData.setMessage("Please enter a unique plate number.");
+	            } else if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            } else {
+	                returnData.setMessage("Issue in updating hotel in db: " + errorMessage);
+	            }
+	        }  
+	    }
 		return returnData;
 	}
 	
@@ -439,8 +525,6 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
-	
-	
 	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
 	    ReturnObjectUtility<Hotel> returnData = new ReturnObjectUtility<>();
 	    
@@ -504,6 +588,127 @@ public class HotelDBHandler {
         return returnData;
 	}
 	
+	public ReturnObjectUtility<Room> retrieveRoomObject(int roomID) {
+	    ReturnObjectUtility<Room> returnData = new ReturnObjectUtility<>();
+	    
+	    try {
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery("SELECT * FROM Room WHERE RoomID = " + roomID);
+
+	        if (rSet.next()) { // Check if the hotel exists
+	            // Retrieve hotel details
+	            int retrievedRoomID = rSet.getInt("roomID");
+	            String desc = rSet.getString("rDescription");
+	            Boolean isBooked = rSet.getBoolean("isBooked");
+	            Float pricePerNight = rSet.getFloat("pricePerNight");
+	            int hotelID = rSet.getInt("hotelID");
+	            Room room = new Room(roomID, desc, pricePerNight, isBooked, hotelID);
+
+	            // Create a room object
+	            returnData.setObject(room);
+	            returnData.setMessage("Room data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no hotel is found, set an error message
+	            returnData.setMessage("Error: Room does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such Room") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Room does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving Room from database: " + e.getMessage());
+		    }
+		}
+        return returnData;
+	}
+	
+	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
+	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();
+	    PreparedStatement pstmt;
+
+	    try {
+	        // SQL Query to update the FoodItem table
+	        String sql = "UPDATE FoodItem SET fName = ?, quantity = ?, price = ? WHERE foodID = ?";
+	        pstmt = conn.prepareStatement(sql);
+
+	        // Set parameters
+	        pstmt.setString(1, foodItem.getName());
+	        pstmt.setInt(2, foodItem.getQuantity());
+	        pstmt.setFloat(3, foodItem.getPrice());
+	        pstmt.setInt(4, foodItem.getFoodID());
+
+	        // Execute the update
+	        int rowsAffected = pstmt.executeUpdate();
+
+	        // Check if the update was successful
+	        if (rowsAffected > 0) {
+	            returnData.setMessage("Food item with ID " + foodItem.getFoodID() + " updated successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            returnData.setMessage("Failed to update food item.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        // Handle SQL errors with specific messages
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("unique constraint") || errorMessage.contains("duplicate")) {
+	                returnData.setMessage("Error: Duplicate entry. Ensure the data is unique.");
+	            } else if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            } else {
+	                returnData.setMessage("Issue in updating food item in the database: " + errorMessage);
+	            }
+	        }
+	    }
+	    return returnData;
+	}
+
+	public ReturnObjectUtility<FoodItem> retrieveFoodItemObject(int foodID) {
+	    ReturnObjectUtility<FoodItem> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        ResultSet rSet = stmt.executeQuery("SELECT * FROM FoodItem WHERE foodID = " + foodID);
+
+	        if (rSet.next()) { // Check if the food item exists
+	            // Retrieve food item details
+	            int retrievedFoodID = rSet.getInt("foodID");
+	            String foodName = rSet.getString("fName");
+	            int quantity = rSet.getInt("quantity");
+	            float price = rSet.getFloat("price");
+
+	            // Create a FoodItem object
+	            FoodItem foodItem = new FoodItem(retrievedFoodID, foodName, quantity, price);
+
+	            // Populate return data
+	            returnData.setObject(foodItem);
+	            returnData.setMessage("Food item data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no food item is found, set an error message
+	            returnData.setMessage("Error: Food item does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such fooditem") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Food item does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving food item from database: " + e.getMessage());
+	        }
+	    }
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		ReturnObjectUtility<Room> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -591,6 +796,7 @@ public class HotelDBHandler {
 	    }
 	    return returnData;
 	}
+	
 	public ReturnObjectUtility<Float> getBill(int roomID, int touristID){
 	    ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 try {

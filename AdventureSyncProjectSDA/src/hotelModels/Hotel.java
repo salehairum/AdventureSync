@@ -88,4 +88,7 @@ public class Hotel {
 	public ReturnObjectUtility<Boolean> addHotel(Hotel hotel, int hotelOwnerID) {
 		return hotelDbHandler.addHotel(hotel, hotelOwnerID);
 	}
+	public ReturnObjectUtility<Boolean> updateHotel(Hotel hotel) {
+		return hotelDbHandler.updateHotel(hotel);
+	}
 }

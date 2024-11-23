@@ -94,4 +94,23 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
 		return kitchen.deleteFoodItem(foodID);
 	}
+	public ReturnObjectUtility<Boolean> updateHotel(Hotel hotel) {
+		return hotelOwner.updateHotel(hotel);
+	}
+	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
+		return hotelOwner.retrieveHotelObject(hotelID);
+	}
+	public ReturnObjectUtility<Boolean> updateRoom(Room room) {
+		return hotelOwner.updateRoom(room);
+	}
+	public ReturnObjectUtility<Room> retrieveRoomObject(int roomID) {
+		return hotelOwner.retrieveRoomObject(roomID);
+	}
+	public ReturnObjectUtility<FoodItem> retrieveFoodItemObject(int foodID) {
+		return kitchen.retrieveFoodItemObject(foodID);
+	}
+
+	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
+		return kitchen.updateFoodItem(foodItem);
+	}
 }

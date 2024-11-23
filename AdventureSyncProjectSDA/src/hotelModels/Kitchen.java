@@ -49,5 +49,12 @@ public class Kitchen {
 	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
 		return food.deleteFoodItem(foodID);
 	}
+	public ReturnObjectUtility<FoodItem> retrieveFoodItemObject(int foodID) {
+		return food.retrieveFoodItemObject(foodID);
+	}
+
+	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
+		return food.updateFoodItem(foodItem);
+	}
 }
 

@@ -64,12 +64,12 @@
                   <TextField fx:id="foodIDInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="220.0" promptText="e.g 123" />
                </children>
             </HBox>
-            <Button fx:id="backButton" layoutX="256.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="275.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updFoodButton" layoutX="133.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Update Food" textFill="#f7a072">
+            <Button fx:id="updFoodButton" disable="true" layoutX="133.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: F9F7F3;" text="Update Food" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

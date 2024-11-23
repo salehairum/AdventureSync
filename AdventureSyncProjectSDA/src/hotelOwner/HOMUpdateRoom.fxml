@@ -16,12 +16,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="backButton" layoutX="482.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="backButton" layoutX="482.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="112.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="updRoomButton" layoutX="355.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: F9F7F3;" text="Update Room" textFill="#f7a072">
+      <Button fx:id="updRoomButton" disable="true" layoutX="355.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: F9F7F3;" text="Update Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
