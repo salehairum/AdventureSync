@@ -102,4 +102,8 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return travelAgencyDBHandler.checkPassword(enteredPassword, username);
 	}
+	
+	public ReturnObjectUtility<Boolean> deleteCar(int carID) {
+		return car.deleteCar(carID);
+	}
 }

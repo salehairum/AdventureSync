@@ -90,4 +90,8 @@ public class Car extends Vehicle{
 	public ReturnObjectUtility<Float> addMoney(float bill){
 		return travelAgencyDBHandler.addMoney(bill);
 	}
+	
+	public ReturnObjectUtility<Boolean> deleteCar(int carID) {
+		return travelAgencyDBHandler.deleteCar(carID);
+	}
 }

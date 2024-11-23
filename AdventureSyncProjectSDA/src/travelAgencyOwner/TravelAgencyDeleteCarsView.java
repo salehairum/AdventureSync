@@ -2,18 +2,24 @@ package travelAgencyOwner;
 
 import java.io.IOException;
 
+import dbHandlers.ReturnObjectUtility;
 import hotelOwner.HOMManageKitchen;
 import hotelOwner.HotelOwnerMenuView;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import travelAgencyModels.Car;
 import travelAgencyModels.travelAgencyOwnerController;
 
 public class TravelAgencyDeleteCarsView {
@@ -33,6 +39,10 @@ public class TravelAgencyDeleteCarsView {
 	private Button viewButton;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button deleteButton;
+	@FXML
+	private TextField carIdInput;
 	
 	
 	Parent root;
@@ -50,9 +60,10 @@ public class TravelAgencyDeleteCarsView {
 	
 	@FXML
 	private void initialize() {
+		listenersAssignment();
+		eventHandlersAssignment();
 		taoController = new travelAgencyOwnerController();
 		displayOwnerDetails();
-		eventHandlersAssignment();
 	}
 	
 	public Parent getRoot() {
@@ -69,9 +80,44 @@ public class TravelAgencyDeleteCarsView {
         dob.setText(profileDetail[3]);
     }
     
+  //assigning buttons and listeners
+  	public void listenersAssignment() {
+  		carIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
+  	}
+    
     // Method for button handling
     public void eventHandlersAssignment() {
-        // Assign handlers with parameters for specific FXMLs and classes
+		EventHandler<ActionEvent> deleteButtonHandler=(event)->{
+			Alert alertInvalidInput = new Alert(AlertType.ERROR); 
+			alertInvalidInput.setTitle("Invalid Input"); 
+			
+			StringBuilder errorMessage = new StringBuilder();
+			
+			//check if inputs are numeric
+			if(!isNumeric(carIdInput.getText())) {
+				errorMessage.append("Please enter numeric value for car ID.\n");
+			}
+			
+	        if (errorMessage.length() > 0) {
+	            alertInvalidInput.setContentText(errorMessage.toString());
+	            alertInvalidInput.showAndWait();
+	            return;
+	        }
+	        
+	        int carID=Integer.parseInt(carIdInput.getText());
+
+			ReturnObjectUtility<Boolean> returnData=taoController.deleteCar(carID);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		deleteButton.setOnAction(deleteButtonHandler);
+        
+    	
         viewButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerViewCarsView.class, "View Cars"));
         backButton.setOnMouseClicked(createButtonHandler(TravelAgencyManageCarsView.class, "Manage Cars"));
     }
@@ -103,4 +149,21 @@ public class TravelAgencyDeleteCarsView {
             }
         };
     }
+    
+
+	public boolean isNumeric(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    return str.matches("\\d+(\\.\\d+)?"); // Matches integers or decimals
+	}
+	
+	//check if all inputs have been given
+		private void validateInputs() {
+		    boolean allFieldsFilled = 
+		        !carIdInput.getText().trim().isEmpty();
+
+		    deleteButton.setDisable(!allFieldsFilled);
+		}
+
 }
