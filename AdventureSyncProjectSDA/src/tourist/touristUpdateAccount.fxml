@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
@@ -90,12 +89,12 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="78.0" prefWidth="238.0">
                            <children>
-                              <Label prefHeight="35.0" prefWidth="258.0" text="Enter New Password" textFill="#eddea4">
+                              <Label prefHeight="35.0" prefWidth="329.0" text="Enter Balance To Add" textFill="#eddea4">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="passwordInput" prefHeight="26.0" prefWidth="263.0" promptText="Choose strong password">
+                              <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="211.0" promptText="e.g 12000">
                                  <VBox.margin>
                                     <Insets right="10.0" />
                                  </VBox.margin>
@@ -109,24 +108,15 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="costPerKmInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
+                              <TextField fx:id="cnicInput" prefHeight="26.0" prefWidth="450.0" promptText="e.g XXXXX-XXXXXXX-X" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="98.0" prefWidth="462.0">
-                     <children>
-                        <Label prefHeight="35.0" prefWidth="258.0" text="Enter New Balance" textFill="#eddea4">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="balanceInput" prefHeight="26.0" prefWidth="422.0" promptText="e.g 12000" />
-                     </children>
-                  </VBox>
+                  <VBox prefHeight="98.0" prefWidth="462.0" />
                </children>
             </VBox>
-            <Button fx:id="updateButton" layoutX="137.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
+            <Button fx:id="updateButton" disable="true" layoutX="137.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

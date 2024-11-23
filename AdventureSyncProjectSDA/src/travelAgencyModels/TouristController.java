@@ -110,4 +110,10 @@ public class TouristController {
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return tourist.checkPassword(enteredPassword, username);
 	}
+	public ReturnObjectUtility<Tourist> retrieveAllTouristData(int touristID) {
+		return tourist.retrieveAllTouristData(touristID);
+	}
+	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
+		return tourist.updateTourist(tourist);
+	}
 }

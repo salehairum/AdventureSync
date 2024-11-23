@@ -58,4 +58,11 @@ public class BusDriver extends Person {
 	public ReturnObjectUtility<Boolean> completeTour(int tourID) {
 		return busDBHandler.completeTour(tourID);
 	}
+	public ReturnObjectUtility<BusDriver> retrieveAllBusDriverData(int busDriverID) {
+		return busDBHandler.retrieveAllBusDriverData(busDriverID);
+	}
+	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
+		return busDBHandler.updateBusDriver(busDriver);
+	}
+	
 }

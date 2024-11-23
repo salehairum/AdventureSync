@@ -12,6 +12,7 @@ import busDriver.BusDriverMenuView;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
+import busDriver.BusDriverUpdatesAccountView;
 import busDriver.BusDriverViewBusDetailsView;
 import busDriver.BusDriverViewsFeedbackView;
 import busDriver.busDriverLogin;
@@ -31,6 +32,7 @@ import hotelOwner.HOMViewFood;
 import hotelOwner.HOMViewRoom;
 import hotelOwner.HotelOwnerMenuView;
 import hotelOwner.hotelOwnerLogin;
+import hotelOwner.hotelOwnerUpdateAccount;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
@@ -44,6 +46,7 @@ import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import tourist.TouristSelectsFoodFromMenuView;
+import tourist.TouristUpdatesAccountView;
 import tourist.touristLogin;
 import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
@@ -88,7 +91,7 @@ public class Main extends Application {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
 		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -99,7 +102,7 @@ public class Main extends Application {
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
- 			TouristMenuView accountMenuView = new TouristMenuView(1);
+			TravelAgencyOwnerUpdatesAccountView hotelOwnerMenu = new TravelAgencyOwnerUpdatesAccountView(1);
 
 			Parent root = accountMenuView.getRoot();
 //			// Create the scene and set it

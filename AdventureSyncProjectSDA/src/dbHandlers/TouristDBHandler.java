@@ -187,7 +187,7 @@ public class TouristDBHandler {
 			PreparedStatement pstmt;
 			try {
 				 //first update travel agency owner
-				 String sql = "UPDATE tourist SET tname = ?, dob = ?, cnic= ? where TravelAgencyOwnerId= ?";
+				 String sql = "UPDATE tourist SET tname = ?, dob = ?, cnic= ? where touristID= ?";
 				 pstmt = conn.prepareStatement(sql);
 				    
 				 // Set parameters
@@ -206,7 +206,7 @@ public class TouristDBHandler {
 				 }
 				 
 				 //now update account
-				 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+				 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ?, balance=balance+? where AccountID= ?";
 				 pstmt = conn.prepareStatement(sql);
 				    
 				 Account account=tourist.getAccount();
@@ -215,7 +215,8 @@ public class TouristDBHandler {
 				 pstmt.setString(1, account.getUsername());
 				 pstmt.setObject(2, account.getEmail());
 				 pstmt.setString(3, account.getPassword());
-				 pstmt.setInt(4, account.getAccountID());
+				 pstmt.setFloat(4, account.getBalance());
+				 pstmt.setInt(5, account.getAccountID());
 				 
 				 // Execute the insert
 				 rowsAffected = pstmt.executeUpdate();
@@ -514,7 +515,6 @@ public class TouristDBHandler {
 		    return returnData;
 	}
 
-	
 	public ReturnObjectUtility<Integer> addRoomToBookedRooms(int touristId,int roomID){
 		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -626,6 +626,61 @@ public class TouristDBHandler {
 		        return returnData;
 			}
 	
+	
+	public ReturnObjectUtility<Tourist> retrieveAllTouristData(int touristID) {
+	    ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT t.touristId, t.tName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM Tourist t JOIN Account a ON t.accountID = a.accountID WHERE t.touristId = " + touristID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        if (rSet.next()) { // Check if a result was found
+	            // Retrieve Tourist details
+	            int touristIDRetrieved = rSet.getInt("touristId");
+	            String name = rSet.getString("tName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            // Create a Tourist object
+	            Tourist tourist = new Tourist(touristIDRetrieved, name, dob, cnic);
+
+	            // Retrieve Account details
+	            int accountID = rSet.getInt("accountID");
+	            String username = rSet.getString("username");
+	            String email = rSet.getString("email");
+	            String password = rSet.getString("accPassword");
+	            float balance = rSet.getFloat("balance");
+
+	            // Create an Account object
+	            Account account = new Account(accountID, username, password, email, balance);
+
+		        tourist.setAccount(account);
+	            // Set the result and success message
+	            returnData.setObject(tourist);
+	            returnData.setMessage("Tourist and account data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Tourist does not exist.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such tourist") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Tourist does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving tourist from database: " + e.getMessage());
+	        }
+	    }
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Integer> removeRoomFromBookedRooms(int touristId,int roomID){
 		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;

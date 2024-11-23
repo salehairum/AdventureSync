@@ -24,36 +24,51 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="75.0" layoutY="269.0" prefHeight="87.0" prefWidth="377.0">
+            <HBox alignment="CENTER" layoutX="75.0" layoutY="269.0" prefHeight="87.0" prefWidth="390.0">
                <children>
                   <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Enter Location" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="locationInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="209.0" promptText="e.g peer sohawa" />
+                  <TextField fx:id="locationInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="234.0" promptText="e.g peer sohawa" />
                </children>
             </HBox>
-            <Button fx:id="menuButton" layoutX="263.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="menuButton" layoutX="304.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updHotelButton" layoutX="133.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Update Hotel" textFill="#f7a072">
+            <Button fx:id="updHotelButton" disable="true" layoutX="172.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Update Hotel" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <HBox alignment="CENTER" layoutX="75.0" layoutY="182.0" prefHeight="87.0" prefWidth="377.0">
+            <HBox alignment="CENTER" layoutX="86.0" layoutY="205.0" prefHeight="81.0" prefWidth="377.0">
                <children>
                   <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Enter Name" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nameInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="209.0" promptText="e.g valley hotel" />
+                  <TextField fx:id="nameInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="250.0" promptText="e.g valley hotel" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" layoutX="86.0" layoutY="130.0" prefHeight="81.0" prefWidth="377.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Enter Hotel ID" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="hotelIDInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="250.0" promptText="e.g 1234" />
+               </children>
+            </HBox>
+            <Button fx:id="viewButton" layoutX="174.0" layoutY="356.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="218.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="View Hotel First?" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

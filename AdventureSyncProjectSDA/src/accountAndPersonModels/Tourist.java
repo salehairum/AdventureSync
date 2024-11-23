@@ -115,4 +115,10 @@ public class Tourist extends Person {
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return touristDBHandler.checkPassword(enteredPassword, username);
 	}
+	public ReturnObjectUtility<Tourist> retrieveAllTouristData(int touristID) {
+		return touristDBHandler.retrieveAllTouristData(touristID);
+	}	
+	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
+		return touristDBHandler.updateTourist(tourist);
+	}
 }

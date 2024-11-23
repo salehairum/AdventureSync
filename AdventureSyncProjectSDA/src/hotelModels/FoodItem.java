@@ -70,4 +70,11 @@ public class FoodItem {
 	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
 		return hotelDbHandler.deleteFoodItem(foodID);
 	}
+	public ReturnObjectUtility<FoodItem> retrieveFoodItemObject(int foodID) {
+		return hotelDbHandler.retrieveFoodItemObject(foodID);
+	}
+
+	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
+		return hotelDbHandler.updateFoodItem(foodItem);
+	}
 }
