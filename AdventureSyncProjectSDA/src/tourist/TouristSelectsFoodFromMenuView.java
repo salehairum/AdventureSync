@@ -119,7 +119,7 @@ public class TouristSelectsFoodFromMenuView {
 				return;
 			}
 
-			ReturnObjectUtility<FoodItem> returnData= hController.updateFoodQuantity(foodID, foodQuantity, false);
+			ReturnObjectUtility<FoodItem> returnData= tController.updateFoodQuantity(foodID, foodQuantity, false);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);

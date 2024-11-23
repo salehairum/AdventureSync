@@ -105,7 +105,7 @@ public class TouristSelectRoomFromHotelView {
 			int roomID=Integer.parseInt(roomIDInput.getText());		
 			int hotelID=hotel.getHotelID();
 			//if seat exists, then it must be booked
-			ReturnObjectUtility<Room> returnData= hController.updateRoomBookingStatus(roomID, true);
+			ReturnObjectUtility<Room> returnData= tController.updateRoomBookingStatus(roomID, true);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -125,7 +125,7 @@ public class TouristSelectRoomFromHotelView {
 				    alert.showAndWait();
 				    loadRoomTable();
 				if(!success)
-					hController.updateRoomBookingStatus(roomID, false);
+					tController.updateRoomBookingStatus(roomID, false);
 				else {
 					int transactionID=returnData2.getObject();
 				}

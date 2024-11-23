@@ -73,7 +73,7 @@ public class TouristBooksSeatView {
 		eventHandlersAssignment();
 		tController = new TouristController();
 		displayOwnerDetails();
-		loadBusTable();
+		getBusDetails();
 	}
 	
 	public Parent getRoot() {
@@ -217,7 +217,7 @@ public class TouristBooksSeatView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
-    public void loadBusTable() {
+    public void getBusDetails() {
         // Initialize table columns
         colBusId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colModel.setCellValueFactory(new PropertyValueFactory<>("Model"));

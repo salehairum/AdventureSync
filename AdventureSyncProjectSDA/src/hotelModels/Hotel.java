@@ -14,6 +14,7 @@ public class Hotel {
 	private Kitchen kitchen;
 	private String hotelName;
 	private HotelDBHandler hotelDbHandler;
+	private Room room;
 	//constructor
 	public Hotel()
 	{
@@ -23,6 +24,7 @@ public class Hotel {
 		hotelName="";
 		kitchen=new Kitchen();
         hotelDbHandler=new HotelDBHandler();
+        room=new Room();
 	}
 	public Hotel(int hotelID, String location, String hotelName)
 	{
@@ -30,6 +32,7 @@ public class Hotel {
 		this.hotelName = hotelName;
 		this.location = location;
         hotelDbHandler=new HotelDBHandler();
+        room=new Room();
 	}
 	public Hotel(int hotelID, String hotelName, String location, Kitchen kitchen, ArrayList<Room> rooms) {
 	        this.hotelID = hotelID;
@@ -38,6 +41,7 @@ public class Hotel {
 	        this.kitchen = kitchen;
 	        this.rooms = rooms != null ? rooms : new ArrayList<>(); 
 	        hotelDbHandler=new HotelDBHandler();
+	        room=new Room();
 	 }
 	//getter and setter
 	public int getHotelID() {
@@ -73,7 +77,7 @@ public class Hotel {
 	}
 	
 	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
-		return hotelDbHandler.retrieveHotelObject(hotelID);
+		return room.retrieveHotelObject(hotelID);
 	}
 	public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
 		Room room=new Room();

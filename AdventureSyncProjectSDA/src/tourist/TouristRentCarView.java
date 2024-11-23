@@ -72,7 +72,7 @@ public class TouristRentCarView {
 		tController = new TouristController();
 		toaController = new travelAgencyOwnerController();
 		displayOwnerDetails();
-		loadCarTable();
+		getCarDetails();
 	}
 	
 	public Parent getRoot() {
@@ -117,7 +117,7 @@ public class TouristRentCarView {
 				    alert.setHeaderText(null);
 				    alert.setContentText(returnData2.getMessage());
 				    alert.showAndWait();
-				    loadCarTable();
+				    getCarDetails();
 				if(!success)
 					toaController.updateCarRentalStatus(carID, false);   
 				//if transaction could not be made, set rental status as false
@@ -191,7 +191,7 @@ public class TouristRentCarView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
-    public void loadCarTable() {
+    public void getCarDetails() {
         // Initialize table columns
         colCarId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colModel.setCellValueFactory(new PropertyValueFactory<>("Model"));

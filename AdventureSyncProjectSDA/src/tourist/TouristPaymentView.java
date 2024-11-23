@@ -56,6 +56,7 @@ public class TouristPaymentView {
 	//n can be 
 	//food quantity
 	//number of kms travelled
+	//number of nights tourist stayed
 	public TouristPaymentView(Integer tID, Integer sID, String type, Integer trID, Integer n) {
 		touristID=tID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));

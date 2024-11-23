@@ -135,4 +135,7 @@ public class Room {
 	public ReturnObjectUtility<Room> retrieveRoomObject(int roomID) {
 		return hotelDbHandler.retrieveRoomObject(roomID);
 	}
+	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
+		return hotelDbHandler.retrieveHotelObject(hotelID);
+	}
 }

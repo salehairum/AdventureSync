@@ -103,8 +103,6 @@ public class Main extends Application {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
 			HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
-			TouristDeletesAccountView hotelOwnerMenu = new TouristDeletesAccountView();
-
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);

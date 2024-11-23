@@ -81,7 +81,7 @@ public class touristRoomFeedbackView {
 		ratingInput.getItems().addAll("1", "2", "3","4","5");
 		displayOwnerDetails();
 		eventHandlersAssignment();
-		loadRoomTable();
+		getRoomDetails();
 	}
 	
 	public void listenersAssignment() {
@@ -199,7 +199,7 @@ public class touristRoomFeedbackView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
-    public void loadRoomTable() {
+    public void getRoomDetails() {
         // Initialize table columns
     	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomId"));
     	colPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
