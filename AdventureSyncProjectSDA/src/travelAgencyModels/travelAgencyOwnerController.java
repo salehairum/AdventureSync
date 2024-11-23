@@ -103,4 +103,10 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<Boolean> deleteCar(int carID) {
 		return travelAgencyOwner.deleteCar(carID);
 	}
+	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
+		return travelAgencyOwner.updateAgencyOwner(owner);
+	}
+	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID){
+		return travelAgencyOwner.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
+	}
 }

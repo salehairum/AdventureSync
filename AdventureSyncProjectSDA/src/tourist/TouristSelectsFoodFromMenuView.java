@@ -110,6 +110,12 @@ public class TouristSelectsFoodFromMenuView {
 			int foodID=Integer.parseInt(foodIDInput.getText());					
 			int foodQuantity=Integer.parseInt(foodQuanInput.getText());					
 
+			if(foodQuantity<=0) {
+				alertInvalidInput.setContentText("Food quantity should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
 			ReturnObjectUtility<FoodItem> returnData= hController.updateFoodQuantity(foodID, foodQuantity, false);
 			boolean success=returnData.isSuccess();
 			if(!success) {

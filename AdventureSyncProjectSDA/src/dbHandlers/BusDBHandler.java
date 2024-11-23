@@ -339,6 +339,60 @@ public class BusDBHandler {
 	    return returnData;
 	}
 
+	public ReturnObjectUtility<BusDriver> retrieveAllBusDriverData(int busDriverID) {
+	    ReturnObjectUtility<BusDriver> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT t.busDriverId, t.bName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM busDriver t JOIN Account a ON t.accountID = a.accountID WHERE t.busDriverID = " + busDriverID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        if (rSet.next()) { // Check if a result was found
+	            // Retrieve Tourist details
+	            int busDriverIDRetrieved = rSet.getInt("busDriverId");
+	            String name = rSet.getString("bName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            // Create a Tourist object
+	            BusDriver busDriver = new BusDriver(busDriverIDRetrieved, name, dob, cnic);
+
+	            // Retrieve Account details
+	            int accountID = rSet.getInt("accountID");
+	            String username = rSet.getString("username");
+	            String email = rSet.getString("email");
+	            String password = rSet.getString("accPassword");
+	            float balance = rSet.getFloat("balance");
+
+	            // Create an Account object
+	            Account account = new Account(accountID, username, password, email, balance);
+
+	            busDriver.setAccount(account);
+	            // Set the result and success message
+	            returnData.setObject(busDriver);
+	            returnData.setMessage("Bus Driver and account data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Bus Driver does not exist.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such BusDriver") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Bus Driver does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving Bus Driver from database: " + e.getMessage());
+	        }
+	    }
+	    return returnData;
+	}
+
 	public ReturnObjectUtility<Seat> retrieveSeatObject(int seatId, int busId) {
 	    ReturnObjectUtility<Seat> returnData = new ReturnObjectUtility<>();
 	    
@@ -1024,8 +1078,7 @@ public class BusDBHandler {
 		ReturnObjectUtility<BusDriver> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		try {
-			 //first update travel agency owner
-			 String sql = "UPDATE busDriver SET bname = ?, dob = ?, cnic= ? where TravelAgencyOwnerId= ?";
+			 String sql = "UPDATE busDriver SET bname = ?, dob = ?, cnic= ? where busDriverId= ?";
 			 pstmt = conn.prepareStatement(sql);
 			    
 			 // Set parameters
@@ -1044,7 +1097,7 @@ public class BusDBHandler {
 			 }
 			 
 			 //now update account
-			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ?, balance=balance+? where AccountID= ?";
 			 pstmt = conn.prepareStatement(sql);
 			    
 			 Account account=busDriver.getAccount();
@@ -1053,7 +1106,8 @@ public class BusDBHandler {
 			 pstmt.setString(1, account.getUsername());
 			 pstmt.setObject(2, account.getEmail());
 			 pstmt.setString(3, account.getPassword());
-			 pstmt.setInt(4, account.getAccountID());
+			 pstmt.setFloat(4, account.getBalance());
+			 pstmt.setInt(5, account.getAccountID());
 			 
 			 // Execute the insert
 			 rowsAffected = pstmt.executeUpdate();

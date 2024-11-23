@@ -84,4 +84,10 @@ public class busDriverController {
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return busDriver.checkPassword(enteredPassword, username);
 	}
+	public ReturnObjectUtility<BusDriver> retrieveAllBusDriverData(int busDriverID) {
+		return busDriver.retrieveAllBusDriverData(busDriverID);
+	}
+	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
+		return busDriver.updateBusDriver(busDriver);
+	}
 }

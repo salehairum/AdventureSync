@@ -114,7 +114,7 @@ public class TouristChecksOutRoomView {
 			}
 			else {
 				//mark room as not booked
-				ReturnObjectUtility<Room> returnData2=tController.removeRoomFromBookedRooms(touristID, roomID);	
+				ReturnObjectUtility<Integer> returnData2=tController.removeRoomFromBookedRooms(touristID, roomID);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -124,6 +124,9 @@ public class TouristChecksOutRoomView {
 				    
 				if(!success)
 					hController.updateRoomBookingStatus(roomID, true); 
+				else {
+					int transactionID=returnData2.getObject();
+				}
 				//if transaction could not be made, set isBooked as true i.e it is still booked.
 //				try {
 //                    // Dynamically load and show the TouristPaymentView

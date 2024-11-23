@@ -15,6 +15,7 @@ import java.util.List;
 
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
+import accountAndPersonModels.Tourist;
 import accountAndPersonModels.TravelAgencyOwner;
 import travelAgencyModels.Car;
 import travelAgencyModels.Tour;
@@ -376,51 +377,6 @@ public class TravelAgencyDBHandler {
 		}
         return returnData;
 	}
-	/*public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
-		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
-		PreparedStatement pstmt;
-		try {
-			 String sql = "UPDATE Car SET rentalStatus = ? WHERE carID = ?";
-			 pstmt = conn.prepareStatement(sql);
-			    
-			 // Set parameters
-			 pstmt.setBoolean(1,rentalStatus);
-			 pstmt.setInt(2, carID);
-
-			 // Execute the insert
-			 int rowsAffected = pstmt.executeUpdate();
-			    
-			 if (rowsAffected > 0) {
-				 if(rentalStatus) {
-					 returnData.setMessage("Car is now rented.");
-				 }
-				 else {
-					 returnData.setMessage("Car is no longer rented.");
-				 }
-
-		         returnData.setSuccess(true);
-			 } else {
-				 returnData.setMessage("Failed to update car rental status.");
-		         returnData.setSuccess(false);
-			 }
-			 
-		} catch (SQLException e) {
-			String errorMessage = e.getMessage().toLowerCase();
-			
-			if (errorMessage != null) {
-		        if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		        	returnData.setMessage("Error: Car does not exist.");
-		        }else {
-		        	returnData.setMessage("Issue in updating car in db: " + errorMessage);
-		        }
-		    } else {
-		    	returnData.setMessage("An unknown error occurred.");
-		    }
-
-	        returnData.setSuccess(false);
-		}
-		return returnData;
-	}*/
 	public ReturnObjectUtility<Car> updateCarRentalStatus(int carID, boolean rentalStatus) {
 		ReturnObjectUtility<Car> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -613,7 +569,6 @@ public class TravelAgencyDBHandler {
 		return returnData;
 	}
 
-	
 	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;
@@ -638,7 +593,7 @@ public class TravelAgencyDBHandler {
 			 }
 			 
 			 //now update account
-			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ? where AccountID= ?";
+			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ?, balance=balance+? where AccountID= ?";
 			 pstmt = conn.prepareStatement(sql);
 			    
 			 Account account=owner.getAccount();
@@ -647,7 +602,8 @@ public class TravelAgencyDBHandler {
 			 pstmt.setString(1, account.getUsername());
 			 pstmt.setObject(2, account.getEmail());
 			 pstmt.setString(3, account.getPassword());
-			 pstmt.setInt(4, account.getAccountID());
+			 pstmt.setFloat(4, account.getBalance());
+			 pstmt.setInt(5, account.getAccountID());
 			 
 			 // Execute the insert
 			 rowsAffected = pstmt.executeUpdate();
@@ -676,6 +632,61 @@ public class TravelAgencyDBHandler {
 		}
 		return returnData;
 	}
+	
+	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID) {
+	    ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT t.TravelAgencyOwnerId, t.aName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM TravelAgencyOwner t JOIN Account a ON t.accountID = a.accountID WHERE t.TravelAgencyOwnerId = " + TravelAgencyOwnerID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        if (rSet.next()) { // Check if a result was found
+	            // Retrieve Tourist details
+	            int TravelAgencyOwnerIDRetrieved = rSet.getInt("TravelAgencyOwnerId");
+	            String name = rSet.getString("aName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            // Create a Tourist object
+	            TravelAgencyOwner agencyOwner = new TravelAgencyOwner(TravelAgencyOwnerIDRetrieved, name, dob, cnic);
+
+	            // Retrieve Account details
+	            int accountID = rSet.getInt("accountID");
+	            String username = rSet.getString("username");
+	            String email = rSet.getString("email");
+	            String password = rSet.getString("accPassword");
+	            float balance = rSet.getFloat("balance");
+
+	            // Create an Account object
+	            Account account = new Account(accountID, username, password, email, balance);
+
+	            agencyOwner.setAccount(account);
+	            // Set the result and success message
+	            returnData.setObject(agencyOwner);
+	            returnData.setMessage("TravelAgencyOwner and account data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: TravelAgencyOwner does not exist.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such TravelAgencyOwner") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: TravelAgencyOwner does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving TravelAgencyOwner from database: " + e.getMessage());
+	        }
+	    }
+	    return returnData;
+	}
+
 	
 	public ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
 		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();

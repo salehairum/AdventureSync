@@ -82,4 +82,10 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<Room> retrieveRoomObject(int roomID) {
 		return room.retrieveRoomObject(roomID);
 	}
+	public ReturnObjectUtility<HotelOwner> updateHotelOwner(HotelOwner hotelOwner) {
+		return hotelDBHandler.updateHotelOwner(hotelOwner);
+	}
+	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
+		return hotelDBHandler.retrieveAllHotelOwnerData(HotelOwnerID);
+	}
 }

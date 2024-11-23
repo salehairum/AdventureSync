@@ -96,7 +96,7 @@ public class Tourist extends Person {
 		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);
 	}
 	
-	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+	public ReturnObjectUtility<Integer> removeRoomFromBookedRooms(int touristId,int roomID){
 		return touristDBHandler.removeRoomFromBookedRooms(touristId, roomID);
 	}
 	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
@@ -114,5 +114,11 @@ public class Tourist extends Person {
 	}
 	public ReturnObjectUtility<Integer> checkPassword(String enteredPassword, String username) {
 		return touristDBHandler.checkPassword(enteredPassword, username);
+	}
+	public ReturnObjectUtility<Tourist> retrieveAllTouristData(int touristID) {
+		return touristDBHandler.retrieveAllTouristData(touristID);
+	}	
+	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
+		return touristDBHandler.updateTourist(tourist);
 	}
 }

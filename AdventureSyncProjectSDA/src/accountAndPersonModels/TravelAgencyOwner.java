@@ -122,4 +122,11 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<Boolean> deleteCar(int carID) {
 		return car.deleteCar(carID);
 	}
+	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
+		return travelAgencyDBHandler.updateAgencyOwner(owner);
+	}
+	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID){
+		return travelAgencyDBHandler.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
+	}
+
 }

@@ -113,4 +113,10 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
 		return kitchen.updateFoodItem(foodItem);
 	}
+	public ReturnObjectUtility<HotelOwner> updateHotelOwner(HotelOwner hotelOwner) {
+		return hotelOwner.updateHotelOwner(hotelOwner);
+	}
+	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
+		return hotelOwner.retrieveAllHotelOwnerData(HotelOwnerID);
+	}
 }

@@ -12,6 +12,7 @@ import busDriver.BusDriverMenuView;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
+import busDriver.BusDriverUpdatesAccountView;
 import busDriver.BusDriverViewBusDetailsView;
 import busDriver.BusDriverViewsFeedbackView;
 import busDriver.busDriverLogin;
@@ -31,6 +32,7 @@ import hotelOwner.HOMViewFood;
 import hotelOwner.HOMViewRoom;
 import hotelOwner.HotelOwnerMenuView;
 import hotelOwner.hotelOwnerLogin;
+import hotelOwner.hotelOwnerUpdateAccount;
 import dbHandlers.BusDBHandler;
 import dbHandlers.DatabaseManager;
 import dbHandlers.HotelDBHandler;
@@ -44,6 +46,7 @@ import tourist.TouristReturnCarView;
 import tourist.TouristSelectRoomFromHotelView;
 import tourist.TouristSelectSeatFromBusView;
 import tourist.TouristSelectsFoodFromMenuView;
+import tourist.TouristUpdatesAccountView;
 import tourist.touristLogin;
 import tourist.touristRoomFeedbackView;
 import travelAgencyModels.Bus;
@@ -98,7 +101,7 @@ public class Main extends Application {
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
-			HOMUpdateFood hotelOwnerMenu = new HOMUpdateFood();
+			TravelAgencyOwnerUpdatesAccountView hotelOwnerMenu = new TravelAgencyOwnerUpdatesAccountView(1);
  			//Hotel hotel=hdb.retrieveHotelObject(1).getObject();
 // 			ArrayList<Room> rooms=hotel.getRooms();
 // 			for (Room room : rooms) {

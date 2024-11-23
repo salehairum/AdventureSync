@@ -291,6 +291,123 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
+	public ReturnObjectUtility<HotelOwner> updateHotelOwner(HotelOwner hotelOwner) {
+		ReturnObjectUtility<HotelOwner> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 String sql = "UPDATE hotelOwner SET aname = ?, dob = ?, cnic= ? where hotelOwnerID= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setString(1, hotelOwner.getName());
+			 pstmt.setObject(2, hotelOwner.getDob());
+			 pstmt.setString(3, hotelOwner.getCnic());
+			 pstmt.setInt(4, hotelOwner.getHotelOwnerID());
+
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected <=0 ) {
+				 returnData.setMessage("Failed to update hotel owner.");
+				 returnData.setSuccess(false);
+				 return returnData;
+			 }
+			 
+			 sql = "UPDATE Account SET username = ?, email= ?, accPassword= ?, balance=balance+? where AccountID= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 Account account=hotelOwner.getAccount();
+			 
+			 // Set parameters
+			 pstmt.setString(1, account.getUsername());
+			 pstmt.setObject(2, account.getEmail());
+			 pstmt.setString(3, account.getPassword());
+			 pstmt.setFloat(4, account.getBalance());
+			 pstmt.setInt(5, account.getAccountID());
+			 
+			 // Execute the insert
+			 rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 returnData.setMessage("Hotel Owner with id "+hotelOwner.getHotelOwnerID()+" updated successfully.");
+				 returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update Hotel Owner.");
+				 returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in updating Hotel Owner  in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+			returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+
+	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
+	    ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT t.HotelOwnerId, t.aName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM HotelOwner t JOIN Account a ON t.accountID = a.accountID WHERE t.HotelOwnerID = " + HotelOwnerID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        if (rSet.next()) { // Check if a result was found
+	            // Retrieve Tourist details
+	            int HotelOwnerIDRetrieved = rSet.getInt("HotelOwnerId");
+	            String name = rSet.getString("aName");
+	            Date date = rSet.getDate("dob");
+	            LocalDate dob = date.toLocalDate();
+	            String cnic = rSet.getString("cnic");
+
+	            // Create a Tourist object
+	            HotelOwner hotelOwner = new HotelOwner(HotelOwnerIDRetrieved, name, dob, cnic);
+
+	            // Retrieve Account details
+	            int accountID = rSet.getInt("accountID");
+	            String username = rSet.getString("username");
+	            String email = rSet.getString("email");
+	            String password = rSet.getString("accPassword");
+	            float balance = rSet.getFloat("balance");
+
+	            // Create an Account object
+	            Account account = new Account(accountID, username, password, email, balance);
+
+	            hotelOwner.setAccount(account);
+	            // Set the result and success message
+	            returnData.setObject(hotelOwner);
+	            returnData.setMessage("Hotel Owner and account data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: Hotel Owner does not exist.");
+	            returnData.setSuccess(false);
+	        }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such Hotel Owner") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Hotel Owner does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving Hotel Owner from database: " + e.getMessage());
+	        }
+	    }
+	    return returnData;
+	}
+
+	
 	public static ReturnObjectUtility<HotelOwner> retrieveHotelOwnerData(int hotelOwnerID) {
 		ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility();
 		
