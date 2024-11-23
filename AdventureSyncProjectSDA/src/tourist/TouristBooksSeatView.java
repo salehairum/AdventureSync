@@ -55,10 +55,10 @@ public class TouristBooksSeatView {
 	Parent root;
 	TouristController tController;
 	
-	public TouristBooksSeatView(int id) {
+	public TouristBooksSeatView(Integer id) {
+		touristID=id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookSeat.fxml"));
 		loader.setController(this);
-		touristID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -114,9 +114,18 @@ public class TouristBooksSeatView {
 		    	//just send poori bus since ab woh seats aa chuki hain us 
 		    	//pass this bus
 		    	Bus bus=returnData.getObject();
+		    	Integer busid = bus.getID();
+		    	/*try {
+                    // Dynamically load and show the TouristPaymentView
+                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                    currentStage.close();
+                    createButtonHandler(TouristSelectSeatFromBusView.class, "Select Seat", touristID, busid).handle(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }*/
 		    	try {
 		            // Create an instance of the controller using its constructor
-		            TouristSelectSeatFromBusView controllerInstance = new TouristSelectSeatFromBusView(touristID, bus);
+		    		TouristSelectSeatFromBusView controllerInstance = new TouristSelectSeatFromBusView(touristID, busid);
 
 		            // Get the root node from the controller
 		            Parent root = controllerInstance.getRoot();
@@ -125,7 +134,7 @@ public class TouristBooksSeatView {
 		            Scene newFormScene = new Scene(root);
 		            Stage newFormStage = new Stage();
 		            newFormStage.setScene(newFormScene);
-		            newFormStage.setTitle("Select Seats");
+		            newFormStage.setTitle("Select Seat");
 
 		            // Show the new form
 		            newFormStage.show();
@@ -141,37 +150,50 @@ public class TouristBooksSeatView {
 		};
 			
 		selectBusButton.setOnAction(selectBusButtonHandler);
-		menuButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class,"Travel Services"));
+		menuButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class,"Travel Services", touristID));
 	}
 
 	
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;
@@ -188,7 +210,7 @@ public class TouristBooksSeatView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);

@@ -16,12 +16,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="backButton" layoutX="482.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="112.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="backButton" layoutX="482.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="79.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="updRoomButton" disable="true" layoutX="355.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: F9F7F3;" text="Update Room" textFill="#f7a072">
+      <Button fx:id="updRoomButton" disable="true" layoutX="355.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: F9F7F3;" text="Update Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -36,7 +36,7 @@
             <Image url="@../resources/room.png" />
          </image>
       </ImageView>
-      <Button fx:id="viewRoomButton" layoutX="355.0" layoutY="359.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: F9F7F3;" text="View Room First?" textFill="#f7a072">
+      <Button fx:id="viewRoomButton" layoutX="355.0" layoutY="359.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" style="-fx-background-color: F9F7F3;" text="View Room First?" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -113,10 +113,5 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="menuButton" layoutX="505.0" layoutY="359.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

@@ -1184,7 +1184,62 @@ public class HotelDBHandler {
 
 	    return returnData;
 	}
+	
 	public ReturnListUtility<Room> retrieveRoomList(int hotelID) {
+	    ReturnListUtility<Room> returnData = new ReturnListUtility<>();
+
+	    try {
+	        Statement stmt = conn.createStatement();
+	        String query = "SELECT r.roomID, r.pricePerNight, r.rDescription, r.isBooked, (SELECT COALESCE(AVG(f.rating), 0) " +
+	                "FROM Feedback f JOIN RoomHasFeedback rhf " +
+	                "ON f.feedbackID = rhf.feedbackID WHERE rhf.roomID = r.roomID) " +
+	                "AS overallRating FROM Room r WHERE r.hotelID = " + hotelID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+
+	        HashMap<Integer, Room> roomList = new HashMap<>();
+
+	        if (!rSet.next()) {
+	            // No rooms found for the given hotelID
+	            returnData.setMessage("Error: No rooms found for the given hotel ID: " + hotelID);
+	            returnData.setSuccess(false);
+	        } else {
+	            do {
+	                // Retrieve room details from the result set
+	                int roomID = rSet.getInt("roomID");
+	                float pricePerNight = rSet.getFloat("pricePerNight");
+	                String description = rSet.getString("rDescription");
+	                boolean isBooked = rSet.getBoolean("isBooked");
+	                int overallRating = rSet.getInt("overallRating");
+	                
+	                // Create a Room object
+	                Room room = new Room(roomID, overallRating, pricePerNight, description, isBooked);
+
+	                // Add the Room object to the HashMap
+	                roomList.put(roomID, room);
+	            } while (rSet.next());
+
+	            returnData.setList(roomList);
+	            returnData.setMessage("Rooms retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such room") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Room table does not exist or is empty.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving rooms from the database: " + e.getMessage());
+	        }
+
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+	
+	public ReturnListUtility<Room> retrieveNonBookedRoomList(int hotelID) {
 	    ReturnListUtility<Room> returnData = new ReturnListUtility<>();
 
 	    try {
@@ -1238,6 +1293,7 @@ public class HotelDBHandler {
 
 	    return returnData;
 	}
+	
 	public ReturnListUtility<FoodItem> retrieveFoodList(int hotelId) {
 	    ReturnListUtility<FoodItem> returnData = new ReturnListUtility<>();
 

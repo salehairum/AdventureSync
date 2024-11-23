@@ -75,6 +75,9 @@ public class TouristController {
 	public ReturnListUtility<Bus> getBusDetailsWithBusDriverID() {
 		return bus.retrieveBusListWithBusDriverID();
 	}
+	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
+		return bus.getBusDetailsWithTouristID(touristID);
+	}
 	public ReturnListUtility<Seat> getSeatDetails(int busID) {
 		return seat.getSeatDetails(busID);
 	}
@@ -84,8 +87,8 @@ public class TouristController {
 	public ReturnListUtility<FoodItem> getFoodDetails(int hotelID) {
 		return food.getFoodDetails(hotelID);
 	}
-	public ReturnListUtility<Room> getRoomDetails(int hotelID) {
-		return room.getRoomDetails(hotelID);
+	public ReturnListUtility<Room> getNonBookedRoomDetails(int hotelID) {
+		return room.getNonBookedRoomDetails(hotelID);
 	}
 	public ReturnListUtility<RoomWithHotel> getBookedRoomDetails(int touristID) {
 		return roomWithHotel.getBookedRoomDetails(touristID);

@@ -25,7 +25,7 @@
                         <Image url="@../resources/bus.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="busLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Bus Seat" wrappingWidth="171.13671875">
+                  <Text fx:id="busLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Bus Seat" textAlignment="CENTER" wrappingWidth="171.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Image url="@../resources/rating.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="ratingLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Give Feedback (Bus Tour)" wrappingWidth="171.13671875">
+                  <Text fx:id="ratingLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Give Feedback (Bus Tour)" textAlignment="CENTER" wrappingWidth="171.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Image url="@../resources/car.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="rentLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent Car" wrappingWidth="171.13671875">
+                  <Text fx:id="rentLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent Car" textAlignment="CENTER" wrappingWidth="171.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -67,7 +67,7 @@
                         <Image url="@../resources/return.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="returnLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Return Car" wrappingWidth="171.13671875">
+                  <Text fx:id="returnLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Return Car" textAlignment="CENTER" wrappingWidth="171.13671875">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

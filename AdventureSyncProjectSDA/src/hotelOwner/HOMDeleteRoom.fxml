@@ -15,12 +15,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="menuButton" layoutX="518.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="delRoomButton" disable="true" layoutX="361.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: F9F7F3;" text="Delete Room" textFill="#f7a072">
+      <Button fx:id="delRoomButton" disable="true" layoutX="361.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: F9F7F3;" text="Delete Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -35,7 +30,7 @@
             <Image url="@../resources/room.png" />
          </image>
       </ImageView>
-      <Button fx:id="viewRoomButton" layoutX="361.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: F9F7F3;" text="View Room First?" textFill="#f7a072">
+      <Button fx:id="viewRoomButton" layoutX="361.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="218.0" style="-fx-background-color: F9F7F3;" text="View Room First?" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -100,7 +95,7 @@
             </Text>
          </children>
       </Pane>
-      <Button fx:id="backButton" layoutX="518.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="backButton" layoutX="491.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

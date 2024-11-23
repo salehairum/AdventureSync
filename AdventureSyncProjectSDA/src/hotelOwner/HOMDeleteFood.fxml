@@ -10,12 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #0FA3B1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="menuButton" layoutX="502.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="delFoodButton" disable="true" layoutX="370.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Delete Food" textFill="#f7a072">
+      <Button fx:id="delFoodButton" disable="true" layoutX="381.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: F9F7F3;" text="Delete Food" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -30,7 +25,7 @@
             <Image url="@../resources/kitchen.png" />
          </image>
       </ImageView>
-      <Button fx:id="viewFoodButton" layoutX="349.0" layoutY="365.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
+      <Button fx:id="viewFoodButton" layoutX="381.0" layoutY="372.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -41,7 +36,7 @@
          </font>
       </Text>
       <TextField fx:id="foodIDInput" layoutX="487.0" layoutY="250.0" prefHeight="25.0" prefWidth="202.0" promptText="e.g 123" />
-      <Button fx:id="backButton" layoutX="512.0" layoutY="365.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="backButton" layoutX="493.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

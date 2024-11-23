@@ -15,12 +15,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="menuButton" layoutX="486.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="addRoomButton" disable="true" layoutX="359.0" layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Add Room" textFill="#f7a072">
+      <Button fx:id="addRoomButton" disable="true" layoutX="359.0" layoutY="400.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Add Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -32,7 +27,7 @@
          </font>
       </Text>
       <TextField fx:id="pricerPerNightInput" layoutX="444.0" layoutY="251.0" prefHeight="25.0" prefWidth="225.0" promptText="e.g 1000" />
-      <Button fx:id="backButton" layoutX="417.0" layoutY="436.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+      <Button fx:id="backButton" layoutX="483.0" layoutY="400.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

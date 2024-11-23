@@ -56,8 +56,7 @@ public class HotelOwnerSignUpView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
+		}
 	}
 	@FXML
 	private void initialize() {

@@ -8,7 +8,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
@@ -52,11 +51,6 @@
                   <Image url="@../resources/wandermate.png" />
                </image>
             </ImageView>
-            <Text fill="#0fa3b1" layoutX="12.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Travel Agency Owner Menu" textAlignment="CENTER" wrappingWidth="171.13671875">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
             <Text fill="#0fa3b1" layoutX="12.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" textAlignment="CENTER" wrappingWidth="171.13671875">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -98,6 +92,11 @@
                </font>
             </Text>
             <Text fill="#0fa3b1" layoutX="15.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tourist" textAlignment="CENTER" wrappingWidth="171.13671875">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

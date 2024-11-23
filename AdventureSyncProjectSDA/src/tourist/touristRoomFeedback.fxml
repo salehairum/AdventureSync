@@ -31,14 +31,6 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TableView fx:id="carTable" layoutX="11.0" layoutY="163.0" prefHeight="66.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
-               <columns>
-                  <TableColumn prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
-                  <TableColumn prefWidth="104.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
-                  <TableColumn prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
-                  <TableColumn prefWidth="236.0" style="-fx-background-color: #F9F7F3;" text="Description" />
-               </columns>
-            </TableView>
             <Button fx:id="backButton" layoutX="162.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -67,6 +59,15 @@
                </font>
             </Label>
             <ComboBox fx:id="ratingInput" layoutX="264.0" layoutY="359.0" prefHeight="26.0" prefWidth="203.0" promptText="Out of 5 stars..." />
+            <TableView fx:id="roomTable" layoutX="20.0" layoutY="151.0" prefHeight="126.0" prefWidth="511.0" style="-fx-background-color: #F9F7F3;">
+               <columns>
+                  <TableColumn fx:id="colRoomId" prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
+                  <TableColumn fx:id="colPrice" prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
+                  <TableColumn fx:id="colDesc" prefWidth="141.60003662109375" style="-fx-background-color: #F9F7F3;" text="Description" />
+                  <TableColumn fx:id="colHotelId" prefWidth="70.40008544921875" style="-fx-background-color: #f9f7f3;" text="Hotel ID" />
+                  <TableColumn fx:id="colHotelName" prefWidth="127.199951171875" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

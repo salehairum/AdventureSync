@@ -79,8 +79,8 @@ public class TouristTravelServicesMenuView {
 		returnLabel.setOnMouseClicked(createButtonHandler(TouristReturnCarView.class, "Return Car", touristID));
 		busLogo.setOnMouseClicked(createButtonHandler(TouristBooksSeatView.class, "Book Seat", touristID));
 		busLabel.setOnMouseClicked(createButtonHandler(TouristBooksSeatView.class, "Book Seat", touristID));
-		ratingLogo.setOnMouseClicked(createButtonHandler(TouristRatesBusTourView.class, "Bus Feedback", touristID));
-		ratingLabel.setOnMouseClicked(createButtonHandler(TouristRatesBusTourView.class, "Bus Feedback", touristID));
+		ratingLogo.setOnMouseClicked(createButtonHandler(TouristRatesBusView.class, "Bus Feedback", touristID));
+		ratingLabel.setOnMouseClicked(createButtonHandler(TouristRatesBusView.class, "Bus Feedback", touristID));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {
