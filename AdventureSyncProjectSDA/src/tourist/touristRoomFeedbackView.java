@@ -3,7 +3,11 @@ package tourist;
 import java.io.IOException;
 
 import application.Feedback;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import hotelModels.RoomWithHotel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,8 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -44,6 +51,10 @@ public class touristRoomFeedbackView {
 	private Button backButton;
 	@FXML
 	private Button submitButton;
+	@FXML
+	private TableView<RoomWithHotel> roomTable;
+	@FXML
+	private TableColumn<RoomWithHotel, String> colRoomId, colPrice, colDesc, colHotelId, colHotelName;
 	Parent root;
 	TouristController tController;
 	private int touristID;
@@ -56,7 +67,7 @@ public class touristRoomFeedbackView {
 			root = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 		
 	}
 	
@@ -70,6 +81,7 @@ public class touristRoomFeedbackView {
 		ratingInput.getItems().addAll("1", "2", "3","4","5");
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadRoomTable();
 	}
 	
 	public void listenersAssignment() {
@@ -105,35 +117,48 @@ public class touristRoomFeedbackView {
 			
 		submitButton.setOnAction(submitButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
-		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class, "Hotel Services", touristID));
     }
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;
@@ -173,5 +198,25 @@ public class touristRoomFeedbackView {
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
+    }
+    public void loadRoomTable() {
+        // Initialize table columns
+    	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomId"));
+    	colPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
+    	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
+    	colHotelId.setCellValueFactory(new PropertyValueFactory<>("HotelId"));
+    	colHotelName.setCellValueFactory(new PropertyValueFactory<>("HotelName"));
+        // Get car details from the controller
+        ReturnListUtility<RoomWithHotel> returnData = tController.getBookedRoomDetails(touristID);
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<RoomWithHotel> bookedRoomList = FXCollections.observableArrayList(returnData.getList().values());
+            roomTable.setItems(bookedRoomList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            roomTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
     }
 }

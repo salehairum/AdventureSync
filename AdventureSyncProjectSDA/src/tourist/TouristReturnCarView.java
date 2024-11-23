@@ -55,7 +55,7 @@ public class TouristReturnCarView {
 	TouristController tController;
 	travelAgencyOwnerController toaController;
 	
-	public TouristReturnCarView(int id) {
+	public TouristReturnCarView(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristReturnCars.fxml"));
 		loader.setController(this);
 		touristID=id;
@@ -132,20 +132,43 @@ public class TouristReturnCarView {
 					//if transaction could not be made, set rental status as true i.e it is still rented.
 				else  {
 					int transactionID=returnData2.getObject();
-	                try {
+	                /*try {
 	                    // Dynamically load and show the TouristPaymentView
 	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 	                    currentStage.close();
-	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway"/*, touristID,carID, "Return", transactionID,nKms*/).handle(null);;
+	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway", touristID,carID, "Return", transactionID,nKms).handle(null);
 	                } catch (Exception e) {
 	                    e.printStackTrace();
-	                }
+	                }*/
+					try 
+				    {
+				    	String transactionType = "Return";
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, carID, transactionType, transactionID, 0);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Payment Gateway");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
 	            }
 			}
 		};
 			
 		returnButton.setOnAction(rentButtonHandler);
-		backButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services", touristID));
 	}
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
@@ -162,43 +185,49 @@ public class TouristReturnCarView {
 
 		   returnButton.setDisable(!allFieldsFilled);
 	}
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle/*, Object... params*/) {
-        return event -> {
-            try {
-//            	Class<?>[] paramTypes = new Class<?>[params.length];
-//                for (int i = 0; i < params.length; i++) {
-//                    paramTypes[i] = params[i].getClass();
-//                }
-//                java.lang.reflect.Constructor<T> constructor = viewObject.getConstructor(paramTypes);
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-            	
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Show the new form
-                newFormStage.show();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Show the new form
+	            newFormStage.show();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);

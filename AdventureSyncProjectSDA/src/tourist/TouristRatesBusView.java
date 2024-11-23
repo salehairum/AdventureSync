@@ -3,7 +3,10 @@ package tourist;
 import java.io.IOException;
 
 import application.Feedback;
+import dbHandlers.ReturnListUtility;
 import dbHandlers.ReturnObjectUtility;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,8 +16,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -28,17 +34,28 @@ public class TouristRatesBusView {
 	@FXML
 	private TextField commentsInput;
 	@FXML
+	private Text name;
+	@FXML
+	private Text id;
+	@FXML
+	private Text cnic;
+	@FXML
+	private Text dob;
+	@FXML
 	private ComboBox<String> ratingInput;
 	@FXML
-	private Button menuButton;
+	private Button backButton;
 	@FXML
 	private Button submitButton;
 	private int touristID;
-	
+	@FXML
+	private TableView<Bus> busTable;
+	@FXML
+	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo;
 	Parent root;
 	TouristController tController;
 	
-	public TouristRatesBusView(int id) {
+	public TouristRatesBusView(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRatesBus.fxml"));
 		loader.setController(this);
 		touristID=id;
@@ -56,12 +73,43 @@ public class TouristRatesBusView {
 		eventHandlersAssignment();
 		ratingInput.getItems().addAll("1", "2", "3","4","5");
 		tController = new TouristController();
+		loadBusTable();
+		displayOwnerDetails();
 	}
 	
 	public Parent getRoot() {
 		return root;
 	}
-	
+	// Method to display profile
+    public void displayOwnerDetails() {
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
+
+        name.setText(profileDetail[0]);
+        id.setText(profileDetail[1]);
+        cnic.setText(profileDetail[2]);
+        dob.setText(profileDetail[3]);
+    }
+	public void loadBusTable() {
+        // Initialize table columns
+        colBusId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colModel.setCellValueFactory(new PropertyValueFactory<>("Model"));
+        colBrand.setCellValueFactory(new PropertyValueFactory<>("Brand"));
+        colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
+        colPlateNo.setCellValueFactory(new PropertyValueFactory<>("PlateNumber"));
+
+        // Get car details from the controller
+        ReturnListUtility<Bus> returnData = tController.getBusDetailsWithTouristID(touristID);
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<Bus> busList = FXCollections.observableArrayList(returnData.getList().values());
+            busTable.setItems(busList); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            busTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
 	//assigning buttons and listeners
 	public void listenersAssignment() {
 		busIdInput.textProperty().addListener((observable, oldValue, newValue) -> validateInputs());
@@ -94,37 +142,51 @@ public class TouristRatesBusView {
 		};
 			
 		submitButton.setOnAction(submitButtonHandler);
-		menuButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class,"Menu"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services", touristID));
 	}
 
 	
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
+	
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;

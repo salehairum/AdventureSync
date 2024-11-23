@@ -32,6 +32,14 @@ public class Room {
 		this.pricePerNight = pricePerNight;
 		this.overallRating = overallRating;
 	}
+	public Room(int roomID, int overallRating, float pricePerNight, String description, boolean isBooked) 
+	{
+		this.roomID = roomID;
+		this.description = description;
+		this.pricePerNight = pricePerNight;
+		this.overallRating = overallRating;
+		this.isBooked = isBooked;
+	}
 	public Room(int roomID, String description, float pricePerNight, boolean isBooked, 
             ArrayList<Feedback> ratings, int hotelID) {
 	    this.roomID = roomID;
@@ -105,6 +113,9 @@ public class Room {
 	}
 	public ReturnListUtility<Room> getRoomDetails(int hotelID) {
 		return hotelDbHandler.retrieveRoomList(hotelID);
+	}
+	public ReturnListUtility<Room> getNonBookedRoomDetails(int hotelID) {
+		return hotelDbHandler.retrieveNonBookedRoomList(hotelID);
 	}
 //	public ReturnObjectUtility<Room> addRoomToBookedRooms(int touristId,int roomID){
 //		return hotelDbHandler.add

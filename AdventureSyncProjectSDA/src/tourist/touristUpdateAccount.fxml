@@ -121,7 +121,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="menuButton" layoutX="292.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="292.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -135,11 +135,6 @@
                   <Image url="@../resources/wandermate.png" />
                </image>
             </ImageView>
-            <Text fill="#0fa3b1" layoutX="12.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Travel Agency Owner Menu" textAlignment="CENTER" wrappingWidth="171.13671875">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
             <Text fill="#0fa3b1" layoutX="12.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" textAlignment="CENTER" wrappingWidth="171.13671875">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -181,6 +176,11 @@
                </font>
             </Text>
             <Text fill="#0fa3b1" layoutX="15.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tourist" textAlignment="CENTER" wrappingWidth="171.13671875">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

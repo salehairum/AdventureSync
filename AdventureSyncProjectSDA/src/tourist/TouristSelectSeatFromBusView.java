@@ -53,18 +53,17 @@ public class TouristSelectSeatFromBusView {
 	private TableColumn<Seat, String> colSeatId, colRowNo;
 	
 	private int touristID;
-	
+	private int busID;
 	Parent root;
 	TouristController tController;
 	travelAgencyOwnerController toaController;
 	busDriverController bController;
-	Bus bus;
 	
-	public TouristSelectSeatFromBusView(int id, Bus newBus) {
+	public TouristSelectSeatFromBusView(Integer id, Integer bID) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectSeatFromBus.fxml"));
 		loader.setController(this);
 		touristID=id;
-		bus=newBus;
+		busID=bID;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -106,7 +105,6 @@ public class TouristSelectSeatFromBusView {
 			}
 			
 			int seatID=Integer.parseInt(seatIdInput.getText());
-			int busID=bus.getID();
 			//if seat exists, then it must be booked
 			ReturnObjectUtility<Seat> returnData= bController.updateSeatBookingStatus(seatID, true);
 			boolean success=returnData.isSuccess();
@@ -134,52 +132,88 @@ public class TouristSelectSeatFromBusView {
 					//pass busId, nottt seatID!!
 					//pass transactionID
 					int transactionID=returnData2.getObject();
-					try {
+					/*try {
 	                    // Dynamically load and show the TouristPaymentView
 	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 	                    currentStage.close();
-	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
+	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway", touristID, busID, "Bus", transactionID, 0).handle(null);
 	                } catch (Exception e) {
 	                    e.printStackTrace();
-	                }
+	                }*/
+					try 
+				    {
+				    	String transactionType = "Bus";
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, busID, transactionType, transactionID, 0);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Payment Gateway");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
 				}
 			}
 		};
 			
 		bookSeatButton.setOnAction(bookSeatButtonHandler);
-		backButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristTravelServicesMenuView.class, "Travel Services", touristID));
 	}
 	
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
@@ -207,7 +241,7 @@ public class TouristSelectSeatFromBusView {
         colRowNo.setCellValueFactory(new PropertyValueFactory<>("RowNo"));
 
         // Get car details from the controller
-        ReturnListUtility<Seat> returnData = tController.getSeatDetails(bus.getID());
+        ReturnListUtility<Seat> returnData = tController.getSeatDetails(busID);
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList

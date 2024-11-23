@@ -65,6 +65,9 @@ public class Bus extends Vehicle {
 		busDriverID = bdID;
 		//busHandler=new BusDBHandler();
 	}
+	public Bus(int id, String brand, String model, int year, String plateNumber) {
+		super(id, brand, model, year, plateNumber);
+	}
 	//getters and setters
 	public int getNoOfSeats() {
 		return noOfSeats;
@@ -142,6 +145,9 @@ public class Bus extends Vehicle {
 	}
 	public ReturnListUtility<Bus> retrieveBusListWithBusDriverID() {
 		return busHandler.retrieveBusListWithBusDriverID();
+	}
+	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
+		return busHandler.getBusDetailsWithTouristID(touristID);
 	}
 	public ReturnObjectUtility<Float> getBill(int busId){
 		return busHandler.getBill(busId);

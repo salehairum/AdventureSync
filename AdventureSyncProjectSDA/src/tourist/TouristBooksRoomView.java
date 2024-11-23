@@ -125,7 +125,7 @@ public class TouristBooksRoomView {
 		            Scene newFormScene = new Scene(root);
 		            Stage newFormStage = new Stage();
 		            newFormStage.setScene(newFormScene);
-		            newFormStage.setTitle("Select Room From Hotel");
+		            newFormStage.setTitle("Select Room");
 
 		            // Show the new form
 		            newFormStage.show();

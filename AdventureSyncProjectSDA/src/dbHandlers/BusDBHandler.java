@@ -693,6 +693,58 @@ public class BusDBHandler {
 		}
         return returnData;
 	}
+	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
+		ReturnListUtility<Bus> returnData=new ReturnListUtility();
+		
+		try {
+		    Statement stmt = conn.createStatement();
+		    ResultSet rSet = stmt.executeQuery(
+		        "select distinct b.busId, b.brand, b.model, b.manufactureYear, b.plateNumber from bus b join seat s on b.busId = s.busId " +
+		        "join TouristHasBookedSeats thbs on thbs.seatID = s.seatId where thbs.touristID = " + touristID);
+		    //select distinct b.busId, b.brand, b.model, b.manufactureYear, b.plateNumber from bus b join seat s on b.busId = s.busId 
+		    //join TouristHasBookedSeats thbs on thbs.seatID = s.seatId where thbs.touristID = 1
+
+		    HashMap<Integer, Bus> busList = new HashMap<>();
+
+		    if (!rSet.next()) {
+		        // If no result is found, set an error message
+		        returnData.setMessage("Error: No buses found.");
+		        returnData.setSuccess(false);
+		    } else {
+		        do {
+		            // Fetch bus details
+		            int retrievedBusId = rSet.getInt("busId");
+		            String brand = rSet.getString("brand");
+		            String model = rSet.getString("model");
+		            int manufactureYear = rSet.getInt("manufactureYear");
+		            String plateNumber = rSet.getString("plateNumber");
+
+		         // Create a new Bus object
+		            Bus bus = new Bus(retrievedBusId, brand, model, manufactureYear, plateNumber);
+
+		            busList.put(bus.getID(), bus);
+		        } while (rSet.next());
+		        
+		        // Set success data
+		        returnData.setList(busList);
+		        returnData.setMessage("Buses retrieved successfully.");
+		        returnData.setSuccess(true);
+		    }
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Bus does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving buses from database: " + e.getMessage());
+		    }
+            returnData.setSuccess(false);
+		}
+        return returnData;
+	}
+	
 	public ReturnObjectUtility<Seat> updateSeatBookingStatus(int seatID, boolean bookingStatus) {
 		ReturnObjectUtility<Seat> returnData=new ReturnObjectUtility();
 		PreparedStatement pstmt;

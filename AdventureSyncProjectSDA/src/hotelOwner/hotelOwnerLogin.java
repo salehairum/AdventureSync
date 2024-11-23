@@ -9,11 +9,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import tourist.TouristMenuView;
 import travelAgencyModels.TouristController;
 
 public class hotelOwnerLogin {
@@ -71,13 +75,33 @@ public class hotelOwnerLogin {
 			if(success) {
 
 				int hotelOwnerID=returnData.getObject();
-				   	
+		        try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            HotelOwnerMenuView controllerInstance = new HotelOwnerMenuView(hotelOwnerID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Hotel Owner Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 			}//pass it on
 		};
 			
 		loginButton.setOnAction(signupButtonHandler);
 	}
-		
+
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

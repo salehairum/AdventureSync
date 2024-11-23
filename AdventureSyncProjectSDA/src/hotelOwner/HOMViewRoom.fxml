@@ -26,13 +26,6 @@
             <Image url="@../resources/room.png" />
          </image>
       </ImageView>
-      <TableView fx:id="roomTable" layoutX="282.0" layoutY="160.0" prefHeight="200.0" prefWidth="425.0" style="-fx-background-color: F9F7F3;">
-         <columns>
-            <TableColumn fx:id="colRoomId" prefWidth="75.0" text="Room ID" />
-            <TableColumn fx:id="colStatus" prefWidth="104.0" text="Booking Status" />
-            <TableColumn fx:id="colDesc" prefWidth="245.0" text="Description" />
-         </columns>
-      </TableView>
       <Button fx:id="updRoomButton" layoutX="413.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Update" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -102,5 +95,14 @@
             </Text>
          </children>
       </Pane>
+      <TableView fx:id="roomTable" layoutX="209.0" layoutY="126.0" prefHeight="249.0" prefWidth="527.0" style="-fx-background-color: #F9F7F3;">
+         <columns>
+            <TableColumn fx:id="colRoomId" prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
+            <TableColumn fx:id="colRating" prefWidth="84.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
+            <TableColumn fx:id="colPrice" prefWidth="122.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
+            <TableColumn fx:id="colDesc" prefWidth="143.0" style="-fx-background-color: #F9F7F3;" text="Description" />
+            <TableColumn prefWidth="104.0" style="-fx-background-color: #F9F7F3;" text="colIsBooked" />
+         </columns>
+      </TableView>
    </children>
 </Pane>

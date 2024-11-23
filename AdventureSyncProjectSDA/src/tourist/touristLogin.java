@@ -99,41 +99,6 @@ public class touristLogin {
 			
 		loginButton.setOnAction(signupButtonHandler);
 	}
-	/*private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, int touristID) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
-
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
-                
-             // Dynamically call `initializeWithID` if the method exists
-                try {
-                    viewObject.getMethod("initializeWithID", int.class).invoke(controllerInstance, touristID);
-                } catch (NoSuchMethodException e) {
-                    // Ignore if the method doesn't exist (not all controllers need IDs)
-                    System.out.println("No initializeWithID method found for " + viewObject.getSimpleName());
-                }
-                
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
-
-                // Show the new form
-                newFormStage.show();
-
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }*/
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

@@ -206,7 +206,7 @@ public class TouristSelectRoomFromHotelView {
     	colPrice.setCellValueFactory(new PropertyValueFactory<>("PricePerNight"));
     	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
         // Get car details from the controller
-        ReturnListUtility<Room> returnData = tController.getRoomDetails(hotel.getHotelID());
+        ReturnListUtility<Room> returnData = tController.getNonBookedRoomDetails(hotel.getHotelID());
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList

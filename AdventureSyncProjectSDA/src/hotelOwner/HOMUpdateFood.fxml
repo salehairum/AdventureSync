@@ -69,17 +69,12 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="updFoodButton" disable="true" layoutX="133.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: F9F7F3;" text="Update Food" textFill="#f7a072">
+            <Button fx:id="updFoodButton" disable="true" layoutX="159.0" layoutY="421.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="113.0" style="-fx-background-color: F9F7F3;" text="Update Food" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="viewFoodButton" layoutX="133.0" layoutY="374.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="menuButton" layoutX="275.0" layoutY="374.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
+            <Button fx:id="viewFoodButton" layoutX="160.0" layoutY="371.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: F9F7F3;" text="View Food First?" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
