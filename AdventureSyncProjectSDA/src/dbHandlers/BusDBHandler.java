@@ -945,7 +945,7 @@ public class BusDBHandler {
 	            returnData.setSuccess(false);
 	        }
 	        
-	        String deleteQuery = "DELETE FROM tour WHERE tourID = ?";
+	        deleteQuery = "DELETE FROM tour WHERE tourID = ?";
 	        pstmt = conn.prepareStatement(deleteQuery);
 	        pstmt.setInt(1, tourID);
 	        rowsAffected = pstmt.executeUpdate();
