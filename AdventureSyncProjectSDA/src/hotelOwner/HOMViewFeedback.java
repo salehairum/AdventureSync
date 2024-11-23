@@ -2,13 +2,22 @@ package hotelOwner;
 
 import java.io.IOException;
 
+import application.Feedback;
+import dbHandlers.ReturnListUtility;
+import dbHandlers.ReturnObjectUtility;
+import hotelModels.FeedbackWithRoomID;
 import hotelModels.hotelOwnerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -29,7 +38,12 @@ public class HOMViewFeedback {
 	private Text dob;
 	@FXML
 	private Button menuButton;
-	
+	@FXML
+	private TableView<FeedbackWithRoomID> commentTable;
+	@FXML
+	private TableColumn<FeedbackWithRoomID, String> colRoomID, colComment;
+	@FXML
+	private Text ratingLabel;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
@@ -48,6 +62,8 @@ public class HOMViewFeedback {
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		loadCommentTable();
+		loadRatingLabel();
 	}
 	
 	public Parent getRoot() {
@@ -96,5 +112,27 @@ public class HOMViewFeedback {
             }
         };
     }
+    public void loadCommentTable() {
+        // Initialize table columns
+    	colRoomID.setCellValueFactory(new PropertyValueFactory<>("RoomID"));
+        colComment.setCellValueFactory(new PropertyValueFactory<>("Comments"));
 
+        // Get car details from the controller
+        ReturnListUtility<FeedbackWithRoomID> returnData = hoContoller.retrieveFeedbackList(1);
+
+        if (returnData.isSuccess()) {
+            // Convert HashMap to ObservableList
+            ObservableList<FeedbackWithRoomID> feedback = FXCollections.observableArrayList(returnData.getList().values());
+            commentTable.setItems(feedback); // Set data to the table
+        } else {
+            // Handle the error (e.g., log or show a message)
+            System.out.println("Error loading bus: " + returnData.getMessage());
+            commentTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
+        }
+    }
+    public void loadRatingLabel() {
+        // Initialize table columns
+    	ReturnObjectUtility<Float> overallRating = hoContoller.getOverallRating(1);
+        ratingLabel.setText(Float.toString(overallRating.getObject()));
+    }
 }

@@ -13,6 +13,7 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import busDriver.BusDriverUpdateBusView;
 import busDriver.BusDriverViewBusDetailsView;
+import busDriver.BusDriverViewsFeedbackView;
 import busDriver.busDriverLogin;
 import hotelOwner.HOMAddFood;
 import hotelOwner.HOMAddRoom;
@@ -25,6 +26,9 @@ import hotelOwner.HOMManageRoom;
 import hotelOwner.HOMUpdateFood;
 import hotelOwner.HOMUpdateHotel;
 import hotelOwner.HOMUpdateRoom;
+import hotelOwner.HOMViewFeedback;
+import hotelOwner.HOMViewFood;
+import hotelOwner.HOMViewRoom;
 import hotelOwner.HotelOwnerMenuView;
 import hotelOwner.hotelOwnerLogin;
 import dbHandlers.BusDBHandler;
@@ -63,6 +67,8 @@ import travelAgencyOwner.TravelAgencyManageCarsView;
 import travelAgencyOwner.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwner.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwner.TravelAgencyOwnerViewCarsView;
+import travelAgencyOwner.TravelAgencyOwnerViewsBusDriversView;
+import travelAgencyOwner.TravelAgencyOwnerViewsFeedbackView;
 import travelAgencyOwner.TravelAgencyUpdatesCarView;
 import travelAgencyOwner.TravelAgencyViewBusesView;
 import signupForms.BusDriverAddsBus;
@@ -81,7 +87,7 @@ public class Main extends Application {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
 		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -91,8 +97,21 @@ public class Main extends Application {
 
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
-			
+	
  			HOMDeleteFood hotelOwnerMenu = new HOMDeleteFood(2);
+ 			//Hotel hotel=hdb.retrieveHotelObject(1).getObject();
+// 			ArrayList<Room> rooms=hotel.getRooms();
+// 			for (Room room : rooms) {
+// 			    // Access properties or methods of each room
+			
+			
+// 			    System.out.println("Room ID: " + room.getRoomID());}
+			
+// 			Bus bus=bdb.retrieveBusObject(15).getObject();
+				
+	
+ 		//	TouristSelectRoomFromHotelView
+ 			//TouristChecksOutRoomView
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
