@@ -58,10 +58,10 @@ public class TouristChecksOutRoomView {
 	hotelOwnerController hController;
 	Hotel hotel;
 	
-	public TouristChecksOutRoomView(int id) {
+	public TouristChecksOutRoomView(Integer touristID) {
+		this.touristID=touristID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristCheckoutRoom.fxml"));
 		loader.setController(this);
-		touristID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -114,25 +114,40 @@ public class TouristChecksOutRoomView {
 			}
 			else {
 				//mark room as not booked
-				ReturnObjectUtility<Room> returnData2=tController.removeRoomFromBookedRooms(touristID, roomID);	
+				ReturnObjectUtility<Integer> returnData2 = tController.removeRoomFromBookedRooms(touristID, roomID);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
 				    alert.setHeaderText(null);
 				    alert.setContentText(returnData2.getMessage());
 				    alert.showAndWait();
-				    
+				    try 
+				    {
+				    	Integer transactionID = returnData2.getObject();
+				    	String transactionType = "Room";
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, roomID, transactionType, transactionID, 0);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Payment Gateway");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
 				if(!success)
 					hController.updateRoomBookingStatus(roomID, true); 
 				//if transaction could not be made, set isBooked as true i.e it is still booked.
-//				try {
-//                    // Dynamically load and show the TouristPaymentView
-//                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-//                    currentStage.close();
-//                    createButtonHandler(TouristPaymentView.class, "Payment Gateway").handle(null);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
 			}
 		};
 		checkoutButton.setOnAction(rentButtonHandler);
@@ -183,7 +198,7 @@ public class TouristChecksOutRoomView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);

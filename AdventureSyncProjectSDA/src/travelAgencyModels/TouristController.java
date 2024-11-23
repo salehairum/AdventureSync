@@ -61,7 +61,7 @@ public class TouristController {
 		return tourist.addRoomToBookedRooms(touristId, roomID);
 	}
 	
-	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+	public ReturnObjectUtility<Integer> removeRoomFromBookedRooms(int touristId,int roomID){
 		return tourist.removeRoomFromBookedRooms(touristId, roomID);
 	}
 	

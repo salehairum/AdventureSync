@@ -56,10 +56,10 @@ public class TouristPaymentView {
 	//n can be 
 	//food quantity
 	//number of kms travelled
-	public TouristPaymentView(int tID, int sID, String type, int trID, int n) {
+	public TouristPaymentView(Integer tID, Integer sID, String type, Integer trID, Integer n) {
+		touristID=tID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));
 		loader.setController(this);
-		touristID=tID;
 		serviceID=sID;
 		typeOfTransaction=type;
 		transactionID=trID;
@@ -97,8 +97,7 @@ public class TouristPaymentView {
 	public void eventHandlersAssignment() {
 		payCreditButton.setOnAction(payButtonHandler(true));
 		payCashButton.setOnAction(payButtonHandler(false));
-
-		backButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class, "Menu"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristMenuView.class, "Menu", touristID));
     }
 	private EventHandler<ActionEvent> payButtonHandler(boolean isCreditPayment) {
 	    return (event) -> {
@@ -154,36 +153,49 @@ public class TouristPaymentView {
 	    };
 	}
 
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);

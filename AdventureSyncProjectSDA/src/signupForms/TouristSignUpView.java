@@ -12,12 +12,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import tourist.touristLogin;
 import travelAgencyModels.TouristController;
 import travelAgencyModels.travelAgencyOwnerController;
 
@@ -38,6 +43,8 @@ public class TouristSignUpView {
 	private TextField balanceInput;
 	@FXML
 	private DatePicker dobInput;
+	@FXML
+	private Text loginLabel;
 	Parent root;
 	TouristController tController;
 	
@@ -124,8 +131,35 @@ public class TouristSignUpView {
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);
+		loginLabel.setOnMouseClicked(createButtonHandler(touristLogin.class, "Tourist Login"));
 	}
-		
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+    }
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

@@ -96,7 +96,7 @@ public class Tourist extends Person {
 		return touristDBHandler.addRoomToBookedRooms(touristId, roomID);
 	}
 	
-	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
+	public ReturnObjectUtility<Integer> removeRoomFromBookedRooms(int touristId,int roomID){
 		return touristDBHandler.removeRoomFromBookedRooms(touristId, roomID);
 	}
 	public ReturnObjectUtility<Feedback> giveFeedbackToBus(Feedback feedback) {
