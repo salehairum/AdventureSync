@@ -691,7 +691,7 @@ public class HotelDBHandler {
 	        String query = "SELECT fi.foodID, fi.fName, fi.quantity, fi.price " +
                     "FROM FoodItem fi " +
                     "JOIN KitchenHasFood khf ON fi.foodID = khf.foodID " +
-                    "JOIN Hotel h ON h.kitchenID = khf.kitchenID WHERE fi.quantity > 0 and h.hotelID =" + hotelID;
+                    "JOIN Kitchen k ON k.kitchenID = khf.kitchenID WHERE fi.quantity > 0 and k.hotelID = " + hotelID;
 	        ResultSet rSet = stmt.executeQuery(query);
 
 	        HashMap<Integer, FoodItem> foodList = new HashMap<>();
