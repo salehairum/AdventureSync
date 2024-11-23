@@ -626,8 +626,8 @@ public class TouristDBHandler {
 		        return returnData;
 			}
 	
-	public ReturnObjectUtility<Room> removeRoomFromBookedRooms(int touristId,int roomID){
-		ReturnObjectUtility<Room> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<Integer> removeRoomFromBookedRooms(int touristId,int roomID){
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility();
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -663,19 +663,20 @@ public class TouristDBHandler {
 		    pstmt.setInt(1, touristId);
 		    pstmt.setInt(2, roomID);
 		    pstmt.setString(3, "Checkout Hotel Room");
-		    
-		        // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
-		    	returnData.setMessage("Room checked out successfully.");
-		        returnData.setSuccess(true);
-		        return returnData;
-		    } else {
-		    	returnData.setMessage("Failed to checkout from hotel.");
-		        returnData.setSuccess(false);
-		        return returnData;
+		    	rs = pstmt.getGeneratedKeys();
+		        if (rs.next()) {
+		        	int tID = rs.getInt(1);
+		            returnData.setMessage("Successfully retrieved generated Transaction ID.");
+		        	returnData.setObject(tID); 
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to retrieve generated Transaction ID.");
+		            returnData.setSuccess(false);
+		            return returnData;
+		        }
 		    }
-
 		    } catch (SQLException e) {
 		        String errorMessage = e.getMessage().toLowerCase();
 

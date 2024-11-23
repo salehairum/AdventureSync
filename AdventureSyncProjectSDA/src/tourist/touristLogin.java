@@ -8,11 +8,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import travelAgencyModels.TouristController;
 import travelAgencyModels.busDriverController;
 
@@ -67,17 +70,70 @@ public class touristLogin {
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
 			    
-			//send bus driver id 
-			if(success) {
+			//send tourist id 
+			    if (success) {
+			        int touristID = returnData.getObject(); // Assuming this retrieves the tourist ID
+			        try {
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristMenuView controllerInstance = new TouristMenuView(touristID);
 
-				int touristID=returnData.getObject();
-				   	
-			}//pass it on
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Tourist Menu");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
 		};
 			
 		loginButton.setOnAction(signupButtonHandler);
 	}
-		
+	/*private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, int touristID) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+                
+             // Dynamically call `initializeWithID` if the method exists
+                try {
+                    viewObject.getMethod("initializeWithID", int.class).invoke(controllerInstance, touristID);
+                } catch (NoSuchMethodException e) {
+                    // Ignore if the method doesn't exist (not all controllers need IDs)
+                    System.out.println("No initializeWithID method found for " + viewObject.getSimpleName());
+                }
+                
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+    }*/
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

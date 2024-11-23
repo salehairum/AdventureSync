@@ -54,10 +54,10 @@ public class TouristBooksRoomView {
 	TouristController tController;
 	hotelOwnerController hController;
 	
-	public TouristBooksRoomView(int id) {
+	public TouristBooksRoomView(Integer touristID) {
+		this.touristID=touristID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookRoom.fxml"));
 		loader.setController(this);
-		touristID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -125,7 +125,7 @@ public class TouristBooksRoomView {
 		            Scene newFormScene = new Scene(root);
 		            Stage newFormStage = new Stage();
 		            newFormStage.setScene(newFormScene);
-		            newFormStage.setTitle("Select Seats");
+		            newFormStage.setTitle("Select Room From Hotel");
 
 		            // Show the new form
 		            newFormStage.show();
@@ -141,36 +141,50 @@ public class TouristBooksRoomView {
 		};
 			
 		selectHotelButton.setOnAction(selectBusButtonHandler);
-		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class,"Hotel Services"));
+		backButton.setOnMouseClicked(createButtonHandler(TouristHotelServicesMenuView.class,"Hotel Services", touristID));
 	}
 	
-	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}	
+	
 	public boolean isNumeric(String str) {
 	    if (str == null || str.isEmpty()) {
 	        return false;
@@ -187,7 +201,7 @@ public class TouristBooksRoomView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = tController.getTouristProfileDetail(1);
+        String profileDetail[] = tController.getTouristProfileDetail(touristID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
