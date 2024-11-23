@@ -66,4 +66,8 @@ public class FoodItem {
 	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
 		return hotelDbHandler.getHotelOwnerID(foodID);
 	}
+
+	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
+		return hotelDbHandler.deleteFoodItem(foodID);
+	}
 }

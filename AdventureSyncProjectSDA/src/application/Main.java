@@ -96,7 +96,9 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-			
+			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
+	
+ 			HOMDeleteFood hotelOwnerMenu = new HOMDeleteFood(2);
  			//Hotel hotel=hdb.retrieveHotelObject(1).getObject();
 // 			ArrayList<Room> rooms=hotel.getRooms();
 // 			for (Room room : rooms) {
@@ -110,7 +112,6 @@ public class Main extends Application {
 	
  		//	TouristSelectRoomFromHotelView
  			//TouristChecksOutRoomView
- 			hotelOwnerLogin hotelOwnerMenu = new hotelOwnerLogin();
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it

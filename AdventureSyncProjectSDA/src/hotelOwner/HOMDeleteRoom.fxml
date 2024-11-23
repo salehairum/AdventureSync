@@ -15,12 +15,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="menuButton" layoutX="492.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="518.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="delRoomButton" layoutX="373.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="112.0" style="-fx-background-color: F9F7F3;" text="Delete Room" textFill="#f7a072">
+      <Button fx:id="delRoomButton" disable="true" layoutX="361.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: F9F7F3;" text="Delete Room" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

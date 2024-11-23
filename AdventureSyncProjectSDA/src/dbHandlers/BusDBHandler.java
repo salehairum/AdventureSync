@@ -183,7 +183,6 @@ public class BusDBHandler {
 		return returnData;
 	}
 
-	
 	//update bus
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus) {
 	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();

@@ -144,8 +144,10 @@ public class TravelAgencyDBHandler {
 	        ResultSet rSet=stmt.executeQuery("select rentalStatus from car where carID="+carID);
 	        
 	        //car is already rented
-	        while(rSet.getBoolean(1)) {
-	        	returnData.setMessage("Car is already rented");
+	        while(rSet.next() && rSet.getBoolean(1)) {
+	        	returnData.setMessage("Car is already rented, cannot be deleted");
+            	returnData.setSuccess(false);
+            	return returnData;
 	        }
 
 	        //now delete car
@@ -156,8 +158,10 @@ public class TravelAgencyDBHandler {
 
             if (rowsAffected > 0) {
             	returnData.setMessage("Car with id "+carID+" deleted successfully");
+            	returnData.setSuccess(true);
             } else {
             	returnData.setMessage("Car could not be deleted");
+            	returnData.setSuccess(false);
             }
 		}
 		catch(SQLException e){
@@ -165,11 +169,12 @@ public class TravelAgencyDBHandler {
 		    
 		    if (errorMessage.contains("foreign key constraint") || errorMessage.contains("integrity constraint")) {
 		    	returnData.setMessage("Error: Cannot delete car as it is referenced in rental records. Remove related records first.");
-		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
-		    	returnData.setMessage("Error: The Car you are trying to delete does not exist.");
+		    } else if (errorMessage.contains("no such car") || errorMessage.contains("does not exist")) {
+		    	returnData.setMessage("Error: The Car you are trying to delete does not exist."); 
 		    } else {
 		    	returnData.setMessage("Issue in deleting car from database: " + e.getMessage());
 		    }
+        	returnData.setSuccess(false);
 		}
 		return returnData;
 	}
