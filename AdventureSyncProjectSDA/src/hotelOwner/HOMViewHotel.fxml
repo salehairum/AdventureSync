@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -23,39 +22,31 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="377.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Location" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="locationLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Location" textFill="#f7a072">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <Button fx:id="backButton" layoutX="234.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="224.0" layoutY="412.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="105.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="181.0" prefHeight="87.0" prefWidth="377.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Name" textFill="#eddea4">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="nameLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Name" textFill="#f7a072">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            <Label alignment="CENTER" layoutX="41.0" layoutY="206.0" prefHeight="45.0" prefWidth="153.0" text="Name" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Text fx:id="nameLabel" fill="#f9f7f3" layoutX="188.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Label alignment="CENTER" layoutX="52.0" layoutY="277.0" prefHeight="45.0" prefWidth="166.0" text="Location" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Text fx:id="locationLabel" fill="#f9f7f3" layoutX="208.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

@@ -49,7 +49,10 @@ public class HOMManageRoom {
 	
 	Parent root;
 	hotelOwnerController hoContoller;
+	
 	private int hOwnerID;
+	private int hotelID;
+	
 	public HOMManageRoom(Integer hID) {
 		hOwnerID = hID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMManageRoom.fxml"));
@@ -66,8 +69,11 @@ public class HOMManageRoom {
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 	}
-	
+	 public void assignHotelID(){
+			hotelID=hoContoller.getHotelID(hOwnerID).getObject();
+	}
 	public Parent getRoot() {
 		return root;
 	}

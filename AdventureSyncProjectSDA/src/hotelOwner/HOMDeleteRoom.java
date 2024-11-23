@@ -43,8 +43,10 @@ public class HOMDeleteRoom {
 	
 	Parent root;
 	hotelOwnerController hoController;
+	
 	private int hotelOwnerID;
 	private int hotelID;
+	
 	public HOMDeleteRoom(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMDeleteRoom.fxml"));
 		loader.setController(this);
@@ -64,6 +66,7 @@ public class HOMDeleteRoom {
 		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 	}
 	
 	public Parent getRoot() {

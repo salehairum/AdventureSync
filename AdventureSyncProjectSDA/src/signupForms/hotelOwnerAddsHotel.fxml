@@ -35,7 +35,7 @@
             </Text>
             <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="103.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/hotel.png" />
+                  <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
             <HBox alignment="CENTER" layoutX="75.0" layoutY="269.0" prefHeight="87.0" prefWidth="377.0">

@@ -553,6 +553,54 @@ public class BusDBHandler {
 		}
         return returnData;
 	}
+	
+	public ReturnObjectUtility<Integer> retrieveBusByDriverID(int busDriverID) {
+	    // Create a utility object to store the return data
+		ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
+	    
+	    try {
+	        // Create a statement to execute SQL queries
+	        Statement stmt = conn.createStatement();
+
+	        // SQL query using JOIN to retrieve busID for the given busDriverID
+	        String query = "SELECT Bus.busId " +
+	                       "FROM BusDriverDrivesBus " +
+	                       "JOIN Bus ON BusDriverDrivesBus.busID = Bus.busId " +
+	                       "WHERE BusDriverDrivesBus.busDriverID = " + busDriverID;
+
+	        ResultSet rSet = stmt.executeQuery(query);
+	        
+	        // Check if any results are returned
+	        if (!rSet.next()) {
+	            // If no result is found, set an error message
+	            returnData.setMessage("Error: No buses found for the given driver.");
+	            returnData.setSuccess(false);
+	        } else {
+	            // Create a list to store the retrieved busIDs
+	            Integer busID = rSet.getInt("busId");
+
+	            // Set the list and success message
+	            returnData.setObject(busID);
+	            returnData.setMessage("Bus IDs retrieved successfully.");
+	            returnData.setSuccess(true);
+	        }
+	    } catch (SQLException e) {
+	        // Handle SQL exceptions with appropriate messages
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: No buses found for the given driver.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving buses from database: " + e.getMessage());
+	        }
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
+	
 	public static ReturnListUtility<FeedbackWithBusID> getFeedbackDetailsWithBusID() {
 	    ReturnListUtility<FeedbackWithBusID> returnData = new ReturnListUtility<>();
 	    

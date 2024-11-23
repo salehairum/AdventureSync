@@ -70,6 +70,7 @@ public class HOMViewRoom {
 		displayOwnerDetails();
 		eventHandlersAssignment();
 		loadRoomTable();
+		assignHotelID();
 	}
 	
 	public Parent getRoot() {

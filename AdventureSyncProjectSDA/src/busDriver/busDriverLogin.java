@@ -6,16 +6,19 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import dbHandlers.ReturnObjectUtility;
+import hotelOwner.HotelOwnerMenuView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import travelAgencyModels.busDriverController;
 
 public class busDriverLogin {
@@ -73,7 +76,27 @@ public class busDriverLogin {
 			if(success) {
 
 				int busDriverID=returnData.getObject();
-				   	
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+					BusDriverMenuView controllerInstance = new BusDriverMenuView(busDriverID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Bus Driver Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 			}//pass it on
 		};
 			

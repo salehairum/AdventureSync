@@ -159,5 +159,9 @@ public class Bus extends Vehicle {
 	public ReturnObjectUtility<Float> getOverallRating(int busID){
 		return busHandler.getOverallRating(busID);
 	}
+	public ReturnObjectUtility<Integer> retrieveBusByDriverID(int busDriverID)
+	{
+		return busHandler.retrieveBusByDriverID(busDriverID);
+	}
 }
 

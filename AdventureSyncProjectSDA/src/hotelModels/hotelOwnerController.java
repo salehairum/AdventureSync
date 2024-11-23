@@ -122,4 +122,7 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
 		return hotelOwner.getNumberOfNights(roomID, touristID);
 	}
+	public ReturnObjectUtility<Hotel> retrieveHotelDetails(int hotelID){
+		return hotel.retrieveHotelDetails(hotelID);
+	}
 }
