@@ -144,8 +144,10 @@ public class TravelAgencyDBHandler {
 	        ResultSet rSet=stmt.executeQuery("select rentalStatus from car where carID="+carID);
 	        
 	        //car is already rented
-	        while(rSet.next()&&rSet.getBoolean(1)) {
-	        	returnData.setMessage("Car is already rented");
+	        while(rSet.next() && rSet.getBoolean(1)) {
+	        	returnData.setMessage("Car is already rented, cannot be deleted");
+            	returnData.setSuccess(false);
+            	return returnData;
 	        }
 
 	        //now delete car

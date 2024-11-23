@@ -46,5 +46,8 @@ public class Kitchen {
 	public ReturnObjectUtility<Integer> getHotelOwnerID(int foodID) {
 		return food.getHotelOwnerID(foodID);
 	}
+	public ReturnObjectUtility<Boolean> deleteFoodItem(int foodID) {
+		return food.deleteFoodItem(foodID);
+	}
 }
 

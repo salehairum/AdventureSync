@@ -90,19 +90,9 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
+			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 			
- 			Hotel hotel=hdb.retrieveHotelObject(1).getObject();
-// 			ArrayList<Room> rooms=hotel.getRooms();
-// 			for (Room room : rooms) {
-// 			    // Access properties or methods of each room
-// 			    System.out.println("Room ID: " + room.getRoomID());}
-			
-// 			Bus bus=bdb.retrieveBusObject(15).getObject();
-				
-	
- 		//	TouristSelectRoomFromHotelView
- 			//TouristChecksOutRoomView
- 			TravelAgencyDeleteCarsView hotelOwnerMenu = new TravelAgencyDeleteCarsView();
+ 			HOMDeleteFood hotelOwnerMenu = new HOMDeleteFood(2);
 
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
