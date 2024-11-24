@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import dbHandlers.ReturnObjectUtility;
+import controllers.busDriverController;
+import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,8 +20,6 @@ import javafx.scene.layout.Pane;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
-import travelAgencyModels.busDriverController;
-import travelAgencyModels.travelAgencyOwnerController;
 
 public class BusDriverAddsBus {
 	@FXML

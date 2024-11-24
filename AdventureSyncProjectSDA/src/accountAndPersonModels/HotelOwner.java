@@ -2,8 +2,8 @@ package accountAndPersonModels;
 
 import java.time.LocalDate;
 
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.HotelDBHandler;
-import dbHandlers.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
 

@@ -2,7 +2,7 @@ package hotelModels;
 
 import java.util.ArrayList;
 
-import dbHandlers.ReturnObjectUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 
 public class Kitchen {
 	//variables

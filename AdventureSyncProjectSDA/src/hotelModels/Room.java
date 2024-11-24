@@ -4,9 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import application.Feedback;
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.HotelDBHandler;
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
 
 public class Room {
 	//variables

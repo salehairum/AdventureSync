@@ -2,9 +2,9 @@ package accountAndPersonModels;
 
 import java.time.LocalDate;
 
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.BusDBHandler;
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;

@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.Tourist;
 import accountAndPersonModels.TravelAgencyOwner;
-import dbHandlers.ReturnObjectUtility;
+import controllers.TouristController;
+import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,9 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tourist.touristLogin;
-import travelAgencyModels.TouristController;
-import travelAgencyModels.travelAgencyOwnerController;
+import touristView.touristLogin;
 
 public class TouristSignUpView {
 	@FXML

@@ -1,7 +1,7 @@
 package travelAgencyModels;
 
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 
 public class Car extends Vehicle{

@@ -1,8 +1,8 @@
 package travelAgencyModels;
 
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.BusDBHandler;
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
 
 public class Seat {
 	private int seatID;

@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.TravelAgencyOwner;
-import busDriver.busDriverLogin;
-import dbHandlers.ReturnObjectUtility;
-import hotelOwner.hotelOwnerLogin;
+import busDriverView.busDriverLogin;
+import controllers.busDriverController;
+import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.hotelOwnerLogin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,8 +28,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import travelAgencyModels.busDriverController;
-import travelAgencyModels.travelAgencyOwnerController;
 
 public class BusDriverSignUpView {
 	@FXML
