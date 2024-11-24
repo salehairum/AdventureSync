@@ -73,7 +73,7 @@ public class TouristBooksRoomView {
 		tController = new TouristController();
 		hController = new hotelOwnerController();
 		displayOwnerDetails();
-		loadHotelTable();
+		getHotelDetails();
 	}
 	
 	public Parent getRoot() {
@@ -208,7 +208,7 @@ public class TouristBooksRoomView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
-    public void loadHotelTable() {
+    public void getHotelDetails() {
         // Initialize table columns
     	colHotelId.setCellValueFactory(new PropertyValueFactory<>("HotelID"));
         colHotelName.setCellValueFactory(new PropertyValueFactory<>("HotelName"));

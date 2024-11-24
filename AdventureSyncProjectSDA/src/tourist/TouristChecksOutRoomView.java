@@ -103,7 +103,7 @@ public class TouristChecksOutRoomView {
 			
 			int roomID=Integer.parseInt(roomIDInput.getText());
 						
-			ReturnObjectUtility<Room> returnData= hController.updateRoomBookingStatus(roomID, false);
+			ReturnObjectUtility<Room> returnData= tController.updateRoomBookingStatus(roomID, false);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -126,7 +126,7 @@ public class TouristChecksOutRoomView {
 				    alert.showAndWait();
 				   
 				if(!success)
-					hController.updateRoomBookingStatus(roomID, true); 
+					tController.updateRoomBookingStatus(roomID, true); 
 				else {
 					 try 
 					    {

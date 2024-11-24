@@ -65,6 +65,10 @@ public class TouristController {
 		return tourist.removeRoomFromBookedRooms(touristId, roomID);
 	}
 	
+	 public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
+			return hotel.updateRoomBookingStatus(roomID, bookingStatus);
+	}
+	
 	public ReturnObjectUtility<Hotel> retrieveHotelObject(int hotelID) {
 		return hotel.retrieveHotelObject(hotelID);
 	}
@@ -119,4 +123,7 @@ public class TouristController {
 	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
 		return tourist.updateTourist(tourist);
 	}
+	 public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+			return hotel.updateFoodQuantity(foodID, quantity, add);
+		}
 }
