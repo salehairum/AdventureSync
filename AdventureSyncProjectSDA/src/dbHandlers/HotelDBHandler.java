@@ -16,15 +16,17 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
 import application.Feedback;
-import hotelModels.FeedbackWithRoomID;
+import dataUtilityClasses.FeedbackWithBusID;
+import dataUtilityClasses.FeedbackWithRoomID;
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
+import dataUtilityClasses.RoomWithHotel;
 import hotelModels.FoodItem;
 import hotelModels.Hotel;
 import hotelModels.Kitchen;
 import hotelModels.Room;
-import hotelModels.RoomWithHotel;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
-import travelAgencyModels.FeedbackWithBusID;
 import travelAgencyModels.Seat;
 
 public class HotelDBHandler {

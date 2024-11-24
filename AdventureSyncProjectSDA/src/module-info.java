@@ -6,12 +6,12 @@ module AdventureSyncProjectSDA {
 	requires javafx.base;
 	
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
-	opens travelAgencyOwner to javafx.fxml;
-	opens hotelOwner to javafx.fxml;
-	opens busDriver to javafx.fxml;
+	opens travelAgencyOwnerView to javafx.fxml;
+	opens hotelOwnerView to javafx.fxml;
+	opens busDriverView to javafx.fxml;
 	opens signupForms to javafx.fxml;
 	opens travelAgencyModels to javafx.base;
-	opens tourist to javafx.fxml;
+	opens touristView to javafx.fxml;
 	opens hotelModels to javafx.base;
 	opens accountAndPersonModels to javafx.base;
 	

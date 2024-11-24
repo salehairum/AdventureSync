@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
+import dataUtilityClasses.FeedbackWithBusID;
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
-import travelAgencyModels.FeedbackWithBusID;
 
 public class TravelAgencyOwner extends Person {
 	private int agencyOwnerID;

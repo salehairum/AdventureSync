@@ -1,10 +1,10 @@
 package travelAgencyModels;
 
-import dbHandlers.ReturnObjectUtility;
 import dbHandlers.TravelAgencyDBHandler;
 
 import java.util.Date;
 
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.BusDBHandler;
 
 public class Tour {

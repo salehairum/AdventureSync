@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import application.Feedback;
+import dataUtilityClasses.ReturnListUtility;
+import dataUtilityClasses.ReturnObjectUtility;
 import dbHandlers.BusDBHandler;
-import dbHandlers.ReturnListUtility;
-import dbHandlers.ReturnObjectUtility;
 
 public class Bus extends Vehicle {
 	//attributes

@@ -6,9 +6,10 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
-import dbHandlers.ReturnObjectUtility;
-import hotelModels.hotelOwnerController;
-import hotelOwner.hotelOwnerLogin;
+import controllers.TouristController;
+import controllers.hotelOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.hotelOwnerLogin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,8 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tourist.touristLogin;
-import travelAgencyModels.TouristController;
+import touristView.touristLogin;
 
 public class HotelOwnerSignUpView {
 	@FXML

@@ -2,12 +2,12 @@ package signupForms;
 
 import java.io.IOException;
 
-import dbHandlers.ReturnObjectUtility;
+import controllers.hotelOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
 import hotelModels.Hotel;
 import hotelModels.Room;
-import hotelModels.hotelOwnerController;
-import hotelOwner.HOMManageRoom;
-import hotelOwner.HotelOwnerMenuView;
+import hotelOwnerView.HOMManageRoom;
+import hotelOwnerView.HotelOwnerMenuView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
