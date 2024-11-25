@@ -1479,7 +1479,6 @@ public class BusDBHandler {
 	            boolean hasTour = rSet.getBoolean("hasTour");
 	            // Create a new Tour object using the constructor
 	            Bus bus = new Bus(busIDD, brand, model, year, plate, noOfSeat, price, hasTour);
-	            
 	            // Set the Tour object and success message in the return object
 	            returnData.setObject(bus);
 	            returnData.setMessage("Bus details retrieved successfully.");

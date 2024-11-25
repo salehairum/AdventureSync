@@ -14,12 +14,12 @@
    <children>
       <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
-            <Label layoutX="101.0" layoutY="18.0" prefHeight="91.0" prefWidth="209.0" text="View Tour" textFill="#eddea4">
+            <Label layoutX="196.0" layoutY="18.0" prefHeight="91.0" prefWidth="209.0" text="View Tour" textFill="#eddea4">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="31.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="carLogo1" fitHeight="59.0" fitWidth="55.0" layoutX="126.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/route.png" />
                </image>
@@ -40,11 +40,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="tourIDLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Tour ID" textFill="#f7a072">
+                              <Text fx:id="tourIDLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour ID" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -54,11 +54,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="dateLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="date" textFill="#f7a072">
+                              <Text fx:id="dateLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>
@@ -72,11 +72,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="originLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Origin" textFill="#f7a072">
+                              <Text fx:id="originLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Origin" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -86,11 +86,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="destinationLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="destination" textFill="#f7a072">
+                              <Text fx:id="destinationLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>

@@ -58,7 +58,7 @@ public class busDriverController {
 	public String[] getBusDetail(int busId)
     {
     	ReturnObjectUtility<Bus> returnData = bus.getBusDetail(busId);
-    	String busID = String.valueOf(returnData.getObject().getBusDriverID());
+    	String busID = String.valueOf(returnData.getObject().getID());
         String brand = returnData.getObject().getBrand();
         String model = returnData.getObject().getModel();
         String year = String.valueOf(returnData.getObject().getYear());

@@ -11,23 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="sidePanel" layoutX="-1.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
-         <children>
-            <ImageView fx:id="logo" fitHeight="139.0" fitWidth="118.0" layoutX="40.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/wandermate.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="24.0" layoutY="311.0" prefHeight="40.0" prefWidth="150.0" text="Bus Driver Account" textFill="#0fa3b1">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
       <Pane fx:id="mainPanel" layoutX="199.0" prefHeight="500.0" prefWidth="556.0" style="-fx-background-color: #0FA3B1; -fx-border-color: transparent;">
          <children>
             <Label layoutX="100.0" layoutY="18.0" prefHeight="91.0" prefWidth="398.0" text="Enter your Bus Details" textFill="#eddea4">
@@ -165,6 +150,20 @@
             <Label layoutX="33.0" layoutY="92.0" prefHeight="35.0" prefWidth="258.0" text="Please fill out all fields." textFill="#f9f7f3">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="192.0" fitWidth="155.0" layoutX="23.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="26.0" layoutY="302.0" prefHeight="40.0" prefWidth="150.0" text="Bus Driver Account" textFill="#0fa3b1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>

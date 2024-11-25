@@ -173,6 +173,8 @@ public class Bus extends Vehicle {
 	}
 	public ReturnObjectUtility<Bus> getBusDetail(int busID)
 	{
+		//return busHandler.getBusDetail(busID);
+		ReturnObjectUtility<Bus> bus = busHandler.getBusDetail(busID);
 		return busHandler.getBusDetail(busID);
 	}
 }
