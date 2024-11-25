@@ -92,11 +92,16 @@ public class BusDBHandler {
 						 returnData.setMessage("Failed to add seat.");
 		                 returnData.setSuccess(false);
 			        }
+			        else {
+			        	System.out.println("seat se rows affecthui hain");
+			        }
 			    }
+			    
 			}
 			else {
 				 returnData.setMessage("Failed to add bus.");
                  returnData.setSuccess(false);
+                 return returnData;
 			 }
 			 sql = "INSERT INTO BusDriverDrivesBus (busDriverID, busID) VALUES (?, ?);";
 			 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
