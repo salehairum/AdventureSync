@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="mainPanel" layoutX="200.0" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #0FA3B1;">
+         <children>
+            <Label layoutX="200.0" layoutY="24.0" prefHeight="50.0" prefWidth="218.0" text="Welcome!" textFill="#eddea4">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <VBox fx:id="travelServices" alignment="CENTER" layoutX="301.0" layoutY="153.0" prefHeight="119.0" prefWidth="234.0">
+               <children>
+                  <ImageView fx:id="travelLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/travel.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="travelLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Travel Services" wrappingWidth="171.13671875">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox fx:id="hotelServices" alignment="CENTER" layoutX="38.0" layoutY="153.0" prefHeight="119.0" prefWidth="208.0">
+               <children>
+                  <ImageView fx:id="hotelLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hotel2.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="hotelLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel Services" wrappingWidth="171.13671875">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox fx:id="manageAccount" alignment="CENTER" layoutX="172.0" layoutY="289.0" prefHeight="160.0" prefWidth="198.0">
+               <children>
+                  <ImageView fx:id="accountLogo" fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/account.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="accountLabel" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Account" wrappingWidth="200.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">
+         <children>
+            <ImageView fitHeight="137.0" fitWidth="157.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/wandermate.png" />
+               </image>
+            </ImageView>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tourist" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="12.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" textAlignment="CENTER" wrappingWidth="171.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="name" fill="#0fa3b1" layoutX="75.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="id" fill="#0fa3b1" layoutX="75.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="cnic" fill="#0fa3b1" layoutX="75.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNIC" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dob" fill="#0fa3b1" layoutX="75.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB" wrappingWidth="122.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="69.125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="61.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNIC:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#0fa3b1" layoutX="15.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB:" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</Pane>
