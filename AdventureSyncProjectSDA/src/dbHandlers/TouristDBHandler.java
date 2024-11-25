@@ -144,8 +144,6 @@ public class TouristDBHandler {
 			        }
 		            
 			        int touristID=rSetForAccount.getInt("touristID");
-			        System.out.println("Actual: "+accPassword);
-			        System.out.println("Entered: "+enteredPassword);
 			        if(accPassword.equals(enteredPassword)) {
 			        	returnData.setObject(touristID);
 			            returnData.setMessage("Logged in successfully");
@@ -178,6 +176,95 @@ public class TouristDBHandler {
 		    }
 
             returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int touristID) {
+		ReturnObjectUtility<Integer> returnData=new ReturnObjectUtility<Integer>();
+		PreparedStatement pstmt;
+		try {
+			 Statement stmt = conn.createStatement();
+		        ResultSet rSet = stmt.executeQuery("select account.accountID, account.accPassword from account inner join tourist on tourist.accountID=account.accountID where touristID=" + touristID+"");
+		        
+		        int accountID=0;
+		        if (rSet.next()) { // Check if a result was found
+		            String accPassword= rSet.getString("accPassword");
+			        accountID=rSet.getInt("accountID");
+		            
+			        Statement stmtForAccount = conn.createStatement();
+			        
+			        if(accPassword.equals(enteredPassword)) {
+			        	returnData.setObject(accountID);
+			            returnData.setMessage("Correct Old Password");
+			            returnData.setSuccess(true);
+			            return returnData;
+			        }
+			        else {
+			        	returnData.setObject(accountID);
+			            returnData.setMessage("Please correctly enter your old password.");
+			            returnData.setSuccess(false);
+			            return returnData;
+			        }
+		        } else {
+		            // If no result is found, set an error message
+		            returnData.setMessage("Error: User does not exist.");
+		            returnData.setSuccess(false);
+		        }
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in changing password: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+
+            returnData.setSuccess(false);
+		}
+		return returnData;
+	}
+	
+	public ReturnObjectUtility<Tourist> updatePassword(String password, int accountID) {
+		ReturnObjectUtility<Tourist> returnData=new ReturnObjectUtility();
+		PreparedStatement pstmt;
+		try {
+			 //first update travel agency owner
+			 String sql = "UPDATE account SET accPassword= ? where accountID= ?";
+			 pstmt = conn.prepareStatement(sql);
+			    
+			 // Set parameters
+			 pstmt.setString(1, password);
+			 pstmt.setObject(2, accountID);
+			 
+			 // Execute the insert
+			 int rowsAffected = pstmt.executeUpdate();
+			    
+			 if (rowsAffected > 0) {
+				 returnData.setMessage("Password updated successfully.");
+				 returnData.setSuccess(true);
+			 } else {
+				 returnData.setMessage("Failed to update password.");
+				 returnData.setSuccess(false);
+			 }
+			 
+		} catch (SQLException e) {
+			String errorMessage = e.getMessage().toLowerCase();
+			
+			if (errorMessage != null) {
+		        if (errorMessage.contains("foreign key constraint")) {
+		        	returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		        } else {
+		        	returnData.setMessage("Issue in updating password in db: " + errorMessage);
+		        }
+		    } else {
+		    	returnData.setMessage("An unknown error occurred.");
+		    }
+			returnData.setSuccess(false);
 		}
 		return returnData;
 	}
@@ -603,7 +690,7 @@ public class TouristDBHandler {
 	}
 	
 	//bus driver related functions
-	public static ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
+	public ReturnObjectUtility<Tourist> retrieveTouristData(int touristID) {
 				ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility();
 				
 				try {

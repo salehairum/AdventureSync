@@ -27,17 +27,17 @@
                   <Image url="@../resources/update.png" />
                </image>
             </ImageView>
-            <Button fx:id="backButton" layoutX="283.0" layoutY="397.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="291.0" layoutY="371.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" disable="true" layoutX="157.0" layoutY="397.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
+            <Button fx:id="updateButton" disable="true" layoutX="157.0" layoutY="371.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <VBox layoutX="44.0" layoutY="113.0" prefHeight="275.0" prefWidth="478.0">
+            <VBox layoutX="44.0" layoutY="113.0" prefHeight="257.0" prefWidth="478.0">
                <children>
                   <HBox prefHeight="66.0" prefWidth="498.0">
                      <children>
@@ -125,6 +125,11 @@
                   </HBox>
                </children>
             </VBox>
+            <Button fx:id="updPasswordButton" layoutX="158.0" layoutY="433.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="251.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update Password" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

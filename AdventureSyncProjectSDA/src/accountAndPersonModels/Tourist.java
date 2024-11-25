@@ -121,4 +121,10 @@ public class Tourist extends Person {
 	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
 		return touristDBHandler.updateTourist(tourist);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int touristID) {
+		return touristDBHandler.compareOldPassword(enteredPassword, touristID);
+	}
+	public ReturnObjectUtility<Tourist> updatePassword(String password, int accountID) {
+		return touristDBHandler.updatePassword(password, accountID);
+	}
 }
