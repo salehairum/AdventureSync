@@ -49,7 +49,7 @@ public class TravelAgencyOwnerViewsFeedbackView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyOwnerViewsFeedbackView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerViewFeedback.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerViewFeedback.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

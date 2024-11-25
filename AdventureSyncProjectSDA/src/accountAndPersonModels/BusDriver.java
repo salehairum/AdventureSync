@@ -64,5 +64,7 @@ public class BusDriver extends Person {
 	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
 		return busDBHandler.updateBusDriver(busDriver);
 	}
-	
+	public ReturnObjectUtility<BusDriver> deleteBusDriver(int busDriverID) {
+		return busDBHandler.deleteBusDriver(busDriverID);
+	}
 }

@@ -33,7 +33,7 @@ public class HOMViewHotel {
 	Parent root;
 	hotelOwnerController hoContoller;
 	public HOMViewHotel() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMViewHotel.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMViewHotel.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

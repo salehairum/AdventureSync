@@ -51,7 +51,7 @@ public class TravelAgencyManageCarsView extends AnchorPane {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyManageCarsView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerMgrCars.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMgrCars.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

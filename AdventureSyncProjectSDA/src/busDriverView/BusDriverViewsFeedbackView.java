@@ -49,7 +49,7 @@ public class BusDriverViewsFeedbackView {
 	busDriverController bdController;
 	
 	public BusDriverViewsFeedbackView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverViewsFeedback.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverViewsFeedback.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

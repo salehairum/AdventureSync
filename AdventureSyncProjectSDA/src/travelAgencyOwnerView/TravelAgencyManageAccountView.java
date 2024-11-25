@@ -42,7 +42,7 @@ public class TravelAgencyManageAccountView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyManageAccountView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerMgrAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMgrAccount.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

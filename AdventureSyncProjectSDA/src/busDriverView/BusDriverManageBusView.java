@@ -43,7 +43,7 @@ public class BusDriverManageBusView {
 	busDriverController bdController;
 	
 	public BusDriverManageBusView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverMgrBus.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverMgrBus.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

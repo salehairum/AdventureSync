@@ -44,7 +44,7 @@ public class TouristManagesAccountView {
 	private int touristID;
 	public TouristManagesAccountView(Integer touristID) {
 		this.touristID = touristID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristManageAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristManageAccount.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

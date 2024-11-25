@@ -2,13 +2,18 @@ package travelAgencyOwnerView;
 
 import java.io.IOException;
 
+import accountAndPersonModels.TravelAgencyOwner;
 import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -29,12 +34,16 @@ public class TravelAgencyOwnerDeleteAccountView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button yesButton;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	public TravelAgencyOwnerDeleteAccountView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerDeleteAccount.fxml"));
+	int agencyOwnerID;
+	public TravelAgencyOwnerDeleteAccountView(int id) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerDeleteAccount.fxml"));
 		loader.setController(this);
+		agencyOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -61,9 +70,21 @@ public class TravelAgencyOwnerDeleteAccountView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
- // Method for button handling
+    // Method for button handling
     public void eventHandlersAssignment() {
-        // Assign handlers with parameters for specific FXMLs and classes
+		EventHandler<ActionEvent> yesButtonHandler=(event)->{
+			
+			ReturnObjectUtility<TravelAgencyOwner> returnData=taoController.deleteAgencyOwner(agencyOwnerID);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		yesButton.setOnAction(yesButtonHandler);
+        
         backButton.setOnMouseClicked(createButtonHandler(TravelAgencyManageAccountView.class, "Manage Account"));
     }
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {

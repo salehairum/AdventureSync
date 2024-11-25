@@ -54,7 +54,7 @@ public class BusDriverUpdateBusView {
 	busDriverController bController;
 	
 	public BusDriverUpdateBusView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverUpdateBus.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverUpdateBus.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

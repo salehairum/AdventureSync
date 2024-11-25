@@ -92,4 +92,7 @@ public class busDriverController {
 	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
 		return busDriver.updateBusDriver(busDriver);
 	}
+	public ReturnObjectUtility<BusDriver> deleteBusDriver(int busDriverID) {
+		return busDriver.deleteBusDriver(busDriverID);
+	}
 }

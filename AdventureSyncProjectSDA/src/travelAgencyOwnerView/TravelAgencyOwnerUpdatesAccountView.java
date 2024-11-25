@@ -56,7 +56,7 @@ public class TravelAgencyOwnerUpdatesAccountView {
 	travelAgencyOwnerController taoController;
 	private int agencyOwnerID;
 	public TravelAgencyOwnerUpdatesAccountView(int id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerUpdateAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerUpdateAccount.fxml"));
 		loader.setController(this);
 		agencyOwnerID=id;
 		try {

@@ -28,7 +28,7 @@ public class travelAgencyOwnerLogin {
 	travelAgencyOwnerController tController;
 	
 	public travelAgencyOwnerLogin() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerLogin.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerLogin.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

@@ -56,7 +56,7 @@ public class TouristReturnCarView {
 	travelAgencyOwnerController toaController;
 	
 	public TouristReturnCarView(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristReturnCars.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristReturnCars.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {

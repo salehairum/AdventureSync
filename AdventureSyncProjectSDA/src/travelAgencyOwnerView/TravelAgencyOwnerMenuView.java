@@ -49,7 +49,7 @@ public class TravelAgencyOwnerMenuView extends AnchorPane{
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyOwnerMenuView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMenu.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

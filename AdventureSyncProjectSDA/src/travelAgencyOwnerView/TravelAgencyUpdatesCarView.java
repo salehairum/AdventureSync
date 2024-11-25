@@ -54,7 +54,7 @@ public class TravelAgencyUpdatesCarView {
 	travelAgencyOwnerController taoController;
 	
 	public TravelAgencyUpdatesCarView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerUpdateCar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerUpdateCar.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

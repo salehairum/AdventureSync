@@ -54,7 +54,7 @@ public class HOMAddFood {
 	Parent root;
 	hotelOwnerController hoContoller;
 	public HOMAddFood(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMAddFood.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMAddFood.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
 		try {

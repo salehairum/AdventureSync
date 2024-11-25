@@ -46,7 +46,7 @@ public class TravelAgencyManageBusView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyManageBusView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerMgrBuses.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMgrBuses.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

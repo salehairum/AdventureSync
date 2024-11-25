@@ -129,4 +129,7 @@ public class TravelAgencyOwner extends Person {
 		return travelAgencyDBHandler.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
 	}
 
+	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
+		return travelAgencyDBHandler.deleteAgencyOwner(owner);
+	}
 }

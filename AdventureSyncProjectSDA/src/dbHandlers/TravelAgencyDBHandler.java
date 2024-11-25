@@ -635,6 +635,61 @@ public class TravelAgencyDBHandler {
 		return returnData;
 	}
 	
+	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
+	    ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+
+	    try {
+	    	//see if there are rented cars or not
+	    	Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("SELECT COUNT(*) AS rentedCars FROM car WHERE rentalStatus = 1");
+	   
+	        if(rSet.next()) {
+	        	int nCars = rSet.getInt("rentedCars");
+	        	if(nCars>0) {
+	                returnData.setMessage("Cars in your agency are currently rented by tourists. This account cannot be deleted");
+	                returnData.setSuccess(false);
+	                return returnData;
+	        	}
+	        }
+	    	
+	        // First Insert into Account table
+	        String sql = "Delete from travelAgencyOwner where travelAgencyOwnerID="+owner;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        int rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            rs = pstmt.getGeneratedKeys();
+	            if (rs.next()) {
+	            	int retrievedAccountID = rs.getInt(1);
+	                returnData.setMessage("Your account has been deleted successfully!");
+	                returnData.setSuccess(true);
+	            }
+	        }  else {
+                returnData.setMessage("Your account could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            }else {
+	                returnData.setMessage("Issue in deleting travel agency owner in DB: " + errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+	
+	
 	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID) {
 	    ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility<>();
 

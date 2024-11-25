@@ -49,7 +49,7 @@ public class TravelAgencyDeleteCarsView {
 	travelAgencyOwnerController taoController;
 	
 	public TravelAgencyDeleteCarsView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerDeleteCar.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerDeleteCar.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

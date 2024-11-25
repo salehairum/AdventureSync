@@ -32,12 +32,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="yesButton" layoutX="179.0" layoutY="209.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Yes" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="noButton" layoutX="278.0" layoutY="209.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="No" textFill="#f7a072">
+            <Button fx:id="yesButton" layoutX="244.0" layoutY="209.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Yes" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

@@ -34,7 +34,7 @@ public class BusDriverViewsTourDetailsView {
 	busDriverController bdController;
 	
 	public BusDriverViewsTourDetailsView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverViewTour.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverViewTour.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

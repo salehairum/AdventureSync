@@ -55,7 +55,7 @@ public class BusDriverMenuView {
 	Parent root;
 	busDriverController bdController;
 	public BusDriverMenuView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverMenu.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

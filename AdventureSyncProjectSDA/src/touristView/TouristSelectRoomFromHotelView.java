@@ -57,7 +57,7 @@ public class TouristSelectRoomFromHotelView {
 	
 	public TouristSelectRoomFromHotelView(Integer touristID, Hotel newHotel) {
 		this.touristID=touristID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectRoomFromHotel.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristSelectRoomFromHotel.fxml"));
 		loader.setController(this);
 		hotel=newHotel;
 		try {

@@ -59,7 +59,7 @@ public class TouristPaymentView {
 	//number of nights tourist stayed
 	public TouristPaymentView(Integer tID, Integer sID, String type, Integer trID, Integer n) {
 		touristID=tID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristPayment.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristPayment.fxml"));
 		loader.setController(this);
 		serviceID=sID;
 		typeOfTransaction=type;

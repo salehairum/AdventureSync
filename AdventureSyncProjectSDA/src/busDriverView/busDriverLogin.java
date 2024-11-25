@@ -30,7 +30,7 @@ public class busDriverLogin {
 	busDriverController bController;
 	
 	public busDriverLogin() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriver/busDriverLogin.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverLogin.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

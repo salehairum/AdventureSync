@@ -53,7 +53,7 @@ public class TouristOrdersFoodView {
 	
 	public TouristOrdersFoodView(Integer id) {
 		touristID=id;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristOrdersFood.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristOrdersFood.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

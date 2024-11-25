@@ -51,7 +51,7 @@ public class TravelAgencyOwnerAssignsTourToBusView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	public TravelAgencyOwnerAssignsTourToBusView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerAssignBusTour.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerAssignBusTour.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

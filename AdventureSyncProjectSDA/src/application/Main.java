@@ -33,6 +33,7 @@ import travelAgencyOwnerView.TravelAgencyManageAccountView;
 import travelAgencyOwnerView.TravelAgencyManageBusView;
 import travelAgencyOwnerView.TravelAgencyManageCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerAssignsTourToBusView;
+import travelAgencyOwnerView.TravelAgencyOwnerDeleteAccountView;
 import travelAgencyOwnerView.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewsBusDriversView;
@@ -91,7 +92,7 @@ public class Main extends Application {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
 		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=sdaDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -102,7 +103,7 @@ public class Main extends Application {
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
-			HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
+			BusDriverDeletesAccountView hotelOwnerMenu = new BusDriverDeletesAccountView(3);
 			Parent root = hotelOwnerMenu.getRoot();
 //			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
