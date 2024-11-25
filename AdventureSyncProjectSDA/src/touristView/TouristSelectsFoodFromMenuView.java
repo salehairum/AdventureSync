@@ -59,7 +59,7 @@ public class TouristSelectsFoodFromMenuView {
 	
 	public TouristSelectsFoodFromMenuView(Integer id, Hotel newHotel) {
 		touristID=id;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectsFoodFromMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristSelectsFoodFromMenu.fxml"));
 		loader.setController(this);
 		hotel=newHotel;
 		try {

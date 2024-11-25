@@ -60,7 +60,7 @@ public class TouristChecksOutRoomView {
 	
 	public TouristChecksOutRoomView(Integer touristID) {
 		this.touristID=touristID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristCheckoutRoom.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristCheckoutRoom.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

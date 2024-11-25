@@ -61,7 +61,7 @@ public class touristRoomFeedbackView {
 	
 	public touristRoomFeedbackView(Integer id) {
 		touristID=id;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRoomFeedback.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristRoomFeedback.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

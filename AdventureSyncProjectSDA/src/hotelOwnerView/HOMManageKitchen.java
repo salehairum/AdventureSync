@@ -53,7 +53,7 @@ public class HOMManageKitchen {
 	private int hotelID;
 	public HOMManageKitchen(Integer hID) {
 		hotelOwnerID = hID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMManageKitchen.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMManageKitchen.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

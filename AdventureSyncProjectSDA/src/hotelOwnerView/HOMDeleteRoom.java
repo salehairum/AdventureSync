@@ -46,7 +46,7 @@ public class HOMDeleteRoom {
 	private int hotelOwnerID;
 	private int hotelID;
 	public HOMDeleteRoom(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMDeleteRoom.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMDeleteRoom.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
 		try {

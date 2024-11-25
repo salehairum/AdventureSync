@@ -50,7 +50,7 @@ public class HotelOwnerMenuView {
 	private int hOwnerID;
 	public HotelOwnerMenuView(Integer hID) {
 		hOwnerID = hID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HotelOwnerMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HotelOwnerMenu.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

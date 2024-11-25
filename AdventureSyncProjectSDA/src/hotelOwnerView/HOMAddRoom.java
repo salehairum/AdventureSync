@@ -49,7 +49,7 @@ public class HOMAddRoom {
 	Parent root;
 	hotelOwnerController hoContoller;
 	public HOMAddRoom(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMAddRoom.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMAddRoom.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
 		try {
