@@ -279,7 +279,6 @@ public class BusDBHandler {
 		return returnData;
 	}
 	
-	
 	//update bus
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus) {
 	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();
@@ -796,7 +795,6 @@ public class BusDBHandler {
 
 	    return returnData;
 	}
-
 	
 	public static ReturnListUtility<FeedbackWithBusID> getFeedbackDetailsWithBusID() {
 	    ReturnListUtility<FeedbackWithBusID> returnData = new ReturnListUtility<>();
@@ -1525,9 +1523,11 @@ public class BusDBHandler {
 	            // Set the Tour object and success message in the return object
 	            returnData.setObject(tour);
 	            returnData.setMessage("Tour details retrieved successfully.");
+	            returnData.setSuccess(true);
 	        } else {
 	            // If no result is found, set an error message
 	            returnData.setMessage("Error: No tour found for the given bus ID.");
+	            returnData.setSuccess(false);
 	        }
 	    } catch (SQLException e) {
 	        // Handle SQL exceptions

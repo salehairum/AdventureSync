@@ -152,7 +152,7 @@ public class BusDriverViewsFeedbackView {
     }
     public void loadRatingLabel() {
         // Initialize table columns
-    	ReturnObjectUtility<Float> overallRating = bdController.getOverallRating(1);
+    	ReturnObjectUtility<Float> overallRating = bdController.getOverallRating(busID);
         ratingLabel.setText(Float.toString(overallRating.getObject()));
     }
 }

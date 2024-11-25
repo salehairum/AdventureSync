@@ -75,7 +75,7 @@ public class busDriverController {
 	}
 	public String[] getBusTourDetail(int busID){
 		ReturnObjectUtility<Tour> returnData = tour.getBusTourDetail(busID);
-		if(returnData != null)
+		if(returnData.isSuccess())
 		{
 			String tourID = String.valueOf(returnData.getObject().getTourID());
 	        String origin = returnData.getObject().getOrigin();

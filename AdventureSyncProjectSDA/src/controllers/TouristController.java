@@ -134,4 +134,7 @@ public class TouristController {
 	public ReturnObjectUtility<Tourist> updatePassword(String password, int accountID) {
 		return tourist.updatePassword(password, accountID);
 	}
+	public ReturnObjectUtility<Tourist> deleteTourist(int touristID) {
+		return tourist.deleteTourist(touristID);
+	}
 }

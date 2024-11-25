@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 import accountAndPersonModels.Account;
 import accountAndPersonModels.BusDriver;
+import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
 import application.Feedback;
 import dataUtilityClasses.ReturnObjectUtility;
@@ -270,6 +271,92 @@ public class TouristDBHandler {
 	}
 	
 	//tourist account related
+	public ReturnObjectUtility<Tourist> deleteTourist(int touristID) {
+	    ReturnObjectUtility<Tourist> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+
+	    try {
+	        
+	        Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("SELECT COUNT(*) AS bookedRooms FROM TouristHasBookedRooms WHERE touristID="+touristID);
+	        
+	        int busID=0;
+	        if(rSet.next()) {
+	        	int nRooms= rSet.getInt("bookedrooms");
+	        	if(nRooms>0) {
+	                returnData.setMessage("You have booked hotel rooms. Your account cannot be deleted");
+	                returnData.setSuccess(false);
+	                return returnData;
+	        	}
+	        }
+	        
+	        stmt=conn.createStatement();
+	        rSet=stmt.executeQuery("SELECT COUNT(*) AS rentedCars FROM TouristHasRentedCars WHERE touristID="+touristID);
+	        if(rSet.next()) {
+	        	int nCars= rSet.getInt("rentedCars");
+	        	if(nCars>0) {
+	                returnData.setMessage("You have rented cars. Your account cannot be deleted");
+	                returnData.setSuccess(false);
+	                return returnData;
+	        	}
+	        }
+	        
+	        stmt=conn.createStatement();
+	        rSet=stmt.executeQuery("SELECT COUNT(*) AS bookedSeats FROM TouristHasBookedSeats WHERE touristID="+touristID);
+	        if(rSet.next()) {
+	        	int nSeats= rSet.getInt("bookedSeats");
+	        	if(nSeats>0) {
+	                returnData.setMessage("You have booked seats in buses. Your account cannot be deleted");
+	                returnData.setSuccess(false);
+	                return returnData;
+	        	}
+	        }
+	        
+	        stmt=conn.createStatement();
+	        rSet=stmt.executeQuery("SELECT accountid from tourist where touristID="+touristID);
+	        int accID=0;
+	        if(rSet.next()) {
+	        	accID= rSet.getInt("accountid");
+	        }
+	        
+	        String sql = "Delete from tourist where touristID="+touristID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        int rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            rs = pstmt.getGeneratedKeys();
+	            if (rs.next()) {
+	            	int retrievedAccountID = rs.getInt(1);
+	                returnData.setMessage("Your account has been deleted successfully!");
+	                returnData.setSuccess(true);
+	            }
+	        }  else {
+                returnData.setMessage("Your account could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+	        
+	        
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            }else {
+	                returnData.setMessage("Issue in deleting tourist in DB: " + errorMessage);
+	                System.out.println(errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+	
 	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
 			ReturnObjectUtility<Tourist> returnData=new ReturnObjectUtility();
 			PreparedStatement pstmt;

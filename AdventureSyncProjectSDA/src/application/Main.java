@@ -15,6 +15,7 @@ import busDriverView.BusDriverUpdateBusView;
 import busDriverView.BusDriverUpdatesAccountView;
 import busDriverView.BusDriverViewBusDetailsView;
 import busDriverView.BusDriverViewsFeedbackView;
+import busDriverView.BusDriverViewsTourDetailsView;
 import busDriverView.busDriverLogin;
 import controllers.hotelOwnerController;
 import dataUtilityClasses.ReturnListUtility;
@@ -104,7 +105,7 @@ public class Main extends Application {
 
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
-			TravelAgencyOwnerUpdatePasswordView hotelOwnerMenu = new TravelAgencyOwnerUpdatePasswordView(1);
+			TouristDeletesAccountView hotelOwnerMenu = new TouristDeletesAccountView(6);
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);
 
