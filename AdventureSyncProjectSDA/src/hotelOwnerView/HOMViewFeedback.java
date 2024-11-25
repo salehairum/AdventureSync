@@ -53,7 +53,7 @@ public class HOMViewFeedback {
 	
 	public HOMViewFeedback(Integer hID) {
 		hotelOwnerID = hID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMViewFeedback.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMViewFeedback.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

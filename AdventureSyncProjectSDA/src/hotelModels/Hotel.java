@@ -98,4 +98,7 @@ public class Hotel {
 	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
 		return hotelDbHandler.getNumberOfNights(roomID, touristID);
 	}
+	public ReturnObjectUtility<Hotel> retrieveHotelDetails(int hotelID){
+		return hotelDbHandler.retrieveHotelDetails(hotelID);
+	}
 }

@@ -47,7 +47,7 @@ public class HOMManageAccount {
 	
 	public HOMManageAccount(Integer hID) {
 		hotelOwnerID = hID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMManageAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMManageAccount.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

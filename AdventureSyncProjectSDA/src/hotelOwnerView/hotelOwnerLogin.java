@@ -31,7 +31,7 @@ public class hotelOwnerLogin {
 	Parent root;
 	hotelOwnerController hoController;
 	public hotelOwnerLogin() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/hotelOwnerLogin.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/hotelOwnerLogin.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

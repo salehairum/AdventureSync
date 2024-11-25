@@ -5,16 +5,19 @@ import java.io.IOException;
 import controllers.TouristController;
 import controllers.travelAgencyOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.HotelOwnerMenuView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class travelAgencyOwnerLogin {
 	@FXML
@@ -28,7 +31,7 @@ public class travelAgencyOwnerLogin {
 	travelAgencyOwnerController tController;
 	
 	public travelAgencyOwnerLogin() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwner/travelAgencyOwnerLogin.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerLogin.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();
@@ -71,6 +74,27 @@ public class travelAgencyOwnerLogin {
 			if(success) {
 
 				int travelAgencyOwnerID=returnData.getObject();
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            TravelAgencyOwnerMenuView controllerInstance = new TravelAgencyOwnerMenuView(travelAgencyOwnerID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Travel Agency Owner Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 				   	
 			}//pass it on
 		};

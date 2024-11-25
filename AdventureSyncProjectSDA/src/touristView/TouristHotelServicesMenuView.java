@@ -51,7 +51,7 @@ public class TouristHotelServicesMenuView {
 	private int touristID;
 	public TouristHotelServicesMenuView(Integer touristID) {
 		this.touristID = touristID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristHotelServicesMenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristHotelServicesMenu.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

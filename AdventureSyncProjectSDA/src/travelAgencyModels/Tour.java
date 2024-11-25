@@ -30,6 +30,14 @@ public class Tour {
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		busDBHandler=new BusDBHandler();
     }
+	
+	public Tour(int tourID, String origin, String destination, Date date) {
+        this.tourID = tourID;
+        this.origin = origin;
+        this.destination = destination;
+        this.date = date;
+    }
+	
 	//getters and setters
 	public int getBusID() {
 		return busID;
@@ -69,5 +77,8 @@ public class Tour {
 	
 	public ReturnObjectUtility<Integer> retrieveTourID(int busDriverID){
 		return busDBHandler.retrieveTourID(busDriverID);
+	}
+	public ReturnObjectUtility<Tour> getBusTourDetail(int busID){
+		return busDBHandler.getBusTourDetail(busID);
 	}
 }

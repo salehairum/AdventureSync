@@ -57,7 +57,7 @@ public class TouristBooksSeatView {
 	
 	public TouristBooksSeatView(Integer id) {
 		touristID=id;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristBookSeat.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristBookSeat.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

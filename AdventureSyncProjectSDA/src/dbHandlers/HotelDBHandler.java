@@ -743,6 +743,53 @@ public class HotelDBHandler {
 		}
         return returnData;
 	}
+	public ReturnObjectUtility<Hotel> retrieveHotelDetails(int hotelID) {
+	    // Create a utility object to store the return data
+	    ReturnObjectUtility<Hotel> returnData = new ReturnObjectUtility<>();
+
+	    try {
+	        // Create a statement to execute SQL queries
+	        Statement stmt = conn.createStatement();
+	        
+	        // Query to retrieve only the hotel name and location
+	        ResultSet hotelSet = stmt.executeQuery(
+	            "SELECT hotelID, hName, hLocation FROM Hotel WHERE hotelID = " + hotelID);
+
+	        if (hotelSet.next()) { // Check if the hotel exists
+	            // Retrieve hotel details
+	            int retrievedHotelID = hotelSet.getInt("hotelID");
+	            String hotelName = hotelSet.getString("hName");
+	            String location = hotelSet.getString("hLocation");
+
+	            // Create a Hotel object using the constructor
+	            Hotel hotel = new Hotel(retrievedHotelID, hotelName, location);
+
+	            // Set the Hotel object and success message
+	            returnData.setObject(hotel);
+	            returnData.setMessage("Hotel data retrieved successfully.");
+	            returnData.setSuccess(true);
+	        } else {
+	            // If no hotel is found, set an error message
+	            returnData.setMessage("Error: Hotel does not exist.");
+	            returnData.setSuccess(false);
+	        }
+	    } catch (SQLException e) {
+	        // Handle SQL exceptions with appropriate messages
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage.contains("no such hotel") || errorMessage.contains("does not exist") 
+	            || errorMessage.contains("no current")) {
+	            returnData.setMessage("Error: Hotel does not exist.");
+	        } else {
+	            // General case for other SQL exceptions
+	            returnData.setMessage("Issue in retrieving hotel data from database: " + e.getMessage());
+	        }
+	        returnData.setSuccess(false);
+	    }
+
+	    return returnData;
+	}
+
 	
 	public ReturnObjectUtility<Boolean> updateFoodItem(FoodItem foodItem) {
 	    ReturnObjectUtility<Boolean> returnData = new ReturnObjectUtility<Boolean>();

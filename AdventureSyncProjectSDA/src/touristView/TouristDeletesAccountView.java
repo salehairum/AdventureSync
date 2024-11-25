@@ -41,7 +41,7 @@ public class TouristDeletesAccountView {
 	int touristID;
 	public TouristDeletesAccountView(Integer tID) {
 		touristID = tID;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristDeleteAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristDeleteAccount.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

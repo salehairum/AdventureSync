@@ -60,7 +60,7 @@ public class TouristSelectSeatFromBusView {
 	busDriverController bController;
 	
 	public TouristSelectSeatFromBusView(Integer id, Integer bID) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristSelectSeatFromBus.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristSelectSeatFromBus.fxml"));
 		loader.setController(this);
 		touristID=id;
 		busID=bID;

@@ -56,7 +56,7 @@ public class TouristRentCarView {
 	travelAgencyOwnerController toaController;
 	
 	public TouristRentCarView(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRentCars.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristRentCars.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {

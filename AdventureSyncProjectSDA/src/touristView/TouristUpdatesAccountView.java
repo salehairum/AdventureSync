@@ -55,7 +55,7 @@ public class TouristUpdatesAccountView {
 	TouristController tController;
 	private int touristID;
 	public TouristUpdatesAccountView(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristUpdateAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristUpdateAccount.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {

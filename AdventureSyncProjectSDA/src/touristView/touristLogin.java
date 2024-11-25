@@ -31,7 +31,7 @@ public class touristLogin {
 	TouristController tController;
 	
 	public touristLogin() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristLogin.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristLogin.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

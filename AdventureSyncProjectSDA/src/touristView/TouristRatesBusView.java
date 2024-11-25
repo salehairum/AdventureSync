@@ -56,7 +56,7 @@ public class TouristRatesBusView {
 	TouristController tController;
 	
 	public TouristRatesBusView(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/tourist/touristRatesBus.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/touristView/touristRatesBus.fxml"));
 		loader.setController(this);
 		touristID=id;
 		try {
