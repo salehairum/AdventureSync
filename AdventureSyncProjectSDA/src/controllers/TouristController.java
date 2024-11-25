@@ -125,7 +125,13 @@ public class TouristController {
 	public ReturnObjectUtility<Tourist> updateTourist(Tourist tourist) {
 		return tourist.updateTourist(tourist);
 	}
-	 public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
+	public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 			return hotel.updateFoodQuantity(foodID, quantity, add);
-		}
+	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int touristID) {
+		return tourist.compareOldPassword(enteredPassword, touristID);
+	}
+	public ReturnObjectUtility<Tourist> updatePassword(String password, int accountID) {
+		return tourist.updatePassword(password, accountID);
+	}
 }

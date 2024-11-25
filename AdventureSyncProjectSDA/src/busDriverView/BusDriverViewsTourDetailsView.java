@@ -40,7 +40,7 @@ public class BusDriverViewsTourDetailsView {
 	
 	Parent root;
 	busDriverController bdController;
-	
+
 	private int busDriverID;
 	private int busID;
 	

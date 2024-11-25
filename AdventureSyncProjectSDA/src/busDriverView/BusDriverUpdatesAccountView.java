@@ -57,7 +57,7 @@ public class BusDriverUpdatesAccountView {
 
 	private int busDriverID;
 	private int busID;
-	
+
 	public BusDriverUpdatesAccountView(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverUpdateAccount.fxml"));
 		loader.setController(this);

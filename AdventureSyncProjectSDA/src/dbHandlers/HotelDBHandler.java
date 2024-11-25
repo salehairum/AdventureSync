@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.time.LocalDate;
 
 import accountAndPersonModels.Account;
+import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
 import application.Feedback;
@@ -355,6 +356,123 @@ public class HotelDBHandler {
 		return returnData;
 	}
 
+	public ReturnObjectUtility<HotelOwner> deleteHotelOwner(int hotelOwnerID) {
+	    ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility<>();
+	    PreparedStatement pstmt;
+	    ResultSet rs;
+
+	    try {
+	    	//see if there are rented cars or not
+	    	Statement stmt=conn.createStatement();
+	        ResultSet rSet=stmt.executeQuery("select HotelId from HotelOwnerOwnsHotel where hotelOwnerID"+hotelOwnerID);
+	        int hotelID=0;
+	        if(rSet.next()) {
+	        	hotelID= rSet.getInt("hotelid");
+	        }
+	        
+	        stmt=conn.createStatement();
+	        rSet=stmt.executeQuery("SELECT COUNT(*) AS bookedRooms FROM room WHERE isBooked= 1 AND hotelID="+hotelID);
+	        
+	        int busID=0;
+	        if(rSet.next()) {
+	        	int nRooms= rSet.getInt("bookedrooms");
+	        	if(nRooms>0) {
+	                returnData.setMessage("Rooms in your hotel are currently booked. Your account cannot be deleted");
+	                returnData.setSuccess(false);
+	                return returnData;
+	        	}
+	        }
+	        
+	        stmt=conn.createStatement();
+	        rSet=stmt.executeQuery("select accountID from busdriver where hotelOwnerID="+hotelOwnerID);
+	        int accID=0;
+	        if(rSet.next()) {
+	        	accID= rSet.getInt("accountID");
+	        }
+	        
+	        String sql = "Delete from hotelOwnerOwnsHotel where hotelOwnerID="+hotelOwnerID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        int rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected <= 0) {
+	        	returnData.setMessage("Your account could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+	        
+	        sql = "DELETE FROM RoomHasFeedback WHERE roomID IN (SELECT roomID FROM Room WHERE hotelID ="+hotelID+")";
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        //delete from seats
+	        sql = "Delete from room where hotelID="+hotelID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        sql = "Delete from kitchen where hotelID="+hotelID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        sql = "Delete from hotel where hotelID="+hotelID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        
+	        if (rowsAffected <= 0) {
+	        	returnData.setMessage("Your hotel could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+	        
+	        
+	        sql = "Delete from hotelOwner where hotelOwnerID="+hotelOwnerID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected > 0) {
+	            rs = pstmt.getGeneratedKeys();
+	            if (rs.next()) {
+	            	int retrievedAccountID = rs.getInt(1);
+	                returnData.setMessage("Your account has been deleted successfully!");
+	                returnData.setSuccess(true);
+	            }
+	        }  else {
+                returnData.setMessage("Your account could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+	        
+
+	        sql = "Delete from account where accountID="+accID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        if (rowsAffected <= 0) {
+	        	returnData.setMessage("Your account could not be deleted. Try again later");
+                returnData.setSuccess(false);
+                return returnData;
+            }
+
+	    } catch (SQLException e) {
+	        String errorMessage = e.getMessage().toLowerCase();
+
+	        if (errorMessage != null) {
+	            if (errorMessage.contains("foreign key constraint")) {
+	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+	            }else {
+	                returnData.setMessage("Issue in deleting bus driver in DB: " + errorMessage);
+	                System.out.println(errorMessage);
+	            }
+	        } else {
+	            returnData.setMessage("An unknown error occurred.");
+	        }
+	        returnData.setSuccess(false);
+	    }
+	    return returnData;
+	}
+	
+	
 	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
 	    ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility<>();
 

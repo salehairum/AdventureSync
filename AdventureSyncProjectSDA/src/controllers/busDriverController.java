@@ -125,6 +125,9 @@ public class busDriverController {
 	public ReturnObjectUtility<BusDriver> updateBusDriver(BusDriver busDriver) {
 		return busDriver.updateBusDriver(busDriver);
 	}
+	public ReturnObjectUtility<BusDriver> deleteBusDriver(int busDriverID) {
+		return busDriver.deleteBusDriver(busDriverID);
+	}
 	public ReturnObjectUtility<Integer> retrieveBusByDriverID(int busDriverID)
 	{
 		return bus.retrieveBusByDriverID(busDriverID);

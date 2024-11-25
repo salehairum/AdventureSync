@@ -40,8 +40,8 @@ public class HOMManageHotel {
 	private Button menuButton;
 	
 	Parent root;
-	hotelOwnerController hoContoller;
-	
+	hotelOwnerController hoController;
+
 	private int hotelID;
 	private int hotelOwnerID;
 	
@@ -58,13 +58,13 @@ public class HOMManageHotel {
 	
 	@FXML
 	private void initialize() {
-		hoContoller = new hotelOwnerController();
+		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
 		assignHotelID();
 	}
 	public void assignHotelID(){
-		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
+		hotelID=hoController.getHotelID(hotelOwnerID).getObject();
 	}
 	public Parent getRoot() {
 		return root;
@@ -72,7 +72,7 @@ public class HOMManageHotel {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(hotelOwnerID);
+        String profileDetail[] = hoController.getHotelOwnerProfileDetail(hotelOwnerID);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);

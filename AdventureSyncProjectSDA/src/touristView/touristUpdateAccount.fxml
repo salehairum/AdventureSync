@@ -27,7 +27,7 @@
                   <Image url="@../resources/update.png" />
                </image>
             </ImageView>
-            <VBox layoutX="31.0" layoutY="129.0" prefHeight="305.0" prefWidth="478.0">
+            <VBox layoutX="36.0" layoutY="109.0" prefHeight="274.0" prefWidth="478.0">
                <children>
                   <HBox prefHeight="66.0" prefWidth="498.0">
                      <children>
@@ -113,15 +113,19 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="98.0" prefWidth="462.0" />
                </children>
             </VBox>
-            <Button fx:id="updateButton" disable="true" layoutX="137.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
+            <Button fx:id="updateButton" disable="true" layoutX="149.0" layoutY="373.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="backButton" layoutX="292.0" layoutY="426.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+            <Button fx:id="backButton" layoutX="283.0" layoutY="373.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="updPasswordButton" layoutX="149.0" layoutY="433.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="251.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Update Password" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

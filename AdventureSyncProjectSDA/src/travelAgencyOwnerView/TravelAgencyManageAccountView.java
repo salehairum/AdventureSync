@@ -41,7 +41,6 @@ public class TravelAgencyManageAccountView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	
 	private int tOwnerID;
 	
 	public TravelAgencyManageAccountView(Integer id) {

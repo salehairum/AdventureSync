@@ -4,13 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 import accountAndPersonModels.BusDriver;
-import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.TravelAgencyOwner;
 import dataUtilityClasses.FeedbackWithBusID;
 import dataUtilityClasses.ReturnListUtility;
 import dataUtilityClasses.ReturnObjectUtility;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Tour;
@@ -112,5 +109,8 @@ public class travelAgencyOwnerController {
 	}
 	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID){
 		return travelAgencyOwner.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
+	}
+	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
+		return travelAgencyOwner.deleteAgencyOwner(owner);
 	}
 }

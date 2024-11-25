@@ -150,7 +150,10 @@ public class BusDriverAddsBus {
 
 		HashMap<Integer, Seat> seats=createSeats(nRows, nSeats);
 	    // Create the Car object
-	    return new Bus(0, brand, model, year, plateNumber, seats,nSeats,nRows, seatFee); //does not have tour at start
+	    Bus bus=new Bus(0, brand, model, year, plateNumber, seats,nSeats,nRows, seatFee); //does not have tour at start
+	    bus.setSeats(seats);
+	    
+	    return bus;
 	}
 	
 	public HashMap<Integer, Seat> createSeats(int nRows, int nSeats) {

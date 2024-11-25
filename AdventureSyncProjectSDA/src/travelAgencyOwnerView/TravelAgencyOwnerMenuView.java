@@ -48,7 +48,6 @@ public class TravelAgencyOwnerMenuView extends AnchorPane{
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	
 	private int tOwnerID;
 	
 	public TravelAgencyOwnerMenuView(Integer id) {

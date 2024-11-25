@@ -33,6 +33,7 @@ public class Bus extends Vehicle {
 		
 		seats=new HashMap<Integer, Seat>();
 		this.seats = seats;
+		
 		this.noOfSeats = noOfSeats;
 		this.priceOfSeats = priceOfSeats;
 		this.hasTour = hasTour;
@@ -70,7 +71,7 @@ public class Bus extends Vehicle {
 		this.hasTour = false;
 		this.noOfRows = noOfRows;
 		busDriverID = bdID;
-		//busHandler=new BusDBHandler();
+		busHandler=new BusDBHandler();
 	}
 	public Bus(int id, String brand, String model, int year, String plateNumber) {
 		super(id, brand, model, year, plateNumber);

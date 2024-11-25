@@ -52,7 +52,6 @@ public class TravelAgencyAddCarView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	
 	private int tOwnerID;
 	
 	public TravelAgencyAddCarView(Integer id) {

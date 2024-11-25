@@ -91,4 +91,7 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<Integer> getNumberOfNights(int roomID, int touristID){
 		return hotel.getNumberOfNights(roomID, touristID);
 	}
+	public ReturnObjectUtility<HotelOwner> deleteHotelOwner(int hotelOwnerID) {
+		return hotelDBHandler.deleteHotelOwner(hotelOwnerID);
+	}
 }

@@ -47,7 +47,6 @@ public class TravelAgencyDeleteCarsView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	
 	private int tOwnerID;
 	
 	public TravelAgencyDeleteCarsView(Integer id) {

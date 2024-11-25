@@ -2,13 +2,18 @@ package travelAgencyOwnerView;
 
 import java.io.IOException;
 
+import accountAndPersonModels.TravelAgencyOwner;
 import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -29,16 +34,18 @@ public class TravelAgencyOwnerDeleteAccountView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button yesButton;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	
 	private int tOwnerID;
 	
 	public TravelAgencyOwnerDeleteAccountView(Integer id) {
 		tOwnerID = id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerDeleteAccount.fxml"));
 		loader.setController(this);
+		agencyOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -65,8 +72,20 @@ public class TravelAgencyOwnerDeleteAccountView {
         cnic.setText(profileDetail[2]);
         dob.setText(profileDetail[3]);
     }
- // Method for button handling
+    // Method for button handling
     public void eventHandlersAssignment() {
+		EventHandler<ActionEvent> yesButtonHandler=(event)->{
+			
+			ReturnObjectUtility<TravelAgencyOwner> returnData=taoController.deleteAgencyOwner(tOwnerID);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		yesButton.setOnAction(yesButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
         backButton.setOnMouseClicked(createButtonHandler(TravelAgencyManageAccountView.class, "Manage Account", tOwnerID));
     }

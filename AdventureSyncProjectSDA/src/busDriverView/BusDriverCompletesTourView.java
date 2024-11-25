@@ -47,8 +47,8 @@ public class BusDriverCompletesTourView {
 
 	private int busDriverID;
 	private int busID;
-	
-	public BusDriverCompletesTourView(Integer id) {
+
+	public BusDriverCompletesTourView(int id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverCompletesTour.fxml"));
 		loader.setController(this);
 		busDriverID=id;

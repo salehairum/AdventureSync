@@ -2,12 +2,20 @@ package busDriverView;
 
 import java.io.IOException;
 
+
+import accountAndPersonModels.BusDriver;
+import accountAndPersonModels.TravelAgencyOwner;
+import controllers.busDriverController;
+import dataUtilityClasses.ReturnObjectUtility;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -29,10 +37,13 @@ public class BusDriverDeletesAccountView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button yesButton;
 	
 	Parent root;
 	busDriverController bdController;
-	
+	int busDriverID;
+
 	private int busDriverID;
 	private int busID;
 	
@@ -45,7 +56,6 @@ public class BusDriverDeletesAccountView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
 	}
 	
 	public Parent getRoot() {
@@ -71,11 +81,22 @@ public class BusDriverDeletesAccountView {
         dob.setText(profileDetail[3]);
     }
     
-    // Method for button handling
     public void eventHandlersAssignment() {
-        // Assign handlers with parameters for specific FXMLs and classes
+		EventHandler<ActionEvent> yesButtonHandler=(event)->{
+			
+			ReturnObjectUtility<BusDriver> returnData=bdController.deleteBusDriver(busDriverID);
+			
+			boolean success=returnData.isSuccess();
+			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+		};
+		yesButton.setOnAction(yesButtonHandler);
+
         backButton.setOnMouseClicked(createButtonHandler(BusDriverMgrAccountView.class, "Manage Account", busDriverID));
-    }
+	}
 
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {

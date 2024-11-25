@@ -53,10 +53,14 @@ public class TravelAgencyUpdatesCarView {
 	Parent root;
 	travelAgencyOwnerController taoController;
 	
+<<<<<<< HEAD
+	public TravelAgencyUpdatesCarView() {
+=======
 	private int tOwnerID;
 	
 	public TravelAgencyUpdatesCarView(Integer id) {
 		tOwnerID = id;
+>>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerUpdateCar.fxml"));
 		loader.setController(this);
 		try {

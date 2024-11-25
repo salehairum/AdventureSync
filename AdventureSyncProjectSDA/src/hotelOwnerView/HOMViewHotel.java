@@ -40,10 +40,10 @@ public class HOMViewHotel {
 	private int hotelOwnerID;
 	
 	Parent root;
-	hotelOwnerController hoContoller;
+	hotelOwnerController hoController;
 	public HOMViewHotel(Integer id) {
 		hotelOwnerID = id;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMViewHotel.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMViewHotel.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();
@@ -54,14 +54,14 @@ public class HOMViewHotel {
 	
 	@FXML
 	private void initialize() {
-		hoContoller = new hotelOwnerController();
+		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
 		assignHotelID();
 		loadLabels();
 	}
 	public void assignHotelID(){
-		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
+		hotelID=hoController.getHotelID(hotelOwnerID).getObject();
 	}
 	public Parent getRoot() {
 		return root;
@@ -69,7 +69,7 @@ public class HOMViewHotel {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(hotelOwnerID);
+        String profileDetail[] = hoController.getHotelOwnerProfileDetail(hotelOwnerID);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
@@ -77,7 +77,7 @@ public class HOMViewHotel {
     }
     public void loadLabels()
     {
-    	ReturnObjectUtility<Hotel> hotel = hoContoller.retrieveHotelDetails(hotelID);
+    	ReturnObjectUtility<Hotel> hotel = hoController.retrieveHotelDetails(hotelID);
     	nameLabel.setText(hotel.getObject().getHotelName());
     	locationLabel.setText(hotel.getObject().getLocation());
     }
