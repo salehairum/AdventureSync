@@ -48,15 +48,11 @@ public class TravelAgencyOwnerViewsFeedbackView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-<<<<<<< HEAD
-	public TravelAgencyOwnerViewsFeedbackView() {
-=======
 	
 	private int tOwnerID;
 	
 	public TravelAgencyOwnerViewsFeedbackView(Integer id) {
 		tOwnerID = id;
->>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerViewFeedback.fxml"));
 		loader.setController(this);
 		try {

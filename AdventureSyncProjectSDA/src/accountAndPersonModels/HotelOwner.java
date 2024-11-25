@@ -94,4 +94,10 @@ public class HotelOwner extends Person{
 	public ReturnObjectUtility<HotelOwner> deleteHotelOwner(int hotelOwnerID) {
 		return hotelDBHandler.deleteHotelOwner(hotelOwnerID);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int hotelOwnerID) {
+		return hotelDBHandler.compareOldPassword(enteredPassword, hotelOwnerID);
+	}
+	public ReturnObjectUtility<HotelOwner> updatePassword(String password, int accountID) {
+		return hotelDBHandler.updatePassword(password, accountID);
+	}
 }

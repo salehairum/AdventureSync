@@ -34,6 +34,7 @@ import travelAgencyOwnerView.TravelAgencyManageBusView;
 import travelAgencyOwnerView.TravelAgencyManageCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwnerView.TravelAgencyOwnerDeleteAccountView;
+import travelAgencyOwnerView.TravelAgencyOwnerUpdatePasswordView;
 import travelAgencyOwnerView.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewsBusDriversView;
@@ -103,13 +104,7 @@ public class Main extends Application {
 
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
-	
-<<<<<<< HEAD
-			TouristUpdatePasswordView hotelOwnerMenu = new TouristUpdatePasswordView(1);
-=======
-			AccountMenuView hotelOwnerMenu = new AccountMenuView();
-			//HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
->>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
+			TravelAgencyOwnerUpdatePasswordView hotelOwnerMenu = new TravelAgencyOwnerUpdatePasswordView(1);
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);
 

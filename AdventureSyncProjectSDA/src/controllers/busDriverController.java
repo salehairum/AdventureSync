@@ -132,4 +132,10 @@ public class busDriverController {
 	{
 		return bus.retrieveBusByDriverID(busDriverID);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int busDriverID) {
+		return busDriver.compareOldPassword(enteredPassword, busDriverID);
+	}
+	public ReturnObjectUtility<BusDriver> updatePassword(String password, int accountID) {
+		return busDriver.updatePassword(password, accountID);
+	}
 }

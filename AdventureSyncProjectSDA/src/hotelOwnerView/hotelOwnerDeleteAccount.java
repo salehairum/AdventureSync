@@ -41,11 +41,11 @@ public class hotelOwnerDeleteAccount {
 	Parent root;
 	hotelOwnerController hoController;
 	int hotelOwnerID;
+	int hotelID;
 	public hotelOwnerDeleteAccount(Integer hID) {
 		hotelOwnerID=hID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/hotelOwnerDeleteAccount.fxml"));
 		loader.setController(this);
-		hotelOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -61,7 +61,7 @@ public class hotelOwnerDeleteAccount {
 		assignHotelID();
 	}
 	public void assignHotelID(){
-		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
+		hotelID=hoController.getHotelID(hotelOwnerID).getObject();
 	}
 	public Parent getRoot() {
 		return root;
@@ -69,11 +69,7 @@ public class hotelOwnerDeleteAccount {
 	
 	// Method to display profile
     public void displayOwnerDetails() {
-<<<<<<< HEAD
-        String profileDetail[] = hoController.getHotelOwnerProfileDetail(1);
-=======
-        String profileDetail[] = hoContoller.getHotelOwnerProfileDetail(hotelOwnerID);
->>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
+        String profileDetail[] = hoController.getHotelOwnerProfileDetail(hotelOwnerID);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
@@ -81,7 +77,6 @@ public class hotelOwnerDeleteAccount {
     }
     
     public void eventHandlersAssignment() {
-<<<<<<< HEAD
   		EventHandler<ActionEvent> yesButtonHandler=(event)->{
   			
   			ReturnObjectUtility<HotelOwner> returnData=hoController.deleteHotelOwner(hotelOwnerID);
@@ -94,11 +89,7 @@ public class hotelOwnerDeleteAccount {
   			    alert.showAndWait();
   		};
   		yesButton.setOnAction(yesButtonHandler);
-        backButton.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account"));
-=======
-        // Assign handlers with parameters for specific FXMLs and classes
         backButton.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account", hotelOwnerID));
->>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
     }
 
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {

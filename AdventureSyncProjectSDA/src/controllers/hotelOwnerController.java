@@ -131,4 +131,10 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Hotel> retrieveHotelDetails(int hotelID){
 		return hotel.retrieveHotelDetails(hotelID);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int hotelOwnerID) {
+		return hotelOwner.compareOldPassword(enteredPassword, hotelOwnerID);
+	}
+	public ReturnObjectUtility<HotelOwner> updatePassword(String password, int accountID) {
+		return hotelOwner.updatePassword(password, accountID);
+	}
 }

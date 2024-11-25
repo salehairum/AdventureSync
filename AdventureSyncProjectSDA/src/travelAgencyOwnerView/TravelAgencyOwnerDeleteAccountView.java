@@ -45,7 +45,6 @@ public class TravelAgencyOwnerDeleteAccountView {
 		tOwnerID = id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerDeleteAccount.fxml"));
 		loader.setController(this);
-		agencyOwnerID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
