@@ -104,13 +104,16 @@ public class Main extends Application {
 		try {
 			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
 	
+<<<<<<< HEAD
 			TouristUpdatePasswordView hotelOwnerMenu = new TouristUpdatePasswordView(1);
+=======
+			AccountMenuView hotelOwnerMenu = new AccountMenuView();
+			//HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
+>>>>>>> 69e3e1a5ece4688ce91e725d7ef42086b7887192
 			Parent root = hotelOwnerMenu.getRoot();
-//			// Create the scene and set it
 			Scene scene = new Scene(root, 750, 500);
-//	       
-		    // Set the scene to the primary stage
-		    primaryStage.setScene(scene);
+
+			primaryStage.setScene(scene);
 		    primaryStage.setTitle("Account Menu");
 		    primaryStage.show();
 			} catch(Exception e) {

@@ -2,6 +2,7 @@ package busDriverView;
 
 import java.io.IOException;
 
+
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.TravelAgencyOwner;
 import controllers.busDriverController;
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import controllers.busDriverController;
 
 public class BusDriverDeletesAccountView {
 	@FXML
@@ -41,11 +43,14 @@ public class BusDriverDeletesAccountView {
 	Parent root;
 	busDriverController bdController;
 	int busDriverID;
+
+	private int busDriverID;
+	private int busID;
 	
-	public BusDriverDeletesAccountView(int id) {
+	public BusDriverDeletesAccountView(Integer bID) {
+		busDriverID = bID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverDeleteAccount.fxml"));
 		loader.setController(this);
-		busDriverID=id;
 		try {
 			root = loader.load();
 		} catch (IOException e) {
@@ -62,10 +67,14 @@ public class BusDriverDeletesAccountView {
 		bdController = new busDriverController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignBusID();
+	}
+	public void assignBusID(){
+		 busID=bdController.retrieveBusByDriverID(busDriverID).getObject();
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = bdController.getBusDriverProfileDetail(1);
+        String profileDetail[] = bdController.getBusDriverProfileDetail(busDriverID);
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
         cnic.setText(profileDetail[2]);
@@ -85,35 +94,48 @@ public class BusDriverDeletesAccountView {
 			    alert.showAndWait();
 		};
 		yesButton.setOnAction(yesButtonHandler);
-		
-        backButton.setOnMouseClicked(createButtonHandler(BusDriverMgrAccountView.class, "Manage Account"));
-    }
 
-    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+        backButton.setOnMouseClicked(createButtonHandler(BusDriverMgrAccountView.class, "Manage Account", busDriverID));
+	}
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Show the new form
-                newFormStage.show();
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
+
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 }

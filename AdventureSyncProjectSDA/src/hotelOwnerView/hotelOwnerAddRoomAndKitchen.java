@@ -39,7 +39,7 @@ public class hotelOwnerAddRoomAndKitchen {
 	Parent root;
 	hotelOwnerController hoContoller;
 	public hotelOwnerAddRoomAndKitchen() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/hotelOwnerAddRoomAndKitchen.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/hotelOwnerAddRoomAndKitchen.fxml"));
 		loader.setController(this);
 		try {
 			root = loader.load();

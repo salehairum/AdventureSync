@@ -41,7 +41,10 @@ public class TravelAgencyManageAccountView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	public TravelAgencyManageAccountView() {
+	private int tOwnerID;
+	
+	public TravelAgencyManageAccountView(Integer id) {
+		tOwnerID = id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMgrAccount.fxml"));
 		loader.setController(this);
 		try {
@@ -62,7 +65,7 @@ public class TravelAgencyManageAccountView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
+        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(tOwnerID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
@@ -72,37 +75,50 @@ public class TravelAgencyManageAccountView {
  // Method for button handling
     public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
-        updateLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerUpdatesAccountView.class, "Update Account"));
-        updateLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerUpdatesAccountView.class, "Update Account"));
-        deleteLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "Update Account"));
-        deleteLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "Update Account"));
-        menuButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerMenuView.class, "Menu"));
+        updateLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerUpdatesAccountView.class, "Update Account", tOwnerID));
+        updateLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerUpdatesAccountView.class, "Update Account", tOwnerID));
+        deleteLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "Update Account", tOwnerID));
+        deleteLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "Update Account", tOwnerID));
+        menuButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerMenuView.class, "Travel Agecny Owner Menu", tOwnerID));
     }
-    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 }

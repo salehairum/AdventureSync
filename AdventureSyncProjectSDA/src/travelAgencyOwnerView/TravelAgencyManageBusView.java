@@ -45,7 +45,11 @@ public class TravelAgencyManageBusView {
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
-	public TravelAgencyManageBusView() {
+	
+	private int tOwnerID;
+	
+	public TravelAgencyManageBusView(Integer id) {
+		tOwnerID = id;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/travelAgencyOwnerView/travelAgencyOwnerMgrBuses.fxml"));
 		loader.setController(this);
 		try {
@@ -67,7 +71,7 @@ public class TravelAgencyManageBusView {
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
-        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(1);
+        String profileDetail[] = taoController.getTravelAgencyOwnerProfileDetail(tOwnerID);
 
         name.setText(profileDetail[0]);
         id.setText(profileDetail[1]);
@@ -77,40 +81,53 @@ public class TravelAgencyManageBusView {
     // Method for button handling
     public void eventHandlersAssignment() {
         // Assign handlers with parameters for specific FXMLs and classes
-    	viewBusLogo.setOnMouseClicked(createButtonHandler(TravelAgencyViewBusesView.class, "View Bus"));
-    	viewBusLabel.setOnMouseClicked(createButtonHandler(TravelAgencyViewBusesView.class, "View Bus"));
-    	//viewDriversLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "View Bus Driver"));
-    	//viewDriversLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerDeleteAccountView.class, "View Bus Driver"));
-    	assignTourLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerAssignsTourToBusView.class, "Assign Tour"));
-    	assignTourLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerAssignsTourToBusView.class, "Assign Tour"));
-        menuButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerMenuView.class, "Menu"));
+    	viewBusLogo.setOnMouseClicked(createButtonHandler(TravelAgencyViewBusesView.class, "View Bus", tOwnerID));
+    	viewBusLabel.setOnMouseClicked(createButtonHandler(TravelAgencyViewBusesView.class, "View Bus", tOwnerID));
+    	viewDriversLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerViewsBusDriversView.class, "View Bus Driver", tOwnerID));
+    	viewDriversLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerViewsBusDriversView.class, "View Bus Driver", tOwnerID));
+    	assignTourLogo.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerAssignsTourToBusView.class, "Assign Tour", tOwnerID));
+    	assignTourLabel.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerAssignsTourToBusView.class, "Assign Tour", tOwnerID));
+        menuButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerMenuView.class, "Travel Agency Owner Menu", tOwnerID));
     }
-    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
-        return event -> {
-            try {
-                // Dynamically create an instance of the specified class
-                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+    private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
+	    return event -> {
+	        try {
+	            T controllerInstance;
 
-                // Assuming the controller class has a `getRoot()` method
-                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+	            // Check if the class has a constructor that matches the params
+	            if (params != null && params.length > 0) {
+	                Class<?>[] paramTypes = new Class<?>[params.length];
+	                for (int i = 0; i < params.length; i++) {
+	                    paramTypes[i] = params[i].getClass(); // Get parameter types
+	                }
 
-                // Create a new scene and stage for the new form
-                Scene newFormScene = new Scene(root);
-                Stage newFormStage = new Stage();
-                newFormStage.setScene(newFormScene);
-                newFormStage.setTitle(stageTitle);
+	                // Create an instance using the constructor with parameters
+	                controllerInstance = viewObject.getDeclaredConstructor(paramTypes).newInstance(params);
+	            } else {
+	                // Default constructor
+	                controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+	            }
 
-                // Show the new form
-                newFormStage.show();
+	            // Assuming the controller class has a getRoot() method
+	            Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
 
-                // Close the current form
-                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+	            // Create a new scene and stage for the new form
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle(stageTitle);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        };
-    }
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    };
+	}
 
 }

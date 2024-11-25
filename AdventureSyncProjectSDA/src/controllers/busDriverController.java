@@ -1,6 +1,7 @@
 package controllers;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.HotelOwner;
@@ -12,14 +13,18 @@ import dataUtilityClasses.ReturnListUtility;
 import dataUtilityClasses.ReturnObjectUtility;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Seat;
+import travelAgencyModels.Tour;
 
+//change this one
 public class busDriverController {
 	
 	BusDriver busDriver;
 	Bus bus;
+	Tour tour;
 	public busDriverController() {
 		bus=new Bus();
 		busDriver=new BusDriver();
+		tour = new Tour();
 	}
 
 	public ReturnObjectUtility<Boolean> addBus(Bus newBus,int busDriverID){
@@ -50,12 +55,40 @@ public class busDriverController {
         String[] profileDetails = {busDriverName, busDriverIdStr, busDriverCnic, busDriverDob};
         return profileDetails;
     }
-	
+	public String[] getBusDetail(int busId)
+    {
+    	ReturnObjectUtility<Bus> returnData = bus.getBusDetail(busId);
+    	String busID = String.valueOf(returnData.getObject().getBusDriverID());
+        String brand = returnData.getObject().getBrand();
+        String model = returnData.getObject().getModel();
+        String year = String.valueOf(returnData.getObject().getYear());
+        String noOfSeat = String.valueOf(returnData.getObject().getNoOfSeats());
+        String seatFee = String.valueOf(returnData.getObject().getPriceOfSeats());
+        String plateNo = String.valueOf(returnData.getObject().getPlateNumber());
+        String isAssigned = String.valueOf(returnData.getObject().isHasTour());
+        String[] profileDetails = {busID, brand, model, year, noOfSeat, seatFee, plateNo, isAssigned};
+        return profileDetails;
+    }
 	//db interaction functions
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver bDriver){
 		return busDriver.addBusDriver(bDriver);
 	}
-	
+	public String[] getBusTourDetail(int busID){
+		ReturnObjectUtility<Tour> returnData = tour.getBusTourDetail(busID);
+		if(returnData != null)
+		{
+			String tourID = String.valueOf(returnData.getObject().getTourID());
+	        String origin = returnData.getObject().getOrigin();
+	        String destination = returnData.getObject().getDestination();
+	        Date date = returnData.getObject().getDate();
+	        String dateStr = date.toString();
+	        String[] tourDetails = {tourID, origin, destination, dateStr};
+	        return tourDetails;
+		}
+		else
+			return null;
+		
+	}
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return bus.retrieveBusList();
 	}
@@ -94,5 +127,9 @@ public class busDriverController {
 	}
 	public ReturnObjectUtility<BusDriver> deleteBusDriver(int busDriverID) {
 		return busDriver.deleteBusDriver(busDriverID);
+	}
+	public ReturnObjectUtility<Integer> retrieveBusByDriverID(int busDriverID)
+	{
+		return bus.retrieveBusByDriverID(busDriverID);
 	}
 }

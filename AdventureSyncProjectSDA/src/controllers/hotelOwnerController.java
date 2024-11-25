@@ -46,7 +46,9 @@ public class hotelOwnerController
     public ReturnObjectUtility<HotelOwner> addHotelOwner(HotelOwner newHotelOwner) {
 		return hotelOwner.addHotelOwner(newHotelOwner);
 	}
-    
+    public ReturnObjectUtility<Room> updateRoomBookingStatus(int roomID, boolean bookingStatus) {
+		return hotel.updateRoomBookingStatus(roomID, bookingStatus);
+	}
     public ReturnObjectUtility<FoodItem> updateFoodQuantity(int foodID, int quantity, boolean add) {
 		return hotel.updateFoodQuantity(foodID, quantity, add);
 	}
@@ -125,5 +127,8 @@ public class hotelOwnerController
 	}
 	public ReturnObjectUtility<HotelOwner> deleteHotelOwner(int hotelOwnerID) {
 		return hotelOwner.deleteHotelOwner(hotelOwnerID);
+	}
+	public ReturnObjectUtility<Hotel> retrieveHotelDetails(int hotelID){
+		return hotel.retrieveHotelDetails(hotelID);
 	}
 }
