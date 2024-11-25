@@ -106,9 +106,8 @@ public class Main extends Application {
 			//HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);
-//	       
-		    // Set the scene to the primary stage
-		    primaryStage.setScene(scene);
+
+			primaryStage.setScene(scene);
 		    primaryStage.setTitle("Account Menu");
 		    primaryStage.show();
 			} catch(Exception e) {
