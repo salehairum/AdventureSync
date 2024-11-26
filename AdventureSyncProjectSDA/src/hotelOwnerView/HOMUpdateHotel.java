@@ -53,7 +53,7 @@ public class HOMUpdateHotel {
 	Parent root;
 	hotelOwnerController hoController;
 	public HOMUpdateHotel(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/HOMUpdateHotel.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/HOMUpdateHotel.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
 		try {

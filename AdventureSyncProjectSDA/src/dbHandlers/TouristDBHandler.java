@@ -710,6 +710,11 @@ public class TouristDBHandler {
 			//first see if car exists or not
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from room where roomID="+roomID);
+	        
+	        int isBooked=rSet.getInt("isBooked");
+	        
+	        System.out.println(isBooked);
+	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No room found with the entered room ID.");
 		         returnData.setSuccess(false);

@@ -89,7 +89,7 @@ public class TouristUpdatePasswordView {
 			}
 	        
 	        //else update your password
-	        ReturnObjectUtility<Tourist> returnData=tController.updatePassword(password, touristID);
+	        ReturnObjectUtility<Tourist> returnData=tController.updatePassword(password, accountData.getObject());
 	        
 	        // Show success or failure message
 	        boolean success = returnData.isSuccess();

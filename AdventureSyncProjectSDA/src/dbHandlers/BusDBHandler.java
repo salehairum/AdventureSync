@@ -92,9 +92,6 @@ public class BusDBHandler {
 						 returnData.setMessage("Failed to add seat.");
 		                 returnData.setSuccess(false);
 			        }
-			        else {
-			        	System.out.println("seat se rows affecthui hain");
-			        }
 			    }
 			    
 			}
@@ -152,8 +149,6 @@ public class BusDBHandler {
 			        }
 		            
 			        int busDriverID=rSetForAccount.getInt("busDriverID");
-			        System.out.println("Actual: "+accPassword);
-			        System.out.println("Entered: "+enteredPassword);
 			        if(accPassword.equals(enteredPassword)) {
 			        	returnData.setObject(busDriverID);
 			            returnData.setMessage("Logged in successfully");

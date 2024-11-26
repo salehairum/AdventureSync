@@ -92,7 +92,7 @@ public class TravelAgencyOwnerUpdatePasswordView {
 			}
 	        
 	        //else update your password
-	        ReturnObjectUtility<TravelAgencyOwner> returnData=taoController.updatePassword(password, tOwnerID);
+	        ReturnObjectUtility<TravelAgencyOwner> returnData=taoController.updatePassword(password, accountData.getObject());
 	        
 	        // Show success or failure message
 	        boolean success = returnData.isSuccess();

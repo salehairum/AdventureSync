@@ -90,7 +90,7 @@ public class Room {
 	public boolean isBooked() {
 		return isBooked;
 	}
-	public boolean getIsBooked() {
+	public boolean getBooked() {
 		return isBooked;
 	}
 	public void setBooked(boolean isBooked) {

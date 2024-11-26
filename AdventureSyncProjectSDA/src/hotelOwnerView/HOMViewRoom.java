@@ -69,6 +69,7 @@ public class HOMViewRoom {
 		hoController = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 		loadRoomTable();
 	}
 	
@@ -138,10 +139,10 @@ public class HOMViewRoom {
     	colRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomID"));
     	colRating.setCellValueFactory(new PropertyValueFactory<>("OverallRating"));
     	colPrice.setCellValueFactory(new PropertyValueFactory<>("PricePerNight"));
-    	//colIsBooked.setCellValueFactory(new PropertyValueFactory<>("isBooked"));
+    	colIsBooked.setCellValueFactory(new PropertyValueFactory<>("Booked"));
     	colDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
         // Get car details from the controller
-        ReturnListUtility<Room> returnData = hoController.getRoomDetails(hOwnerID);
+        ReturnListUtility<Room> returnData = hoController.getRoomDetails(hotelID);
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList

@@ -98,7 +98,7 @@ public class HOMAddFood {
 				errorMessage.append("Please enter numeric value for food quantity.\n");
 			}
 			if(!isNumeric(foodPriceInput.getText())) {
-				errorMessage.append("Please enter numeric value for food quantity.\n");
+				errorMessage.append("Please enter numeric value for food price.\n");
 			}
 	        if (errorMessage.length() > 0) {
 	            alertInvalidInput.setContentText(errorMessage.toString());
