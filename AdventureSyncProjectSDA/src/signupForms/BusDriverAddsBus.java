@@ -17,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -126,26 +128,31 @@ public class BusDriverAddsBus {
 	        alert.setHeaderText(null);
 	        alert.setContentText(returnData.getMessage());
 	        alert.showAndWait();
-	        try {
-	            // Dynamically create an instance of the next form's controller with the touristID
-				BusDriverMenuView controllerInstance = new BusDriverMenuView(busDriverID);
+	        
+	        
+	        if(success)
+	        {
+	        	try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+					BusDriverMenuView controllerInstance = new BusDriverMenuView(busDriverID);
 
-	            // Load the next form's scene
-	            Parent root = controllerInstance.getRoot();
-	            Scene newFormScene = new Scene(root);
-	            Stage newFormStage = new Stage();
-	            newFormStage.setScene(newFormScene);
-	            newFormStage.setTitle("Bus Driver Menu");
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Bus Driver Menu");
 
-	            // Show the new form
-	            newFormStage.show();
+		            // Show the new form
+		            newFormStage.show();
 
-	            // Close the current form
-	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-	            currentStage.close();
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 	        }
 	    };
 	    addButton.setOnAction(addButtonHandler);
