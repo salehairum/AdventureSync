@@ -2,15 +2,21 @@ package touristView;
 
 import java.io.IOException;
 
+import accountAndPersonModels.HotelOwner;
+import accountAndPersonModels.Tourist;
 import controllers.TouristController;
 import controllers.busDriverController;
 import controllers.travelAgencyOwnerController;
+import dataUtilityClasses.ReturnObjectUtility;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -35,6 +41,8 @@ public class TouristDeletesAccountView {
 	private Text dob;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button yesButton;
 	
 	Parent root;
 	TouristController tController;
@@ -61,6 +69,18 @@ public class TouristDeletesAccountView {
 		eventHandlersAssignment();
 	}
 	public void eventHandlersAssignment() {
+  		EventHandler<ActionEvent> yesButtonHandler=(event)->{
+  			
+  			ReturnObjectUtility<Tourist> returnData=tController.deleteTourist(touristID);
+  			
+  			boolean success=returnData.isSuccess();
+  			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+  			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+  			    alert.setHeaderText(null);
+  			    alert.setContentText(returnData.getMessage());
+  			    alert.showAndWait();
+  		};
+  		yesButton.setOnAction(yesButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
     	backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account", touristID));
     }

@@ -15,6 +15,7 @@ import busDriverView.BusDriverUpdateBusView;
 import busDriverView.BusDriverUpdatesAccountView;
 import busDriverView.BusDriverViewBusDetailsView;
 import busDriverView.BusDriverViewsFeedbackView;
+import busDriverView.BusDriverViewsTourDetailsView;
 import busDriverView.busDriverLogin;
 import controllers.hotelOwnerController;
 import dataUtilityClasses.ReturnListUtility;
@@ -34,6 +35,7 @@ import travelAgencyOwnerView.TravelAgencyManageBusView;
 import travelAgencyOwnerView.TravelAgencyManageCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerAssignsTourToBusView;
 import travelAgencyOwnerView.TravelAgencyOwnerDeleteAccountView;
+import travelAgencyOwnerView.TravelAgencyOwnerUpdatePasswordView;
 import travelAgencyOwnerView.TravelAgencyOwnerUpdatesAccountView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewCarsView;
 import travelAgencyOwnerView.TravelAgencyOwnerViewsBusDriversView;
@@ -102,12 +104,8 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-			Hotel hotel=hdb.retrieveHotelObject(6).getObject();
-
-
 			AccountMenuView hotelOwnerMenu = new AccountMenuView();
-			//HotelOwnerMenuView hotelOwnerMenu = new HotelOwnerMenuView(1);
-
+      
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);
 

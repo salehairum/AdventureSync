@@ -43,7 +43,6 @@ public class BusDriverDeletesAccountView {
 	
 	Parent root;
 	busDriverController bdController;
-	
 	private int busDriverID;
 	private int busID;
 	

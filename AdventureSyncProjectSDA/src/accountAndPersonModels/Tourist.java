@@ -127,4 +127,7 @@ public class Tourist extends Person {
 	public ReturnObjectUtility<Tourist> updatePassword(String password, int accountID) {
 		return touristDBHandler.updatePassword(password, accountID);
 	}
+	public ReturnObjectUtility<Tourist> deleteTourist(int touristID) {
+		return touristDBHandler.deleteTourist(touristID);
+	}
 }

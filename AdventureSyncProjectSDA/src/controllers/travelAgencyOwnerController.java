@@ -113,4 +113,11 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
 		return travelAgencyOwner.deleteAgencyOwner(owner);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int travelAgencyOwnerID) {
+		return travelAgencyOwner.compareOldPassword(enteredPassword, travelAgencyOwnerID);
+	}
+
+	public ReturnObjectUtility<TravelAgencyOwner> updatePassword(String password, int accountID) {
+		return travelAgencyOwner.updatePassword(password, accountID);
+	}
 }

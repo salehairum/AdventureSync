@@ -67,4 +67,10 @@ public class BusDriver extends Person {
 	public ReturnObjectUtility<BusDriver> deleteBusDriver(int busDriverID) {
 		return busDBHandler.deleteBusDriver(busDriverID);
 	}
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int busDriverID) {
+		return busDBHandler.compareOldPassword(enteredPassword, busDriverID);
+	}
+	public ReturnObjectUtility<BusDriver> updatePassword(String password, int accountID) {
+		return busDBHandler.updatePassword(password, accountID);
+	}
 }

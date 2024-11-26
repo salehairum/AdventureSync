@@ -132,4 +132,12 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
 		return travelAgencyDBHandler.deleteAgencyOwner(owner);
 	}
+	
+	public ReturnObjectUtility<Integer> compareOldPassword(String enteredPassword, int travelAgencyOwnerID) {
+		return travelAgencyDBHandler.compareOldPassword(enteredPassword, travelAgencyOwnerID);
+	}
+
+	public ReturnObjectUtility<TravelAgencyOwner> updatePassword(String password, int accountID) {
+		return travelAgencyDBHandler.updatePassword(password, accountID);
+	}
 }

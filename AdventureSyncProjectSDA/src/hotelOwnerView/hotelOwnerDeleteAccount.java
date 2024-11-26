@@ -89,7 +89,6 @@ public class hotelOwnerDeleteAccount {
   			    alert.showAndWait();
   		};
   		yesButton.setOnAction(yesButtonHandler);
-        // Assign handlers with parameters for specific FXMLs and classes
         backButton.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account", hotelOwnerID));
     }
 
