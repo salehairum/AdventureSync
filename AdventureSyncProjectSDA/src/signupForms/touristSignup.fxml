@@ -27,11 +27,6 @@
                   <Image url="@../resources/tourist.png" />
                </image>
             </ImageView>
-            <Button fx:id="signupButton" layoutX="221.0" layoutY="434.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Button>
             <Label fx:id="loginStatement" layoutX="33.0" layoutY="86.0" prefHeight="35.0" prefWidth="228.0" text="Already have an account? " textFill="#f9f7f3">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -148,6 +143,16 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
+            <Button fx:id="signupButton" layoutX="258.0" layoutY="435.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="menuButton" layoutX="135.0" layoutY="435.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">

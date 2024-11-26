@@ -46,6 +46,9 @@ public class TouristSignUpView {
 	private DatePicker dobInput;
 	@FXML
 	private Text loginLabel;
+	@FXML
+	private Button menuButton;
+	
 	Parent root;
 	TouristController tController;
 	
@@ -157,6 +160,7 @@ public class TouristSignUpView {
 			
 		signupButton.setOnAction(signupButtonHandler);
 		loginLabel.setOnMouseClicked(createButtonHandler(touristLogin.class, "Tourist Login"));
+		menuButton.setOnMouseClicked(createButtonHandler(AccountMenuView.class, "Account Menu"));
 	}
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

@@ -47,6 +47,8 @@ public class HotelOwnerSignUpView {
 	private DatePicker dobInput;
 	@FXML
 	private Text loginLabel;
+	@FXML
+	private Button menuButton;
 	Parent root;
 	hotelOwnerController hController;
 	
@@ -159,6 +161,7 @@ public class HotelOwnerSignUpView {
 			
 		signupButton.setOnAction(signupButtonHandler);
 		loginLabel.setOnMouseClicked(createButtonHandler(hotelOwnerLogin.class, "Hotel Owner Login"));
+		menuButton.setOnMouseClicked(createButtonHandler(AccountMenuView.class, "Account Menu"));
 	}
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

@@ -47,6 +47,9 @@ public class TravelAgencyOwnerSignUpView {
 	private DatePicker dobInput;
 	@FXML
 	private Text loginLabel;
+	@FXML
+	private Button menuButton;
+	
 	Parent root;
 	travelAgencyOwnerController taoController;
 	
@@ -158,6 +161,7 @@ public class TravelAgencyOwnerSignUpView {
 			
 		signupButton.setOnAction(signupButtonHandler);
 		loginLabel.setOnMouseClicked(createButtonHandler(travelAgencyOwnerLogin.class, "Travel Agency Owner Login"));
+		menuButton.setOnMouseClicked(createButtonHandler(AccountMenuView.class, "Account Menu"));
 	}
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

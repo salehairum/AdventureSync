@@ -39,7 +39,7 @@
                   <TextField fx:id="passwordInput" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="220.0" promptText="e.g 123" />
                </children>
             </HBox>
-            <Button fx:id="loginButton" layoutX="217.0" layoutY="384.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Login" textFill="#f7a072">
+            <Button fx:id="loginButton" layoutX="287.0" layoutY="384.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Login" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -49,6 +49,11 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
+            <Button fx:id="signupButton" layoutX="159.0" layoutY="384.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="117.0" style="-fx-background-color: F9F7F3;" text="Signup" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="sidePanel" layoutY="-2.0" prefHeight="505.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">

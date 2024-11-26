@@ -132,14 +132,6 @@ public class TouristReturnCarView {
 					//if transaction could not be made, set rental status as true i.e it is still rented.
 				else  {
 					int transactionID=returnData2.getObject();
-	                /*try {
-	                    // Dynamically load and show the TouristPaymentView
-	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-	                    currentStage.close();
-	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway", touristID,carID, "Return", transactionID,nKms).handle(null);
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                }*/
 					try 
 				    {
 				    	String transactionType = "Return";

@@ -129,7 +129,6 @@ public class BusDriverAddsBus {
 	        alert.setContentText(returnData.getMessage());
 	        alert.showAndWait();
 	        
-	        
 	        if(success)
 	        {
 	        	try {

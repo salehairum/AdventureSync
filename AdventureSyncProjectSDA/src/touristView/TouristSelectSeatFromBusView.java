@@ -132,14 +132,6 @@ public class TouristSelectSeatFromBusView {
 					//pass busId, nottt seatID!!
 					//pass transactionID
 					int transactionID=returnData.getObject();
-					/*try {
-	                    // Dynamically load and show the TouristPaymentView
-	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-	                    currentStage.close();
-	                    createButtonHandler(TouristPaymentView.class, "Payment Gateway", touristID, busID, "Bus", transactionID, 0).handle(null);
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                }*/
 					try 
 				    {
 				    	String transactionType = "Bus";
