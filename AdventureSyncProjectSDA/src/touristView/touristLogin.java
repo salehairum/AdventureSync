@@ -18,6 +18,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import signupForms.HotelOwnerSignUpView;
+import signupForms.TouristSignUpView;
 
 public class touristLogin {
 	@FXML
@@ -26,6 +28,8 @@ public class touristLogin {
 	private TextField passwordInput;
 	@FXML
 	private Button loginButton;
+	@FXML
+	private Button signupButton;
 	
 	Parent root;
 	TouristController tController;
@@ -101,7 +105,37 @@ public class touristLogin {
 		};
 			
 		loginButton.setOnAction(signupButtonHandler);
+		signupButton.setOnMouseClicked(createButtonHandler(TouristSignUpView.class, "Tourist SignUp"));
 	}
+	
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+    }
+	
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import accountAndPersonModels.BusDriver;
 import accountAndPersonModels.Tourist;
 import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.HotelOwnerUpdatesPasswordView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,6 +52,9 @@ public class BusDriverUpdatesAccountView {
 	private TextField balanceInput;
 	@FXML
 	private DatePicker dobInput;
+	@FXML
+	private Button updPasswordButton;
+	
 	busDriverController bdController;
 	
 	Parent root;
@@ -139,6 +143,7 @@ public class BusDriverUpdatesAccountView {
 	    updateButton.setOnAction(updateButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
         backButton.setOnMouseClicked(createButtonHandler(BusDriverMgrAccountView.class, "Manage Account", busDriverID));
+        updPasswordButton.setOnMouseClicked(createButtonHandler(BusDriverUpdatesPasswordView.class, "Change Password", busDriverID));
     }
 
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {

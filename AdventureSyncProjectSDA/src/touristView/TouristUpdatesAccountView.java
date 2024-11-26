@@ -5,6 +5,7 @@ import java.io.IOException;
 import accountAndPersonModels.Tourist;
 import controllers.TouristController;
 import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.HotelOwnerUpdatesPasswordView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,6 +52,8 @@ public class TouristUpdatesAccountView {
 	private DatePicker dobInput;
 	@FXML
 	private Button backButton;
+	@FXML
+	private Button updPasswordButton;
 	Parent root;
 	TouristController tController;
 	private int touristID;
@@ -119,6 +122,7 @@ public class TouristUpdatesAccountView {
 	    };
 	    updateButton.setOnAction(updateButtonHandler);
 	    backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account", touristID));
+	    updPasswordButton.setOnMouseClicked(createButtonHandler(TouristUpdatePasswordView.class, "Change Password", touristID));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {

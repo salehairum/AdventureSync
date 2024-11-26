@@ -43,6 +43,7 @@
                </font>
             </Button>
             <HBox alignment="CENTER" layoutX="86.0" layoutY="241.0" prefHeight="59.0" prefWidth="422.0">
+
                <children>
                   <Label alignment="CENTER" prefHeight="46.0" prefWidth="107.0" text="Name" textFill="#eddea4">
                      <font>
