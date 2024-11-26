@@ -40,11 +40,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="busIDLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Bus ID" textFill="#f7a072">
+                              <Text fx:id="busIDLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Bus ID" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -54,11 +54,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="brandLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Brand" textFill="#f7a072">
+                              <Text fx:id="brandLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>
@@ -72,11 +72,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="modelLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Model" textFill="#f7a072">
+                              <Text fx:id="modelLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Model" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -86,11 +86,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="yearLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Year" textFill="#f7a072">
+                              <Text fx:id="yearLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>
@@ -104,11 +104,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="nSeatsLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="No of seats" textFill="#f7a072">
+                              <Text fx:id="nSeatsLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="No. of seats" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -118,11 +118,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="seatFeeLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Seat Fee" textFill="#f7a072">
+                              <Text fx:id="seatFeeLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Seat Fee" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>
@@ -136,11 +136,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="plateNoLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="PlateNumber" textFill="#f7a072">
+                              <Text fx:id="plateNoLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Plate Number" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="238.0">
@@ -150,11 +150,11 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="hasTourLabel" prefHeight="20.0" prefWidth="220.0" style="-fx-background-color: #F9F7F3;" text="Yes or no" textFill="#f7a072">
+                              <Text fx:id="hasTourLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Yes or No" wrappingWidth="214.125">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
-                              </Label>
+                              </Text>
                            </children>
                         </VBox>
                      </children>

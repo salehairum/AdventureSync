@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import accountAndPersonModels.Account;
 import accountAndPersonModels.HotelOwner;
 import accountAndPersonModels.Tourist;
+import busDriverView.BusDriverMenuView;
 import controllers.TouristController;
 import controllers.hotelOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
@@ -126,8 +127,34 @@ public class HotelOwnerSignUpView {
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
 			    
-		//send hotel owner id
-		int hotelOwnerID=returnData.getObject().getHotelOwnerID();
+			    //send hotel owner id
+			    if(success)
+			    {
+			    	int hotelOwnerID=returnData.getObject().getHotelOwnerID();
+			    	try {
+			            // Dynamically create an instance of the next form's controller with the touristID
+						HotelOwnerAddsHotel controllerInstance = new HotelOwnerAddsHotel(hotelOwnerID);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Add Hotel");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
+			    
+		
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);

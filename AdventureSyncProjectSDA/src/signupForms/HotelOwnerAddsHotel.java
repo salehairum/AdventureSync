@@ -35,7 +35,7 @@ public class HotelOwnerAddsHotel {
 	hotelOwnerController hoContoller;
 	int hotelOwnerID;
 	
-	public HotelOwnerAddsHotel(int id) {
+	public HotelOwnerAddsHotel(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/signupForms/hotelOwnerAddsHotel.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
@@ -71,6 +71,30 @@ public class HotelOwnerAddsHotel {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    if(success)
+			    {
+			    	try {
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            HotelOwnerMenuView controllerInstance = new HotelOwnerMenuView(hotelOwnerID);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Hotel Owner Menu");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
 		};
 		addHotelButton.setOnAction(addButtonHandler);
     }

@@ -80,6 +80,7 @@ public class BusDriverViewBusDetailsView {
 	}
 	public void assignBusID(){
 		 busID=bdController.retrieveBusByDriverID(busDriverID).getObject();
+		 //System.out.println("busID " + busID);
 	}
 	// Method to display profile
     public void displayOwnerDetails() {
