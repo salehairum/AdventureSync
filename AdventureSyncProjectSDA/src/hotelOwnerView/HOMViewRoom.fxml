@@ -101,7 +101,7 @@
             <TableColumn fx:id="colRating" prefWidth="84.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
             <TableColumn fx:id="colPrice" prefWidth="122.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
             <TableColumn fx:id="colDesc" prefWidth="143.0" style="-fx-background-color: #F9F7F3;" text="Description" />
-            <TableColumn prefWidth="104.0" style="-fx-background-color: #F9F7F3;" text="colIsBooked" />
+            <TableColumn fx:id="colIsBooked" prefWidth="104.0" style="-fx-background-color: #F9F7F3;" text="colIsBooked" />
          </columns>
       </TableView>
    </children>

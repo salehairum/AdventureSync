@@ -712,6 +712,7 @@ public class HotelDBHandler {
 		            	hotelOwner.setHotelOwnerID(retrievedOwnerID);
 		            	returnData.setMessage("Hotel Owner with id "+retrievedOwnerID+" added successfuly!");
 		                returnData.setSuccess(true);
+		                returnData.setObject(hotelOwner);
 		                return returnData;
 		            } else {
 		                returnData.setMessage("Failed to retrieve generated Account ID.");
@@ -762,8 +763,6 @@ public class HotelDBHandler {
 			        }
 		            
 			        int hotelOwnerID=rSetForAccount.getInt("hotelOwnerID");
-			        System.out.println("Actual: "+accPassword);
-			        System.out.println("Entered: "+enteredPassword);
 			        if(accPassword.equals(enteredPassword)) {
 			        	returnData.setObject(hotelOwnerID);
 			            returnData.setMessage("Logged in successfully");
@@ -1302,13 +1301,13 @@ public class HotelDBHandler {
 	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
 		 try {
 		        Statement stmt = conn.createStatement();
-		        ResultSet rSet = stmt.executeQuery("select hotelId from HotelOwnerOwnsHotel where hotelOwnerID=" + hotelOwnerID);
+		        ResultSet rSet = stmt.executeQuery("select hotelId from HotelOwnerOwnsHotel where hotelOwnerID= " + hotelOwnerID);
 		        
 		        if (rSet.next()) { // Check if a result was found
 		            int hotelID= rSet.getInt("hotelID");
 
 		            returnData.setObject(hotelID);
-		            returnData.setMessage("HotelID retrieved successfully.");
+			        returnData.setMessage("HotelID retrieved successfully.");
 		            returnData.setSuccess(true);
 		        } else {
 		            // If no result is found, set an error message

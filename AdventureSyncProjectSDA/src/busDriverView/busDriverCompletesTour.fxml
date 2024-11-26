@@ -82,11 +82,6 @@
                               <Insets left="15.0" right="15.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="noButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="No" textFill="#f7a072">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
                      </children>
                   </HBox>
                </children>

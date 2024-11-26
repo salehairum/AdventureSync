@@ -92,7 +92,7 @@ public class BusDriverUpdatesPasswordView {
 			}
 	        
 	        //else update your password
-	        ReturnObjectUtility<BusDriver> returnData=bdController.updatePassword(password, busDriverID);
+	        ReturnObjectUtility<BusDriver> returnData=bdController.updatePassword(password, accountData.getObject());
 	        
 	        // Show success or failure message
 	        boolean success = returnData.isSuccess();

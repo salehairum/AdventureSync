@@ -23,18 +23,18 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="377.0">
+            <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="400.0">
                <children>
                   <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Location" textFill="#eddea4">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="locationLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Location" textFill="#f7a072">
+                  <Text fx:id="locationLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" wrappingWidth="262.14489364624023">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </HBox>
             <Button fx:id="backButton" layoutX="234.0" layoutY="417.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Back" textFill="#f7a072">
@@ -42,18 +42,18 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="181.0" prefHeight="87.0" prefWidth="377.0">
+            <HBox alignment="CENTER" layoutX="87.0" layoutY="181.0" prefHeight="87.0" prefWidth="422.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Name" textFill="#eddea4">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="105.0" text="Name" textFill="#eddea4">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameLabel" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: F9F7F3;" text="Name" textFill="#f7a072">
+                  <Text fx:id="nameLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="304.0406677722931">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </HBox>
          </children>

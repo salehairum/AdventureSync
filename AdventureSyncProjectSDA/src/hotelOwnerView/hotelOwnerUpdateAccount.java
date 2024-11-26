@@ -59,7 +59,7 @@ public class hotelOwnerUpdateAccount {
 	private int hotelOwnerID;
 	
 	public hotelOwnerUpdateAccount(Integer id) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwner/hotelOwnerUpdateAccount.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/hotelOwnerUpdateAccount.fxml"));
 		loader.setController(this);
 		hotelOwnerID=id;
 		try {
