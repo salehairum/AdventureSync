@@ -118,8 +118,7 @@ public class TouristSelectsFoodFromMenuView {
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
-
-			ReturnObjectUtility<FoodItem> returnData= tController.updateFoodQuantity(foodID, foodQuantity, false);
+			ReturnObjectUtility<Integer> returnData=tController.orderFood(touristID, foodID);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -130,7 +129,7 @@ public class TouristSelectsFoodFromMenuView {
 			}
 			else {
 				//add to transaction history
-				ReturnObjectUtility<Integer> returnData2=tController.orderFood(touristID, foodID);
+				ReturnObjectUtility<FoodItem> returnData2= tController.updateFoodQuantity(foodID, foodQuantity, false);
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -139,7 +138,7 @@ public class TouristSelectsFoodFromMenuView {
 				    alert.showAndWait();
 				    
 				if(success) {
-					Integer transactionID=returnData2.getObject();
+					Integer transactionID=returnData.getObject();
 					try 
 				    {
 				    	String transactionType = "Order";

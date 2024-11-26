@@ -144,7 +144,7 @@ public class TouristReturnCarView {
 				    {
 				    	String transactionType = "Return";
 			            // Dynamically create an instance of the next form's controller with the touristID
-			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, carID, transactionType, transactionID, 0);
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, carID, transactionType, transactionID, nKms);
 
 			            // Load the next form's scene
 			            Parent root = controllerInstance.getRoot();

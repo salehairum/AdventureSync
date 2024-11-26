@@ -104,7 +104,7 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-			TouristUpdatePasswordView hotelOwnerMenu = new TouristUpdatePasswordView(7);
+			TouristMenuView hotelOwnerMenu = new TouristMenuView(7);
       
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);

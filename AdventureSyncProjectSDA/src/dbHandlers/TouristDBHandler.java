@@ -589,12 +589,16 @@ public class TouristDBHandler {
 			//first see if car exists or not
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from seat where seatID="+seatID);
+	        
+	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No seat found with the entered Seat ID..");
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
-	        else if(rSet.getBoolean("isBooked")){
+	        else if(rSet.getInt("isBooked")==1){
+		        System.out.println(rSet.getInt("isBooked"));
+		        System.out.println(seatID);
 	        	 returnData.setMessage("Seat is already booked.");
 		         returnData.setSuccess(false);
 		         return returnData;
@@ -711,9 +715,7 @@ public class TouristDBHandler {
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from room where roomID="+roomID);
 	        
-	        int isBooked=rSet.getInt("isBooked");
-	        
-	        System.out.println(isBooked);
+	        System.out.println(roomID);
 	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No room found with the entered room ID.");
@@ -748,7 +750,7 @@ public class TouristDBHandler {
 		    pstmt.setInt(2, roomID);
 		    pstmt.setString(3, "Book Hotel Room");
 		    
-		        // Execute the insert
+		    // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
 		    	rs = pstmt.getGeneratedKeys();

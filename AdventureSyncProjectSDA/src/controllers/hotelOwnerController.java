@@ -55,9 +55,13 @@ public class hotelOwnerController
 	public ReturnObjectUtility<Float> getBill(int roomID, int nNights){
 		return hotelOwner.getBill(roomID, nNights);
 	}
-	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
-		return hotelOwner.addMoney(roomID, bill);
+	public ReturnObjectUtility<Float> addMoneyRoom(int roomID, float bill){
+		return hotelOwner.addMoneyRoom(roomID, bill);
 	}
+	public ReturnObjectUtility<Float> addMoneyFood(int foodID, float bill){
+		return hotelOwner.addMoneyFood(foodID, bill);
+	}
+	
 	public ReturnObjectUtility<Integer> getHotelID(int hotelOwnerID){
 		return hotelOwner.getHotelID(hotelOwnerID);
 	}
