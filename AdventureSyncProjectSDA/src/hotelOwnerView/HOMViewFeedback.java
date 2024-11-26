@@ -44,6 +44,8 @@ public class HOMViewFeedback {
 	private TableColumn<FeedbackWithRoomID, String> colRoomID, colComment;
 	@FXML
 	private Text ratingLabel;
+	@FXML
+	private Text msgText;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
@@ -67,9 +69,9 @@ public class HOMViewFeedback {
 		hoContoller = new hotelOwnerController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
+		assignHotelID();
 		loadCommentTable();
 		loadRatingLabel();
-		assignHotelID();
 	}
 	 public void assignHotelID(){
 			hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
@@ -146,8 +148,8 @@ public class HOMViewFeedback {
             ObservableList<FeedbackWithRoomID> feedback = FXCollections.observableArrayList(returnData.getList().values());
             commentTable.setItems(feedback); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             commentTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

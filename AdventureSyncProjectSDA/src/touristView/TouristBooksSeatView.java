@@ -50,6 +50,8 @@ public class TouristBooksSeatView {
 	private TableView<Bus> busTable;
 	@FXML
 	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo, colDriverID, colHasTour;
+	@FXML
+	private Text msgText;	
 	
 	private int touristID;
 	Parent root;
@@ -103,13 +105,15 @@ public class TouristBooksSeatView {
 						
 			ReturnObjectUtility<Bus> returnData=tController.retrieveBusObject(busID);
 			boolean success=returnData.isSuccess();
-			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-		    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-		    alert.setHeaderText(null);
-		    alert.setContentText(returnData.getMessage());
-		    alert.showAndWait();
+			if(!success) {
+				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+			}
 		    
-		    if(success) {
+			else {
 		    	//go to next form
 		    	//just send poori bus since ab woh seats aa chuki hain us 
 		    	//pass this bus
@@ -227,8 +231,8 @@ public class TouristBooksSeatView {
             ObservableList<Bus> busList = FXCollections.observableArrayList(returnData.getList().values());
             busTable.setItems(busList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             busTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

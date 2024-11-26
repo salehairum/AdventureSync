@@ -122,11 +122,14 @@ public class TouristPaymentView {
 	        // Deduct money
 	        ReturnObjectUtility<Tourist> returnData = tController.deductMoney(touristID, bill, transactionID, isCreditPayment);
 	        boolean success = returnData.isSuccess();
-	        Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-	        alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-	        alert.setHeaderText(null);
-	        alert.setContentText(returnData.getMessage());
-	        alert.showAndWait();
+	        
+	        if(!success) {
+		        Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+		        alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+		        alert.setHeaderText(null);
+		        alert.setContentText(returnData.getMessage());
+		        alert.showAndWait();
+	        }
 	        
 	        if (success && isCreditPayment) {
 	            // Add money
@@ -144,7 +147,7 @@ public class TouristPaymentView {
 	        		returnData2=hController.addMoneyFood(serviceID, bill);
 	        	}
   	            success = returnData2.isSuccess();
-  	            alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+  	            Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
   	            alert.setTitle(success ? "Operation Successful" : "Operation Failed");
   	            alert.setHeaderText(null);
   	            alert.setContentText(returnData2.getMessage());

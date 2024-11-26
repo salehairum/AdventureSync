@@ -158,5 +158,10 @@
             </Text>
          </children>
       </Pane>
+      <Text fx:id="msgText" fill="#f9f7f3" layoutX="248.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

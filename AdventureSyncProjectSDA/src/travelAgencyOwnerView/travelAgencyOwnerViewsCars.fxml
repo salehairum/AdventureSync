@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TableView fx:id="carTable" layoutX="5.0" layoutY="114.0" prefHeight="292.0" prefWidth="539.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="carTable" layoutX="6.0" layoutY="146.0" prefHeight="272.0" prefWidth="539.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colCarId" prefWidth="45.0" style="-fx-background-color: #f9f7f3;" text="Car ID" />
                   <TableColumn fx:id="colModel" prefWidth="75.0" style="-fx-background-color: #f9f7f3;" text="Model" />
@@ -50,6 +50,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="39.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

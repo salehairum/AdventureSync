@@ -25,20 +25,20 @@
                   <Image url="@../resources/route.png" />
                </image>
             </ImageView>
-            <Button fx:id="menuButton" layoutX="227.0" layoutY="379.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
+            <Button fx:id="menuButton" layoutX="219.0" layoutY="381.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="128.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
             <VBox layoutX="33.0" layoutY="154.0" prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <HBox prefHeight="39.0" prefWidth="500.0">
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="457.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="400.0" text="Your bus is currently assigned tour with TourID" textFill="#eddea4">
+                        <Text fx:id="msgText" fill="#eddea4" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Bus is assigned Tour with Tour ID" textAlignment="CENTER" wrappingWidth="330.83044397830963">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
-                        </Label>
+                        </Text>
                         <Label fx:id="tourIDLabel" textFill="#eddea4">
                            <font>
                               <Font name="System Bold" size="18.0" />

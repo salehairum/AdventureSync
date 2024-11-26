@@ -69,14 +69,16 @@ public class hotelOwnerLogin {
 			ReturnObjectUtility<Integer> returnData=hoController.checkPassword(password, username);
 			
 			boolean success=returnData.isSuccess();
-			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-			    alert.setHeaderText(null);
-			    alert.setContentText(returnData.getMessage());
-			    alert.showAndWait();
+			if(!success) {
+				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+				    alert.setHeaderText(null);
+				    alert.setContentText(returnData.getMessage());
+				    alert.showAndWait();
+			}
 			    
 			//send bus driver id 
-			if(success) {
+			else {
 
 				int hotelOwnerID=returnData.getObject();
 		        try {

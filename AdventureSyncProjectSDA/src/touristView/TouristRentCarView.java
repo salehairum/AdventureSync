@@ -49,6 +49,9 @@ public class TouristRentCarView {
 	private TableView<Car> carTable;
 	@FXML
 	private TableColumn<Car, String> colCarId, colModel, colBrand, colYear, colPlateNo, colRentalFee, colCost;
+	@FXML
+	private Text msgText;
+	
 	private int touristID;
 	
 	Parent root;
@@ -236,8 +239,8 @@ public class TouristRentCarView {
             ObservableList<Car> carList = FXCollections.observableArrayList(returnData.getList().values());
             carTable.setItems(carList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading cars: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             carTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

@@ -84,6 +84,7 @@ import hotelOwnerView.HOMUpdateHotel;
 import hotelOwnerView.HOMUpdateRoom;
 import hotelOwnerView.HOMViewFeedback;
 import hotelOwnerView.HOMViewFood;
+import hotelOwnerView.HOMViewHotel;
 import hotelOwnerView.HOMViewRoom;
 import hotelOwnerView.HotelOwnerMenuView;
 import hotelOwnerView.hotelOwnerLogin;

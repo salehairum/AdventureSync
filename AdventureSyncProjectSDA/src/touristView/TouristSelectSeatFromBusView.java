@@ -51,6 +51,9 @@ public class TouristSelectSeatFromBusView {
 	private TableView<Seat> seatTable;
 	@FXML
 	private TableColumn<Seat, String> colSeatId, colRowNo;
+	@FXML
+	private Text msgText;	
+	
 	
 	private int touristID;
 	private int busID;
@@ -240,8 +243,8 @@ public class TouristSelectSeatFromBusView {
             ObservableList<Seat> seatList = FXCollections.observableArrayList(returnData.getList().values());
             seatTable.setItems(seatList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             seatTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

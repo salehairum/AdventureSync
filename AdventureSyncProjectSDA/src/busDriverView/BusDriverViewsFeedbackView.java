@@ -44,6 +44,8 @@ public class BusDriverViewsFeedbackView {
 	private TableColumn<Feedback, String> colComment;
 	@FXML
 	private Text ratingLabel;
+	@FXML
+	private Text msgText;
 	
 	Parent root;
 	busDriverController bdController;
@@ -70,10 +72,10 @@ public class BusDriverViewsFeedbackView {
 	private void initialize() {
 		bdController = new busDriverController();
 		displayOwnerDetails();
+		assignBusID();
 		eventHandlersAssignment();
 		loadCommentTable();
 		loadRatingLabel();
-		assignBusID();
 	}
 	 public void assignBusID(){
 		 busID=bdController.retrieveBusByDriverID(busDriverID).getObject();
@@ -146,7 +148,8 @@ public class BusDriverViewsFeedbackView {
             commentTable.setItems(feedback); // Set data to the table
         } else {
             // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             commentTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

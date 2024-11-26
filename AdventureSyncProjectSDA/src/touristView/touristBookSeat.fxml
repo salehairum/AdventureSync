@@ -41,7 +41,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TableView fx:id="busTable" layoutX="8.0" layoutY="95.0" prefHeight="275.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="busTable" layoutX="11.0" layoutY="174.0" prefHeight="186.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colBusId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Bus ID" />
                   <TableColumn fx:id="colModel" prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
@@ -52,6 +52,11 @@
                   <TableColumn fx:id="colHasTour" prefWidth="61.0" style="-fx-background-color: #f9f7f3;" text="HasTour" />
                </columns>
             </TableView>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="41.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

@@ -26,7 +26,7 @@
                   <Image url="@../resources/car.png" />
                </image>
             </ImageView>
-            <TableView fx:id="carTable" layoutX="7.0" layoutY="103.0" prefHeight="237.0" prefWidth="536.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="carTable" layoutX="7.0" layoutY="142.0" prefHeight="198.0" prefWidth="536.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colCarId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="Car ID" />
                   <TableColumn fx:id="colModel" prefWidth="75.99993515014648" style="-fx-background-color: #f9f7f3;" text="Model" />
@@ -57,6 +57,11 @@
                   <TextField fx:id="carIdInput" prefHeight="26.0" prefWidth="272.0" promptText="e.g 1234" />
                </children>
             </HBox>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

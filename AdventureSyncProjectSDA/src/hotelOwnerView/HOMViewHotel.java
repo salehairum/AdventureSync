@@ -37,6 +37,8 @@ public class HOMViewHotel {
 	private Text locationLabel;
 	@FXML
 	private Text idLabel;
+	@FXML
+	private Text msgText;
 	
 	private int hotelID;
 	private int hotelOwnerID;
@@ -80,9 +82,15 @@ public class HOMViewHotel {
     public void loadLabels()
     {
     	ReturnObjectUtility<Hotel> hotel = hoController.retrieveHotelDetails(hotelID);
-    	idLabel.setText(String.valueOf(hotelID));
-    	nameLabel.setText(hotel.getObject().getHotelName());
-    	locationLabel.setText(hotel.getObject().getLocation());
+    	if(hotel.isSuccess()) {
+        	nameLabel.setText(hotel.getObject().getHotelName());
+        	idLabel.setText(Integer.toString(hotelID));
+        	locationLabel.setText(hotel.getObject().getLocation());
+    	}
+    	else {
+        	msgText.setVisible(true);
+        	msgText.setText(hotel.getMessage());
+    	}
     }
     // Method for button handling
     public void eventHandlersAssignment() {

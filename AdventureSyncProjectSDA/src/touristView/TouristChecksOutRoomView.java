@@ -50,6 +50,8 @@ public class TouristChecksOutRoomView {
 	private TableView<RoomWithHotel> roomTable;
 	@FXML
 	private TableColumn<RoomWithHotel, String> colRoomId, colPrice, colDesc, colHotelId, colHotelName;
+	@FXML
+	private Text msgText;	
 	
 	private int touristID;
 	
@@ -239,8 +241,8 @@ public class TouristChecksOutRoomView {
             ObservableList<RoomWithHotel> bookedRoomList = FXCollections.observableArrayList(returnData.getList().values());
             roomTable.setItems(bookedRoomList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             roomTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

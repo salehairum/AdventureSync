@@ -41,12 +41,15 @@ public class BusDriverCompletesTourView {
 	private Button yesButton;
 	@FXML
 	private Text tourIDText;
+	@FXML
+	private Text msgText;
 	
 	Parent root;
 	busDriverController bdController;
 
 	private int busDriverID;
 	private int busID;
+	private int tourID;
 
 	public BusDriverCompletesTourView(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/busDriverView/busDriverCompletesTour.fxml"));
@@ -67,7 +70,7 @@ public class BusDriverCompletesTourView {
 		bdController = new busDriverController();
 		displayOwnerDetails();
 		eventHandlersAssignment();
-		tourIDText.setText(Integer.toString(getTourID()));
+		setTourID();
 		assignBusID();
 	}
 	// Method to display profile
@@ -86,7 +89,7 @@ public class BusDriverCompletesTourView {
     	 EventHandler<ActionEvent> yesButtonHandler = (event) -> {
  	        // Create a single alert instance to avoid repeated showAndWait() calls
 
-    		ReturnObjectUtility<Boolean> returnData=bdController.completeTour(getTourID());
+    		ReturnObjectUtility<Boolean> returnData=bdController.completeTour(tourID);
  	        boolean success = returnData.isSuccess();
  	        Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
  	        alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -140,17 +143,20 @@ public class BusDriverCompletesTourView {
 	    };
 	}
     
-    public int getTourID() {
+    public void setTourID() {
     	ReturnObjectUtility<Integer> returnData=bdController.retrieveTourID(busDriverID);
     	boolean success=returnData.isSuccess();
     	if(!success) {
-    		Alert alert = new Alert(AlertType.ERROR);
-		    alert.setTitle("Operation Failed");
-		    alert.setHeaderText(null);
-		    alert.setContentText(returnData.getMessage());
-		    alert.showAndWait();
-		    return 0;
+    		msgText.setText("Currently no tour has been assigned to your bus");
+    		tourIDText.setVisible(false);
+    		tourID=0;
+    		viewDetailsButton.setDisable(true);
+    		yesButton.setDisable(true);
     	}
-    	return returnData.getObject();
+    	else
+    	{
+    		tourID=returnData.getObject();
+    		tourIDText.setText(Integer.toString(returnData.getObject()));
+    	}
     }
 }

@@ -25,7 +25,7 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <TableView fx:id="hotelTable" layoutX="7.0" layoutY="109.0" prefHeight="255.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="hotelTable" layoutX="11.0" layoutY="185.0" prefHeight="183.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colHotelId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="HotelID" />
                   <TableColumn fx:id="colHotelName" prefWidth="285.60003662109375" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
@@ -48,6 +48,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="31.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

@@ -49,6 +49,8 @@ public class TouristSelectsFoodFromMenuView {
 	private TableView<FoodItem> foodTable;
 	@FXML
 	private TableColumn<FoodItem, String> colFoodId, colName, colQuan, colPrice;
+	@FXML
+	private Text msgText;	
 	
 	private int touristID;
 	
@@ -249,8 +251,8 @@ public class TouristSelectsFoodFromMenuView {
             ObservableList<FoodItem> foodList = FXCollections.observableArrayList(returnData.getList().values());
             foodTable.setItems(foodList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading food items: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             foodTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

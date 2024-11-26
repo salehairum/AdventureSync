@@ -40,6 +40,9 @@ public class TouristRatesBusTourView {
 	private TableView<Bus> busTable;
 	@FXML
 	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo;
+	@FXML
+	private Text msgText;
+	
 	Parent root;
 	TouristController tController;
 	int touristID;
@@ -134,8 +137,8 @@ public class TouristRatesBusTourView {
             ObservableList<Bus> busList = FXCollections.observableArrayList(returnData.getList().values());
             busTable.setItems(busList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             busTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

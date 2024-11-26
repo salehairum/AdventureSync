@@ -21,22 +21,22 @@
             <Image url="@../resources/rating.png" />
          </image>
       </ImageView>
-      <Text fx:id="roomRatingLabel" fill="#eddea4" layoutX="239.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Bus Rating" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="roomRatingLabel" fill="#eddea4" layoutX="238.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Bus Rating" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="menuButton" layoutX="424.0" layoutY="411.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="424.0" layoutY="433.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fill="#eddea4" layoutX="246.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fill="#eddea4" layoutX="228.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TableView fx:id="commentTable" layoutX="441.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: F9F7F3;">
+      <TableView fx:id="commentTable" layoutX="457.0" layoutY="213.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: F9F7F3;">
         <columns>
           <TableColumn fx:id="colComment" prefWidth="199.0" text="Comments" />
         </columns>
@@ -100,9 +100,14 @@
             </Text>
          </children>
       </Pane>
-      <Text fx:id="ratingLabel" fill="#f9f7f3" layoutX="498.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buses Rating" wrappingWidth="164.13671875">
+      <Text fx:id="ratingLabel" fill="#f9f7f3" layoutX="492.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buses Rating" wrappingWidth="164.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="msgText" fill="#f9f7f3" layoutX="238.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Text>
    </children>

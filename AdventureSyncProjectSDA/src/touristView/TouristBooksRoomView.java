@@ -49,6 +49,8 @@ public class TouristBooksRoomView {
 	@FXML
 	private TableColumn<Hotel, String> colHotelId, colHotelName, colHotelLoc;
 	private int touristID;
+	@FXML
+	private Text msgText;	
 	
 	Parent root;
 	TouristController tController;
@@ -103,13 +105,16 @@ public class TouristBooksRoomView {
 						
 			ReturnObjectUtility<Hotel> returnData=tController.retrieveHotelObject(hotelID);
 			boolean success=returnData.isSuccess();
-			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-		    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-		    alert.setHeaderText(null);
-		    alert.setContentText(returnData.getMessage());
-		    alert.showAndWait();
+			if(!success) {
+				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+			    alert.setHeaderText(null);
+			    alert.setContentText(returnData.getMessage());
+			    alert.showAndWait();
+			}
 		    
-		    if(success) {
+			else {
+		    
 		    	//go to next form
 		    	//just send poora hotel since ab woh rooms aa chuke hain uskay 
 		    	//pass this room
@@ -222,8 +227,8 @@ public class TouristBooksRoomView {
             ObservableList<Hotel> hotelList = FXCollections.observableArrayList(returnData.getList().values());
             hotelTable.setItems(hotelList); // Set data to the table
         } else {
-            // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading bus: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             hotelTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

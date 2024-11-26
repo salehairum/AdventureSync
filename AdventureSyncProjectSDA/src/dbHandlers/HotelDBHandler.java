@@ -462,7 +462,6 @@ public class HotelDBHandler {
 	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 	            }else {
 	                returnData.setMessage("Issue in deleting bus driver in DB: " + errorMessage);
-	                System.out.println(errorMessage);
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
@@ -561,7 +560,6 @@ public class HotelDBHandler {
 		return returnData;
 	}
 	
-	
 	public ReturnObjectUtility<HotelOwner> retrieveAllHotelOwnerData(int HotelOwnerID) {
 	    ReturnObjectUtility<HotelOwner> returnData = new ReturnObjectUtility<>();
 
@@ -599,7 +597,7 @@ public class HotelDBHandler {
 	            returnData.setSuccess(true);
 	        } else {
 	            // If no result is found, set an error message
-	            returnData.setMessage("Error: Hotel Owner does not exist.");
+	            returnData.setMessage("Hotel Owner does not exist.");
 	            returnData.setSuccess(false);
 	        }
 
@@ -896,7 +894,7 @@ public class HotelDBHandler {
 	            returnData.setSuccess(true);
 	        } else {
 	            // If no hotel is found, set an error message
-	            returnData.setMessage("Error: Hotel does not exist.");
+	            returnData.setMessage("Hotel does not exist.");
 	            returnData.setSuccess(false);
 	        }
 	    } catch(SQLException e){
@@ -934,7 +932,7 @@ public class HotelDBHandler {
 	            returnData.setSuccess(true);
 	        } else {
 	            // If no hotel is found, set an error message
-	            returnData.setMessage("Error: Room does not exist.");
+	            returnData.setMessage("Room does not exist.");
 	            returnData.setSuccess(false);
 	        }
 	    } catch(SQLException e){
@@ -976,7 +974,7 @@ public class HotelDBHandler {
 	            returnData.setSuccess(true);
 	        } else {
 	            // If no hotel is found, set an error message
-	            returnData.setMessage("Error: Hotel does not exist.");
+	            returnData.setMessage("Hotel does not exist.");
 	            returnData.setSuccess(false);
 	        }
 	    } catch (SQLException e) {
@@ -1496,7 +1494,7 @@ public class HotelDBHandler {
 
 	        if (!rSet.next()) {
 	            // No rooms found for the given hotelID
-	            returnData.setMessage("Error: No rooms found for the given hotel ID: " + hotelID);
+	            returnData.setMessage("No rooms found for the given hotel ID: " + hotelID);
 	            returnData.setSuccess(false);
 	        } else {
 	            do {
@@ -1552,7 +1550,7 @@ public class HotelDBHandler {
 
 	        if (!rSet.next()) {
 	            // No rooms found for the given hotelID
-	            returnData.setMessage("Error: No rooms found for the given hotel ID: " + hotelID);
+	            returnData.setMessage("No rooms found for the given hotel ID: " + hotelID);
 	            returnData.setSuccess(false);
 	        } else {
 	            do {
@@ -1604,7 +1602,7 @@ public class HotelDBHandler {
 
 	        if (!rSet.next()) {
 	            // No food items found for the given hotelID
-	            returnData.setMessage("Error: No food items found for the given hotel ID: " + hotelId);
+	            returnData.setMessage("No food items found for the given hotel ID: " + hotelId);
 	            returnData.setSuccess(false);
 	        } else {
 	            do {
@@ -1806,7 +1804,7 @@ public class HotelDBHandler {
 
 	        // Set the result in the returnData object
 	        if (feedbackList.isEmpty()) {
-	            returnData.setMessage("No feedback found for buses.");
+	            returnData.setMessage("No feedback found for hotel rooms.");
 	            returnData.setSuccess(false);
 	        } else {
 	            returnData.setList(feedbackList);
