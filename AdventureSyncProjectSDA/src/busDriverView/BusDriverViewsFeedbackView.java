@@ -138,7 +138,7 @@ public class BusDriverViewsFeedbackView {
         colComment.setCellValueFactory(new PropertyValueFactory<>("Comment"));
 
         // Get car details from the controller
-        ReturnListUtility<Feedback> returnData = bdController.retrieveFeedbackList(1);
+        ReturnListUtility<Feedback> returnData = bdController.retrieveFeedbackList(busID);
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList

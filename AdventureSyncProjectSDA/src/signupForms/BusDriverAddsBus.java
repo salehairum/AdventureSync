@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import busDriverView.BusDriverMenuView;
 import controllers.busDriverController;
 import controllers.travelAgencyOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
@@ -12,11 +13,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Seat;
@@ -42,7 +45,7 @@ public class BusDriverAddsBus {
 	busDriverController bController;
 	int busDriverID;
 	
-	public BusDriverAddsBus(int id) {
+	public BusDriverAddsBus(Integer id) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/signupForms/busDriverAddsBus.fxml"));
 		loader.setController(this);
 		busDriverID=id;
@@ -123,6 +126,27 @@ public class BusDriverAddsBus {
 	        alert.setHeaderText(null);
 	        alert.setContentText(returnData.getMessage());
 	        alert.showAndWait();
+	        try {
+	            // Dynamically create an instance of the next form's controller with the touristID
+				BusDriverMenuView controllerInstance = new BusDriverMenuView(busDriverID);
+
+	            // Load the next form's scene
+	            Parent root = controllerInstance.getRoot();
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle("Bus Driver Menu");
+
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	    };
 	    addButton.setOnAction(addButtonHandler);
 	}

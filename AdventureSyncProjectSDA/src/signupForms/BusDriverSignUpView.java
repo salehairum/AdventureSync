@@ -10,6 +10,7 @@ import busDriverView.busDriverLogin;
 import controllers.busDriverController;
 import controllers.travelAgencyOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.HotelOwnerMenuView;
 import hotelOwnerView.hotelOwnerLogin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -132,6 +133,27 @@ public class BusDriverSignUpView {
 			    
 			//send bus driver id 
 			int busDriverID=returnData.getObject().getBusDriverID();
+			try {
+	            // Dynamically create an instance of the next form's controller with the touristID
+	            BusDriverAddsBus controllerInstance = new BusDriverAddsBus(busDriverID);
+
+	            // Load the next form's scene
+	            Parent root = controllerInstance.getRoot();
+	            Scene newFormScene = new Scene(root);
+	            Stage newFormStage = new Stage();
+	            newFormStage.setScene(newFormScene);
+	            newFormStage.setTitle("Add Bus");
+
+	            // Show the new form
+	            newFormStage.show();
+
+	            // Close the current form
+	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);

@@ -41,7 +41,7 @@ public class hotelOwnerDeleteAccount {
 	Parent root;
 	hotelOwnerController hoController;
 	int hotelOwnerID;
-	int hotelID;
+	private int hotelID;
 	public hotelOwnerDeleteAccount(Integer hID) {
 		hotelOwnerID=hID;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotelOwnerView/hotelOwnerDeleteAccount.fxml"));
