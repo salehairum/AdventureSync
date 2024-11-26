@@ -589,12 +589,16 @@ public class TouristDBHandler {
 			//first see if car exists or not
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from seat where seatID="+seatID);
+	        
+	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No seat found with the entered Seat ID..");
 		         returnData.setSuccess(false);
 		         return returnData;
 	        }
-	        else if(rSet.getBoolean("isBooked")){
+	        else if(rSet.getInt("isBooked")==1){
+		        System.out.println(rSet.getInt("isBooked"));
+		        System.out.println(seatID);
 	        	 returnData.setMessage("Seat is already booked.");
 		         returnData.setSuccess(false);
 		         return returnData;

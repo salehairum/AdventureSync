@@ -106,7 +106,7 @@ public class TouristSelectSeatFromBusView {
 			
 			int seatID=Integer.parseInt(seatIdInput.getText());
 			//if seat exists, then it must be booked
-			ReturnObjectUtility<Seat> returnData= bController.updateSeatBookingStatus(seatID, true);
+			ReturnObjectUtility<Integer> returnData=tController.addSeatToBookedSeats(touristID, seatID);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -117,7 +117,7 @@ public class TouristSelectSeatFromBusView {
 			}
 			else {
 				//add seat to booked seats
-				ReturnObjectUtility<Integer> returnData2=tController.addSeatToBookedSeats(touristID, seatID);
+				ReturnObjectUtility<Seat> returnData2= bController.updateSeatBookingStatus(seatID, true);
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -131,7 +131,7 @@ public class TouristSelectSeatFromBusView {
 					//go to payment
 					//pass busId, nottt seatID!!
 					//pass transactionID
-					int transactionID=returnData2.getObject();
+					int transactionID=returnData.getObject();
 					/*try {
 	                    // Dynamically load and show the TouristPaymentView
 	                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

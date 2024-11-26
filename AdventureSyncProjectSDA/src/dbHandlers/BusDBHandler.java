@@ -1107,7 +1107,7 @@ public class BusDBHandler {
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;
 		 try {
-			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT busDriverID FROM BusDriverDrivesBus WHERE busID = ?)";
+			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT accountId from busdriver inner join  BusDriverDrivesBus on busDriver.busDriverId=BusDriverDrivesBus.busDriverID  WHERE busID = ?)";
 		        pstmt = conn.prepareStatement(sql);
 
 		        // Set parameters
