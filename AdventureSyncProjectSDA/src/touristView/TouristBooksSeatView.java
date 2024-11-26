@@ -115,14 +115,6 @@ public class TouristBooksSeatView {
 		    	//pass this bus
 		    	Bus bus=returnData.getObject();
 		    	Integer busid = bus.getID();
-		    	/*try {
-                    // Dynamically load and show the TouristPaymentView
-                	Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                    currentStage.close();
-                    createButtonHandler(TouristSelectSeatFromBusView.class, "Select Seat", touristID, busid).handle(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
 		    	try {
 		            // Create an instance of the controller using its constructor
 		    		TouristSelectSeatFromBusView controllerInstance = new TouristSelectSeatFromBusView(touristID, busid);

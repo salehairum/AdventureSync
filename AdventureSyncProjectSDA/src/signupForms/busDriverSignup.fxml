@@ -27,7 +27,7 @@
                   <Image url="@../resources/busDriver.png" />
                </image>
             </ImageView>
-            <Button fx:id="signupButton" layoutX="208.0" layoutY="421.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
+            <Button fx:id="signupButton" layoutX="263.0" layoutY="421.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Sign up" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -148,6 +148,11 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
+            <Button fx:id="menuButton" layoutX="140.0" layoutY="421.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Menu" textFill="#f7a072">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="sidePanel" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #EDDEA4;">

@@ -35,6 +35,8 @@ public class HOMViewHotel {
 	private Text nameLabel;
 	@FXML
 	private Text locationLabel;
+	@FXML
+	private Text idLabel;
 	
 	private int hotelID;
 	private int hotelOwnerID;
@@ -78,6 +80,7 @@ public class HOMViewHotel {
     public void loadLabels()
     {
     	ReturnObjectUtility<Hotel> hotel = hoController.retrieveHotelDetails(hotelID);
+    	idLabel.setText(String.valueOf(hotelID));
     	nameLabel.setText(hotel.getObject().getHotelName());
     	locationLabel.setText(hotel.getObject().getLocation());
     }

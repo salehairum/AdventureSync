@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import touristView.TouristMenuView;
 import touristView.touristLogin;
 
 public class TouristSignUpView {
@@ -45,6 +46,9 @@ public class TouristSignUpView {
 	private DatePicker dobInput;
 	@FXML
 	private Text loginLabel;
+	@FXML
+	private Button menuButton;
+	
 	Parent root;
 	TouristController tController;
 	
@@ -130,11 +134,33 @@ public class TouristSignUpView {
 			if(success) {
 
 				int touristID=returnData.getObject().getTouristID();
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            TouristMenuView controllerInstance = new TouristMenuView(touristID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Tourist Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 			}
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);
 		loginLabel.setOnMouseClicked(createButtonHandler(touristLogin.class, "Tourist Login"));
+		menuButton.setOnMouseClicked(createButtonHandler(AccountMenuView.class, "Account Menu"));
 	}
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

@@ -16,8 +16,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import signupForms.HotelOwnerSignUpView;
+import signupForms.TravelAgencyOwnerSignUpView;
 
 public class travelAgencyOwnerLogin {
 	@FXML
@@ -26,6 +29,8 @@ public class travelAgencyOwnerLogin {
 	private TextField passwordInput;
 	@FXML
 	private Button loginButton;
+	@FXML
+	private Button signupButton;
 	
 	Parent root;
 	travelAgencyOwnerController tController;
@@ -100,8 +105,37 @@ public class travelAgencyOwnerLogin {
 		};
 			
 		loginButton.setOnAction(signupButtonHandler);
+		signupButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerSignUpView.class, "Travel Agency Owner SignUp"));
 	}
-		
+	
+	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
+        return event -> {
+            try {
+                // Dynamically create an instance of the specified class
+                T controllerInstance = viewObject.getDeclaredConstructor().newInstance();
+
+                // Assuming the controller class has a `getRoot()` method
+                Parent root = (Parent) viewObject.getMethod("getRoot").invoke(controllerInstance);
+
+                // Create a new scene and stage for the new form
+                Scene newFormScene = new Scene(root);
+                Stage newFormStage = new Stage();
+                newFormStage.setScene(newFormScene);
+                newFormStage.setTitle(stageTitle);
+
+                // Show the new form
+                newFormStage.show();
+
+                // Close the current form
+                Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
+    }
+	
 	public boolean isValidPassword(String password) {
 	    if (password == null || password.isEmpty()) {
 	        return false;

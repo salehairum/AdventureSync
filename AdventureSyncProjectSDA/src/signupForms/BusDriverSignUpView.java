@@ -49,6 +49,9 @@ public class BusDriverSignUpView {
 	private DatePicker dobInput;
 	@FXML
 	private Text loginLabel;
+	@FXML
+	private Button menuButton;
+	
 	Parent root;
 	busDriverController bController;
 	int busID;
@@ -130,34 +133,38 @@ public class BusDriverSignUpView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
-			    
-			//send bus driver id 
-			int busDriverID=returnData.getObject().getBusDriverID();
-			try {
-	            // Dynamically create an instance of the next form's controller with the touristID
-	            BusDriverAddsBus controllerInstance = new BusDriverAddsBus(busDriverID);
+			  
+			if(success)
+			{
+				//send bus driver id 
+				int busDriverID=returnData.getObject().getBusDriverID();
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            BusDriverAddsBus controllerInstance = new BusDriverAddsBus(busDriverID);
 
-	            // Load the next form's scene
-	            Parent root = controllerInstance.getRoot();
-	            Scene newFormScene = new Scene(root);
-	            Stage newFormStage = new Stage();
-	            newFormStage.setScene(newFormScene);
-	            newFormStage.setTitle("Add Bus");
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Add Bus");
 
-	            // Show the new form
-	            newFormStage.show();
+		            // Show the new form
+		            newFormStage.show();
 
-	            // Close the current form
-	            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-	            currentStage.close();
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+			}
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);
 		loginLabel.setOnMouseClicked(createButtonHandler(busDriverLogin.class, "Driver Login"));
+		menuButton.setOnMouseClicked(createButtonHandler(AccountMenuView.class, "Account Menu"));
 	}
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle) {
         return event -> {

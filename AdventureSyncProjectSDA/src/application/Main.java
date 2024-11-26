@@ -95,7 +95,7 @@ public class Main extends Application {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
 		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=adventureSync;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
 		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
 		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
@@ -104,7 +104,7 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-			TouristMenuView hotelOwnerMenu = new TouristMenuView(7);
+			AccountMenuView hotelOwnerMenu = new AccountMenuView();
       
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);

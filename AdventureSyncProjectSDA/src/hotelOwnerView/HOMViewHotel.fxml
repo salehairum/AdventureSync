@@ -23,7 +23,7 @@
                   <Image url="@../resources/hotel2.png" />
                </image>
             </ImageView>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="274.0" prefHeight="87.0" prefWidth="400.0">
+            <HBox alignment="CENTER" layoutX="85.0" layoutY="300.0" prefHeight="87.0" prefWidth="400.0">
                <children>
                   <Label alignment="CENTER" prefHeight="45.0" prefWidth="166.0" text="Location" textFill="#eddea4">
                      <font>
@@ -42,14 +42,28 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <HBox alignment="CENTER" layoutX="87.0" layoutY="181.0" prefHeight="87.0" prefWidth="422.0">
+            <HBox alignment="CENTER" layoutX="86.0" layoutY="210.0" prefHeight="87.0" prefWidth="422.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="105.0" text="Name" textFill="#eddea4">
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="107.0" text="Name" textFill="#eddea4">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                   <Text fx:id="nameLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="304.0406677722931">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="85.0" layoutY="120.0" prefHeight="87.0" prefWidth="422.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="46.0" prefWidth="119.0" text="Hotel ID" textFill="#eddea4">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="idLabel" fill="#f9f7f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Hotel ID" wrappingWidth="291.0406677722931">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

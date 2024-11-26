@@ -51,6 +51,8 @@ public class hotelOwnerUpdateAccount {
 	private TextField balanceInput;
 	@FXML
 	private DatePicker dobInput;
+	@FXML
+	private Button updPasswordButton;
 	
 	Parent root;
 	hotelOwnerController hoController;
@@ -137,6 +139,7 @@ public class hotelOwnerUpdateAccount {
 	    };
 	    updateButton.setOnAction(updateButtonHandler);
     	backButton.setOnMouseClicked(createButtonHandler(HOMManageAccount.class, "Manage Account", hotelOwnerID));
+    	updPasswordButton.setOnMouseClicked(createButtonHandler(HotelOwnerUpdatesPasswordView.class, "Change Password", hotelOwnerID));
     }
 
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
