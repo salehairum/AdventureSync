@@ -21,17 +21,17 @@
             <Image url="@../resources/rating.png" />
          </image>
       </ImageView>
-      <Text fx:id="avgRoomRatingLabel" fill="#eddea4" layoutX="239.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rooms Rating" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="avgRoomRatingLabel" fill="#eddea4" layoutX="232.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rooms Rating" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="menuButton" layoutX="417.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
+      <Button fx:id="menuButton" layoutX="414.0" layoutY="446.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: F9F7F3;" text="Menu" textFill="#f7a072">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="commentLabel" fill="#eddea4" layoutX="331.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fx:id="commentLabel" fill="#eddea4" layoutX="341.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -95,16 +95,21 @@
             </Text>
          </children>
       </Pane>
-      <Text fx:id="ratingLabel" fill="#f9f7f3" layoutX="490.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Rating" wrappingWidth="164.13671875">
+      <Text fx:id="ratingLabel" fill="#f9f7f3" layoutX="498.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Rating" wrappingWidth="164.13671875">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <TableView fx:id="commentTable" layoutX="272.0" layoutY="196.0" prefHeight="206.0" prefWidth="379.0" style="-fx-background-color: F9F7F3;">
+      <TableView fx:id="commentTable" layoutX="272.0" layoutY="231.0" prefHeight="206.0" prefWidth="379.0" style="-fx-background-color: F9F7F3;">
          <columns>
             <TableColumn fx:id="colRoomID" prefWidth="141.0" text="Room ID" />
             <TableColumn fx:id="colComment" prefWidth="237.0" text="Comment" />
          </columns>
       </TableView>
+      <Text fx:id="msgText" fill="#f9f7f3" layoutX="223.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

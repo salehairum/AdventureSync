@@ -73,7 +73,7 @@ public class BusDBHandler {
 	                	newBusId= generatedKeys.getInt(1);
 	                    returnData.setMessage("Bus added successfully with ID: " + newBusId);
 	                } else {
-	                	returnData.setMessage("Bus added, but ID retrieval failed.");
+	                	returnData.setMessage("Bus added successfully!");
 	                }
 	            }
 			    returnData.setSuccess(true);
@@ -109,7 +109,7 @@ public class BusDBHandler {
 			 rowsAffected = pstmt.executeUpdate();
 			    
 			 if (rowsAffected <= 0) {
-				 returnData.setMessage("Failed to assign hotel to hotel owner.");
+				 returnData.setMessage("Failed to assign bus to bus driver.");
                  returnData.setSuccess(false);
 			 }	 
 		} catch (SQLException e) {
@@ -644,7 +644,7 @@ public class BusDBHandler {
 
 	        if (!rSet.next()) {
 	            // If no result is found, set an error message
-	            returnData.setMessage("Error: No available seats.");
+	            returnData.setMessage("No available seats.");
 	            returnData.setSuccess(false);
 	        } else {
 	            do { // Iterate through the result set to fetch all available seats
@@ -857,7 +857,7 @@ public class BusDBHandler {
 
 	        // Set the result in the returnData object
 	        if (feedbackList.isEmpty()) {
-	            returnData.setMessage("No feedback found for buses with bus ID " + busID);
+	            returnData.setMessage("No feedback has been given for this bus");
 	            returnData.setSuccess(false);
 	        } else {
 	            returnData.setList(feedbackList);
@@ -1284,7 +1284,6 @@ public class BusDBHandler {
 		            // If no result is found, set an error message
 		            returnData.setMessage("Error: Bus Driver does not exist.");
 		        }
-	            
 			}
 			catch(SQLException e){
 				String errorMessage = e.getMessage().toLowerCase();
@@ -1332,7 +1331,7 @@ public class BusDBHandler {
 		            return returnData;
 		        }
 		    } else {
-		        returnData.setMessage("Failed to insert into Account table.");
+		        returnData.setMessage("Failed to create account.");
 		        returnData.setSuccess(false);
 		        return returnData;
 		    }
@@ -1360,12 +1359,12 @@ public class BusDBHandler {
 		                returnData.setSuccess(true);
 		                return returnData;
 		            } else {
-		                returnData.setMessage("Failed to retrieve generated Account ID.");
+		                returnData.setMessage("Bus Driver added successfully.");
 		                returnData.setSuccess(false);
 		                return returnData;
 		            }
 		        } else {
-		            returnData.setMessage("Failed to insert into Bus Driver table.");
+		            returnData.setMessage("Failed to add Bus Driver.");
 		            returnData.setSuccess(false);
 		            return returnData;
 		        }
@@ -1535,7 +1534,6 @@ public class BusDBHandler {
 	            returnData.setMessage("Issue in retrieving tour details from database: " + e.getMessage());
 	        }
 	    }
-
 	    // Return the data
 	    return returnData;
 	}

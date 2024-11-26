@@ -52,6 +52,9 @@ public class TouristRatesBusView {
 	private TableView<Bus> busTable;
 	@FXML
 	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo;
+	@FXML
+	private Text msgText;
+	
 	Parent root;
 	TouristController tController;
 	

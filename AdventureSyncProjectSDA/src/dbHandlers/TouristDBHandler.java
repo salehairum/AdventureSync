@@ -1134,8 +1134,6 @@ public class TouristDBHandler {
 				            returnData.setSuccess(false);
 				        }
 
-				        System.out.println("Rows affected in account update: " + rowsAffected);
-
 				 }
 			        
 		        sql = "UPDATE transactionHistory SET paymentStatus = ? WHERE transactionID =  ?";
@@ -1152,6 +1150,11 @@ public class TouristDBHandler {
 		            returnData.setMessage("Failed to update transaction");
 		            returnData.setSuccess(false);
 		        }
+		        else {
+		        	 returnData.setMessage("Transaction updated");
+			         returnData.setSuccess(true);
+		        }
+	    		
 		    } catch (SQLException e) {
 		        String errorMessage = e.getMessage().toLowerCase();
 

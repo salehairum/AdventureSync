@@ -84,6 +84,7 @@ import hotelOwnerView.HOMUpdateHotel;
 import hotelOwnerView.HOMUpdateRoom;
 import hotelOwnerView.HOMViewFeedback;
 import hotelOwnerView.HOMViewFood;
+import hotelOwnerView.HOMViewHotel;
 import hotelOwnerView.HOMViewRoom;
 import hotelOwnerView.HotelOwnerMenuView;
 import hotelOwnerView.hotelOwnerLogin;
@@ -104,7 +105,7 @@ public class Main extends Application {
 		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
 
 		try {
-			TouristMenuView hotelOwnerMenu = new TouristMenuView(7);
+			AccountMenuView hotelOwnerMenu = new AccountMenuView();
       
 			Parent root = hotelOwnerMenu.getRoot();
 			Scene scene = new Scene(root, 750, 500);

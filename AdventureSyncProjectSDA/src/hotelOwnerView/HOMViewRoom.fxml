@@ -16,12 +16,12 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Text fill="#eddea4" layoutX="392.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Rooms" textAlignment="CENTER" wrappingWidth="218.13671875">
+      <Text fill="#eddea4" layoutX="392.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Rooms" textAlignment="CENTER" wrappingWidth="218.13671875">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Text>
-      <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="316.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="roomLogo" fitHeight="81.0" fitWidth="89.0" layoutX="303.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/room.png" />
          </image>
@@ -95,7 +95,7 @@
             </Text>
          </children>
       </Pane>
-      <TableView fx:id="roomTable" layoutX="209.0" layoutY="126.0" prefHeight="249.0" prefWidth="527.0" style="-fx-background-color: #F9F7F3;">
+      <TableView fx:id="roomTable" layoutX="216.0" layoutY="160.0" prefHeight="249.0" prefWidth="527.0" style="-fx-background-color: #F9F7F3;">
          <columns>
             <TableColumn fx:id="colRoomId" prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
             <TableColumn fx:id="colRating" prefWidth="84.0" style="-fx-background-color: #f9f7f3;" text="Rating" />
@@ -104,5 +104,10 @@
             <TableColumn fx:id="colIsBooked" prefWidth="104.0" style="-fx-background-color: #F9F7F3;" text="colIsBooked" />
          </columns>
       </TableView>
+      <Text fx:id="msgText" fill="#f9f7f3" layoutX="232.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

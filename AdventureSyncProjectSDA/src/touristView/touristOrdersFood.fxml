@@ -41,13 +41,18 @@
                </font>
             </Label>
             <TextField fx:id="hotelIDInput" layoutX="232.0" layoutY="376.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 1234" />
-            <TableView fx:id="hotelTable" layoutX="8.0" layoutY="107.0" prefHeight="255.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="hotelTable" layoutX="8.0" layoutY="162.0" prefHeight="200.0" prefWidth="535.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colHotelId" prefWidth="49.599991619586945" style="-fx-background-color: #f9f7f3;" text="HotelID" />
                   <TableColumn fx:id="colHotelName" prefWidth="285.60003662109375" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
                   <TableColumn fx:id="colHotelLoc" prefWidth="193.5999755859375" style="-fx-background-color: #f9f7f3;" text="Location" />
                </columns>
             </TableView>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="30.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

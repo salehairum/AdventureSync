@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <TableView fx:id="foodTable" layoutX="94.0" layoutY="117.0" prefHeight="200.0" prefWidth="344.0" style="-fx-background-color: F9F7F3;">
+            <TableView fx:id="foodTable" layoutX="94.0" layoutY="147.0" prefHeight="170.0" prefWidth="344.0" style="-fx-background-color: F9F7F3;">
                <columns>
                   <TableColumn fx:id="colFoodId" prefWidth="68.0" text="Food ID" />
                   <TableColumn fx:id="colName" prefWidth="108.0" text="Name" />
@@ -55,6 +55,11 @@
                </font>
             </Label>
             <TextField fx:id="foodQuanInput" layoutX="234.0" layoutY="369.0" prefHeight="26.0" prefWidth="206.0" promptText="e.g 5" />
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="30.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

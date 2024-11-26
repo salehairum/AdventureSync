@@ -64,14 +64,17 @@ public class touristLogin {
 			ReturnObjectUtility<Integer> returnData=tController.checkPassword(password, username);
 			
 			boolean success=returnData.isSuccess();
-			Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
-			    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
-			    alert.setHeaderText(null);
-			    alert.setContentText(returnData.getMessage());
-			    alert.showAndWait();
+			if(!success) {
+				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
+				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
+				    alert.setHeaderText(null);
+				    alert.setContentText(returnData.getMessage());
+				    alert.showAndWait();
+			}
 			    
-			//send tourist id 
-			    if (success) {
+			//send bus driver id 
+			else {
+
 			        int touristID = returnData.getObject(); // Assuming this retrieves the tourist ID
 			        try {
 			            // Dynamically create an instance of the next form's controller with the touristID

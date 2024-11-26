@@ -44,6 +44,8 @@ public class HOMViewFood {
 	private TableView<FoodItem> foodTable;
 	@FXML
 	private TableColumn<FoodItem, String> colFoodId, colName, colQuan, colPrice;
+	@FXML
+	private Text msgText;
 	
 	Parent root;
 	hotelOwnerController hoContoller;
@@ -66,6 +68,7 @@ public class HOMViewFood {
 	@FXML
 	private void initialize() {
 		hoContoller = new hotelOwnerController();
+		hotelID=hoContoller.getHotelID(hotelOwnerID).getObject();
 		displayOwnerDetails();
 		eventHandlersAssignment();
 		loadFoodTable();
@@ -139,7 +142,7 @@ public class HOMViewFood {
     	colQuan.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
     	colPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
         // Get car details from the controller
-        ReturnListUtility<FoodItem> returnData = hoContoller.getFoodDetails(1);
+        ReturnListUtility<FoodItem> returnData = hoContoller.getFoodDetails(hotelID);
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList
@@ -147,7 +150,8 @@ public class HOMViewFood {
             foodTable.setItems(foodList); // Set data to the table
         } else {
             // Handle the error (e.g., log or show a message)
-            System.out.println("Error loading food items: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             foodTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }

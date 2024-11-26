@@ -73,8 +73,9 @@ public class busDriverController {
 	public ReturnObjectUtility<BusDriver> addBusDriver(BusDriver bDriver){
 		return busDriver.addBusDriver(bDriver);
 	}
-	public String[] getBusTourDetail(int busID){
+	public ReturnObjectUtility<String[]> getBusTourDetail(int busID){
 		ReturnObjectUtility<Tour> returnData = tour.getBusTourDetail(busID);
+        ReturnObjectUtility<String[]> tour=new  ReturnObjectUtility<String[]>();
 		if(returnData.isSuccess())
 		{
 			String tourID = String.valueOf(returnData.getObject().getTourID());
@@ -83,10 +84,12 @@ public class busDriverController {
 	        Date date = returnData.getObject().getDate();
 	        String dateStr = date.toString();
 	        String[] tourDetails = {tourID, origin, destination, dateStr};
-	        return tourDetails;
+	        
+	        tour.setObject(tourDetails);
 		}
-		else
-			return null;
+        tour.setMessage(returnData.getMessage());
+        tour.setSuccess(returnData.isSuccess());
+        return tour;
 		
 	}
 	public ReturnListUtility<Bus> retrieveBusList() {

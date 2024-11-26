@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import controllers.busDriverController;
+import dataUtilityClasses.ReturnObjectUtility;
 
 public class BusDriverViewsTourDetailsView {
 	@FXML
@@ -37,6 +38,8 @@ public class BusDriverViewsTourDetailsView {
 	private Text originLabel;
 	@FXML
 	private Text destinationLabel;
+	@FXML
+	private Text msgText;
 	
 	Parent root;
 	busDriverController bdController;
@@ -81,16 +84,20 @@ public class BusDriverViewsTourDetailsView {
     }
     
     public void displayTourDetail() {
-        String profileDetail[] = bdController.getBusTourDetail(busID);
-        if(profileDetail != null)
+        ReturnObjectUtility<String[]> returnData=bdController.getBusTourDetail(busID);
+        String tourDetail[] = returnData.getObject();
+        if(returnData.isSuccess())
         {
-        	tourIDLabel.setText(profileDetail[0]);
-        	originLabel.setText(profileDetail[1]);
-        	destinationLabel.setText(profileDetail[2]);
-        	dateLabel.setText(profileDetail[3]);
+        	tourIDLabel.setText(tourDetail[0]);
+        	originLabel.setText(tourDetail[1]);
+        	destinationLabel.setText(tourDetail[2]);
+        	dateLabel.setText(tourDetail[3]);
         }
         else
         {
+            // Handle the error (e.g., log or show a message)
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
         	tourIDLabel.setText("Tour ID");
         	originLabel.setText("Origin");
         	destinationLabel.setText("Destination");

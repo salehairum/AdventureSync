@@ -26,11 +26,6 @@
                   <Image url="@../resources/rating.png" />
                </image>
             </ImageView>
-            <Label layoutX="13.0" layoutY="116.0" prefHeight="35.0" prefWidth="282.0" text="Room you have booked:" textFill="#eddea4">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
             <Button fx:id="backButton" layoutX="162.0" layoutY="432.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="118.0" style="-fx-background-radius: 10; -fx-background-color: #F9F7F3;" text="Back" textFill="#f7a072">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -68,6 +63,11 @@
                   <TableColumn fx:id="colHotelName" prefWidth="127.199951171875" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
                </columns>
             </TableView>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="14.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

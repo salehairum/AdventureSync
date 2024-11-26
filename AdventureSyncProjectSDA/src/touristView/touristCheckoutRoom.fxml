@@ -46,7 +46,7 @@
                   <TextField fx:id="roomIDInput" prefHeight="26.0" prefWidth="212.0" promptText="e.g 1234" />
                </children>
             </HBox>
-            <TableView fx:id="roomTable" layoutX="11.0" layoutY="111.0" prefHeight="236.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
+            <TableView fx:id="roomTable" layoutX="11.0" layoutY="160.0" prefHeight="187.0" prefWidth="529.0" style="-fx-background-color: #F9F7F3;">
                <columns>
                   <TableColumn fx:id="colRoomId" prefWidth="73.0" style="-fx-background-color: #f9f7f3;" text="Room ID" />
                   <TableColumn fx:id="colPrice" prefWidth="115.0" style="-fx-background-color: #f9f7f3;" text="Price per night" />
@@ -55,6 +55,11 @@
                   <TableColumn fx:id="colHotelName" prefWidth="127.199951171875" style="-fx-background-color: #f9f7f3;" text="Hotel Name" />
                </columns>
             </TableView>
+            <Text fx:id="msgText" fill="#f9f7f3" layoutX="16.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="495.24073791503906">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: EDDEA4;">

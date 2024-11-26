@@ -41,6 +41,9 @@ public class TravelAgencyOwnerViewsBusDriversView {
 	private TableView<BusDriver> busDriverTable;
 	@FXML
 	private TableColumn<BusDriver, String> colBDriverID, colName, colDOB, colCNIC;
+	@FXML
+	private Text msgText;
+	
 	Parent root;
 	travelAgencyOwnerController taoController;
 	
@@ -141,8 +144,8 @@ public class TravelAgencyOwnerViewsBusDriversView {
             // Set the data into the TableView
             busDriverTable.setItems(busDriverList);
         } else {
-            // Handle the error (log or show a message)
-            System.out.println("Error loading bus drivers: " + returnData.getMessage());
+        	msgText.setVisible(true);
+        	msgText.setText(returnData.getMessage());
             busDriverTable.setItems(FXCollections.observableArrayList()); // Set an empty list in case of failure
         }
     }
