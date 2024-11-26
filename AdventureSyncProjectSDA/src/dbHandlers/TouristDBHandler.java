@@ -715,9 +715,7 @@ public class TouristDBHandler {
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from room where roomID="+roomID);
 	        
-	        int isBooked=rSet.getInt("isBooked");
-	        
-	        System.out.println(isBooked);
+	        System.out.println(roomID);
 	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No room found with the entered room ID.");
@@ -752,7 +750,7 @@ public class TouristDBHandler {
 		    pstmt.setInt(2, roomID);
 		    pstmt.setString(3, "Book Hotel Room");
 		    
-		        // Execute the insert
+		    // Execute the insert
 		    rowsAffected = pstmt.executeUpdate();
 		    if (rowsAffected > 0) {
 		    	rs = pstmt.getGeneratedKeys();

@@ -138,11 +138,10 @@ public class TouristPaymentView {
 	        		returnData2=taController.addMoney(bill);
 	        	}
 	        	else if(typeOfTransaction=="Room") {
-	        		returnData2=hController.addMoney(serviceID, bill);
+	        		returnData2=hController.addMoneyRoom(serviceID, bill);
 	        	}
 	        	else if(typeOfTransaction=="Order") {
-	        		int hotelOwnerID=hController.getHotelOwnerID(serviceID).getObject();
-	        		returnData2=hController.addMoney(hotelOwnerID, bill);
+	        		returnData2=hController.addMoneyFood(serviceID, bill);
 	        	}
   	            success = returnData2.isSuccess();
   	            alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);

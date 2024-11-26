@@ -1020,7 +1020,7 @@ public class TravelAgencyDBHandler {
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;
 		 try {
-			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT travelAgencyOwnerID FROM travelAgencyOwner)";
+			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT accountId from travelagencyOwner)";
 		        pstmt = conn.prepareStatement(sql);
 
 		        // Set parameters

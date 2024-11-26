@@ -98,8 +98,8 @@ public class TouristRentCarView {
 			}
 			
 			int carID=Integer.parseInt(carIdInput.getText());
-						
-			ReturnObjectUtility<Car> returnData= toaController.updateCarRentalStatus(carID, true);
+
+			ReturnObjectUtility<Integer> returnData=tController.addCarToRentedCars(touristID, carID);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -110,7 +110,7 @@ public class TouristRentCarView {
 			}
 			else {
 				//mark car as rented
-				ReturnObjectUtility<Integer> returnData2=tController.addCarToRentedCars(touristID, carID);	
+				ReturnObjectUtility<Car> returnData2= toaController.updateCarRentalStatus(carID, true);	
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -122,6 +122,33 @@ public class TouristRentCarView {
 					toaController.updateCarRentalStatus(carID, false);   
 				//if transaction could not be made, set rental status as false
 				//send ahead transaction ID
+				if(success) {
+					//go to make payment
+					int transactionID=returnData.getObject();
+					try 
+				    {
+				    	String transactionType = "Rent";
+			            // Dynamically create an instance of the next form's controller with the touristID
+			            TouristPaymentView controllerInstance = new TouristPaymentView(touristID, carID, transactionType, transactionID, 0);
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Payment Gateway");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+				}
 			}
 		};
 			

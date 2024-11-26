@@ -105,7 +105,7 @@ public class TouristSelectRoomFromHotelView {
 			int roomID=Integer.parseInt(roomIDInput.getText());		
 			int hotelID=hotel.getHotelID();
 			//if seat exists, then it must be booked
-			ReturnObjectUtility<Room> returnData= tController.updateRoomBookingStatus(roomID, true);
+			ReturnObjectUtility<Integer> returnData=tController.addRoomToBookedRooms(touristID, roomID);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -115,8 +115,8 @@ public class TouristSelectRoomFromHotelView {
 			    alert.showAndWait();
 			}
 			else {
-				//mark car as rented
-				ReturnObjectUtility<Integer> returnData2=tController.addRoomToBookedRooms(touristID, roomID);
+				//mark car as 
+				ReturnObjectUtility<Room> returnData2= tController.updateRoomBookingStatus(roomID, true);
 				success=returnData2.isSuccess();
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);
 				    alert.setTitle(success ? "Operation Successful" : "Operation Failed");
@@ -127,7 +127,7 @@ public class TouristSelectRoomFromHotelView {
 				if(!success)
 					tController.updateRoomBookingStatus(roomID, false);
 				else {
-					int transactionID=returnData2.getObject();
+					int transactionID=returnData.getObject();
 				}
 			}
 		};

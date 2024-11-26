@@ -1258,11 +1258,11 @@ public class HotelDBHandler {
 		    return returnData;
 	}
 	
-	public ReturnObjectUtility<Float> addMoney(int roomID, float bill){
+	public ReturnObjectUtility<Float> addMoneyRoom(int roomID, float bill){
 		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
 		 PreparedStatement pstmt;
 		 try {
-			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (select hotelOwnerID from room inner join HotelOwnerOwnsHotel on HotelOwnerOwnsHotel.hotelID=room.hotelID where roomID=?)";
+			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT accountId from hotelOwner inner join  hotelOwnerOwnsHotel on hotelOwnerOwnsHotel.hotelOwnerID=hotelOwner.hotelOwnerID inner join room on room.hotelid=hotelOwnerOwnsHotel.hotelid WHERE roomID = ?)";
 		        pstmt = conn.prepareStatement(sql);
 
 		        // Set parameters
@@ -1296,6 +1296,46 @@ public class HotelDBHandler {
 		    }
 		    return returnData;
 	}
+	
+	public ReturnObjectUtility<Float> addMoneyFood(int foodID, float bill){
+		 ReturnObjectUtility<Float> returnData = new ReturnObjectUtility<>();
+		 PreparedStatement pstmt;
+		 try {
+			 	String sql = "UPDATE account SET balance = balance + ? WHERE accountID = (SELECT HotelOwner.accountID FROM HotelOwner JOIN HotelOwnerOwnsHotel ON HotelOwner.hotelOwnerId = HotelOwnerOwnsHotel.hotelOwnerID JOIN Kitchen ON HotelOwnerOwnsHotel.hotelID = Kitchen.hotelID JOIN KitchenHasFood ON Kitchen.kitchenID = KitchenHasFood.kitchenID WHERE KitchenHasFood.foodID = ?)";
+		        pstmt = conn.prepareStatement(sql);
+
+		        // Set parameters
+		        pstmt.setFloat(1, bill); // Deduction amount
+		        pstmt.setInt(2, foodID); // foodID
+
+		        // Execute the update
+		        int rowsAffected = pstmt.executeUpdate();
+
+		        if (rowsAffected > 0) {
+		            returnData.setMessage("Balance updated successfully for hotel owner");
+		            returnData.setSuccess(true);
+		        } else {
+		            returnData.setMessage("Failed to update balance for hotel owner");
+		            returnData.setSuccess(false);
+		        }
+		        
+		    } catch (SQLException e) {
+		        String errorMessage = e.getMessage().toLowerCase();
+
+		        if (errorMessage != null) {
+		            if (errorMessage.contains("foreign key constraint")) {
+		                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
+		            } else {
+		                returnData.setMessage("Issue in deducting money in DB: " + errorMessage);
+		            }
+		        } else {
+		            returnData.setMessage("An unknown error occurred.");
+		        }
+		        returnData.setSuccess(false);
+		    }
+		    return returnData;
+	}
+	
 	
 	public ReturnObjectUtility<Integer> getHotelID(int hotelOwnerID){
 	    ReturnObjectUtility<Integer> returnData = new ReturnObjectUtility<>();
