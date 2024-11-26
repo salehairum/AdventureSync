@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import signupForms.AccountMenuView;
 
 public class TravelAgencyOwnerDeleteAccountView {
 	@FXML
@@ -83,6 +84,30 @@ public class TravelAgencyOwnerDeleteAccountView {
 			    alert.setHeaderText(null);
 			    alert.setContentText(returnData.getMessage());
 			    alert.showAndWait();
+			    if(success)
+			    {
+			    	try {
+			            // Dynamically create an instance of the next form's controller with the touristID
+						AccountMenuView controllerInstance = new AccountMenuView();
+
+			            // Load the next form's scene
+			            Parent root = controllerInstance.getRoot();
+			            Scene newFormScene = new Scene(root);
+			            Stage newFormStage = new Stage();
+			            newFormStage.setScene(newFormScene);
+			            newFormStage.setTitle("Menu");
+
+			            // Show the new form
+			            newFormStage.show();
+
+			            // Close the current form
+			            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+			            currentStage.close();
+
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
 		};
 		yesButton.setOnAction(yesButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes

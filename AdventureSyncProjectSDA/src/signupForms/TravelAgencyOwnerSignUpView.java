@@ -23,7 +23,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import touristView.TouristMenuView;
 import travelAgencyModels.Car;
+import travelAgencyOwnerView.TravelAgencyOwnerMenuView;
 import travelAgencyOwnerView.travelAgencyOwnerLogin;
 
 public class TravelAgencyOwnerSignUpView {
@@ -128,6 +130,30 @@ public class TravelAgencyOwnerSignUpView {
 			    
 
 			int AgencyOwnerID=returnData.getObject().getAgencyOwnerID();
+			if(success)
+			{
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            TravelAgencyOwnerMenuView controllerInstance = new TravelAgencyOwnerMenuView(AgencyOwnerID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Travel Agency Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+			}
 		};
 			
 		signupButton.setOnAction(signupButtonHandler);

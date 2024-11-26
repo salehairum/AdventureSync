@@ -6,6 +6,7 @@ import accountAndPersonModels.Tourist;
 import accountAndPersonModels.TravelAgencyOwner;
 import controllers.travelAgencyOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
+import hotelOwnerView.HotelOwnerUpdatesPasswordView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,6 +52,8 @@ public class TravelAgencyOwnerUpdatesAccountView {
 	private TextField balanceInput;
 	@FXML
 	private DatePicker dobInput;
+	@FXML
+	private Button updPasswordButton;
 	
 	Parent root;
 	travelAgencyOwnerController taoController;
@@ -133,6 +136,7 @@ public class TravelAgencyOwnerUpdatesAccountView {
 	    updateButton.setOnAction(updateButtonHandler);
         // Assign handlers with parameters for specific FXMLs and classes
         backButton.setOnMouseClicked(createButtonHandler(TravelAgencyManageAccountView.class, "Manage Account", agencyOwnerID));
+        updPasswordButton.setOnMouseClicked(createButtonHandler(TravelAgencyOwnerUpdatePasswordView.class, "Change Password", agencyOwnerID));
     }
     private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {

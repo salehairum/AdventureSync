@@ -103,7 +103,7 @@ public class BusDriverUpdatesPasswordView {
 	        alert.showAndWait();
 	    };
 	    updateButton.setOnAction(updateButtonHandler);
-	    backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account", busDriverID));
+	    backButton.setOnMouseClicked(createButtonHandler(BusDriverMgrAccountView.class, "Manage Account", busDriverID));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {

@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import touristView.TouristMenuView;
 import touristView.touristLogin;
 
 public class TouristSignUpView {
@@ -130,6 +131,27 @@ public class TouristSignUpView {
 			if(success) {
 
 				int touristID=returnData.getObject().getTouristID();
+				try {
+		            // Dynamically create an instance of the next form's controller with the touristID
+		            TouristMenuView controllerInstance = new TouristMenuView(touristID);
+
+		            // Load the next form's scene
+		            Parent root = controllerInstance.getRoot();
+		            Scene newFormScene = new Scene(root);
+		            Stage newFormStage = new Stage();
+		            newFormStage.setScene(newFormScene);
+		            newFormStage.setTitle("Tourist Menu");
+
+		            // Show the new form
+		            newFormStage.show();
+
+		            // Close the current form
+		            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		            currentStage.close();
+
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
 			}
 		};
 			

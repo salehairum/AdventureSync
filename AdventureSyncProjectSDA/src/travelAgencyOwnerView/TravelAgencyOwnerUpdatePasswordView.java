@@ -103,7 +103,7 @@ public class TravelAgencyOwnerUpdatePasswordView {
 	        alert.showAndWait();
 	    };
 	    updateButton.setOnAction(updateButtonHandler);
-	    backButton.setOnMouseClicked(createButtonHandler(TouristManagesAccountView.class, "Manage Account", tOwnerID));
+	    backButton.setOnMouseClicked(createButtonHandler(TravelAgencyManageAccountView.class, "Manage Account", tOwnerID));
     }
 	private <T> EventHandler<MouseEvent> createButtonHandler(Class<T> viewObject, String stageTitle, Object... params) {
 	    return event -> {
