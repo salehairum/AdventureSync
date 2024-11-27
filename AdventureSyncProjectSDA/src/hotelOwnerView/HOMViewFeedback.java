@@ -141,7 +141,7 @@ public class HOMViewFeedback {
         colComment.setCellValueFactory(new PropertyValueFactory<>("Comments"));
 
         // Get car details from the controller
-        ReturnListUtility<FeedbackWithRoomID> returnData = hoContoller.retrieveFeedbackList(1);
+        ReturnListUtility<FeedbackWithRoomID> returnData = hoContoller.retrieveFeedbackList(hotelID);
 
         if (returnData.isSuccess()) {
             // Convert HashMap to ObservableList

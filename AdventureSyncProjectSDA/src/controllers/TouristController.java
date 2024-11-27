@@ -79,7 +79,7 @@ public class TouristController {
 		return bus.retrieveBusObject(busId);
 	}
 	public ReturnListUtility<Bus> getBusDetailsWithBusDriverID() {
-		return bus.retrieveBusListWithBusDriverID();
+		return bus.retrieveBusListWithBusDriverIDForTourist();
 	}
 	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
 		return bus.getBusDetailsWithTouristID(touristID);

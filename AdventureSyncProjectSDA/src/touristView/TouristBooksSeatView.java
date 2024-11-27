@@ -49,7 +49,7 @@ public class TouristBooksSeatView {
 	@FXML
 	private TableView<Bus> busTable;
 	@FXML
-	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo, colDriverID, colHasTour;
+	private TableColumn<Bus, String> colBusId, colModel, colBrand, colYear, colPlateNo, colDriverID;
 	@FXML
 	private Text msgText;	
 	
@@ -221,7 +221,6 @@ public class TouristBooksSeatView {
         colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
         colPlateNo.setCellValueFactory(new PropertyValueFactory<>("PlateNumber"));
         colDriverID.setCellValueFactory(new PropertyValueFactory<>("BusDriverID"));
-        colHasTour.setCellValueFactory(new PropertyValueFactory<>("HasTour"));
 
         // Get car details from the controller
         ReturnListUtility<Bus> returnData = tController.getBusDetailsWithBusDriverID();
