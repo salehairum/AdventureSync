@@ -83,7 +83,6 @@ public class TravelAgencyOwnerSignUpView {
  			balanceInput.setDisable(true);
  			cnicInput.setDisable(true);
  			dobInput.setDisable(true);
- 			menuButton.setDisable(true);
  			signupButton.setDisable(true);
  	        
 		}

@@ -364,7 +364,7 @@ public class HotelDBHandler {
 	    try {
 	    	//see if there are rented cars or not
 	    	Statement stmt=conn.createStatement();
-	        ResultSet rSet=stmt.executeQuery("select HotelId from HotelOwnerOwnsHotel where hotelOwnerID"+hotelOwnerID);
+	        ResultSet rSet=stmt.executeQuery("select HotelId from HotelOwnerOwnsHotel where hotelOwnerID="+hotelOwnerID);
 	        int hotelID=0;
 	        if(rSet.next()) {
 	        	hotelID= rSet.getInt("hotelid");
@@ -462,6 +462,7 @@ public class HotelDBHandler {
 	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 	            }else {
 	                returnData.setMessage("Issue in deleting bus driver in DB: " + errorMessage);
+	                System.out.println(errorMessage);
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
