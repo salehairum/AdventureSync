@@ -92,6 +92,9 @@ public class busDriverController {
         return tour;
 		
 	}
+	public ReturnObjectUtility<Bus> retrieveBusObjectWithTours(int busId) {
+		return bus.retrieveBusObjectWithTours(busId);
+	}
 	public ReturnListUtility<Bus> retrieveBusList() {
 		return bus.retrieveBusList();
 	}

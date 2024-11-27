@@ -109,18 +109,36 @@ public class HOMUpdateFood {
 	        }
 	        if(!foodPriceInput.getText().trim().isEmpty()) {
 				if(!isNumeric(foodPriceInput.getText())) {
-					alertInvalidInput.setContentText("Please enter numeric value for price"); 
+					alertInvalidInput.setContentText("Please enter numeric value for food price"); 
 					alertInvalidInput.showAndWait(); 
 					return;
 				}
-	        }
+				//check if year of manufacture is valid
+				float price= Float.parseFloat(foodPriceInput.getText());
+	
+				if (price<=0.0f) {
+					alertInvalidInput.setContentText("Food cost should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
+			}
+	        
 	        if(!foodQuanInput.getText().trim().isEmpty()) {
 				if(!isNumeric(foodQuanInput.getText())) {
-					alertInvalidInput.setContentText("Please enter numeric value for food quantity"); 
+					alertInvalidInput.setContentText("Please enter numeric value for food price"); 
 					alertInvalidInput.showAndWait(); 
 					return;
 				}
-	        }
+				//check if year of manufacture is valid
+				int quantity= Integer.parseInt(foodQuanInput.getText());
+	
+				if (quantity<=0) {
+					alertInvalidInput.setContentText("Quantity should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
+			}
+
    	        int foodID = Integer.parseInt(foodIDInput.getText());
    	        ReturnObjectUtility<FoodItem> foodData=hoController.retrieveFoodItemObject(foodID);
    	        

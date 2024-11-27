@@ -145,6 +145,9 @@ public class Bus extends Vehicle {
 	public ReturnObjectUtility<Bus> retrieveBusObject(int newBusId) {
 		return busHandler.retrieveBusObject(newBusId);
 	}
+	public ReturnObjectUtility<Bus> retrieveBusObjectWithTours(int busId) {
+		return busHandler.retrieveBusObjectWithTours(busId);
+	}
 	
 	public ReturnObjectUtility<Boolean> updateBus(Bus bus){
 		return busHandler.updateBus(bus);

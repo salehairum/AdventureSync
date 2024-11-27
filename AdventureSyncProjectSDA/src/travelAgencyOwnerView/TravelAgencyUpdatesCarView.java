@@ -111,15 +111,35 @@ public class TravelAgencyUpdatesCarView {
 					return;
 				}
 			}
-			if(!rentalFeeInput.getText().trim().isEmpty()&&!isNumeric(rentalFeeInput.getText())) { 
-				alertInvalidInput.setContentText("Please enter numeric value for rental fee"); 
-				alertInvalidInput.showAndWait(); 
-				return;
+			if(!rentalFeeInput.getText().trim().isEmpty()) {
+				if(!isNumeric(rentalFeeInput.getText())) {
+					alertInvalidInput.setContentText("Please enter numeric value for rental fee"); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+				//check if year of manufacture is valid
+				float rentalFee= Float.parseFloat(rentalFeeInput.getText());
+	
+				if (rentalFee<=0.0f) {
+					alertInvalidInput.setContentText("Rental fee should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
 			}
-			if(!costPerKmInput.getText().trim().isEmpty()&&!isNumeric(costPerKmInput.getText())) { 
-				alertInvalidInput.setContentText("Please enter numeric value for cost per km"); 
-				alertInvalidInput.showAndWait(); 
-				return;
+			if(!costPerKmInput.getText().trim().isEmpty()) {
+				if(!isNumeric(costPerKmInput.getText())) {
+					alertInvalidInput.setContentText("Please enter numeric value for rental fee"); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+				//check if year of manufacture is valid
+				float costPerKm= Float.parseFloat(costPerKmInput.getText());
+	
+				if (costPerKm<=0) {
+					alertInvalidInput.setContentText("Cost per km should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
 			}
 			
 			int carID = Integer.parseInt(carIdInput.getText());

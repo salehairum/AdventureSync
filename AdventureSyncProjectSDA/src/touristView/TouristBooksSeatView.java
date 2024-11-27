@@ -103,7 +103,7 @@ public class TouristBooksSeatView {
 			
 			int busID=Integer.parseInt(busIdInput.getText());
 						
-			ReturnObjectUtility<Bus> returnData=tController.retrieveBusObject(busID);
+			ReturnObjectUtility<Bus> returnData=tController.retrieveBusObjectWithTours(busID);
 			boolean success=returnData.isSuccess();
 			if(!success) {
 				Alert alert = new Alert(success ? AlertType.INFORMATION : AlertType.ERROR);

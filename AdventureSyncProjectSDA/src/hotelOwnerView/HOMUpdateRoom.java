@@ -104,6 +104,23 @@ public class HOMUpdateRoom {
 					return;
 				}
 	        }
+	        
+	        if(!pricePerNightInput.getText().trim().isEmpty()) {
+				if(!isNumeric(pricePerNightInput.getText())) {
+					alertInvalidInput.setContentText("Please enter numeric value for room cost"); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+				//check if year of manufacture is valid
+				float price= Float.parseFloat(pricePerNightInput.getText());
+	
+				if (price<=0.0f) {
+					alertInvalidInput.setContentText("Room cost should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
+			}
+	        
    	        int roomID = Integer.parseInt(roomIDInput.getText());
    	        ReturnObjectUtility<Room> roomData=hoController.retrieveRoomObject(roomID);
    	        

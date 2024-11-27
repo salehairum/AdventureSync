@@ -111,6 +111,22 @@ public class TravelAgencyAddCarView {
 	            return;
 	        }
 
+	        int costPerKm=Integer.parseInt(costPerKmInput.getText());
+			
+			if(costPerKm<=0) {
+				alertInvalidInput.setContentText("Cost per km should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
+			float rentalFee=Float.parseFloat(rentalFeeInput.getText());
+				
+			if(rentalFee<=0) {
+					alertInvalidInput.setContentText("Rental fee should be greater than zero."); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+			
 			//check if year of manufacture is valid
 			int year = Integer.parseInt(yearInput.getText());
 

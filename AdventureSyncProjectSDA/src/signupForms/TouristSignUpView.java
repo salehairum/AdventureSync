@@ -120,6 +120,12 @@ public class TouristSignUpView {
 				return;
 			}
 			
+			if(!isValidCNIC(cnicInput.getText())) {
+				alertInvalidInput.setContentText("Please enter valid cnic of the format XXXXX-XXXXXXX-X"); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
 			Tourist tourist=createTouristObject();
 			ReturnObjectUtility<Tourist> returnData=tController.addTourist(tourist);				
 			
@@ -234,7 +240,14 @@ public class TouristSignUpView {
 	    tourist.setAccount(account);
 	    return tourist;
 	}
-
+	public boolean isValidCNIC(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    
+	    // Regular expression for CNIC format: XXXXX-XXXXXXX-X
+	    return str.matches("\\d{5}-\\d{7}-\\d{1}");
+	}
 	//check if all inputs have been given
 	private void validateInputs() {
 	    boolean allFieldsFilled = 

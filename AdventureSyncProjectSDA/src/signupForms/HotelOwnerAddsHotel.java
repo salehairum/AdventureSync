@@ -62,6 +62,8 @@ public class HotelOwnerAddsHotel {
     public void eventHandlersAssignment() {
     	
     	EventHandler<ActionEvent> addButtonHandler=(event)->{
+    		
+    		
     		Hotel hotel=createHotelObject();
 			ReturnObjectUtility<Boolean> returnData=hoContoller.addHotel(hotel, hotelOwnerID);
 			
