@@ -73,6 +73,16 @@ public class Bus extends Vehicle {
 		busDriverID = bdID;
 		busHandler=new BusDBHandler();
 	}
+	public Bus(int id, String brand, String model, int year, String plateNumber, int noOfSeats,int noOfRows, float priceOfSeats, int bdID, boolean hastour) {
+		super(id, brand, model, year, plateNumber);
+		this.noOfSeats = noOfSeats;
+		this.priceOfSeats = priceOfSeats;
+		this.hasTour = false;
+		this.noOfRows = noOfRows;
+		busDriverID = bdID;
+		this.hasTour = hastour;
+		busHandler=new BusDBHandler();
+	}
 	public Bus(int id, String brand, String model, int year, String plateNumber) {
 		super(id, brand, model, year, plateNumber);
 	}
@@ -153,6 +163,9 @@ public class Bus extends Vehicle {
 	}
 	public ReturnListUtility<Bus> retrieveBusListWithBusDriverID() {
 		return busHandler.retrieveBusListWithBusDriverID();
+	}
+	public ReturnListUtility<Bus> retrieveBusListWithBusDriverIDForTourist() {
+		return busHandler.retrieveBusListWithBusDriverIDForTourist();
 	}
 	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
 		return busHandler.getBusDetailsWithTouristID(touristID);

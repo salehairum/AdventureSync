@@ -911,6 +911,63 @@ public class BusDBHandler {
 		            int busDriverID = rSet.getInt("busDriverID"); // Fetch bus driver ID
 
 		         // Create a new Bus object
+		            Bus bus = new Bus(retrievedBusId, brand, model, manufactureYear, plateNumber, noOfSeats, noOfRows, priceOfSeat, busDriverID, hasTour);
+
+		            busList.put(bus.getID(), bus);
+		        } while (rSet.next());
+		        
+		        // Set success data
+		        returnData.setList(busList);
+		        returnData.setMessage("Buses retrieved successfully.");
+		        returnData.setSuccess(true);
+		    }
+		}
+		catch(SQLException e){
+			String errorMessage = e.getMessage().toLowerCase();
+		    
+		    if (errorMessage.contains("no such bus") || errorMessage.contains("does not exist") ||errorMessage.contains("no current")) {
+		       returnData.setMessage("Error: Bus does not exist.");
+		    } else {
+		        // General case for other SQL exceptions
+		    	returnData.setMessage("Issue in retrieving buses from database: " + e.getMessage());
+		    }
+            returnData.setSuccess(false);
+		}
+        return returnData;
+	}
+	
+	public ReturnListUtility<Bus> retrieveBusListWithBusDriverIDForTourist() {
+		ReturnListUtility<Bus> returnData=new ReturnListUtility();
+		
+		try {
+		    Statement stmt = conn.createStatement();
+		    ResultSet rSet = stmt.executeQuery(
+		        "SELECT b.busId, b.brand, b.model, b.manufactureYear, b.plateNumber, b.noOfSeats, " +
+		        "b.noOfRows, b.priceOfSeat, bddb.busDriverID " +
+		        "FROM Bus b " +
+		        "INNER JOIN BusDriverDrivesBus bddb ON b.busId = bddb.busID and b.hasTour = 1"
+		    );
+
+		    HashMap<Integer, Bus> busList = new HashMap<>();
+
+		    if (!rSet.next()) {
+		        // If no result is found, set an error message
+		        returnData.setMessage("Error: No buses found.");
+		        returnData.setSuccess(false);
+		    } else {
+		        do {
+		            // Fetch bus details
+		            int retrievedBusId = rSet.getInt("busId");
+		            String brand = rSet.getString("brand");
+		            String model = rSet.getString("model");
+		            int manufactureYear = rSet.getInt("manufactureYear");
+		            String plateNumber = rSet.getString("plateNumber");
+		            int noOfSeats = rSet.getInt("noOfSeats");
+		            int noOfRows = rSet.getInt("noOfRows");
+		            float priceOfSeat = rSet.getFloat("priceOfSeat");
+		            int busDriverID = rSet.getInt("busDriverID"); // Fetch bus driver ID
+
+		         // Create a new Bus object
 		            Bus bus = new Bus(retrievedBusId, brand, model, manufactureYear, plateNumber, noOfSeats, noOfRows, priceOfSeat, busDriverID);
 
 		            busList.put(bus.getID(), bus);
@@ -935,6 +992,7 @@ public class BusDBHandler {
 		}
         return returnData;
 	}
+	
 	public ReturnListUtility<Bus> getBusDetailsWithTouristID(int touristID) {
 		ReturnListUtility<Bus> returnData=new ReturnListUtility();
 		
