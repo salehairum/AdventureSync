@@ -117,6 +117,11 @@ public class BusDriverUpdatesAccountView {
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
+			if(!cnicInput.getText().trim().isEmpty() && !isValidCNIC(cnicInput.getText())) {
+				alertInvalidInput.setContentText("Please enter valid cnic of format XXXXX-XXXXXXX-X"); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
 	        
 	        ReturnObjectUtility<BusDriver> busDriverData=bdController.retrieveAllBusDriverData(busDriverID);
 	        if(!busDriverData.isSuccess()) {
@@ -227,6 +232,16 @@ public class BusDriverUpdatesAccountView {
 	private boolean isValidEmail(String email) {
 	    return email != null && email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
 	}
+	
+	public boolean isValidCNIC(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    
+	    // Regular expression for CNIC format: XXXXX-XXXXXXX-X
+	    return str.matches("\\d{5}-\\d{7}-\\d{1}");
+	}
+
 	private void validateInputs() {
 	    // Check if at least one of the other fields is filled
 	    boolean atLeastOneOtherFieldFilled = 

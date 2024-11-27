@@ -100,6 +100,16 @@ public class HOMAddRoom {
 	            alertInvalidInput.showAndWait();
 	            return;
 	        }
+	        
+	        float price=Float.parseFloat(pricerPerNightInput.getText());
+			
+			if(price<=0.0f) {
+				alertInvalidInput.setContentText("Room cost should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
+	        
 			Room room=createRoomObject();
 			ReturnObjectUtility<Boolean> returnData=hoContoller.addRoom(room);
 			

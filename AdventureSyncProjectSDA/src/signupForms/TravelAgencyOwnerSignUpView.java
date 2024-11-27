@@ -132,6 +132,11 @@ public class TravelAgencyOwnerSignUpView {
 				alertInvalidInput.showAndWait(); 
 				return;
 			}
+			if(!isValidCNIC(cnicInput.getText())) {
+				alertInvalidInput.setContentText("Please enter valid cnic of the format XXXXX-XXXXXXX-X"); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
 			
 			LocalDate currentDate = LocalDate.now();
 
@@ -238,6 +243,15 @@ public class TravelAgencyOwnerSignUpView {
 
 	private boolean isValidEmail(String email) {
 	    return email != null && email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+	}
+
+	public boolean isValidCNIC(String str) {
+	    if (str == null || str.isEmpty()) {
+	        return false;
+	    }
+	    
+	    // Regular expression for CNIC format: XXXXX-XXXXXXX-X
+	    return str.matches("\\d{5}-\\d{7}-\\d{1}");
 	}
 
 	

@@ -115,7 +115,31 @@ public class BusDriverAddsBus {
 	            alertInvalidInput.showAndWait();
 	            return;
 	        }
-
+	        
+	        int nSeats=Integer.parseInt(nSeatsInput.getText());
+			
+			if(nSeats<=0) {
+				alertInvalidInput.setContentText("Number of seats should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+	        
+			int nRows=Integer.parseInt(nRowsInput.getText());
+			
+			if(nRows<=0) {
+				alertInvalidInput.setContentText("Number of rows should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
+			float seatFee=Float.parseFloat(seatFeeInput.getText());
+			
+			if(seatFee<=0.0f) {
+				alertInvalidInput.setContentText("Seat fee should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+			
 	        // Perform the operation
 	        Bus bus = createBusObject();
 

@@ -105,6 +105,21 @@ public class HOMAddFood {
 	            alertInvalidInput.showAndWait();
 	            return;
 	        }
+	        float price=Float.parseFloat(foodPriceInput.getText());
+			
+			if(price<=0.0f) {
+				alertInvalidInput.setContentText("Food price should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
+	        
+			int quantity=Integer.parseInt(foodQuanInput.getText());
+			
+			if(quantity<=0) {
+				alertInvalidInput.setContentText("Food quantity should be greater than zero."); 
+				alertInvalidInput.showAndWait(); 
+				return;
+			}
 			FoodItem food=createFoodItemObject();
 			ReturnObjectUtility<Boolean> returnData=hoContoller.addFoodItem(food, hotelID);
 			

@@ -124,11 +124,21 @@ public class BusDriverUpdateBusView {
 					return;
 				}
 			}
-	        if (!seatFeeInput.getText().trim().isEmpty() && !isNumeric(seatFeeInput.getText())) { 
-	            alertInvalidInput.setContentText("Please enter a numeric value for seat fee"); 
-	            alertInvalidInput.showAndWait(); 
-	            return;
-	        }
+	        if(!seatFeeInput.getText().trim().isEmpty()) {
+				if(!isNumeric(seatFeeInput.getText())) {
+					alertInvalidInput.setContentText("Please enter numeric value for seat fee"); 
+					alertInvalidInput.showAndWait(); 
+					return;
+				}
+				//check if year of manufacture is valid
+				float seatFee = Float.parseFloat(seatFeeInput.getText());
+	
+				if (seatFee<0.0f) {
+					alertInvalidInput.setContentText("Seat Fee should be greater than zero"); 
+					alertInvalidInput.showAndWait();
+					return;
+				}
+			}
 	        
 	        int busID = Integer.parseInt(busIdInput.getText());
 	        ReturnObjectUtility<Bus> busData=bController.retrieveBusObject(busID);
