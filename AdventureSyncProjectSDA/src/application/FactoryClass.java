@@ -41,7 +41,7 @@ public class FactoryClass {
 	public void assignConnections() {
 		//saleha: E85OBQM
 		//afsah: MHOGR9K
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
+		String connectionString="jdbc:sqlserver://DESKTOP-E85OBQM\\SQLEXPRESS;databaseName=adventureSync;integratedSecurity=true;encrypt=false";
 		dbManager=new DatabaseManager(connectionString);
 		
 		hotelDB= new HotelDBHandler(dbManager.getConnection());
@@ -49,11 +49,4 @@ public class FactoryClass {
 		busDB = new BusDBHandler(dbManager.getConnection());
 		touristDB = new TouristDBHandler(dbManager.getConnection());
 	}
-//	
-//	public void createSingletonAgencyOwner() {
-//		TravelAgencyOwner agencyOwner=TravelAgencyOwner.getInstance();
-//		if(agencyOwner==null)
-//			agencyOwnerExists=false;
-//		else agencyOwnerExists=true;
-//	}
 }
