@@ -93,29 +93,9 @@ import hotelOwnerView.hotelOwnerUpdateAccount;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		//saleha: E85OBQM
-		//afsah: MHOGR9K
-		//apni db ka naam bhi change karlena yaad se!
-		String connectionString="jdbc:sqlserver://DESKTOP-MHOGR9K\\SQLEXPRESS;databaseName=sdaProjectDB;integratedSecurity=true;encrypt=false";
-		DatabaseManager dbManager=new DatabaseManager(connectionString);
 		
-		HotelDBHandler hdb = new HotelDBHandler(dbManager.getConnection());
-		TravelAgencyDBHandler tadb = new TravelAgencyDBHandler(dbManager.getConnection());
-		BusDBHandler bdb = new BusDBHandler(dbManager.getConnection());
-		TouristDBHandler tdb = new TouristDBHandler(dbManager.getConnection());
+		FactoryClass factory=new FactoryClass(primaryStage);
 
-		try {
-			AccountMenuView hotelOwnerMenu = new AccountMenuView();
-      
-			Parent root = hotelOwnerMenu.getRoot();
-			Scene scene = new Scene(root, 750, 500);
-
-			primaryStage.setScene(scene);
-		    primaryStage.setTitle("Account Menu");
-		    primaryStage.show();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
 	}
 	
 	public static void main(String[] args) {
