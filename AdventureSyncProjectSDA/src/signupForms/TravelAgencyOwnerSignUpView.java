@@ -7,6 +7,7 @@ import accountAndPersonModels.Account;
 import accountAndPersonModels.TravelAgencyOwner;
 import controllers.travelAgencyOwnerController;
 import dataUtilityClasses.ReturnObjectUtility;
+import dataUtilityClasses.SingletonReturnData;
 import hotelOwnerView.hotelOwnerLogin;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -66,6 +67,28 @@ public class TravelAgencyOwnerSignUpView {
 	
 	@FXML
 	private void initialize() {
+		TravelAgencyOwner agencyOwner=TravelAgencyOwner.getInstance();
+		if(agencyOwner!=null)
+		{
+			Alert alert = new Alert(AlertType.ERROR);
+ 	        alert.setTitle("Operation Failed");
+ 	        alert.setHeaderText(null);
+ 	        alert.setContentText("Travel Agency Owner already exists! Cannot add new one");
+ 	        alert.showAndWait();
+
+ 	       nameInput.setDisable(true);
+ 			emailInput.setDisable(true);
+ 			usernameInput.setDisable(true);
+ 			passwordInput.setDisable(true);
+ 			balanceInput.setDisable(true);
+ 			cnicInput.setDisable(true);
+ 			dobInput.setDisable(true);
+ 			menuButton.setDisable(true);
+ 			signupButton.setDisable(true);
+ 	        
+		}
+		//else allow to set instance
+		
 		listenersAssignment();
 		eventHandlersAssignment();
 		taoController = new travelAgencyOwnerController();
@@ -132,9 +155,9 @@ public class TravelAgencyOwnerSignUpView {
 			    alert.showAndWait();
 			    
 
-			int AgencyOwnerID=returnData.getObject().getAgencyOwnerID();
 			if(success)
 			{
+				int AgencyOwnerID=returnData.getObject().getAgencyOwnerID();	
 				try {
 		            // Dynamically create an instance of the next form's controller with the touristID
 		            TravelAgencyOwnerMenuView controllerInstance = new TravelAgencyOwnerMenuView(AgencyOwnerID);
@@ -232,10 +255,11 @@ public class TravelAgencyOwnerSignUpView {
 	    Account account = new Account(0, username, password, email, balance);
 
 	    // Create TravelAgencyOwner object with the provided details
-	    TravelAgencyOwner travelAgencyOwner = new TravelAgencyOwner(0, name, dob, cnic);
-	    travelAgencyOwner.setAccount(account);
+	    SingletonReturnData travelAgencyOwner = new SingletonReturnData(0, name, dob, cnic);
+	    travelAgencyOwner.setAcc(account);
+	    TravelAgencyOwner.initInstance(travelAgencyOwner);
 
-	    return travelAgencyOwner;
+	    return TravelAgencyOwner.getInstance();
 	}
 
 	//check if all inputs have been given

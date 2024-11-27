@@ -7,35 +7,65 @@ import java.util.List;
 import dataUtilityClasses.FeedbackWithBusID;
 import dataUtilityClasses.ReturnListUtility;
 import dataUtilityClasses.ReturnObjectUtility;
+import dataUtilityClasses.SingletonReturnData;
 import dbHandlers.TravelAgencyDBHandler;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 
 public class TravelAgencyOwner extends Person {
+	private static TravelAgencyOwner instance;
 	private int agencyOwnerID;
 	//private HashMap<Integer,Car> cars;
-	private TravelAgencyDBHandler travelAgencyDBHandler;
+	private static TravelAgencyDBHandler travelAgencyDBHandler;
 	Car car;
 	Bus bus;
 	BusDriver busDriver;
 	FeedbackWithBusID fBusID;
+	boolean existsInDb;
 	//constructors
-	public TravelAgencyOwner()
+	private TravelAgencyOwner()
 	{
 		super();
+		existsInDb=false;
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		car=new Car();
 		bus=new Bus();
 		busDriver = new BusDriver();
 		fBusID = new FeedbackWithBusID();
 	}
-	public TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
+	private TravelAgencyOwner(int agencyOwnerID, String name, LocalDate dob, String cnic)
 	{
 		super(name, dob, cnic);
 		this.agencyOwnerID = agencyOwnerID;
 		travelAgencyDBHandler=new TravelAgencyDBHandler();
 		car=new Car();
 		bus=new Bus();
+		existsInDb=false;
+	}
+	
+	public static TravelAgencyOwner getInstance() {
+		travelAgencyDBHandler=new TravelAgencyDBHandler();
+		if(instance==null)
+		{
+			ReturnObjectUtility<SingletonReturnData> returnData=travelAgencyDBHandler.retrieveTravelAgencyOwnerData();
+			if(returnData.isSuccess())
+			{
+				SingletonReturnData owner=returnData.getObject();
+				initInstance(owner);
+			}
+			else return null;
+		}
+
+		return instance;
+	}
+	
+	public static void initInstance(SingletonReturnData owner) {
+		instance=new TravelAgencyOwner();
+		instance.setName(owner.getName());
+		instance.setCnic(owner.getCnic());
+		instance.setDob(owner.getDob());
+		instance.setAgencyOwnerID(owner.getId());
+		instance.setAccount(owner.getAcc());
 	}
 	
 	//getters and setters
@@ -53,9 +83,9 @@ public class TravelAgencyOwner extends Person {
 //	}
 //	
 	//communication with db handler
-	public ReturnObjectUtility<TravelAgencyOwner> getDetail(int travelAgencyOwnerID)
+	public ReturnObjectUtility<SingletonReturnData> getDetail()
 	{
-		ReturnObjectUtility<TravelAgencyOwner> returnData = travelAgencyDBHandler.retrieveTravelAgencyOwnerData(travelAgencyOwnerID);
+		ReturnObjectUtility<SingletonReturnData> returnData = travelAgencyDBHandler.retrieveTravelAgencyOwnerData();
 		return returnData;
 	}
 	
@@ -125,8 +155,8 @@ public class TravelAgencyOwner extends Person {
 	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
 		return travelAgencyDBHandler.updateAgencyOwner(owner);
 	}
-	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID){
-		return travelAgencyDBHandler.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
+	public ReturnObjectUtility<SingletonReturnData> retrieveAllTravelAgencyOwnerData(){
+		return travelAgencyDBHandler.retrieveAllTravelAgencyOwnerData();
 	}
 
 	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {

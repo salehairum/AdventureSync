@@ -347,7 +347,6 @@ public class TouristDBHandler {
 	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 	            }else {
 	                returnData.setMessage("Issue in deleting tourist in DB: " + errorMessage);
-	                System.out.println(errorMessage);
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
@@ -597,8 +596,6 @@ public class TouristDBHandler {
 		         return returnData;
 	        }
 	        else if(rSet.getInt("isBooked")==1){
-		        System.out.println(rSet.getInt("isBooked"));
-		        System.out.println(seatID);
 	        	 returnData.setMessage("Seat is already booked.");
 		         returnData.setSuccess(false);
 		         return returnData;
@@ -714,8 +711,6 @@ public class TouristDBHandler {
 			//first see if car exists or not
 			Statement stmt=conn.createStatement();
 	        ResultSet rSet=stmt.executeQuery("select * from room where roomID="+roomID);
-	        
-	        System.out.println(roomID);
 	        
 	        if(!rSet.next()) {
 	        	 returnData.setMessage("No room found with the entered room ID.");
@@ -1119,10 +1114,6 @@ public class TouristDBHandler {
 				        // Set parameters
 				        pstmt.setFloat(1, bill); // Deduction amount
 				        pstmt.setInt(2, touristID); // Tourist ID
-			        
-				        System.out.println(bill);
-				        System.out.println(touristID);
-
 				        // Execute the update
 				        rowsAffected= pstmt.executeUpdate();
 	
