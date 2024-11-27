@@ -425,6 +425,11 @@ public class BusDBHandler {
 	        
 	        rowsAffected = pstmt.executeUpdate();
 	        
+	        sql = "Delete from bushasfeedback where busID="+busID;
+	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        rowsAffected = pstmt.executeUpdate();
+	        
 	        sql = "Delete from bus where busID="+busID;
 	        pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	        
@@ -472,7 +477,6 @@ public class BusDBHandler {
 	                returnData.setMessage("Error: Invalid reference. Check if the related data exists.");
 	            }else {
 	                returnData.setMessage("Issue in deleting bus driver in DB: " + errorMessage);
-	                System.out.println(errorMessage);
 	            }
 	        } else {
 	            returnData.setMessage("An unknown error occurred.");
@@ -1222,7 +1226,7 @@ public class BusDBHandler {
 	        } 
 	        
 	        //remove association with tourist
-	        String deleteQuery = "DELETE FROM touristBookedSeats inner join seat on touristBookedSeats.seatId=seat.seatID where busid = ?";
+	        String deleteQuery = "DELETE FROM TouristHasBookedSeats WHERE seatID IN (SELECT seatId FROM Seat WHERE busId = ? )";
 	        pstmt = conn.prepareStatement(deleteQuery);
 	        pstmt.setInt(1, busID);
 	        rowsAffected = pstmt.executeUpdate();

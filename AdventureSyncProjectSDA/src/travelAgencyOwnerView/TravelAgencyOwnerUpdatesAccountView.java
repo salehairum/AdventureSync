@@ -111,17 +111,9 @@ public class TravelAgencyOwnerUpdatesAccountView {
 				return;
 			}
 	        
-	        ReturnObjectUtility<TravelAgencyOwner> TravelAgencyOwnerData=taoController.retrieveAllTravelAgencyOwnerData(agencyOwnerID);
-	        if(!TravelAgencyOwnerData.isSuccess()) {
-				Alert alert = new Alert(AlertType.ERROR);
-			    alert.setTitle("Operation Failed");
-			    alert.setHeaderText(null);
-			    alert.setContentText(TravelAgencyOwnerData.getMessage());
-			    alert.showAndWait();
-			    return;
-			}
+	        TravelAgencyOwner TravelAgencyOwnerData=TravelAgencyOwner.getInstance();
 	        
-	        TravelAgencyOwner agencyOwner=updateTravelAgencyOwnerObject(TravelAgencyOwnerData.getObject());
+	        TravelAgencyOwner agencyOwner=updateTravelAgencyOwnerObject(TravelAgencyOwnerData);
 	        
 	        ReturnObjectUtility<TravelAgencyOwner> returnData=taoController.updateAgencyOwner(agencyOwner);
 	        

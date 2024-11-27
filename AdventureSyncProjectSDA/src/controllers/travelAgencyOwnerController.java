@@ -8,6 +8,7 @@ import accountAndPersonModels.TravelAgencyOwner;
 import dataUtilityClasses.FeedbackWithBusID;
 import dataUtilityClasses.ReturnListUtility;
 import dataUtilityClasses.ReturnObjectUtility;
+import dataUtilityClasses.SingletonReturnData;
 import travelAgencyModels.Bus;
 import travelAgencyModels.Car;
 import travelAgencyModels.Tour;
@@ -17,18 +18,18 @@ public class travelAgencyOwnerController {
 	
 	public travelAgencyOwnerController()
 	{
-		travelAgencyOwner = new TravelAgencyOwner();
+		travelAgencyOwner = TravelAgencyOwner.getInstance();
 	}
 	
 	//retrieve profile
 	public String[] getTravelAgencyOwnerProfileDetail(int travelAgecnyOwnerId)
     {
-    	ReturnObjectUtility<TravelAgencyOwner> returnData = travelAgencyOwner.getDetail(travelAgecnyOwnerId);
-    	String travelAgencyOwnerName = returnData.getObject().getName();
-        int travelAgencyOwnerId_ = returnData.getObject().getAgencyOwnerID();
+		
+    	String travelAgencyOwnerName = travelAgencyOwner.getName();
+        int travelAgencyOwnerId_ = travelAgencyOwner.getAgencyOwnerID();
         String travelAgencyOwnerIdStr = String.valueOf(travelAgencyOwnerId_);
-        String travelAgencyOwnerCnic = returnData.getObject().getCnic();
-        LocalDate dob = returnData.getObject().getDob();
+        String travelAgencyOwnerCnic = travelAgencyOwner.getCnic();
+        LocalDate dob = travelAgencyOwner.getDob();
         String travelAgencyOwnerDob = dob.toString();
         String[] profileDetails = {travelAgencyOwnerName, travelAgencyOwnerIdStr, travelAgencyOwnerCnic, travelAgencyOwnerDob};
         return profileDetails;
@@ -58,6 +59,7 @@ public class travelAgencyOwnerController {
 	
 	//travel agency related functions
 	public ReturnObjectUtility<TravelAgencyOwner> addAgencyOwner(TravelAgencyOwner owner) {
+		travelAgencyOwner = TravelAgencyOwner.getInstance();
 		return travelAgencyOwner.addAgencyOwner(owner);
 	}
 	
@@ -107,8 +109,8 @@ public class travelAgencyOwnerController {
 	public ReturnObjectUtility<TravelAgencyOwner> updateAgencyOwner(TravelAgencyOwner owner) {
 		return travelAgencyOwner.updateAgencyOwner(owner);
 	}
-	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID){
-		return travelAgencyOwner.retrieveAllTravelAgencyOwnerData(TravelAgencyOwnerID);
+	public ReturnObjectUtility<SingletonReturnData> retrieveAllTravelAgencyOwnerData(){
+		return travelAgencyOwner.retrieveAllTravelAgencyOwnerData();
 	}
 	public ReturnObjectUtility<TravelAgencyOwner> deleteAgencyOwner(int owner) {
 		return travelAgencyOwner.deleteAgencyOwner(owner);

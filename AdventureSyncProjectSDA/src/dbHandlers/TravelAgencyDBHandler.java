@@ -19,6 +19,7 @@ import accountAndPersonModels.Tourist;
 import accountAndPersonModels.TravelAgencyOwner;
 import dataUtilityClasses.ReturnListUtility;
 import dataUtilityClasses.ReturnObjectUtility;
+import dataUtilityClasses.SingletonReturnData;
 import travelAgencyModels.Car;
 import travelAgencyModels.Tour;
 
@@ -623,8 +624,6 @@ public class TravelAgencyDBHandler {
 			        }
 		            
 			        int travelAgencyOwnerID=rSetForAccount.getInt("travelAgencyOwnerID");
-			        System.out.println("Actual: "+accPassword);
-			        System.out.println("Entered: "+enteredPassword);
 			        if(accPassword.equals(enteredPassword)) {
 			        	returnData.setObject(travelAgencyOwnerID);
 			            returnData.setMessage("Logged in successfully");
@@ -779,12 +778,12 @@ public class TravelAgencyDBHandler {
 	    return returnData;
 	}
 	
-	public ReturnObjectUtility<TravelAgencyOwner> retrieveAllTravelAgencyOwnerData(int TravelAgencyOwnerID) {
-	    ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility<>();
+	public ReturnObjectUtility<SingletonReturnData> retrieveAllTravelAgencyOwnerData() {
+	    ReturnObjectUtility<SingletonReturnData> returnData = new ReturnObjectUtility<>();
 
 	    try {
 	        Statement stmt = conn.createStatement();
-	        String query = "SELECT t.TravelAgencyOwnerId, t.aName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM TravelAgencyOwner t JOIN Account a ON t.accountID = a.accountID WHERE t.TravelAgencyOwnerId = " + TravelAgencyOwnerID;
+	        String query = "SELECT t.TravelAgencyOwnerId, t.aName, t.dob, t.cnic, a.accountID, a.username, a.accpassword, a.email, a.balance FROM TravelAgencyOwner t JOIN Account a ON t.accountID = a.accountID ";
 
 	        ResultSet rSet = stmt.executeQuery(query);
 
@@ -796,9 +795,7 @@ public class TravelAgencyDBHandler {
 	            LocalDate dob = date.toLocalDate();
 	            String cnic = rSet.getString("cnic");
 
-	            // Create a Tourist object
-	            TravelAgencyOwner agencyOwner = new TravelAgencyOwner(TravelAgencyOwnerIDRetrieved, name, dob, cnic);
-
+	            SingletonReturnData agencyOwner=new SingletonReturnData(TravelAgencyOwnerIDRetrieved, name, dob, cnic); 
 	            // Retrieve Account details
 	            int accountID = rSet.getInt("accountID");
 	            String username = rSet.getString("username");
@@ -808,8 +805,8 @@ public class TravelAgencyDBHandler {
 
 	            // Create an Account object
 	            Account account = new Account(accountID, username, password, email, balance);
-
-	            agencyOwner.setAccount(account);
+	            agencyOwner.setAcc(account);
+	            
 	            // Set the result and success message
 	            returnData.setObject(agencyOwner);
 	            returnData.setMessage("TravelAgencyOwner and account data retrieved successfully.");
@@ -833,12 +830,12 @@ public class TravelAgencyDBHandler {
 	    return returnData;
 	}
 
-	public ReturnObjectUtility<TravelAgencyOwner> retrieveTravelAgencyOwnerData(int travelAgencyOwnerID) {
-		ReturnObjectUtility<TravelAgencyOwner> returnData = new ReturnObjectUtility();
+	public ReturnObjectUtility<SingletonReturnData> retrieveTravelAgencyOwnerData() {
+		ReturnObjectUtility<SingletonReturnData> returnData = new ReturnObjectUtility();
 		
 		try {
 			Statement stmt = conn.createStatement();
-	        ResultSet rSet=stmt.executeQuery("select * from TravelAgencyOwner where TravelAgencyOwnerId="+travelAgencyOwnerID);
+	        ResultSet rSet=stmt.executeQuery("select * from TravelAgencyOwner");
 	        
 	        if (rSet.next()) { 
 	            int travelAgencyOwnerIDRetrieved = rSet.getInt("TravelAgencyOwnerId");
@@ -847,7 +844,7 @@ public class TravelAgencyDBHandler {
 	            LocalDate dob = date.toLocalDate();
 	            String cnic = rSet.getString("cnic");
 
-	            TravelAgencyOwner travelAgencyOwner = new TravelAgencyOwner(travelAgencyOwnerIDRetrieved, name, dob, cnic);
+	            SingletonReturnData travelAgencyOwner = new SingletonReturnData(travelAgencyOwnerIDRetrieved, name, dob, cnic);
 	            
 	            // Set the hotel owner object and success message
 	            returnData.setObject(travelAgencyOwner);
